@@ -1,1 +1,27 @@
-<p>login works!</p>
+<h1>{{ strings.title }}</h1>
+<p>{{ strings.subtitle }}</p>
+
+<label>{{ strings.emailLabel }}</label>
+<input type="email" formControlName="email" [placeholder]="strings.emailPlaceholder">
+
+<label>{{ strings.passwordLabel }}</label>
+<input type="password" formControlName="password" [placeholder]="strings.passwordPlaceholder">
+
+<label>{{ strings.roleLabel }}</label>
+<select formControlName="role">
+  <option value="Usuario">{{ strings.roleUser }}</option>
+  <option value="Administrador">{{ strings.roleAdmin }}</option>
+</select>
+
+<button type="submit">
+  {{ strings.loginButton }}
+</button>
+
+<p>
+  {{ strings.registerQuestion }}
+  <a routerLink="/register">{{ strings.registerLink }}</a>
+</p>
+
+<a routerLink="/">
+  {{ strings.backHome }}
+</a>
