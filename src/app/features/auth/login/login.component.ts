@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LucideAngularModule, Leaf } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    LucideAngularModule
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
