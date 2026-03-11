@@ -13,6 +13,14 @@ const routes: Routes = [
   {
     path: 'reforestacion/:id',
     loadChildren: () => import('./features/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule)
+  },
+  {
+    path: 'campanas-reciclaje',
+    loadChildren: () => import('./features/campañas-reciclaje/campañas-reciclaje.module').then(m => m.CampañasReciclajeModule)
+  },
+  {
+    path: 'campanas-reciclaje/:id',
+    loadChildren: () => import('./features/recycling-campaign-detail/recycling-campaign-detail.module').then(m => m.RecyclingCampaignDetailModule)
   }
 ];
 
