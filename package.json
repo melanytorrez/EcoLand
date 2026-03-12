@@ -1,0 +1,12 @@
+{
+  "name": "ecoland-monorepo",
+  "version": "1.0.0",
+  "description": "Ecoland Project - Monorepo Structure",
+  "scripts": {
+    "start": "npm start --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "ng": "npm run ng --prefix frontend",
+    "test": "npm test --prefix frontend"
+  },
+  "private": true
+}
