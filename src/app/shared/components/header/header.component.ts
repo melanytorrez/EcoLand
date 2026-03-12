@@ -16,10 +16,6 @@ export class HeaderComponent {
 
   navItems = [
     { path: '/', label: 'Inicio' },
-    { path: '/reforestacion', label: 'Reforestación' },
-    { path: '/campanas-reciclaje', label: 'Campañas de Reciclaje' },
-    { path: '/reciclaje', label: 'Reciclaje' },
-    { path: '/estadisticas', label: 'Estadísticas' },
   ];
 
   constructor(private router: Router) {

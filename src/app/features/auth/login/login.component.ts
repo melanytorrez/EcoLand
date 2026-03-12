@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LucideAngularModule, Leaf } from 'lucide-angular';
+import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +12,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ReactiveFormsModule,
     LucideAngularModule
+  ],
+  providers: [
+    { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

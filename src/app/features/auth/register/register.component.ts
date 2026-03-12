@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +12,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ReactiveFormsModule,
     LucideAngularModule
+  ],
+  providers: [
+    { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
@@ -43,7 +46,7 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.invalid) {
-      if (this.registerForm.errors?.mismatch) {
+      if (this.registerForm.hasError('mismatch')) {
         this.error = this.strings.errorPasswordMismatch;
       } else {
         this.error = this.strings.errorRequired;
