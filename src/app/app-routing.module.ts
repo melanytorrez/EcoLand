@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'reciclaje',
     loadChildren: () => import('./features/reciclaje/reciclaje.module').then(m => m.ReciclajeModule)
+  },
+  {
+    path: 'estadisticas',
+    loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule)
   }
 ];
 
