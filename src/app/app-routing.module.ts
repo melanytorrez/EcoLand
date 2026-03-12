@@ -4,11 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
+    pathMatch: 'full'
   },
   {
     path: '',
-    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'reforestacion',
