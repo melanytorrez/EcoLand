@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'campanas-reciclaje/:id',
     loadChildren: () => import('./features/recycling-campaign-detail/recycling-campaign-detail.module').then(m => m.RecyclingCampaignDetailModule)
+  },
+  {
+    path: 'reciclaje',
+    loadChildren: () => import('./features/reciclaje/reciclaje.module').then(m => m.ReciclajeModule)
   }
 ];
 
