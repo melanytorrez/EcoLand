@@ -40,23 +40,13 @@ set "WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain"
 
 set "DOWNLOAD_URL=https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.3.0/maven-wrapper-3.3.0.jar"
 
-if "%MAVEN_BATCH_ECHO%" == "on" echo %MAVEN_BATCH_ECHO%
-
-if not "%MAVEN_SKIP_RC%" == "on" (
-  if exist "%USERPROFILE%\mavenrc_pre.bat" call "%USERPROFILE%\mavenrc_pre.bat"
-)
-
 if not "%JAVA_HOME%" == "" goto checkJava
 
 set "JAVA_EXE=java.exe"
 %JAVA_EXE% -version >nul 2>&1
 if "%ERRORLEVEL%" == "0" goto init
 
-echo.
-echo ERROR: JAVA_HOME not found in your environment.
-echo Please set the JAVA_HOME variable in your environment to match the
-echo location of your Java installation.
-echo.
+echo ERROR: JAVA_HOME not found and java.exe is not in PATH.
 goto error
 
 :checkJava
@@ -64,26 +54,22 @@ set "JAVA_HOME=%JAVA_HOME:"=%"
 set "JAVA_EXE=%JAVA_HOME%\bin\java.exe"
 
 if exist "%JAVA_EXE%" goto init
-
-echo.
 echo ERROR: JAVA_HOME is set to an invalid directory.
-echo JAVA_HOME = "%JAVA_HOME%"
-echo Please set the JAVA_HOME variable in your environment to match the
-echo location of your Java installation.
-echo.
 goto error
 
 :init
 if exist "%WRAPPER_JAR%" goto run
 
-echo.
 echo Downloading Maven Wrapper...
-powershell -Command "& {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('%DOWNLOAD_URL%', '%WRAPPER_JAR%')}"
+powershell -Command "& {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $webClient = New-Object System.Net.WebClient; $webClient.DownloadFile('%DOWNLOAD_URL%', '%WRAPPER_JAR%')}"
+if not exist "%WRAPPER_JAR%" (
+    echo ERROR: Failed to download maven-wrapper.jar
+    goto error
+)
 
 :run
-"%JAVA_EXE%" %MAVEN_OPTS% -classpath "%WRAPPER_JAR%" %WRAPPER_LAUNCHER% %*
-
-if "%MAVEN_BATCH_PAUSE%" == "on" pause
+set "MAVEN_PROJECTBASEDIR=%~dp0"
+"%JAVA_EXE%" %MAVEN_OPTS% -Dmaven.multiModuleProjectDirectory="%MAVEN_PROJECTBASEDIR%" -classpath "%WRAPPER_JAR%" %WRAPPER_LAUNCHER% %*
 
 if "%ERRORLEVEL%" neq 0 goto error
 goto end
