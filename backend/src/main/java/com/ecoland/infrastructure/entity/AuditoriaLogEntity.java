@@ -24,20 +24,46 @@ public class AuditoriaLogEntity {
     @JoinColumn(name = "usuario_id")
     private UsuarioEntity usuario;
 
-    public AuditoriaLogEntity() {}
+    public AuditoriaLogEntity() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getAccion() { return accion; }
-    public void setAccion(String accion) { this.accion = accion; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getDetalle() { return detalle; }
-    public void setDetalle(String detalle) { this.detalle = detalle; }
+    public String getAccion() {
+        return accion;
+    }
 
-    public LocalDateTime getFecha() { return fecha; }
-    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+    public void setAccion(String accion) {
+        this.accion = accion;
+    }
 
-    public UsuarioEntity getUsuario() { return usuario; }
-    public void setUsuario(UsuarioEntity usuario) { this.usuario = usuario; }
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
 }

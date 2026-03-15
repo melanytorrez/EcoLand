@@ -69,6 +69,9 @@ if not exist "%WRAPPER_JAR%" (
 
 :run
 set "MAVEN_PROJECTBASEDIR=%~dp0"
+@REM Remove trailing backslash to prevent Java from interpreting it as an escape character
+set "MAVEN_PROJECTBASEDIR=%MAVEN_PROJECTBASEDIR:~0,-1%"
+
 "%JAVA_EXE%" %MAVEN_OPTS% -Dmaven.multiModuleProjectDirectory="%MAVEN_PROJECTBASEDIR%" -classpath "%WRAPPER_JAR%" %WRAPPER_LAUNCHER% %*
 
 if "%ERRORLEVEL%" neq 0 goto error
