@@ -1,8 +1,6 @@
 package com.ecoland.application.service;
 
 import com.ecoland.application.dto.AuthResponse;
-import com.ecoland.application.dto.LoginRequest;
-import com.ecoland.application.dto.RegisterRequest;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
@@ -23,11 +21,11 @@ public class AuthService implements AuthUseCase {
     }
 
     @Override
-    public AuthResponse login(LoginRequest request) {
-        Usuario usuario = usuarioRepositoryPort.findByEmail(request.getEmail())
+    public AuthResponse login(String email, String password) {
+        Usuario usuario = usuarioRepositoryPort.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        if (!passwordEncoder.matches(request.getPassword(), usuario.getPassword())) {
+        if (!passwordEncoder.matches(password, usuario.getPassword())) {
             throw new RuntimeException("Contraseña incorrecta");
         }
 
@@ -37,19 +35,16 @@ public class AuthService implements AuthUseCase {
     }
 
     @Override
-    public AuthResponse register(RegisterRequest request) {
-        if (usuarioRepositoryPort.findByEmail(request.getEmail()).isPresent()) {
+    public AuthResponse register(Usuario usuario) {
+        if (usuarioRepositoryPort.findByEmail(usuario.getEmail()).isPresent()) {
             throw new RuntimeException("El email ya está registrado");
         }
 
-        Usuario nuevoUsuario = new Usuario();
-        nuevoUsuario.setNombre(request.getNombre());
-        nuevoUsuario.setEmail(request.getEmail());
-        nuevoUsuario.setPassword(passwordEncoder.encode(request.getPassword()));
-        nuevoUsuario.setRoles(Collections.emptySet());
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        usuario.setRoles(Collections.emptySet());
 
-        Usuario guardado = usuarioRepositoryPort.save(nuevoUsuario);
-        
+        Usuario guardado = usuarioRepositoryPort.save(usuario);
+
         String token = "jwt-token-placeholder";
         return new AuthResponse(token, guardado.getEmail(), guardado.getNombre());
     }

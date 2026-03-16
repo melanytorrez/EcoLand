@@ -38,16 +38,8 @@ public class TokenRepositoryAdapter implements TokenRepositoryPort {
     }
 
     private TokenSesion toDomain(TokenSesionEntity entity) {
-        Usuario usuario = new Usuario(
-            entity.getUsuario().getId(),
-            entity.getUsuario().getNombre(),
-            entity.getUsuario().getEmail(),
-            entity.getUsuario().getPassword(),
-            entity.getUsuario().getRoles().stream()
-                .map(r -> new Rol(r.getId(), r.getNombre()))
-                .collect(Collectors.toSet())
-        );
-        return new TokenSesion(entity.getId(), entity.getToken(), entity.getFechaExpiracion(), usuario);
+        Long usuarioId = entity.getUsuario() != null ? entity.getUsuario().getId() : null;
+        return new TokenSesion(entity.getId(), entity.getToken(), entity.getFechaExpiracion(), usuarioId);
     }
 
     private TokenSesionEntity toEntity(TokenSesion tokenSesion) {
@@ -56,10 +48,11 @@ public class TokenRepositoryAdapter implements TokenRepositoryPort {
         entity.setToken(tokenSesion.getToken());
         entity.setFechaExpiracion(tokenSesion.getFechaExpiracion());
         
-        UsuarioEntity userEntity = new UsuarioEntity();
-        userEntity.setId(tokenSesion.getUsuario().getId());
-        // Note: Full mapping of user might be needed depending on cascades
-        entity.setUsuario(userEntity);
+        if (tokenSesion.getUsuarioId() != null) {
+            UsuarioEntity userEntity = new UsuarioEntity();
+            userEntity.setId(tokenSesion.getUsuarioId());
+            entity.setUsuario(userEntity);
+        }
         
         return entity;
     }
