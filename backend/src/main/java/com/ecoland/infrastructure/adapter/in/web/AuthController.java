@@ -18,14 +18,11 @@ public class AuthController {
         this.authUseCase = authUseCase;
     }
 
-<<<<<<< HEAD
-=======
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authUseCase.login(request.getEmail(), request.getPassword()));
     }
 
->>>>>>> RamaBackLu
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
         Usuario usuario = new Usuario();
@@ -35,8 +32,5 @@ public class AuthController {
         return ResponseEntity.ok(authUseCase.register(usuario));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authUseCase.login(request));
-    }
+
 }
