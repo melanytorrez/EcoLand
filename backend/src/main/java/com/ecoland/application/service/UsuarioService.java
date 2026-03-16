@@ -27,6 +27,11 @@ public class UsuarioService implements UsuarioUseCase {
     }
 
     @Override
+    public Optional<Usuario> buscarUsuarioPorEmail(String email) {
+        return usuarioRepositoryPort.findByEmail(email);
+    }
+
+    @Override
     public Usuario createUsuario(Usuario usuario) {
         return usuarioRepositoryPort.save(usuario);
     }

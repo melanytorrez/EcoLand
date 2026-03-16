@@ -9,17 +9,21 @@ public class AuditoriaLog {
     private String accion;
     private String detalle;
     private LocalDateTime fecha;
-    private Usuario usuario;
+    private Long usuarioId;
 
     public AuditoriaLog() {}
 
+<<<<<<< HEAD
     public AuditoriaLog(Long id, String usuarioEmail, String accion, String detalle, LocalDateTime fecha, Usuario usuario) {
+=======
+    public AuditoriaLog(Long id, String accion, String detalle, LocalDateTime fecha, Long usuarioId) {
+>>>>>>> RamaBackLu
         this.id = id;
         this.usuarioEmail = usuarioEmail;
         this.accion = accion;
         this.detalle = detalle;
         this.fecha = fecha;
-        this.usuario = usuario;
+        this.usuarioId = usuarioId;
     }
 
     public Long getId() { return id; }
@@ -37,6 +41,12 @@ public class AuditoriaLog {
     public LocalDateTime getFecha() { return fecha; }
     public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
 
+<<<<<<< HEAD
     public Usuario getUsuario() { return usuario; }
     public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 }
+=======
+    public Long getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
+}
+>>>>>>> RamaBackLu

@@ -3,6 +3,7 @@ package com.ecoland.infrastructure.adapter.in.web;
 import com.ecoland.application.dto.AuthResponse;
 import com.ecoland.application.dto.LoginRequest;
 import com.ecoland.application.dto.RegisterRequest;
+import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,21 @@ public class AuthController {
         this.authUseCase = authUseCase;
     }
 
+<<<<<<< HEAD
+=======
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authUseCase.login(request.getEmail(), request.getPassword()));
+    }
+
+>>>>>>> RamaBackLu
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authUseCase.register(request));
+        Usuario usuario = new Usuario();
+        usuario.setNombre(request.getNombre());
+        usuario.setEmail(request.getEmail());
+        usuario.setPassword(request.getPassword());
+        return ResponseEntity.ok(authUseCase.register(usuario));
     }
 
     @PostMapping("/login")
