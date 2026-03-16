@@ -6,8 +6,6 @@
     "start": "npm start --prefix frontend",
     "build": "npm run build --prefix frontend",
     "ng": "npm run ng --prefix frontend",
-    "start:backend": "cd backend && mvnw.cmd spring-boot:run",
-    "build:backend": "cd backend && mvnw.cmd clean install",
     "test": "npm test --prefix frontend"
   },
   "private": true
