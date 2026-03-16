@@ -27,6 +27,7 @@ public class AuditoriaRepositoryAdapter implements AuditoriaRepositoryPort {
 
     private AuditoriaLog toDomain(AuditoriaLogEntity entity) {
         Usuario usuario = null;
+
         if (entity.getUsuario() != null) {
             usuario = new Usuario(
                 entity.getUsuario().getId(),
@@ -38,7 +39,15 @@ public class AuditoriaRepositoryAdapter implements AuditoriaRepositoryPort {
                     .collect(Collectors.toSet())
             );
         }
-        return new AuditoriaLog(entity.getId(), entity.getAccion(), entity.getDetalle(), entity.getFecha(), usuario);
+
+        return new AuditoriaLog(
+            entity.getId(),
+            entity.getUsuario() != null ? entity.getUsuario().getEmail() : null,
+            entity.getAccion(),
+            entity.getDetalle(),
+            entity.getFecha(),
+            usuario
+        );
     }
 
     private AuditoriaLogEntity toEntity(AuditoriaLog log) {

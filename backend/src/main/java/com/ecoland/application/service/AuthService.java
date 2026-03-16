@@ -1,5 +1,5 @@
 package com.ecoland.application.service;
-
+import com.ecoland.infrastructure.security.JwtService;
 import com.ecoland.application.dto.AuthResponse;
 import com.ecoland.application.dto.LoginRequest;
 import com.ecoland.application.dto.RegisterRequest;
@@ -8,7 +8,7 @@ import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import com.ecoland.domain.port.out.AuditoriaRepositoryPort;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
-import com.ecoland.security.JwtService;
+
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
