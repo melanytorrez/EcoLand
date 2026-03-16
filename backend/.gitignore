@@ -1,9 +1,0 @@
-target/
-*.txt
-boot_log*.txt
-compile*.txt
-
-# Ignore IDE files if they ever get created
-.idea/
-.vscode/
-*.iml

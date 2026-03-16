@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FeatureFlagGuard } from './core/guards/feature-flag.guard';
-
 const routes: Routes = [
   {
     path: '',
@@ -15,39 +13,27 @@ const routes: Routes = [
   },
   {
     path: 'reforestacion',
-    loadChildren: () => import('./features/reforestacion/reforestacion.module').then(m => m.ReforestacionModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/reforestacion/reforestacion.module').then(m => m.ReforestacionModule)
   },
   {
     path: 'reforestacion/:id',
-    loadChildren: () => import('./features/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule)
   },
   {
     path: 'campanas-reciclaje',
-    loadChildren: () => import('./features/campañas-reciclaje/campañas-reciclaje.module').then(m => m.CampañasReciclajeModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'campanasReciclaje' }
+    loadChildren: () => import('./features/campañas-reciclaje/campañas-reciclaje.module').then(m => m.CampañasReciclajeModule)
   },
   {
     path: 'campanas-reciclaje/:id',
-    loadChildren: () => import('./features/recycling-campaign-detail/recycling-campaign-detail.module').then(m => m.RecyclingCampaignDetailModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'campanasReciclaje' }
+    loadChildren: () => import('./features/recycling-campaign-detail/recycling-campaign-detail.module').then(m => m.RecyclingCampaignDetailModule)
   },
   {
     path: 'reciclaje',
-    loadChildren: () => import('./features/reciclaje/reciclaje.module').then(m => m.ReciclajeModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reciclaje' }
+    loadChildren: () => import('./features/reciclaje/reciclaje.module').then(m => m.ReciclajeModule)
   },
   {
     path: 'estadisticas',
-    loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'estadisticas' }
+    loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule)
   }
 ];
 

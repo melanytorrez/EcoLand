@@ -27,7 +27,7 @@ export class RegisterComponent {
 
   strings = AUTH_STRINGS;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -55,18 +55,13 @@ export class RegisterComponent {
       return;
     }
 
-    const { fullName, email, password } = this.registerForm.value;
-
-    this.authService.register({ nombre: fullName, email, password }).subscribe({
-      next: (response) => {
-        console.log('Registro exitoso', response);
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.error('Error en el registro', err);
-        this.error = err.error?.message || 'Error al registrar. Por favor, inténtelo de nuevo.';
-      }
-    });
+    const { role } = this.registerForm.value;
+    // TODO: perform actual registration via AuthService when implemented
+    if (role === 'Administrador') {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
 }
