@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
@@ -12,7 +11,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    LucideAngularModule
+    LucideAngularModule,
+    RouterModule
   ],
   providers: [
     { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
