@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -58,11 +59,11 @@ export class RegisterComponent {
     const { fullName, email, password } = this.registerForm.value;
 
     this.authService.register({ nombre: fullName, email, password }).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         console.log('Registro exitoso', response);
         this.router.navigate(['/']);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error en el registro', err);
         this.error = err.error?.message || 'Error al registrar. Por favor, inténtelo de nuevo.';
       }
