@@ -9,6 +9,7 @@ com\ecoland\domain\model\AuditoriaLog.class
 com\ecoland\domain\port\out\RolRepositoryPort.class
 com\ecoland\infrastructure\entity\RolEntity.class
 com\ecoland\domain\port\out\UsuarioRepositoryPort.class
+com\ecoland\application\service\AuditoriaService.class
 com\ecoland\application\service\AuthService.class
 com\ecoland\application\dto\AuthResponse.class
 com\ecoland\infrastructure\adapter\in\web\AuthController.class
