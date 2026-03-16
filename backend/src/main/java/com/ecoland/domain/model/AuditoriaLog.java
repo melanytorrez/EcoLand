@@ -3,7 +3,9 @@ package com.ecoland.domain.model;
 import java.time.LocalDateTime;
 
 public class AuditoriaLog {
+
     private Long id;
+    private String usuarioEmail;
     private String accion;
     private String detalle;
     private LocalDateTime fecha;
@@ -11,8 +13,9 @@ public class AuditoriaLog {
 
     public AuditoriaLog() {}
 
-    public AuditoriaLog(Long id, String accion, String detalle, LocalDateTime fecha, Usuario usuario) {
+    public AuditoriaLog(Long id, String usuarioEmail, String accion, String detalle, LocalDateTime fecha, Usuario usuario) {
         this.id = id;
+        this.usuarioEmail = usuarioEmail;
         this.accion = accion;
         this.detalle = detalle;
         this.fecha = fecha;
@@ -21,6 +24,9 @@ public class AuditoriaLog {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
+    public String getUsuarioEmail() { return usuarioEmail; }
+    public void setUsuarioEmail(String usuarioEmail) { this.usuarioEmail = usuarioEmail; }
 
     public String getAccion() { return accion; }
     public void setAccion(String accion) { this.accion = accion; }
