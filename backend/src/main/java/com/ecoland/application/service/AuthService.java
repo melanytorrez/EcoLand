@@ -6,6 +6,8 @@ import com.ecoland.application.dto.RegisterRequest;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
+import com.ecoland.security.JwtService;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,12 @@ public class AuthService implements AuthUseCase {
 
     private final UsuarioRepositoryPort usuarioRepositoryPort;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public AuthService(UsuarioRepositoryPort usuarioRepositoryPort, PasswordEncoder passwordEncoder) {
+    public AuthService(UsuarioRepositoryPort usuarioRepositoryPort, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.usuarioRepositoryPort = usuarioRepositoryPort;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -32,7 +36,7 @@ public class AuthService implements AuthUseCase {
         }
 
         // Token generation placeholder
-        String token = "jwt-token-placeholder";
+        String token = jwtService.generateToken(usuario.getEmail());
         return new AuthResponse(token, usuario.getEmail(), usuario.getNombre());
     }
 
@@ -50,7 +54,7 @@ public class AuthService implements AuthUseCase {
 
         Usuario guardado = usuarioRepositoryPort.save(nuevoUsuario);
         
-        String token = "jwt-token-placeholder";
+        String token = jwtService.generateToken(guardado.getEmail());
         return new AuthResponse(token, guardado.getEmail(), guardado.getNombre());
     }
 }
