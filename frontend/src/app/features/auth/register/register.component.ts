@@ -64,7 +64,7 @@ export class RegisterComponent {
       },
       error: (err) => {
         console.error('Error en el registro', err);
-        this.error = 'Error al registrar. Es posible que el correo ya esté en uso.';
+        this.error = err.error?.message || 'Error al registrar. Por favor, inténtelo de nuevo.';
       }
     });
   }
