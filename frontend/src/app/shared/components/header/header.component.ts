@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { FeatureFlagService } from '../../../core/services/feature-flag.service';
+import { FeatureFlags } from '../../../core/config/feature-flags.config';
 
 @Component({
   selector: 'app-header',
@@ -14,15 +16,21 @@ export class HeaderComponent {
   isAdmin = false; // Mock for now
   user = { name: 'Usuario' };
 
-  navItems = [
-    { path: '/', label: 'Inicio' },
-    { path: '/reforestacion', label: 'Reforestación' },
-    { path: '/campanas-reciclaje', label: 'Campañas de Reciclaje' },
-    { path: '/reciclaje', label: 'Reciclaje' },
-    { path: '/estadisticas', label: 'Estadísticas' },
+  allNavItems = [
+    { path: '/', label: 'Inicio', feature: null },
+    { path: '/reforestacion', label: 'Reforestación', feature: 'reforestacion' },
+    { path: '/campanas-reciclaje', label: 'Campañas de Reciclaje', feature: 'campanasReciclaje' },
+    { path: '/reciclaje', label: 'Reciclaje', feature: 'reciclaje' },
+    { path: '/estadisticas', label: 'Estadísticas', feature: 'estadisticas' },
   ];
 
-  constructor(private router: Router) {
+  get navItems() {
+    return this.allNavItems.filter(item => 
+      !item.feature || this.featureFlagService.isFeatureEnabled(item.feature as keyof FeatureFlags)
+    );
+  }
+
+  constructor(private router: Router, private featureFlagService: FeatureFlagService) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
