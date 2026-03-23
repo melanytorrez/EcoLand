@@ -26,19 +26,14 @@ public class AuditoriaRepositoryAdapter implements AuditoriaRepositoryPort {
     }
 
     private AuditoriaLog toDomain(AuditoriaLogEntity entity) {
-        Usuario usuario = null;
-        if (entity.getUsuario() != null) {
-            usuario = new Usuario(
-                entity.getUsuario().getId(),
-                entity.getUsuario().getNombre(),
-                entity.getUsuario().getEmail(),
-                entity.getUsuario().getPassword(),
-                entity.getUsuario().getRoles().stream()
-                    .map(r -> new Rol(r.getId(), r.getNombre()))
-                    .collect(Collectors.toSet())
-            );
-        }
-        return new AuditoriaLog(entity.getId(), entity.getAccion(), entity.getDetalle(), entity.getFecha(), usuario);
+        Long usuarioId = entity.getUsuario() != null ? entity.getUsuario().getId() : null;
+        return new AuditoriaLog(
+            entity.getId(),
+            entity.getAccion(),
+            entity.getDetalle(),
+            entity.getFecha(),
+            usuarioId
+        );
     }
 
     private AuditoriaLogEntity toEntity(AuditoriaLog log) {
@@ -48,9 +43,9 @@ public class AuditoriaRepositoryAdapter implements AuditoriaRepositoryPort {
         entity.setDetalle(log.getDetalle());
         entity.setFecha(log.getFecha());
         
-        if (log.getUsuario() != null) {
+        if (log.getUsuarioId() != null) {
             UsuarioEntity userEntity = new UsuarioEntity();
-            userEntity.setId(log.getUsuario().getId());
+            userEntity.setId(log.getUsuarioId());
             entity.setUsuario(userEntity);
         }
         

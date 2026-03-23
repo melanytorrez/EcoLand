@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    LucideAngularModule
+    LucideAngularModule,
+    RouterModule
   ],
   providers: [
     { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
@@ -26,7 +28,7 @@ export class RegisterComponent {
 
   strings = AUTH_STRINGS;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -54,13 +56,18 @@ export class RegisterComponent {
       return;
     }
 
-    const { role } = this.registerForm.value;
-    // TODO: perform actual registration via AuthService when implemented
-    if (role === 'Administrador') {
-      this.router.navigate(['/admin']);
-    } else {
-      this.router.navigate(['/']);
-    }
+    const { fullName, email, password } = this.registerForm.value;
+
+    this.authService.register({ nombre: fullName, email, password }).subscribe({
+      next: (response: any) => {
+        console.log('Registro exitoso', response);
+        this.router.navigate(['/']);
+      },
+      error: (err: any) => {
+        console.error('Error en el registro', err);
+        this.error = err.error?.message || 'Error al registrar. Por favor, inténtelo de nuevo.';
+      }
+    });
   }
 
 }

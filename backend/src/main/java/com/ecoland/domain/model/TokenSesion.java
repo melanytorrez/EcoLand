@@ -6,15 +6,15 @@ public class TokenSesion {
     private Long id;
     private String token;
     private LocalDateTime fechaExpiracion;
-    private Usuario usuario;
+    private Long usuarioId;
 
     public TokenSesion() {}
 
-    public TokenSesion(Long id, String token, LocalDateTime fechaExpiracion, Usuario usuario) {
+    public TokenSesion(Long id, String token, LocalDateTime fechaExpiracion, Long usuarioId) {
         this.id = id;
         this.token = token;
         this.fechaExpiracion = fechaExpiracion;
-        this.usuario = usuario;
+        this.usuarioId = usuarioId;
     }
 
     public Long getId() { return id; }
@@ -26,6 +26,6 @@ public class TokenSesion {
     public LocalDateTime getFechaExpiracion() { return fechaExpiracion; }
     public void setFechaExpiracion(LocalDateTime fechaExpiracion) { this.fechaExpiracion = fechaExpiracion; }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public Long getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
 }

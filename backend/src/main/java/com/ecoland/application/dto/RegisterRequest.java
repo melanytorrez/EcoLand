@@ -1,11 +1,10 @@
 package com.ecoland.application.dto;
 
 public class RegisterRequest {
+
     private String nombre;
     private String email;
     private String password;
-
-    public RegisterRequest() {}
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

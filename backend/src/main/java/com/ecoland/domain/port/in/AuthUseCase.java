@@ -1,10 +1,9 @@
 package com.ecoland.domain.port.in;
 
 import com.ecoland.application.dto.AuthResponse;
-import com.ecoland.application.dto.LoginRequest;
-import com.ecoland.application.dto.RegisterRequest;
+import com.ecoland.domain.model.Usuario;
 
 public interface AuthUseCase {
-    AuthResponse login(LoginRequest request);
-    AuthResponse register(RegisterRequest request);
+    AuthResponse login(String email, String password);
+    AuthResponse register(Usuario usuario);
 }
