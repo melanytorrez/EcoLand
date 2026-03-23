@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
+import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -27,7 +28,11 @@ export class LoginComponent {
 
   strings = AUTH_STRINGS;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router,
+    private authService: AuthService
+  ) {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -44,13 +49,24 @@ export class LoginComponent {
       return;
     }
 
-    const { role } = this.loginForm.value;
+    const { email, password, role } = this.loginForm.value;
 
-    if (role === 'Administrador') {
-      this.router.navigate(['/admin']);
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.authService.login({ email, password }).subscribe({
+      next: (response: any) => {
+        console.log('Login exitoso', response);
+        // La redirección depende del rol que haya seleccionado el usuario o el que venga del BE
+        // Por ahora mantenemos la lógica de navegación basada en el formulario
+        if (role === 'Administrador') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err: any) => {
+        console.error('Error en el login', err);
+        this.error = 'Credenciales inválidas. Por favor, intente de nuevo.';
+      }
+    });
 
   }
 
