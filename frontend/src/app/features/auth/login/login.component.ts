@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent {
 
   strings = AUTH_STRINGS;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -43,7 +44,13 @@ export class LoginComponent {
       return;
     }
 
-    const { role } = this.loginForm.value;
+    const { role, email } = this.loginForm.value;
+
+    this.authService.login({
+      fullName: email,
+      email,
+      role
+    });
 
     if (role === 'Administrador') {
       this.router.navigate(['/admin']);

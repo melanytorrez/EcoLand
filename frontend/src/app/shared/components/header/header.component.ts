@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
+import { AuthService } from '../../../core/services/auth.service';
 import { FeatureFlagService } from '../../../core/services/feature-flag.service';
 import { FeatureFlags } from '../../../core/config/feature-flags.config';
 
@@ -10,11 +11,12 @@ import { FeatureFlags } from '../../../core/config/feature-flags.config';
   styleUrl: './header.component.css',
   standalone: false
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   currentPath = '';
-  isAuthenticated = false; // Mock for now
-  isAdmin = false; // Mock for now
-  user = { name: 'Usuario' };
+  isAuthenticated = false;
+  isAdmin = false;
+  user = { name: '' };
+  private readonly subscriptions = new Subscription();
 
   allNavItems = [
     { path: '/', label: 'Inicio', feature: null },
@@ -30,15 +32,36 @@ export class HeaderComponent {
     );
   }
 
-  constructor(private router: Router, private featureFlagService: FeatureFlagService) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      this.currentPath = event.urlAfterRedirects;
-    });
+  constructor(
+    private router: Router,
+    private featureFlagService: FeatureFlagService,
+    private authService: AuthService
+  ) {
+    this.currentPath = this.router.url;
+
+    this.subscriptions.add(
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe((event: NavigationEnd) => {
+        this.currentPath = event.urlAfterRedirects;
+      })
+    );
+
+    this.subscriptions.add(
+      this.authService.user$.subscribe(user => {
+        this.isAuthenticated = !!user;
+        this.user.name = user?.fullName ?? '';
+        this.isAdmin = user?.role === 'Administrador';
+      })
+    );
   }
 
   logout() {
-    this.isAuthenticated = false;
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

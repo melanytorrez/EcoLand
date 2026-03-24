@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,7 @@ export class RegisterComponent {
 
   strings = AUTH_STRINGS;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -54,8 +55,14 @@ export class RegisterComponent {
       return;
     }
 
-    const { role } = this.registerForm.value;
-    // TODO: perform actual registration via AuthService when implemented
+    const { role, fullName, email } = this.registerForm.value;
+
+    this.authService.register({
+      fullName,
+      email,
+      role
+    });
+
     if (role === 'Administrador') {
       this.router.navigate(['/admin']);
     } else {
