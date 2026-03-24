@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../strings';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -27,10 +28,18 @@ export class LoginComponent {
 
   strings = AUTH_STRINGS;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  get emailRules() {
+    const val = this.loginForm?.get('email')?.value || '';
+    return {
+      hasAt: val.includes('@'),
+      hasCom: val.endsWith('.com')
+    };
+  }
+
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
 
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
       password: ['', Validators.required],
       role: ['Usuario']
     });
@@ -44,13 +53,25 @@ export class LoginComponent {
       return;
     }
 
-    const { role } = this.loginForm.value;
+    const { email, password, role } = this.loginForm.value;
 
-    if (role === 'Administrador') {
-      this.router.navigate(['/admin']);
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.authService.login({ email, password }).subscribe({
+      next: (response: any) => {
+        if (response && response.token) {
+          this.authService.setToken(response.token);
+        }
+        
+        if (role === 'Administrador' || this.authService.getUser()?.role === 'Admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err: any) => {
+        console.error('Error al iniciar sesión', err);
+        this.error = 'Contraseña o Correo incorrectos intente de nuevo';
+      }
+    });
 
   }
 

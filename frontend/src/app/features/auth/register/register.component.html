@@ -67,6 +67,14 @@
               class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
           </div>
+          <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" 
+               class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">
+            <span *ngIf="registerForm.get('email')?.errors?.['required']">⚠️ El correo es obligatorio.</span>
+            <ng-container *ngIf="!registerForm.get('email')?.errors?.['required']">
+              <span *ngIf="!emailRules.hasAt">⚠️ Falta el símbolo &#64; en el correo.</span>
+              <span *ngIf="!emailRules.hasCom">⚠️ El correo debe terminar en .com.</span>
+            </ng-container>
+          </div>
         </div>
 
         <!-- PASSWORD -->
@@ -89,6 +97,17 @@
               class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
           </div>
+          <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" 
+               class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">
+            <span *ngIf="registerForm.get('password')?.errors?.['required']">⚠️ La contraseña es obligatoria.</span>
+            <ng-container *ngIf="!registerForm.get('password')?.errors?.['required']">
+              <span *ngIf="!passwordRules.minLength">⚠️ Mínimo 8 caracteres.</span>
+              <span *ngIf="!passwordRules.hasUpper">⚠️ Falta una letra mayúscula.</span>
+              <span *ngIf="!passwordRules.hasLower">⚠️ Falta una letra minúscula.</span>
+              <span *ngIf="!passwordRules.hasNumber">⚠️ Falta un número.</span>
+              <span *ngIf="!passwordRules.hasSpecial">⚠️ Falta un carácter especial.</span>
+            </ng-container>
+          </div>
         </div>
 
         <!-- CONFIRM PASSWORD -->
@@ -110,6 +129,10 @@
               [placeholder]="strings.confirmPasswordPlaceholder"
               class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
+          </div>
+          <div *ngIf="registerForm.hasError('mismatch') && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" 
+               class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">
+            <span>⚠️ Las contraseñas no coinciden.</span>
           </div>
         </div>
 

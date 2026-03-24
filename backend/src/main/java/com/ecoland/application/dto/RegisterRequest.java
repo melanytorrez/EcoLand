@@ -10,6 +10,7 @@ public class RegisterRequest {
 
     @NotBlank(message = "El email no puede estar vacío")
     @Email(message = "Debe ser un correo electrónico válido")
+    @Pattern(regexp = "^[^\\s@]+@[^\\s@]+\\.com$", message = "El correo debe terminar en .com")
     private String email;
 
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!.*_\\-]).{8,}$",

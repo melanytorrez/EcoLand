@@ -1,5 +1,6 @@
 package com.ecoland.application.service;
 
+import com.ecoland.domain.exception.EmailAlreadyExistsException;
 import com.ecoland.infrastructure.security.JwtService;
 import com.ecoland.application.dto.AuthResponse;
 import com.ecoland.domain.model.AuditoriaLog;
@@ -53,7 +54,7 @@ public class AuthService implements AuthUseCase {
     @Override
     public AuthResponse register(Usuario usuario) {
         if (usuarioRepositoryPort.findByEmail(usuario.getEmail()).isPresent()) {
-            throw new RuntimeException("El email ya está registrado");
+            throw new EmailAlreadyExistsException("El email ya está registrado");
         }
 
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));

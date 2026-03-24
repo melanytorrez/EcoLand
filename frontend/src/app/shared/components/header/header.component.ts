@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { FeatureFlagService } from '../../../core/services/feature-flag.service';
 import { FeatureFlags } from '../../../core/config/feature-flags.config';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +13,6 @@ import { FeatureFlags } from '../../../core/config/feature-flags.config';
 })
 export class HeaderComponent {
   currentPath = '';
-  isAuthenticated = false; // Mock for now
-  isAdmin = false; // Mock for now
-  user = { name: 'Usuario' };
 
   allNavItems = [
     { path: '/', label: 'Inicio', feature: null },
@@ -30,7 +28,26 @@ export class HeaderComponent {
     );
   }
 
-  constructor(private router: Router, private featureFlagService: FeatureFlagService) {
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  get user(): any {
+    return this.authService.getUser();
+  }
+
+  get isAdmin(): boolean {
+    const u = this.user;
+    return u && (u.role === 'Admin' || u.role === 'Administrador');
+  }
+
+  showLogoutModal = false;
+
+  constructor(
+    private router: Router, 
+    private featureFlagService: FeatureFlagService,
+    private authService: AuthService
+  ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
@@ -39,6 +56,16 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.isAuthenticated = false;
+    this.showLogoutModal = true;
+  }
+
+  confirmLogout() {
+    this.showLogoutModal = false;
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+  cancelLogout() {
+    this.showLogoutModal = false;
   }
 }

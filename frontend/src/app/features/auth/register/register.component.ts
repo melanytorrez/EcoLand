@@ -26,13 +26,36 @@ export class RegisterComponent {
   registerForm: FormGroup;
   error = '';
 
+  get emailRules() {
+    const val = this.registerForm?.get('email')?.value || '';
+    return {
+      hasAt: val.includes('@'),
+      hasCom: val.endsWith('.com')
+    };
+  }
+
+  get passwordRules() {
+    const val = this.registerForm?.get('password')?.value || '';
+    return {
+      minLength: val.length >= 8,
+      hasUpper: /[A-Z]/.test(val),
+      hasLower: /[a-z]/.test(val),
+      hasNumber: /[0-9]/.test(val),
+      hasSpecial: /[@#$%^&+=!.*_\-]/.test(val)
+    };
+  }
+
   strings = AUTH_STRINGS;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
+      password: ['', [
+        Validators.required, 
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!.*_\-]).{8,}$/)
+      ]],
       confirmPassword: ['', Validators.required],
       role: ['Usuario']
     }, {
@@ -61,6 +84,10 @@ export class RegisterComponent {
     this.authService.register({ nombre: fullName, email, password }).subscribe({
       next: (response: any) => {
         console.log('Registro exitoso', response);
+        // Guardar token para iniciar sesión automáticamente
+        if (response && response.token) {
+          this.authService.setToken(response.token);
+        }
         this.router.navigate(['/']);
       },
       error: (err: any) => {

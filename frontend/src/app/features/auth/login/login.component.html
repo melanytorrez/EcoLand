@@ -50,6 +50,17 @@
             >
 
           </div>
+          
+          <!-- Dynamic Email Validation -->
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" 
+               class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1 text-left">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">⚠️ El correo es obligatorio.</span>
+            <ng-container *ngIf="!loginForm.get('email')?.errors?.['required']">
+              <span *ngIf="!emailRules.hasAt">⚠️ Falta el símbolo &#64; en el correo.</span>
+              <span *ngIf="!emailRules.hasCom">⚠️ El correo debe terminar en .com.</span>
+            </ng-container>
+          </div>
+          
         </div>
 
         <!-- PASSWORD -->

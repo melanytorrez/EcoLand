@@ -40,7 +40,7 @@
           <!-- User Info -->
           <div class="hidden md:flex items-center gap-2 px-4 py-2.5 bg-[#E8F5E9] rounded-2xl">
             <lucide-icon name="user" class="w-4 h-4 text-[#2E7D32]"></lucide-icon>
-            <span class="text-sm font-medium text-[#2E7D32]">{{ user.name }}</span>
+            <span class="text-sm font-medium text-[#2E7D32]">{{ user?.nombre || user?.sub || 'Usuario' }}</span>
           </div>
 
           <!-- Logout Button -->
@@ -73,3 +73,35 @@
     </div>
   </div>
 </header>
+
+<!-- Logout Confirmation Modal -->
+<div *ngIf="showLogoutModal" 
+     style="position: fixed; inset: 0; z-index: 999999; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+  
+  <div style="background-color: white; border-radius: 24px; padding: 24px; width: 90%; max-width: 260px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 1px solid #e5e7eb; position: relative;">
+    
+    <!-- Icon -->
+    <div style="width: 48px; height: 48px; background-color: #fef2f2; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto;">
+      <lucide-icon name="log-out" style="width: 24px; height: 24px; color: #dc2626;"></lucide-icon>
+    </div>
+    
+    <h3 style="font-size: 1.125rem; font-weight: 700; text-align: center; color: #111827; margin: 0 0 8px 0;">¿Cerrar sesión?</h3>
+    <p style="font-size: 0.8rem; text-align: center; color: #6b7280; margin: 0 0 20px 0;">¿Estás seguro de salir?</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <!-- Main Action (Aceptar) -->
+      <button 
+        (click)="confirmLogout()"
+        style="width: 100%; padding: 10px; background-color: #dc2626; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
+        Sí, salir
+      </button>
+      <!-- Secondary Action (Cancelar) -->
+      <button 
+        (click)="cancelLogout()"
+        style="width: 100%; padding: 10px; background-color: white; color: #4b5563; border: 1px solid #d1d5db; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
+        Cancelar
+      </button>
+    </div>
+    
+  </div>
+</div>

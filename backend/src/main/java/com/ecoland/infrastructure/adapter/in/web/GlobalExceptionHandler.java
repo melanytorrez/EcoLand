@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ecoland.domain.exception.EmailAlreadyExistsException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -24,5 +26,12 @@ public class GlobalExceptionHandler {
         });
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 }
