@@ -1,11 +1,21 @@
 package com.ecoland.application.dto;
 
-public class RegisterRequest {
-    private String nombre;
-    private String email;
-    private String password;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
-    public RegisterRequest() {}
+public class RegisterRequest {
+
+    private String nombre;
+
+    @NotBlank(message = "El email no puede estar vacío")
+    @Email(message = "Debe ser un correo electrónico válido")
+    @Pattern(regexp = "^[^\\s@]+@[^\\s@]+\\.com$", message = "El correo debe terminar en .com")
+    private String email;
+
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!.*_\\-]).{8,}$",
+             message = "La contraseña debe tener al menos 8 caracteres, un número, una letra minúscula, una mayúscula y un carácter especial")
+    private String password;
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

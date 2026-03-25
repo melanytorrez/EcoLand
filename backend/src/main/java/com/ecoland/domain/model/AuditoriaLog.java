@@ -3,6 +3,7 @@ package com.ecoland.domain.model;
 import java.time.LocalDateTime;
 
 public class AuditoriaLog {
+
     private Long id;
     private String accion;
     private String detalle;

@@ -1,9 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription, filter } from 'rxjs';
-import { AuthService } from '../../../core/services/auth.service';
+import { filter } from 'rxjs';
 import { FeatureFlagService } from '../../../core/services/feature-flag.service';
 import { FeatureFlags } from '../../../core/config/feature-flags.config';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +11,8 @@ import { FeatureFlags } from '../../../core/config/feature-flags.config';
   styleUrl: './header.component.css',
   standalone: false
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent {
   currentPath = '';
-  isAuthenticated = false;
-  isAdmin = false;
-  user = { name: '' };
-  private readonly subscriptions = new Subscription();
 
   allNavItems = [
     { path: '/', label: 'Inicio', feature: null },
@@ -32,36 +28,44 @@ export class HeaderComponent implements OnDestroy {
     );
   }
 
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  get user(): any {
+    return this.authService.getUser();
+  }
+
+  get isAdmin(): boolean {
+    const u = this.user;
+    return u && (u.role === 'Admin' || u.role === 'Administrador');
+  }
+
+  showLogoutModal = false;
+
   constructor(
-    private router: Router,
+    private router: Router, 
     private featureFlagService: FeatureFlagService,
     private authService: AuthService
   ) {
-    this.currentPath = this.router.url;
-
-    this.subscriptions.add(
-      this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
-      ).subscribe((event: NavigationEnd) => {
-        this.currentPath = event.urlAfterRedirects;
-      })
-    );
-
-    this.subscriptions.add(
-      this.authService.user$.subscribe(user => {
-        this.isAuthenticated = !!user;
-        this.user.name = user?.fullName ?? '';
-        this.isAdmin = user?.role === 'Administrador';
-      })
-    );
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.currentPath = event.urlAfterRedirects;
+    });
   }
 
   logout() {
+    this.showLogoutModal = true;
+  }
+
+  confirmLogout() {
+    this.showLogoutModal = false;
     this.authService.logout();
     this.router.navigate(['/']);
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+  cancelLogout() {
+    this.showLogoutModal = false;
   }
 }

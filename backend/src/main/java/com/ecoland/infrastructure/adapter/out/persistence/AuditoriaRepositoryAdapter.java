@@ -27,7 +27,13 @@ public class AuditoriaRepositoryAdapter implements AuditoriaRepositoryPort {
 
     private AuditoriaLog toDomain(AuditoriaLogEntity entity) {
         Long usuarioId = entity.getUsuario() != null ? entity.getUsuario().getId() : null;
-        return new AuditoriaLog(entity.getId(), entity.getAccion(), entity.getDetalle(), entity.getFecha(), usuarioId);
+        return new AuditoriaLog(
+            entity.getId(),
+            entity.getAccion(),
+            entity.getDetalle(),
+            entity.getFecha(),
+            usuarioId
+        );
     }
 
     private AuditoriaLogEntity toEntity(AuditoriaLog log) {

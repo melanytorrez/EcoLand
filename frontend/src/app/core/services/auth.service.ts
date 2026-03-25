@@ -1,57 +1,51 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-export interface UserSession {
-  fullName: string;
-  email: string;
-  role?: string;
-}
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly sessionStorageKey = 'ecoland_session';
-  private readonly userSubject = new BehaviorSubject<UserSession | null>(this.loadSession());
 
-  readonly user$ = this.userSubject.asObservable();
-  readonly isAuthenticated$ = this.user$.pipe(map(user => !!user));
+  private apiUrl = 'http://localhost:8080/auth';
 
-  constructor() {}
+  constructor(private http: HttpClient) { }
 
-  get currentUser(): UserSession | null {
-    return this.userSubject.value;
+  register(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, user);
   }
 
-  get isAuthenticated(): boolean {
-    return this.currentUser !== null;
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  login(user: UserSession): void {
-    this.userSubject.next(user);
-    localStorage.setItem(this.sessionStorageKey, JSON.stringify(user));
+  setToken(token: string): void {
+    localStorage.setItem('auth_token', token);
   }
 
-  register(user: UserSession): void {
-    this.login(user);
+  getToken(): string | null {
+    return localStorage.getItem('auth_token');
+  }
+
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    return !!token;
   }
 
   logout(): void {
-    this.userSubject.next(null);
-    localStorage.removeItem(this.sessionStorageKey);
+    localStorage.removeItem('auth_token');
   }
 
-  private loadSession(): UserSession | null {
-    const rawSession = localStorage.getItem(this.sessionStorageKey);
-    if (!rawSession) {
-      return null;
-    }
-
+  getUser(): any {
+    const token = this.getToken();
+    if (!token) return null;
+    
     try {
-      return JSON.parse(rawSession) as UserSession;
-    } catch {
-      localStorage.removeItem(this.sessionStorageKey);
+      const payload = token.split('.')[1];
+      const decodedPalyoad = atob(payload);
+      return JSON.parse(decodedPalyoad);
+    } catch (e) {
+      console.error('Error decoding JWT Token', e);
       return null;
     }
   }

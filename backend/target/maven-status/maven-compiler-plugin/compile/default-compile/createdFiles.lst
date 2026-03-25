@@ -1,9 +1,0 @@
-com\ecoland\EcoLandApplication.class
-com\ecoland\infrastructure\entity\UsuarioEntity.class
-com\ecoland\infrastructure\repository\JpaTokenRepository.class
-com\ecoland\infrastructure\entity\RolEntity.class
-com\ecoland\infrastructure\entity\AuditoriaLogEntity.class
-com\ecoland\infrastructure\repository\JpaUsuarioRepository.class
-com\ecoland\infrastructure\repository\JpaAuditoriaRepository.class
-com\ecoland\infrastructure\entity\TokenSesionEntity.class
-com\ecoland\infrastructure\repository\JpaRolRepository.class

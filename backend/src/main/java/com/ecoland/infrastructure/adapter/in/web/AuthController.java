@@ -7,10 +7,10 @@ import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/auth")
-@CrossOrigin(origins = "*")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final AuthUseCase authUseCase;
@@ -25,11 +25,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         Usuario usuario = new Usuario();
         usuario.setNombre(request.getNombre());
         usuario.setEmail(request.getEmail());
         usuario.setPassword(request.getPassword());
         return ResponseEntity.ok(authUseCase.register(usuario));
     }
+
+
 }

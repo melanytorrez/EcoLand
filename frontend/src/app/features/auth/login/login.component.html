@@ -50,6 +50,17 @@
             >
 
           </div>
+          
+          <!-- Dynamic Email Validation -->
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" 
+               class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1 text-left">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">⚠️ El correo es obligatorio.</span>
+            <ng-container *ngIf="!loginForm.get('email')?.errors?.['required']">
+              <span *ngIf="!emailRules.hasAt">⚠️ Falta el símbolo &#64; en el correo.</span>
+              <span *ngIf="!emailRules.hasCom">⚠️ El correo debe terminar en .com.</span>
+            </ng-container>
+          </div>
+          
         </div>
 
         <!-- PASSWORD -->
@@ -122,8 +133,9 @@
         <!-- BUTTON -->
         <button
           type="submit"
-          class="w-full px-8 py-4 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold text-lg"
-        >
+          class="w-full px-8 py-4 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold text-lg 
+          hover:shadow-2xl hover:shadow-[#4CAF50]/30 hover:scale-105 transition-all duration-300"
+          >
           {{ strings.loginButton }}
         </button>
 
@@ -142,7 +154,8 @@
         <div class="text-center">
           <p class="text-gray-600">
             {{ strings.registerQuestion }}
-            <a routerLink="/register" class="text-[#2E7D32] font-semibold">
+            <a routerLink="/register" 
+            class="text-[#2E7D32] font-semibold hover:text-[#4CAF50] cursor-pointer">
               {{ strings.registerLink }}
             </a>
           </p>
@@ -150,7 +163,8 @@
 
         <!-- Back -->
         <div class="text-center pt-4">
-          <a routerLink="/" class="text-sm text-gray-500">
+          <a routerLink="/" 
+          class="text-sm text-gray-500 hover:text-[#2E7D32] cursor-pointer">
             {{ strings.backHome }}
           </a>
         </div>
