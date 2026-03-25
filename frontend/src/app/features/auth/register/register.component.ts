@@ -79,20 +79,31 @@ export class RegisterComponent {
       return;
     }
 
-    const { fullName, email, password } = this.registerForm.value;
+    const { fullName, email, password, role } = this.registerForm.value;
 
-    this.authService.register({ nombre: fullName, email, password }).subscribe({
+    this.authService.register({ nombre: fullName, email, password, role }).subscribe({
       next: (response: any) => {
         console.log('Registro exitoso', response);
-        // Guardar token para iniciar sesión automáticamente
-        if (response && response.token) {
-          this.authService.setToken(response.token);
-        }
+        this.authService.setSession(response);
         this.router.navigate(['/']);
       },
       error: (err: any) => {
         console.error('Error en el registro', err);
-        this.error = err.error?.message || 'Error al registrar. Por favor, inténtelo de nuevo.';
+        if (err?.error?.message) {
+          this.error = err.error.message;
+          return;
+        }
+
+        // Validation errors can arrive as { field: message } map
+        if (err?.error && typeof err.error === 'object') {
+          const firstValidationMessage = Object.values(err.error)[0];
+          if (typeof firstValidationMessage === 'string') {
+            this.error = firstValidationMessage;
+            return;
+          }
+        }
+
+        this.error = 'Error al registrar. Por favor, inténtelo de nuevo.';
       }
     });
   }

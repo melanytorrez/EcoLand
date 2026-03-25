@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/auth';
+  private readonly apiUrl = 'http://localhost:8082/auth';
+  private readonly tokenKey = 'auth_token';
+  private readonly userKey = 'auth_user';
 
   constructor(private http: HttpClient) { }
 
@@ -20,11 +22,30 @@ export class AuthService {
   }
 
   setToken(token: string): void {
-    localStorage.setItem('auth_token', token);
+    localStorage.setItem(this.tokenKey, token);
+  }
+
+  setSession(response: any): void {
+    if (response?.token) {
+      this.setToken(response.token);
+    }
+
+    if (response?.nombre || response?.email) {
+      localStorage.setItem(this.userKey, JSON.stringify({
+        nombre: response.nombre,
+        email: response.email,
+        role: response.role
+      }));
+    }
+  }
+
+  normalizeRole(role: string | undefined | null): 'admin' | 'usuario' {
+    const value = (role || '').toLowerCase();
+    return value.includes('admin') ? 'admin' : 'usuario';
   }
 
   getToken(): string | null {
-    return localStorage.getItem('auth_token');
+    return localStorage.getItem(this.tokenKey);
   }
 
   isAuthenticated(): boolean {
@@ -33,17 +54,28 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userKey);
   }
 
   getUser(): any {
+    const savedUser = localStorage.getItem(this.userKey);
+    if (savedUser) {
+      try {
+        return JSON.parse(savedUser);
+      } catch {
+        localStorage.removeItem(this.userKey);
+      }
+    }
+
     const token = this.getToken();
     if (!token) return null;
     
     try {
       const payload = token.split('.')[1];
-      const decodedPalyoad = atob(payload);
-      return JSON.parse(decodedPalyoad);
+      const normalizedPayload = payload.replace(/-/g, '+').replace(/_/g, '/');
+      const decodedPayload = atob(normalizedPayload);
+      return JSON.parse(decodedPayload);
     } catch (e) {
       console.error('Error decoding JWT Token', e);
       return null;
