@@ -57,11 +57,20 @@ export class LoginComponent {
 
     this.authService.login({ email, password }).subscribe({
       next: (response: any) => {
-        if (response && response.token) {
-          this.authService.setToken(response.token);
+        this.authService.setSession(response);
+
+        const selectedRole = role === 'Administrador' ? 'admin' : 'usuario';
+        const actualRole = this.authService.normalizeRole(response?.role);
+
+        if (selectedRole !== actualRole) {
+          this.authService.logout();
+          this.error = selectedRole === 'admin'
+            ? 'Tu cuenta no tiene permisos de administrador.'
+            : 'Tu cuenta es de administrador. Elige el acceso de administrador.';
+          return;
         }
         
-        if (role === 'Administrador' || this.authService.getUser()?.role === 'Admin') {
+        if (actualRole === 'admin') {
           this.router.navigate(['/admin']);
         } else {
           this.router.navigate(['/']);

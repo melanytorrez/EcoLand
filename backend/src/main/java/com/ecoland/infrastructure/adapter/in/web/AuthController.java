@@ -3,11 +3,14 @@ package com.ecoland.infrastructure.adapter.in.web;
 import com.ecoland.application.dto.AuthResponse;
 import com.ecoland.application.dto.LoginRequest;
 import com.ecoland.application.dto.RegisterRequest;
+import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,6 +33,9 @@ public class AuthController {
         usuario.setNombre(request.getNombre());
         usuario.setEmail(request.getEmail());
         usuario.setPassword(request.getPassword());
+        if (request.getRole() != null && !request.getRole().isBlank()) {
+            usuario.setRoles(Collections.singleton(new Rol(null, request.getRole())));
+        }
         return ResponseEntity.ok(authUseCase.register(usuario));
     }
 

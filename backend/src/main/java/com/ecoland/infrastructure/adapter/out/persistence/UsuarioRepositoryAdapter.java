@@ -8,6 +8,7 @@ import com.ecoland.infrastructure.entity.RolEntity;
 import com.ecoland.infrastructure.repository.JpaUsuarioRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -42,14 +43,17 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
     }
 
     private Usuario toDomain(UsuarioEntity entity) {
+        var roles = entity.getRoles() == null ? Collections.<Rol>emptySet() :
+            entity.getRoles().stream()
+                .map(r -> new Rol(r.getId(), r.getNombre()))
+                .collect(Collectors.toSet());
+
         return new Usuario(
             entity.getId(),
             entity.getNombre(),
             entity.getEmail(),
             entity.getPassword(),
-            entity.getRoles().stream()
-                .map(r -> new Rol(r.getId(), r.getNombre()))
-                .collect(Collectors.toSet())
+            roles
         );
     }
 

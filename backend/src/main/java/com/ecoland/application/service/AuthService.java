@@ -4,9 +4,11 @@ import com.ecoland.domain.exception.EmailAlreadyExistsException;
 import com.ecoland.infrastructure.security.JwtService;
 import com.ecoland.application.dto.AuthResponse;
 import com.ecoland.domain.model.AuditoriaLog;
+import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import com.ecoland.domain.port.out.AuditoriaRepositoryPort;
+import com.ecoland.domain.port.out.RolRepositoryPort;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,22 +16,26 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Set;
 
 @Service
 public class AuthService implements AuthUseCase {
 
     private final UsuarioRepositoryPort usuarioRepositoryPort;
+    private final RolRepositoryPort rolRepositoryPort;
     private final AuditoriaRepositoryPort auditoriaRepositoryPort;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
     public AuthService(
             UsuarioRepositoryPort usuarioRepositoryPort,
+            RolRepositoryPort rolRepositoryPort,
             AuditoriaRepositoryPort auditoriaRepositoryPort,
             PasswordEncoder passwordEncoder,
             JwtService jwtService
     ) {
         this.usuarioRepositoryPort = usuarioRepositoryPort;
+        this.rolRepositoryPort = rolRepositoryPort;
         this.auditoriaRepositoryPort = auditoriaRepositoryPort;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
@@ -48,7 +54,7 @@ public class AuthService implements AuthUseCase {
 
         registrarAuditoria(usuario.getId(), "LOGIN", "Inicio de sesión exitoso");
 
-        return new AuthResponse(token, usuario.getEmail(), usuario.getNombre());
+        return new AuthResponse(token, usuario.getEmail(), usuario.getNombre(), resolvePrimaryRole(usuario.getRoles()));
     }
 
     @Override
@@ -57,11 +63,13 @@ public class AuthService implements AuthUseCase {
             throw new EmailAlreadyExistsException("El email ya está registrado");
         }
 
+        String requestedRole = resolvePrimaryRole(usuario.getRoles());
+        String normalizedRole = normalizeRoleName(requestedRole);
+        Rol persistedRole = rolRepositoryPort.findByNombre(normalizedRole)
+                .orElseGet(() -> rolRepositoryPort.save(new Rol(null, normalizedRole)));
+        usuario.setRoles(Collections.singleton(persistedRole));
+
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-        // Asignar roles por defecto si es necesario, o mantener vacío como estaba
-        if (usuario.getRoles() == null) {
-            usuario.setRoles(Collections.emptySet());
-        }
 
         Usuario guardado = usuarioRepositoryPort.save(usuario);
 
@@ -69,7 +77,32 @@ public class AuthService implements AuthUseCase {
 
         registrarAuditoria(guardado.getId(), "REGISTER", "Registro de nuevo usuario");
 
-        return new AuthResponse(token, guardado.getEmail(), guardado.getNombre());
+        return new AuthResponse(token, guardado.getEmail(), guardado.getNombre(), resolvePrimaryRole(guardado.getRoles()));
+    }
+
+    private String resolvePrimaryRole(Set<com.ecoland.domain.model.Rol> roles) {
+        if (roles == null || roles.isEmpty()) {
+            return "Usuario";
+        }
+
+        return roles.stream()
+                .map(com.ecoland.domain.model.Rol::getNombre)
+                .filter(nombre -> nombre != null && !nombre.isBlank())
+                .findFirst()
+                .orElse("Usuario");
+    }
+
+    private String normalizeRoleName(String role) {
+        if (role == null) {
+            return "Usuario";
+        }
+
+        String value = role.trim().toLowerCase();
+        if (value.contains("admin")) {
+            return "Admin";
+        }
+
+        return "Usuario";
     }
 
     private void registrarAuditoria(Long usuarioId, String accion, String detalle) {
@@ -81,4 +114,4 @@ public class AuthService implements AuthUseCase {
 
         auditoriaRepositoryPort.save(log);
     }
-}
+}
