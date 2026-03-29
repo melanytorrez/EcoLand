@@ -42,9 +42,32 @@
   <!-- Campaigns Grid -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div *ngIf="isLoading" class="min-h-[220px] flex items-center justify-center">
+        <div class="animate-pulse flex flex-col items-center">
+          <lucide-icon name="leaf" class="w-12 h-12 text-[#4CAF50] mb-3"></lucide-icon>
+          <p class="text-gray-600 font-medium">Cargando campanas...</p>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading && errorMessage" class="max-w-2xl mx-auto bg-red-50 border-2 border-red-200 rounded-2xl p-6 text-center">
+        <p class="text-red-700 font-medium mb-4">{{ errorMessage }}</p>
+        <button
+          type="button"
+          (click)="retry()"
+          class="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-colors"
+        >
+          Reintentar
+        </button>
+      </div>
+
+      <div *ngIf="!isLoading && !errorMessage && filteredCampaigns.length === 0" class="max-w-2xl mx-auto bg-[#E8F5E9] border-2 border-[#C8E6C9] rounded-2xl p-6 text-center">
+        <p class="text-[#2E7D32] font-medium">No hay campanas de reforestacion disponibles por el momento.</p>
+      </div>
+
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           *ngFor="let campaign of filteredCampaigns"
+          [class.hidden]="isLoading || !!errorMessage"
           class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2"
         >
           <div class="relative h-56 overflow-hidden">
@@ -97,12 +120,13 @@
               <p class="text-sm font-semibold text-[#2E7D32]">{{ campaign.organizer }}</p>
             </div>
 
-            <a
-              [routerLink]="['/reforestacion', campaign.id]"
+            <button
+              type="button"
+              (click)="participate(campaign.id)"
               class="block w-full px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white text-center rounded-2xl font-semibold hover:shadow-lg hover:shadow-[#4CAF50]/30 transition-all font-semibold"
             >
               Participar
-            </a>
+            </button>
           </div>
         </div>
       </div>

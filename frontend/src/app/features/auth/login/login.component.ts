@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../../../core/constants/strings.constants';
 import { CommonModule } from '@angular/common';
@@ -25,6 +25,8 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   error = '';
+  infoMessage = '';
+  redirectTo = '';
 
   strings = AUTH_STRINGS;
 
@@ -36,13 +38,16 @@ export class LoginComponent {
     };
   }
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
       password: ['', Validators.required],
       role: ['Usuario']
     });
+
+    this.redirectTo = this.route.snapshot.queryParamMap.get('redirectTo') || '';
+    this.infoMessage = this.route.snapshot.queryParamMap.get('message') || '';
 
   }
 
@@ -73,7 +78,7 @@ export class LoginComponent {
         if (actualRole === 'admin') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/']);
+          this.router.navigateByUrl(this.redirectTo || '/');
         }
       },
       error: (err: any) => {
