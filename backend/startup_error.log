@@ -1,0 +1,96 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< com.ecoland:backend >-------------------------
+[INFO] Building EcoLand Backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.4:run (default-cli) > test-compile @ backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ backend ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ backend ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 50 source files with javac [debug release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ backend ---
+[INFO] skip non existing resourceDirectory D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.4:run (default-cli) < test-compile @ backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.4:run (default-cli) @ backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2026-03-29T20:28:12.228-04:00  INFO 9100 --- [           main] com.ecoland.EcoLandApplication           : Starting EcoLandApplication using Java 21.0.10 with PID 9100 (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\target\classes started by torre in D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend)
+2026-03-29T20:28:12.232-04:00  INFO 9100 --- [           main] com.ecoland.EcoLandApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-03-29T20:28:13.704-04:00  INFO 9100 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-29T20:28:13.956-04:00  INFO 9100 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 237 ms. Found 5 JPA repository interfaces.
+2026-03-29T20:28:16.017-04:00  INFO 9100 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-03-29T20:28:16.047-04:00  INFO 9100 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-29T20:28:16.047-04:00  INFO 9100 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-29T20:28:16.196-04:00  INFO 9100 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-29T20:28:16.201-04:00  INFO 9100 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3891 ms
+2026-03-29T20:28:16.546-04:00  INFO 9100 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-29T20:28:16.671-04:00  INFO 9100 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-03-29T20:28:16.803-04:00  INFO 9100 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-29T20:28:17.396-04:00  INFO 9100 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-29T20:28:17.446-04:00  INFO 9100 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-29T20:28:18.134-04:00  INFO 9100 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@726a8729
+2026-03-29T20:28:18.140-04:00  INFO 9100 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-29T20:28:18.240-04:00  WARN 9100 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-29T20:28:20.246-04:00  INFO 9100 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-29T20:28:20.420-04:00  INFO 9100 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: 
+    select
+        ce1_0.id,
+        ce1_0.address,
+        ce1_0.date,
+        ce1_0.description,
+        ce1_0.image,
+        ce1_0.location,
+        ce1_0.organizer,
+        ce1_0.organizer_contact,
+        ce1_0.participants,
+        ce1_0.spots,
+        ce1_0.status,
+        ce1_0.time,
+        ce1_0.title 
+    from
+        campaigns ce1_0
+2026-03-29T20:28:21.594-04:00  WARN 9100 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-29T20:28:21.639-04:00  WARN 9100 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ee05baac-2a62-4bda-ab8e-6cc8f49d34ee
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-29T20:28:22.080-04:00  INFO 9100 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6821d4e1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3ac76ad9, org.springframework.security.web.context.SecurityContextHolderFilter@7f33ad20, org.springframework.security.web.header.HeaderWriterFilter@d03cdc7, org.springframework.web.filter.CorsFilter@213c812a, org.springframework.security.web.authentication.logout.LogoutFilter@539f2fec, com.ecoland.infrastructure.security.JwtFilter@31120021, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3f473daf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@390e814c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@25814d3c, org.springframework.security.web.session.SessionManagementFilter@2ae0eb98, org.springframework.security.web.access.ExceptionTranslationFilter@7f38545a, org.springframework.security.web.access.intercept.AuthorizationFilter@18c95fbb]
+2026-03-29T20:28:22.498-04:00  INFO 9100 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path ''
+2026-03-29T20:28:22.513-04:00  INFO 9100 --- [           main] com.ecoland.EcoLandApplication           : Started EcoLandApplication in 11.53 seconds (process running for 12.485)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  04:22 min
+[INFO] Finished at: 2026-03-29T20:32:24-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.4:run (default-cli) on project backend: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
