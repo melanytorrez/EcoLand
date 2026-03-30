@@ -48,6 +48,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule),
     canActivate: [FeatureFlagGuard],
     data: { feature: 'estadisticas' }
+  },
+  {
+    path: 'admin/campanas',
+    loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
   }
 ];
 
