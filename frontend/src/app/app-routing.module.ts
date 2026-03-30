@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FeatureFlagGuard } from './core/guards/feature-flag.guard';
 
+import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -50,8 +52,14 @@ const routes: Routes = [
     data: { feature: 'estadisticas' }
   },
   {
-    path: 'admin/campanas',
-    loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
+    path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: 'campanas',
+        loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
+      }
+    ]
   }
 ];
 
