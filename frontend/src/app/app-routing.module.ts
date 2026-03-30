@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'reforestacion/:id',
-    loadChildren: () => import('./features/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
+    loadChildren: () => import('./features/campaigns/pages/user/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
     canActivate: [FeatureFlagGuard],
     data: { feature: 'reforestacion' }
   },

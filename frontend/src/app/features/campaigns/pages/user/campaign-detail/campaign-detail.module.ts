@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CampaignDetailRoutingModule } from './campaign-detail-routing.module';
 import { CampaignDetailComponent } from './campaign-detail.component';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../../../shared/shared.module';
 
 
 @NgModule({
