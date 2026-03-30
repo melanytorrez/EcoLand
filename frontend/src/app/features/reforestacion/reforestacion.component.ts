@@ -12,13 +12,29 @@ export class ReforestacionComponent implements OnInit {
   campaigns: Campaign[] = [];
   filteredCampaigns: Campaign[] = [];
   searchTerm: string = '';
+  isLoading: boolean = true;
+  error: string | null = null;
 
   constructor(private campaignService: CampaignService) {}
 
   ngOnInit(): void {
-    this.campaignService.getCampaigns().subscribe(campaigns => {
-      this.campaigns = campaigns;
-      this.filteredCampaigns = campaigns;
+    this.loadCampaigns();
+  }
+
+  loadCampaigns(): void {
+    this.isLoading = true;
+    this.error = null;
+    this.campaignService.getCampaigns().subscribe({
+      next: (campaigns) => {
+        this.campaigns = campaigns;
+        this.filteredCampaigns = campaigns;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.error = 'No se pudieron cargar las campañas. Por favor, verifica tu conexión.';
+        this.isLoading = false;
+        console.error('Error loading campaigns:', err);
+      }
     });
   }
 
