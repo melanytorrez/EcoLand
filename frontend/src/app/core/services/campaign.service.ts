@@ -27,4 +27,11 @@ export class CampaignService {
 
     return this.http.post<Campaign>(`${this.apiUrl}/${id}/participate`, {}, { headers });
   }
+
+  createCampaign(campaign: any, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(this.apiUrl, campaign, { headers });
+  }
 }

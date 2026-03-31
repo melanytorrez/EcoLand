@@ -1,15 +1,7 @@
-import { Component } from '@angular/core';
-
-export interface Campaign {
-  id: number;
-  title: string;
-  date: string;
-  location: string;
-  spots: number;
-  participants: number;
-  status: 'Activa' | 'Programada' | 'Finalizada';
-  organizer: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { CampaignService } from '../../../../../core/services/campaign.service';
+import { AuthService } from '../../../../../core/services/auth.service';
+import { Campaign } from '../../../../../core/models/campaign.model';
 
 export interface CampaignFormData {
   title: string;
@@ -27,7 +19,7 @@ export interface CampaignFormData {
   templateUrl: './campaign-form.component.html',
   standalone: false
 })
-export class CampaignFormComponent {
+export class CampaignFormComponent implements OnInit {
   searchTerm: string = '';
   showModal: boolean = false;
   
@@ -44,38 +36,27 @@ export class CampaignFormComponent {
   
   formErrors: Record<string, string> = {};
 
-  campaigns: Campaign[] = [
-    {
-      id: 1,
-      title: 'Reforestación Parque Tunari',
-      date: '24/02/2026',
-      location: 'Parque Nacional Tunari',
-      spots: 45,
-      participants: 32,
-      status: 'Activa',
-      organizer: 'Alcaldía de Cochabamba',
-    },
-    {
-      id: 2,
-      title: 'Bosques Urbanos Centro',
-      date: '28/02/2026',
-      location: 'Plaza Colón',
-      spots: 30,
-      participants: 18,
-      status: 'Activa',
-      organizer: 'EcoLand',
-    },
-    {
-      id: 3,
-      title: 'Recuperación Zona Sur',
-      date: '05/03/2026',
-      location: 'Av. Blanco Galindo',
-      spots: 60,
-      participants: 42,
-      status: 'Programada',
-      organizer: 'ONG Verde Bolivia',
-    },
-  ];
+  campaigns: Campaign[] = [];
+
+  constructor(
+    private campaignService: CampaignService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadCampaigns();
+  }
+
+  loadCampaigns(): void {
+    this.campaignService.getCampaigns().subscribe({
+      next: (data) => {
+        this.campaigns = data;
+      },
+      error: (err) => {
+        console.error('Error cargando campañas', err);
+      }
+    });
+  }
 
   get filteredCampaigns(): Campaign[] {
     return this.campaigns.filter(
@@ -122,9 +103,13 @@ export class CampaignFormComponent {
       return;
     }
 
-    // Crear nueva campaña
-    const newCampaign: Campaign = {
-      id: Math.max(...this.campaigns.map(c => c.id), 0) + 1,
+    const token = this.authService.getToken();
+    if (!token) {
+      alert('Error: Sesión de administrador expirada o inválida. Por favor, vuelva a iniciar sesión.');
+      return;
+    }
+
+    const newCampaign = {
       title: this.formData.title,
       date: this.formatDateForDisplay(this.formData.date),
       location: this.formData.location,
@@ -132,26 +117,34 @@ export class CampaignFormComponent {
       participants: 0,
       status: this.formData.status,
       organizer: this.formData.organizer,
+      description: this.formData.description,
+      image: this.formData.image,
     };
 
-    this.campaigns = [...this.campaigns, newCampaign];
-    
-    // Resetear formulario
-    this.formData = {
-      title: '',
-      date: '',
-      location: '',
-      spots: '',
-      status: 'Programada',
-      organizer: '',
-      description: '',
-      image: '',
-    };
-    this.formErrors = {};
-    this.showModal = false;
+    this.campaignService.createCampaign(newCampaign, token).subscribe({
+      next: () => {
+        this.loadCampaigns();
+        
+        this.formData = {
+          title: '',
+          date: '',
+          location: '',
+          spots: '',
+          status: 'Programada',
+          organizer: '',
+          description: '',
+          image: '',
+        };
+        this.formErrors = {};
+        this.showModal = false;
 
-    // Mostrar notificación de éxito
-    alert('¡Campaña creada exitosamente!');
+        alert('¡Campaña guardada exitosamente en la base de datos MySQL!');
+      },
+      error: (err) => {
+        console.error('Error guardando en BD:', err);
+        alert('Ocurrió un error al guardar la campaña en el servidor.');
+      }
+    });
   }
 
   formatDateForDisplay(dateString: string): string {
