@@ -5,4 +5,8 @@ import java.util.List;
 
 public interface CampaignUseCase {
     List<Campaign> getAllCampaigns();
+    Campaign getCampaignById(Long id);
+    Campaign saveCampaign(Campaign campaign);
+    Campaign updateCampaign(Long id, Campaign campaign);
+    void deleteCampaign(Long id);
 }
