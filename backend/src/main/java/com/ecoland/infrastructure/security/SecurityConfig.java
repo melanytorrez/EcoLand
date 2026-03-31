@@ -12,11 +12,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
 @Configuration
 public class SecurityConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     private final JwtFilter jwtFilter;
 
@@ -39,6 +43,16 @@ public class SecurityConfig {
             )
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .exceptionHandling(ex -> ex
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    logger.warn("Acceso denegado: El usuario no tiene los roles/permisos necesarios para acceder a {}", request.getRequestURI());
+                    response.sendError(403, "Acceso denegado");
+                })
+                .authenticationEntryPoint((request, response, authException) -> {
+                    logger.warn("Acceso no autorizado: Intento de acceso sin autenticación a {}", request.getRequestURI());
+                    response.sendError(401, "No autorizado");
+                })
             );
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

@@ -34,4 +34,18 @@ export class CampaignService {
     });
     return this.http.post<any>(this.apiUrl, campaign, { headers });
   }
+
+  updateCampaign(id: number, campaign: any, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.apiUrl}/${id}`, campaign, { headers });
+  }
+
+  deleteCampaign(id: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers });
+  }
 }

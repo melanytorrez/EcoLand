@@ -14,9 +14,13 @@ import org.springframework.lang.NonNull;
 
 import java.io.IOException;
 import java.util.Collections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
     private final JwtService jwtService;
 
@@ -37,6 +41,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String token = header.substring(7);
 
             if (!jwtService.isTokenValid(token)) {
+                logger.warn("Intento de acceso fallido: Token inválido, expirado o manipulado");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
@@ -48,6 +53,7 @@ public class JwtFilter extends OncePerRequestFilter {
                         new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                logger.info("Token validado exitosamente para el usuario: {}", email);
             }
         }
 

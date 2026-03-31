@@ -20,17 +20,23 @@ export class CampaignDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
+  this.route.paramMap.subscribe(params => {
+    const idParam = params.get('id');
     const id = idParam ? Number(idParam) : null;
-    
+
     if (id) {
       this.campaignService.getCampaignById(id).subscribe(campaign => {
         this.campaign = campaign;
+
         if (this.campaign) {
-          this.percentage = Math.round((this.campaign.participants / this.campaign.spots) * 100);
-          this.availableSpots = this.campaign.spots - this.campaign.participants;
+          this.percentage = Math.round(
+            (this.campaign.participants / this.campaign.spots) * 100
+          );
+          this.availableSpots =
+            this.campaign.spots - this.campaign.participants;
         }
       });
     }
-  }
+  });
+}
 }

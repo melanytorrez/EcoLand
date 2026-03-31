@@ -91,7 +91,11 @@
             </td>
             <td class="px-6 py-4">
               <div class="flex items-center gap-2">
-                <button class="p-2 text-[#4CAF50] hover:bg-[#E8F5E9] rounded-xl transition-colors">
+                <button
+                  (click)="openModal(campaign)"
+                  class="p-2 text-[#4CAF50] hover:bg-[#E8F5E9] rounded-xl transition-colors"
+                  title="Editar"
+                >
                   <lucide-icon name="edit" class="w-4 h-4"></lucide-icon>
                 </button>
                 <button
@@ -118,8 +122,8 @@
             <lucide-icon name="tree-deciduous" class="w-7 h-7 text-white"></lucide-icon>
           </div>
           <div>
-            <h2 class="text-3xl font-bold text-gray-900">Nueva Campaña</h2>
-            <p class="text-sm text-gray-600">Completa todos los campos para crear la campaña</p>
+            <h2 class="text-3xl font-bold text-gray-900">{{ editingId ? 'Editar Campaña' : 'Nueva Campaña' }}</h2>
+            <p class="text-sm text-gray-600">Completa todos los campos para {{ editingId ? 'actualizar' : 'crear' }} la campaña</p>
           </div>
         </div>
         <button
@@ -301,7 +305,7 @@
             type="submit"
             class="flex-1 px-8 py-4 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold hover:shadow-xl hover:shadow-[#4CAF50]/30 hover:scale-[1.02] transition-all text-base"
           >
-            ✓ Crear Campaña
+            {{ editingId ? '✓ Guardar Cambios' : '✓ Crear Campaña' }}
           </button>
         </div>
       </form>
