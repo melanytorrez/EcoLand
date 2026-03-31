@@ -12,6 +12,6 @@ export class AppComponent {
   constructor(public router: Router) {}
 
   hideLayout(): boolean {
-    return this.router.url === '/login' || this.router.url === '/register';
+    return this.router.url === '/login' || this.router.url === '/register' || this.router.url.startsWith('/admin');
   }
 }

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FeatureFlagGuard } from './core/guards/feature-flag.guard';
 
+import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'reforestacion/:id',
-    loadChildren: () => import('./features/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
+    loadChildren: () => import('./features/campaigns/pages/user/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
     canActivate: [FeatureFlagGuard],
     data: { feature: 'reforestacion' }
   },
@@ -48,6 +50,16 @@ const routes: Routes = [
     loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule),
     canActivate: [FeatureFlagGuard],
     data: { feature: 'estadisticas' }
+  },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: 'campanas',
+        loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
+      }
+    ]
   }
 ];
 
