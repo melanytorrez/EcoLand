@@ -83,14 +83,14 @@ export class CampaignDetailComponent implements OnInit {
     this.participationMessage = null;
 
     this.campaignService.participateInCampaign(this.campaign.id, token).subscribe({
-      next: (updatedCampaign) => {
+      next: (updatedCampaign: Campaign) => {
         this.campaign = updatedCampaign;
-        this.percentage = Math.round((this.campaign.participants / this.campaign.spots) * 100);
-        this.availableSpots = this.campaign.spots - this.campaign.participants;
+        this.percentage = Math.round((updatedCampaign.participants / updatedCampaign.spots) * 100);
+        this.availableSpots = updatedCampaign.spots - updatedCampaign.participants;
         this.participationMessage = 'Participacion registrada con exito.';
         this.participationLoading = false;
       },
-      error: (error) => {
+      error: (error: any) => {
         const backendMessage = error?.error;
         this.participationError = typeof backendMessage === 'string' && backendMessage
           ? backendMessage

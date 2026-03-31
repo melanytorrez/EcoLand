@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private readonly apiUrl = 'http://localhost:8082/auth';
+  private readonly apiUrl = 'http://localhost:8080/auth';
   private readonly tokenKey = 'auth_token';
   private readonly userKey = 'auth_user';
 
