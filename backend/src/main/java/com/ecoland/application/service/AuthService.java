@@ -18,7 +18,10 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
+@Transactional
 public class AuthService implements AuthUseCase {
 
     private final UsuarioRepositoryPort usuarioRepositoryPort;

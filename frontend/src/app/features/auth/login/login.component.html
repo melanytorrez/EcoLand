@@ -24,6 +24,12 @@
         </p>
       </div>
 
+      <div *ngIf="infoMessage" class="p-4 bg-[#E8F5E9] border-2 border-[#C8E6C9] rounded-2xl mb-6">
+        <p class="text-sm text-[#2E7D32] text-center font-medium">
+          {{ infoMessage }}
+        </p>
+      </div>
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
 
         <!-- EMAIL -->
