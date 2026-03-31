@@ -56,18 +56,6 @@ public class CampaignService implements CampaignUseCase {
     }
 
     @Override
-    public Campaign participateInCampaign(Long id, String userEmail) {
-        Campaign campaign = getCampaignById(id);
-
-        if (campaign.getParticipants() >= campaign.getSpots()) {
-            throw new IllegalStateException("La campaña ya no tiene cupos disponibles");
-        }
-
-        campaign.setParticipants(campaign.getParticipants() + 1);
-        return campaignRepositoryPort.save(campaign);
-    }
-
-    @Override
     public void deleteCampaign(Long id) {
         campaignRepositoryPort.deleteById(id);
     }

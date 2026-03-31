@@ -8,6 +8,5 @@ public interface CampaignUseCase {
     Campaign getCampaignById(Long id);
     Campaign saveCampaign(Campaign campaign);
     Campaign updateCampaign(Long id, Campaign campaign);
-    Campaign participateInCampaign(Long id, String userEmail);
     void deleteCampaign(Long id);
 }
