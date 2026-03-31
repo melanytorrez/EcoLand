@@ -3,6 +3,8 @@ package com.ecoland.application.service;
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.in.CampaignUseCase;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CampaignService implements CampaignUseCase {
 
+    private static final Logger logger = LoggerFactory.getLogger(CampaignService.class);
+
     private final CampaignRepositoryPort campaignRepositoryPort;
 
     public CampaignService(CampaignRepositoryPort campaignRepositoryPort) {
@@ -23,56 +27,96 @@ public class CampaignService implements CampaignUseCase {
 
     @Override
     public List<Campaign> getAllCampaigns() {
+        logger.info("Solicitud para obtener todas las campañas");
         return campaignRepositoryPort.findAll();
     }
 
     @Override
     public Campaign getCampaignById(Long id) {
+        logger.info("Solicitud para obtener la campaña con id: {}", id);
         return campaignRepositoryPort.findById(id)
-                .orElseThrow(() -> new RuntimeException("Campaign not found with id " + id));
+                .orElseThrow(() -> {
+                    logger.error("Error al obtener campaña: No se encontró la campaña con id {}", id);
+                    return new RuntimeException("Campaign not found with id " + id);
+                });
     }
 
     @Override
     public Campaign saveCampaign(Campaign campaign) {
-        return campaignRepositoryPort.save(campaign);
+        logger.info("Solicitud para crear nueva campaña con título: {}", campaign.getTitle());
+        try {
+            Campaign savedCampaign = campaignRepositoryPort.save(campaign);
+            logger.info("Campaña creada exitosamente con id: {}", savedCampaign.getId());
+            return savedCampaign;
+        } catch (Exception e) {
+            logger.error("Error al crear la campaña: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Override
     public Campaign updateCampaign(Long id, Campaign campaign) {
-        Campaign existingCampaign = getCampaignById(id);
+        logger.info("Solicitud para actualizar la campaña con id: {}", id);
+        try {
+            Campaign existingCampaign = getCampaignById(id);
 
-        existingCampaign.setImage(campaign.getImage());
-        existingCampaign.setTitle(campaign.getTitle());
-        existingCampaign.setDate(campaign.getDate());
-        existingCampaign.setTime(campaign.getTime());
-        existingCampaign.setLocation(campaign.getLocation());
-        existingCampaign.setAddress(campaign.getAddress());
-        existingCampaign.setSpots(campaign.getSpots());
-        existingCampaign.setParticipants(campaign.getParticipants());
-        existingCampaign.setOrganizer(campaign.getOrganizer());
-        existingCampaign.setOrganizerContact(campaign.getOrganizerContact());
-        existingCampaign.setStatus(campaign.getStatus());
-        existingCampaign.setDescription(campaign.getDescription());
-        existingCampaign.setRequirements(campaign.getRequirements());
+            existingCampaign.setImage(campaign.getImage());
+            existingCampaign.setTitle(campaign.getTitle());
+            existingCampaign.setDate(campaign.getDate());
+            existingCampaign.setTime(campaign.getTime());
+            existingCampaign.setLocation(campaign.getLocation());
+            existingCampaign.setAddress(campaign.getAddress());
+            existingCampaign.setSpots(campaign.getSpots());
+            existingCampaign.setParticipants(campaign.getParticipants());
+            existingCampaign.setOrganizer(campaign.getOrganizer());
+            existingCampaign.setOrganizerContact(campaign.getOrganizerContact());
+            existingCampaign.setStatus(campaign.getStatus());
+            existingCampaign.setDescription(campaign.getDescription());
+            existingCampaign.setRequirements(campaign.getRequirements());
 
-        return campaignRepositoryPort.save(existingCampaign);
+            Campaign updatedCampaign = campaignRepositoryPort.save(existingCampaign);
+            logger.info("Campaña con id: {} actualizada exitosamente", id);
+            return updatedCampaign;
+        } catch (Exception e) {
+            logger.error("Error al actualizar la campaña con id {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Override
     public Campaign participateInCampaign(Long id, String userEmail) {
-        Campaign campaign = getCampaignById(id);
+        logger.info("Usuario {} solicita inscribirse en la campaña con id: {}", userEmail, id);
+        try {
+            Campaign campaign = getCampaignById(id);
 
-        if (campaign.getParticipants() >= campaign.getSpots()) {
-            throw new IllegalStateException("La campaña ya no tiene cupos disponibles");
+            if (campaign.getParticipants() >= campaign.getSpots()) {
+                logger.error("Error al inscribir usuario {}: La campaña {} ya no tiene cupos disponibles", userEmail,
+                        id);
+                throw new IllegalStateException("La campaña ya no tiene cupos disponibles");
+            }
+
+            campaign.setParticipants(campaign.getParticipants() + 1);
+            Campaign updatedCampaign = campaignRepositoryPort.save(campaign);
+            logger.info("Usuario {} inscrito exitosamente en la campaña con id: {}. Participantes actuales: {}",
+                    userEmail, id, updatedCampaign.getParticipants());
+            return updatedCampaign;
+        } catch (Exception e) {
+            logger.error("Error al inscribir al usuario {} en la campaña con id {}: {}", userEmail, id, e.getMessage(),
+                    e);
+            throw e;
         }
-
-        campaign.setParticipants(campaign.getParticipants() + 1);
-        return campaignRepositoryPort.save(campaign);
     }
 
     @Override
     public void deleteCampaign(Long id) {
-        campaignRepositoryPort.deleteById(id);
+        logger.info("Solicitud para eliminar la campaña con id: {}", id);
+        try {
+            campaignRepositoryPort.deleteById(id);
+            logger.info("Campaña con id: {} eliminada exitosamente", id);
+        } catch (Exception e) {
+            logger.error("Error al eliminar la campaña con id {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     private void seedData() {
