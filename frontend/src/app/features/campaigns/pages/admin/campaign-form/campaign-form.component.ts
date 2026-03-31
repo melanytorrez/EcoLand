@@ -22,6 +22,7 @@ export interface CampaignFormData {
 export class CampaignFormComponent implements OnInit {
   searchTerm: string = '';
   showModal: boolean = false;
+  editingId: number | null = null;
   
   formData: CampaignFormData = {
     title: '',
@@ -67,8 +68,23 @@ export class CampaignFormComponent implements OnInit {
   }
 
   handleDelete(id: number): void {
-    if (confirm('¿Está seguro de eliminar esta campaña?')) {
-      this.campaigns = this.campaigns.filter((c) => c.id !== id);
+    if (confirm('¿Está seguro de eliminar permanentemente esta campaña de la base de datos?')) {
+      const token = this.authService.getToken();
+      if (!token) {
+        alert('Error: Debe iniciar sesión como administrador.');
+        return;
+      }
+
+      this.campaignService.deleteCampaign(id, token).subscribe({
+        next: () => {
+          this.loadCampaigns();
+          alert('Campaña eliminada correctamente.');
+        },
+        error: (err) => {
+          console.error('Error al eliminar campaña', err);
+          alert('Hubo un error al intentar eliminar la campaña de la base de datos.');
+        }
+      });
     }
   }
 
@@ -121,33 +137,35 @@ export class CampaignFormComponent implements OnInit {
       image: this.formData.image,
     };
 
-    this.campaignService.createCampaign(newCampaign, token).subscribe({
-      next: () => {
-        this.loadCampaigns();
-        
-        this.formData = {
-          title: '',
-          date: '',
-          location: '',
-          spots: '',
-          status: 'Programada',
-          organizer: '',
-          description: '',
-          image: '',
-        };
-        this.formErrors = {};
-        this.showModal = false;
-
-        alert('¡Campaña guardada exitosamente en la base de datos MySQL!');
-      },
-      error: (err) => {
-        console.error('Error guardando en BD:', err);
-        alert('Ocurrió un error al guardar la campaña en el servidor.');
-      }
-    });
+    if (this.editingId) {
+      this.campaignService.updateCampaign(this.editingId, newCampaign, token).subscribe({
+        next: () => {
+          this.loadCampaigns();
+          this.closeModal();
+          alert('¡Campaña actualizada exitosamente en la base de datos MySQL!');
+        },
+        error: (err) => {
+          console.error('Error actualizando en BD:', err);
+          alert('Ocurrió un error al actualizar la campaña en el servidor.');
+        }
+      });
+    } else {
+      this.campaignService.createCampaign(newCampaign, token).subscribe({
+        next: () => {
+          this.loadCampaigns();
+          this.closeModal();
+          alert('¡Campaña guardada exitosamente en la base de datos MySQL!');
+        },
+        error: (err) => {
+          console.error('Error guardando en BD:', err);
+          alert('Ocurrió un error al guardar la campaña en el servidor.');
+        }
+      });
+    }
   }
 
   formatDateForDisplay(dateString: string): string {
+    if (!dateString) return '';
     const parts = dateString.split('-');
     if (parts.length === 3) {
       const [year, month, day] = parts;
@@ -156,12 +174,49 @@ export class CampaignFormComponent implements OnInit {
     return dateString;
   }
 
-  openModal(): void {
+  formatDateForInput(dateString: string): string {
+    if (!dateString) return '';
+    const parts = dateString.split('/');
+    if (parts.length === 3) {
+      const [day, month, year] = parts;
+      return `${year}-${month}-${day}`;
+    }
+    return dateString;
+  }
+
+  openModal(campaign?: Campaign): void {
+    this.formErrors = {};
+    if (campaign) {
+      this.editingId = campaign.id;
+      this.formData = {
+        title: campaign.title,
+        date: this.formatDateForInput(campaign.date),
+        location: campaign.location,
+        spots: campaign.spots ? campaign.spots.toString() : '',
+        status: (campaign.status as 'Activa' | 'Programada' | 'Finalizada') || 'Programada',
+        organizer: campaign.organizer,
+        description: campaign.description || '',
+        image: campaign.image || '',
+      };
+    } else {
+      this.editingId = null;
+      this.formData = {
+        title: '',
+        date: '',
+        location: '',
+        spots: '',
+        status: 'Programada',
+        organizer: '',
+        description: '',
+        image: '',
+      };
+    }
     this.showModal = true;
   }
 
   closeModal(): void {
     this.showModal = false;
+    this.editingId = null;
     this.formData = {
       title: '',
       date: '',
