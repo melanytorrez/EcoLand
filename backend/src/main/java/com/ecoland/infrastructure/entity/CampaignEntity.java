@@ -1,174 +1,149 @@
 package com.ecoland.infrastructure.entity;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
-
-import java.util.ArrayList;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "campaigns")
 public class CampaignEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(nullable = false)
-	private String image;
+    private String image;
+    private String title;
+    private String date;
+    private String time;
+    private String location;
+    private String address;
+    private int spots;
+    private int participants;
+    private String organizer;
+    private String organizerContact;
+    private String status;
 
-	@Column(nullable = false, length = 100)
-	private String title;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-	@Column(nullable = false)
-	private String date;
+    @ElementCollection
+    @CollectionTable(name = "campaign_requirements", joinColumns = @JoinColumn(name = "campaign_id"))
+    @Column(name = "requirement")
+    private List<String> requirements;
 
-	private String time;
+    public CampaignEntity() {
+    }
 
-	@Column(nullable = false)
-	private String location;
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-	private String address;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@Column(nullable = false)
-	private int spots;
+    public String getImage() {
+        return image;
+    }
 
-	@Column(nullable = false)
-	private int participants;
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-	@Column(nullable = false)
-	private String organizer;
+    public String getTitle() {
+        return title;
+    }
 
-	private String organizerContact;
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	@Column(nullable = false)
-	private String status;
+    public String getDate() {
+        return date;
+    }
 
-	@Column(columnDefinition = "TEXT")
-	private String description;
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "campaign_requirements", joinColumns = @JoinColumn(name = "campaign_id"))
-	@Column(name = "requirement", length = 255)
-	private List<String> requirements = new ArrayList<>();
+    public String getTime() {
+        return time;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setTime(String time) {
+        this.time = time;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public String getImage() {
-		return image;
-	}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	public void setImage(String image) {
-		this.image = image;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public int getSpots() {
+        return spots;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public void setSpots(int spots) {
+        this.spots = spots;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public int getParticipants() {
+        return participants;
+    }
 
-	public String getTime() {
-		return time;
-	}
+    public void setParticipants(int participants) {
+        this.participants = participants;
+    }
 
-	public void setTime(String time) {
-		this.time = time;
-	}
+    public String getOrganizer() {
+        return organizer;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public String getOrganizerContact() {
+        return organizerContact;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setOrganizerContact(String organizerContact) {
+        this.organizerContact = organizerContact;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public int getSpots() {
-		return spots;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setSpots(int spots) {
-		this.spots = spots;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public int getParticipants() {
-		return participants;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setParticipants(int participants) {
-		this.participants = participants;
-	}
+    public List<String> getRequirements() {
+        return requirements;
+    }
 
-	public String getOrganizer() {
-		return organizer;
-	}
-
-	public void setOrganizer(String organizer) {
-		this.organizer = organizer;
-	}
-
-	public String getOrganizerContact() {
-		return organizerContact;
-	}
-
-	public void setOrganizerContact(String organizerContact) {
-		this.organizerContact = organizerContact;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<String> getRequirements() {
-		return requirements;
-	}
-
-	public void setRequirements(List<String> requirements) {
-		this.requirements = requirements;
-	}
+    public void setRequirements(List<String> requirements) {
+        this.requirements = requirements;
+    }
 }

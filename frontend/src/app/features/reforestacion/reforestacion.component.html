@@ -42,29 +42,30 @@
   <!-- Campaigns Grid -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div *ngIf="isLoading" class="min-h-[220px] flex items-center justify-center">
-        <div class="animate-pulse flex flex-col items-center">
-          <lucide-icon name="leaf" class="w-12 h-12 text-[#4CAF50] mb-3"></lucide-icon>
-          <p class="text-gray-600 font-medium">Cargando campanas...</p>
-        </div>
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-20 w-full col-span-full">
+        <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-[#2E7D32] mb-4"></div>
+        <p class="text-gray-600 font-medium italic">Obteniendo campañas desde el bosque...</p>
       </div>
 
-      <div *ngIf="!isLoading && errorMessage" class="max-w-2xl mx-auto bg-red-50 border-2 border-red-200 rounded-2xl p-6 text-center">
-        <p class="text-red-700 font-medium mb-4">{{ errorMessage }}</p>
-        <button
-          type="button"
-          (click)="retry()"
-          class="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-colors"
-        >
-          Reintentar
+      <!-- Error State -->
+      <div *ngIf="error && !isLoading" class="bg-red-50 border-2 border-red-200 rounded-3xl p-8 text-center col-span-full">
+        <lucide-icon name="alert-circle" class="w-12 h-12 text-red-500 mx-auto mb-4"></lucide-icon>
+        <p class="text-red-800 font-bold text-lg mb-2">{{ error }}</p>
+        <button (click)="loadCampaigns()" class="mt-4 px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors">
+          Reintentar conexión
         </button>
       </div>
 
-      <div *ngIf="!isLoading && !errorMessage && filteredCampaigns.length === 0" class="max-w-2xl mx-auto bg-[#E8F5E9] border-2 border-[#C8E6C9] rounded-2xl p-6 text-center">
-        <p class="text-[#2E7D32] font-medium">No hay campanas de reforestacion disponibles por el momento.</p>
+      <!-- No Results State -->
+      <div *ngIf="!isLoading && !error && filteredCampaigns.length === 0" class="text-center py-20 col-span-full">
+        <p class="text-gray-500 text-xl font-medium">No se encontraron campañas que coincidan con tu búsqueda.</p>
+        <button (click)="searchTerm = ''; filterCampaigns()" class="mt-4 text-[#2E7D32] font-bold hover:underline">
+          Ver todas las campañas
+        </button>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full col-span-full" *ngIf="!isLoading && !error">
         <div
           *ngFor="let campaign of filteredCampaigns"
           [class.hidden]="isLoading || !!errorMessage"

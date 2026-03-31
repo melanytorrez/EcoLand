@@ -2,19 +2,13 @@ package com.ecoland.infrastructure.adapter.in.web;
 
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.in.CampaignUseCase;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/campaigns")
+@RequestMapping("/api/campaigns")
+@CrossOrigin(origins = "*") // Para facilitar el desarrollo con Angular
 public class CampaignController {
 
     private final CampaignUseCase campaignUseCase;
@@ -24,30 +18,27 @@ public class CampaignController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Campaign>> getCampaigns() {
-        return ResponseEntity.ok(campaignUseCase.getAllCampaigns());
+    public List<Campaign> getAll() {
+        return campaignUseCase.getAllCampaigns();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Campaign> getCampaignById(@PathVariable Long id) {
-        return campaignUseCase.getCampaignById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Campaign getById(@PathVariable Long id) {
+        return campaignUseCase.getCampaignById(id);
     }
 
-    @PostMapping("/{id}/participate")
-    public ResponseEntity<?> participateInCampaign(@PathVariable Long id, Authentication authentication) {
-        if (authentication == null || authentication.getName() == null || authentication.getName().isBlank()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Debes iniciar sesion para participar");
-        }
+    @PostMapping
+    public Campaign create(@RequestBody Campaign campaign) {
+        return campaignUseCase.saveCampaign(campaign);
+    }
 
-        try {
-            Campaign updatedCampaign = campaignUseCase.participateInCampaign(id, authentication.getName());
-            return ResponseEntity.ok(updatedCampaign);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
+    @PutMapping("/{id}")
+    public Campaign update(@PathVariable Long id, @RequestBody Campaign campaign) {
+        return campaignUseCase.updateCampaign(id, campaign);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        campaignUseCase.deleteCampaign(id);
     }
 }

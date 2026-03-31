@@ -14,8 +14,8 @@ export class ReforestacionComponent implements OnInit {
   campaigns: Campaign[] = [];
   filteredCampaigns: Campaign[] = [];
   searchTerm: string = '';
-  isLoading: boolean = false;
-  errorMessage: string | null = null;
+  isLoading: boolean = true;
+  error: string | null = null;
 
   constructor(
     private campaignService: CampaignService,
@@ -24,20 +24,22 @@ export class ReforestacionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.errorMessage = null;
+    this.loadCampaigns();
+  }
 
+  loadCampaigns(): void {
+    this.isLoading = true;
+    this.error = null;
     this.campaignService.getCampaigns().subscribe({
       next: (campaigns) => {
         this.campaigns = campaigns;
         this.filteredCampaigns = campaigns;
         this.isLoading = false;
       },
-      error: () => {
-        this.errorMessage = 'No se pudo cargar las campanas. Verifica la conexion e intenta nuevamente.';
-        this.campaigns = [];
-        this.filteredCampaigns = [];
+      error: (err) => {
+        this.error = 'No se pudieron cargar las campañas. Por favor, verifica tu conexión.';
         this.isLoading = false;
+        console.error('Error loading campaigns:', err);
       }
     });
   }
