@@ -12,13 +12,17 @@ public class CampaignEntity {
     private Long id;
 
     private String image;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String date;
     private String time;
+    @Column(nullable = false)
     private String location;
     private String address;
     private int spots;
     private int participants;
+    @Column(nullable = false)
     private String organizer;
     private String organizerContact;
     private String status;
