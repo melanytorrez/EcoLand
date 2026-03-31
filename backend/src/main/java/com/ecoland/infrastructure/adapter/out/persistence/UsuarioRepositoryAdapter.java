@@ -6,6 +6,10 @@ import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import com.ecoland.infrastructure.entity.UsuarioEntity;
 import com.ecoland.infrastructure.entity.RolEntity;
 import com.ecoland.infrastructure.repository.JpaUsuarioRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.TransientDataAccessException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -15,6 +19,8 @@ import java.util.stream.Collectors;
 @Component
 public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
 
+    private static final Logger logger = LoggerFactory.getLogger(UsuarioRepositoryAdapter.class);
+
     private final JpaUsuarioRepository jpaUsuarioRepository;
 
     public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository) {
@@ -23,18 +29,58 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
 
     @Override
     public Optional<Usuario> findById(Long id) {
-        return jpaUsuarioRepository.findById(id).map(this::toDomain);
+        try {
+            Optional<Usuario> usuario = jpaUsuarioRepository.findById(id).map(this::toDomain);
+            if (usuario.isEmpty()) {
+                logger.warn("Database query returned no user for id={}", id);
+            }
+            return usuario;
+        } catch (TransientDataAccessException ex) {
+            logger.error("SQL transient error while querying user by id={}", id, ex);
+            throw ex;
+        } catch (DataAccessException ex) {
+            logger.error("Database access error while querying user by id={}", id, ex);
+            throw ex;
+        }
     }
 
     @Override
     public Optional<Usuario> findByEmail(String email) {
-        return jpaUsuarioRepository.findByEmail(email).map(this::toDomain);
+        try {
+            Optional<Usuario> usuario = jpaUsuarioRepository.findByEmail(email).map(this::toDomain);
+            if (usuario.isEmpty()) {
+                logger.warn("Database query returned no user for email={}", email);
+            }
+            return usuario;
+        } catch (TransientDataAccessException ex) {
+            logger.error("SQL transient error while querying user by email={}", email, ex);
+            throw ex;
+        } catch (DataAccessException ex) {
+            logger.error("Database access error while querying user by email={}", email, ex);
+            throw ex;
+        }
     }
 
     @Override
     public Usuario save(Usuario usuario) {
-        UsuarioEntity entity = toEntity(usuario);
-        return toDomain(jpaUsuarioRepository.save(entity));
+        try {
+            UsuarioEntity entity = toEntity(usuario);
+            UsuarioEntity saved = jpaUsuarioRepository.save(entity);
+
+            logger.info(
+                "AUDIT DB: user persisted successfully (userId={}, email={})",
+                saved.getId(),
+                saved.getEmail()
+            );
+
+            return toDomain(saved);
+        } catch (TransientDataAccessException ex) {
+            logger.error("SQL transient error while saving user with id={}", usuario.getId(), ex);
+            throw ex;
+        } catch (DataAccessException ex) {
+            logger.error("Database access error while saving user with id={}", usuario.getId(), ex);
+            throw ex;
+        }
     }
 
     @Override

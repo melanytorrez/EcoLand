@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Aspecto para el registro automático de logs en los controladores web.
@@ -27,7 +29,7 @@ public class LoggingAspect {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         Object[] args = joinPoint.getArgs();
 
-        logger.debug(">>> Entrando al método: {}.{}() con argumentos: {}", className, methodName, Arrays.toString(args));
+        logger.debug(">>> Entrando al método: {}.{}() con argumentos: {}", className, methodName, safeArgsForLog(className, methodName, args));
 
         try {
             Object proceed = joinPoint.proceed();
@@ -42,5 +44,33 @@ public class LoggingAspect {
                           className, methodName, e.getMessage(), executionTime);
             throw e;
         }
+    }
+
+    private String safeArgsForLog(String className, String methodName, Object[] args) {
+        String lowerClass = className.toLowerCase(Locale.ROOT);
+        String lowerMethod = methodName.toLowerCase(Locale.ROOT);
+
+        // En flujos de autenticación no se registran argumentos por seguridad.
+        if (lowerClass.contains("auth") || lowerMethod.contains("login") || lowerMethod.contains("register")) {
+            return "[REDACTED_AUTH_ARGS]";
+        }
+
+        return Arrays.stream(args)
+                .map(this::maskSensitiveValue)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
+
+    private String maskSensitiveValue(Object arg) {
+        if (arg == null) {
+            return "null";
+        }
+
+        String value = String.valueOf(arg);
+        String lowerValue = value.toLowerCase(Locale.ROOT);
+        if (lowerValue.contains("password") || lowerValue.contains("token") || lowerValue.contains("secret")) {
+            return "[REDACTED]";
+        }
+
+        return value;
     }
 }

@@ -4,6 +4,10 @@ import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.infrastructure.entity.CampaignEntity;
 import com.ecoland.infrastructure.repository.JpaCampaignRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.TransientDataAccessException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,6 +17,8 @@ import java.util.stream.Collectors;
 @Component
 public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
 
+    private static final Logger logger = LoggerFactory.getLogger(CampaignRepositoryAdapter.class);
+
     private final JpaCampaignRepository repository;
 
     public CampaignRepositoryAdapter(JpaCampaignRepository repository) {
@@ -21,21 +27,62 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
 
     @Override
     public List<Campaign> findAll() {
-        return repository.findAll().stream()
-                .map(this::toDomain)
-                .collect(Collectors.toList());
+        try {
+            List<Campaign> campaigns = repository.findAll().stream()
+                    .map(this::toDomain)
+                    .collect(Collectors.toList());
+
+            if (campaigns.isEmpty()) {
+                logger.warn("Database query returned an empty campaign list (verify if this is expected)");
+            }
+
+            return campaigns;
+        } catch (TransientDataAccessException ex) {
+            logger.error("SQL transient error while querying all campaigns", ex);
+            throw ex;
+        } catch (DataAccessException ex) {
+            logger.error("Database access error while querying all campaigns", ex);
+            throw ex;
+        }
     }
 
     @Override
     public Optional<Campaign> findById(Long id) {
-        return repository.findById(id).map(this::toDomain);
+        try {
+            Optional<Campaign> campaign = repository.findById(id).map(this::toDomain);
+            if (campaign.isEmpty()) {
+                logger.warn("Database query returned no campaign for id={}", id);
+            }
+            return campaign;
+        } catch (TransientDataAccessException ex) {
+            logger.error("SQL transient error while querying campaign by id={}", id, ex);
+            throw ex;
+        } catch (DataAccessException ex) {
+            logger.error("Database access error while querying campaign by id={}", id, ex);
+            throw ex;
+        }
     }
 
     @Override
     public Campaign save(Campaign campaign) {
-        CampaignEntity entity = toEntity(campaign);
-        CampaignEntity saved = repository.save(entity);
-        return toDomain(saved);
+        try {
+            CampaignEntity entity = toEntity(campaign);
+            CampaignEntity saved = repository.save(entity);
+
+            logger.info(
+                    "AUDIT DB: campaign persisted successfully (campaignId={}, title={})",
+                    saved.getId(),
+                    saved.getTitle()
+            );
+
+            return toDomain(saved);
+        } catch (TransientDataAccessException ex) {
+            logger.error("SQL transient error while saving campaign with id={}", campaign.getId(), ex);
+            throw ex;
+        } catch (DataAccessException ex) {
+            logger.error("Database access error while saving campaign with id={}", campaign.getId(), ex);
+            throw ex;
+        }
     }
 
     @Override
