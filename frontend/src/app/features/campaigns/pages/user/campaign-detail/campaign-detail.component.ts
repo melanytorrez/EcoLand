@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CampaignService } from '../../../../../core/services/campaign.service';
 import { Campaign } from '../../../../../core/models/campaign.model';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-campaign-detail',
@@ -16,7 +17,8 @@ export class CampaignDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private campaignService: CampaignService
+    private campaignService: CampaignService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class CampaignDetailComponent implements OnInit {
           this.availableSpots =
             this.campaign.spots - this.campaign.participants;
         }
+        this.cdr.detectChanges();
       });
     }
   });

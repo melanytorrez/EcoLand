@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CampaignService } from '../../core/services/campaign.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { AuthService } from '../../core/services/auth.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-reforestacion',
@@ -20,7 +21,8 @@ export class ReforestacionComponent implements OnInit {
   constructor(
     private campaignService: CampaignService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -35,10 +37,12 @@ export class ReforestacionComponent implements OnInit {
         this.campaigns = campaigns;
         this.filteredCampaigns = campaigns;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = 'No se pudieron cargar las campañas. Por favor, verifica tu conexión.';
         this.isLoading = false;
+        this.cdr.detectChanges();
         console.error('Error loading campaigns:', err);
       }
     });
