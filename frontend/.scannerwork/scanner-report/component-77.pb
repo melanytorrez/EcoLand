@@ -1,0 +1,1 @@
+M 2cssXhr5src/app/shared/components/footer/footer.component.css

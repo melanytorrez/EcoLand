@@ -1,0 +1,1 @@
+* 2tsXhrOsrc/app/features/campaigns/pages/user/campaign-detail/campaign-detail.module.ts

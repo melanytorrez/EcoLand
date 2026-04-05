@@ -1,0 +1,66 @@
+/**
+ * Constantes de cadenas de texto para EcoLand (Español).
+ * Centraliza todos los mensajes mostrados en la UI para facilitar
+ * el mantenimiento y futura internacionalización.
+ */
+
+export const STRINGS = {
+  auth: {
+    title: "Iniciar sesión",
+    subtitle: "Bienvenido de nuevo a EcoLand",
+    emailLabel: "Correo electrónico",
+    emailPlaceholder: "tu@email.com",
+    passwordLabel: "Contraseña",
+    passwordPlaceholder: "••••••••",
+    roleLabel: "Tipo de usuario",
+    roleUser: "Usuario",
+    roleAdmin: "Administrador",
+    loginButton: "Iniciar sesión",
+    registerQuestion: "¿No tienes una cuenta?",
+    registerLink: "Regístrate aquí",
+    registerTitle: "Crear cuenta",
+    registerSubtitle: "Únete a la comunidad EcoLand",
+    fullNameLabel: "Nombre completo",
+    fullNamePlaceholder: "Juan Pérez",
+    confirmPasswordLabel: "Confirmar contraseña",
+    confirmPasswordPlaceholder: "Repite tu contraseña",
+    registerButton: "Crear cuenta",
+    errorPasswordMismatch: "Las contraseñas no coinciden",
+    loginQuestion: "¿Ya tienes una cuenta?",
+    loginLink: "Inicia sesión aquí",
+    backHome: "← Volver al inicio",
+    errorRequired: "Por favor complete todos los campos",
+    errorInvalidEmail: "Formato de correo inválido",
+    errorInvalidPassword: "La contraseña no cumple los requisitos de seguridad"
+  },
+  navigation: {
+    home: "Inicio",
+    reforestation: "Reforestación",
+    recycling: "Reciclaje",
+    stats: "Estadísticas",
+    admin: "Panel Admin",
+    logout: "Cerrar sesión"
+  },
+  campaigns: {
+    activeTitle: "Campañas activas",
+    participate: "Participar",
+    spotsAvailable: "cupos disponibles",
+    loading: "Cargando campañas...",
+    errorLoading: "Error al cargar las campañas"
+  },
+  stats: {
+    title: "Impacto Ambiental",
+    treesPlanted: "Árboles Plantados",
+    kgRecycled: "Kg Reciclados",
+    volunteers: "Voluntarios Activos"
+  },
+  shared: {
+    confirm: "Confirmar",
+    cancel: "Cancelar",
+    save: "Guardar",
+    delete: "Eliminar"
+  }
+};
+
+// Aliases para compatibilidad con código existente si es necesario
+export const AUTH_STRINGS = STRINGS.auth;

@@ -1,0 +1,1 @@
+. 2tsX/hrEsrc/app/features/campañas-reciclaje/campañas-reciclaje.component.ts

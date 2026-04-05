@@ -1,0 +1,1 @@
+: 2tsXhrVsrc/app/features/recycling-campaign-detail/recycling-campaign-detail-routing.module.ts
