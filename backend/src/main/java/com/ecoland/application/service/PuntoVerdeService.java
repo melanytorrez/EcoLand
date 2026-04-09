@@ -8,7 +8,7 @@ import com.ecoland.domain.model.PuntoVerde;
 import com.ecoland.domain.port.in.PuntoVerdeUseCase;
 import com.ecoland.domain.port.out.PuntoVerdeRepositoryPort;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
