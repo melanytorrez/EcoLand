@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Campaign } from '../../core/models/campaign.model';
 import { CampaignService } from '../../core/services/campaign.service';
+import { StatisticsService } from '../../core/services/statistics.service';
 
 @Component({
   selector: 'app-home',
@@ -10,15 +11,17 @@ import { CampaignService } from '../../core/services/campaign.service';
 })
 export class HomeComponent implements OnInit {
   stats = [
-    { icon: 'tree-deciduous', label: 'Árboles Plantados', value: '15,432' },
-    { icon: 'recycle', label: 'Kg Reciclados', value: '328,567' },
-    { icon: 'users', label: 'Voluntarios Activos', value: '1,856' },
-    { icon: 'trending-up', label: 'Campañas Activas', value: '24' },
+    { icon: 'trending-up', label: 'Campañas Activas', value: '...' },
+    { icon: 'users', label: 'Total Participantes', value: '...' },
+    { icon: 'tree-deciduous', label: 'Total Campañas', value: '...' },
   ];
 
   campaigns: Campaign[] = [];
 
-  constructor(private campaignService: CampaignService) {}
+  constructor(
+    private campaignService: CampaignService,
+    private statisticsService: StatisticsService
+  ) {}
 
   ngOnInit(): void {
     this.campaignService.getCampaigns().subscribe({
@@ -27,6 +30,17 @@ export class HomeComponent implements OnInit {
       },
       error: () => {
         this.campaigns = [];
+      }
+    });
+
+    this.statisticsService.getQuickStats().subscribe({
+      next: (data) => {
+        this.stats[0].value = data.activeCampaigns.toLocaleString();
+        this.stats[1].value = data.totalParticipants.toLocaleString();
+        this.stats[2].value = data.totalCampaigns.toLocaleString();
+      },
+      error: () => {
+        // En caso de error, dejamos los valores predeterminados '...'
       }
     });
   }
