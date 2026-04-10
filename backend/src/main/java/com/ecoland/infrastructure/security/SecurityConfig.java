@@ -32,28 +32,28 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/api/campaigns/**").permitAll()
-                .requestMatchers("/error").permitAll()
-                .anyRequest().authenticated()
-            )
-            .sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            .exceptionHandling(ex -> ex
-                .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    logger.warn("Acceso denegado: El usuario no tiene los roles/permisos necesarios para acceder a {}", request.getRequestURI());
-                    response.sendError(403, "Acceso denegado");
-                })
-                .authenticationEntryPoint((request, response, authException) -> {
-                    logger.warn("Acceso no autorizado: Intento de acceso sin autenticación a {}", request.getRequestURI());
-                    response.sendError(401, "No autorizado");
-                })
-            );
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/campaigns/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .anyRequest().authenticated()
+                        .requestMatchers("/auth/**", "/api/puntos-verdes/**").permitAll())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            logger.warn(
+                                    "Acceso denegado: El usuario no tiene los roles/permisos necesarios para acceder a {}",
+                                    request.getRequestURI());
+                            response.sendError(403, "Acceso denegado");
+                        })
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            logger.warn("Acceso no autorizado: Intento de acceso sin autenticación a {}",
+                                    request.getRequestURI());
+                            response.sendError(401, "No autorizado");
+                        }));
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
