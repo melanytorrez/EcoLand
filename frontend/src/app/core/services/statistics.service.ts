@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { MonthlyStat, DistributionStat, ZoneStat, SummaryStat } from '../models/statistics.model';
 
@@ -47,7 +48,7 @@ export class StatisticsService {
     { month: 'Jun', value: 1856 },
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getSummaryStats(): Observable<SummaryStat[]> {
     return of(this.stats);
@@ -68,4 +69,9 @@ export class StatisticsService {
   getVolunteerGrowth(): Observable<MonthlyStat[]> {
     return of(this.participationData);
   }
+
+  getQuickStats(): Observable<{ totalCampaigns: number; activeCampaigns: number; totalParticipants: number }> {
+    return this.http.get<any>('http://localhost:8082/api/statistics/quick');
+  }
 }
+

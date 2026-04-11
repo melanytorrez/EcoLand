@@ -32,28 +32,29 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/api/campaigns/**").permitAll()
-                .requestMatchers("/error").permitAll()
-                .anyRequest().authenticated()
-            )
-            .sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            .exceptionHandling(ex -> ex
-                .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    logger.warn("Acceso denegado: El usuario no tiene los roles/permisos necesarios para acceder a {}", request.getRequestURI());
-                    response.sendError(403, "Acceso denegado");
-                })
-                .authenticationEntryPoint((request, response, authException) -> {
-                    logger.warn("Acceso no autorizado: Intento de acceso sin autenticación a {}", request.getRequestURI());
-                    response.sendError(401, "No autorizado");
-                })
-            );
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/campaigns/**").permitAll()
+                        .requestMatchers("/api/statistics/**").permitAll()
+                        .requestMatchers("/api/puntos-verdes/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            logger.warn(
+                                    "Acceso denegado: El usuario no tiene los roles/permisos necesarios para acceder a {}",
+                                    request.getRequestURI());
+                            response.sendError(403, "Acceso denegado");
+                        })
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            logger.warn("Acceso no autorizado: Intento de acceso sin autenticación a {}",
+                                    request.getRequestURI());
+                            response.sendError(401, "No autorizado");
+                        }));
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -63,7 +64,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:*", "http://127.0.0.1:*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList(
+            "http://localhost:*", 
+            "http://127.0.0.1:*",
+            "https://*.netlify.app",
+            "https://ecoland.netlify.app"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
