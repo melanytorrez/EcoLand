@@ -1,0 +1,9 @@
+[32m04 04 2026 22:51:01.413:INFO [karma-server]: [39mKarma v6.4.4 server started at http://localhost:9876/
+[32m04 04 2026 22:51:01.421:INFO [launcher]: [39mLaunching browsers ChromeHeadlessCustom with concurrency unlimited
+[91m04 04 2026 22:51:01.424:ERROR [launcher]: [39mCannot load browser "ChromeHeadlessCustom": it is not registered! Perhaps you are missing some plugin?
+[91m04 04 2026 22:51:01.425:ERROR [karma-server]: [39mError: Found 1 load error
+    at Server.<anonymous> (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\frontend\node_modules\karma\lib\server.js:243:26)
+    at Object.onceWrapper (node:events:632:28)
+    at Server.emit (node:events:530:35)
+    at emitListeningNT (node:net:1982:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
