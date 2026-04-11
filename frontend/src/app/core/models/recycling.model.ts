@@ -4,6 +4,7 @@ export interface GreenPoint {
   direccion: string;
   zona: string;
   estado: string;
+  activo: boolean;
   horarios?: GreenPointSchedule[];
   tiposMaterial?: string[];
 }

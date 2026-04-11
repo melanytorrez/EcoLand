@@ -38,9 +38,7 @@ export class ReciclajeComponent implements OnInit {
   }
 
   getPointStatus(point: GreenPoint): 'Abierto' | 'Cerrado' {
-    const estado = (point.estado ?? '').toLowerCase();
-    const isOpen = ['abierto', 'activo', 'activa', 'open', 'true', '1'].some(value => estado.includes(value));
-    return isOpen ? 'Abierto' : 'Cerrado';
+    return point.activo ? 'Abierto' : 'Cerrado';
   }
 
   getPointHours(point: GreenPoint): string {
