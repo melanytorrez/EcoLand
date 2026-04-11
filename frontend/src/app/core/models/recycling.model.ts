@@ -1,8 +1,18 @@
 export interface GreenPoint {
-  name: string;
-  distance: string;
-  status: 'Abierto' | 'Cerrado';
-  schedule: string;
+  id: number;
+  nombre: string;
+  direccion: string;
+  zona: string;
+  estado: string;
+  horarios?: GreenPointSchedule[];
+  tiposMaterial?: string[];
+}
+
+export interface GreenPointSchedule {
+  id: number;
+  diaSemana: string;
+  horaApertura: string;
+  horaCierre: string;
 }
 
 export interface CollectionRoute {

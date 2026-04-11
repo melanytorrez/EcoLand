@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../models/recycling.model';
 
@@ -6,11 +7,7 @@ import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../models/recy
   providedIn: 'root'
 })
 export class RecyclingService {
-  private nearbyPoints: GreenPoint[] = [
-    { name: 'Punto Verde Plaza Colón', distance: '0.8 km', status: 'Abierto', schedule: 'Lun-Vie 8:00-18:00' },
-    { name: 'Punto Verde Mercado La Cancha', distance: '1.2 km', status: 'Abierto', schedule: 'Lun-Sáb 7:00-20:00' },
-    { name: 'Punto Verde Parque Tunari', distance: '2.5 km', status: 'Cerrado', schedule: 'Lun-Dom 6:00-22:00' },
-  ];
+  private readonly apiUrl = 'http://localhost:8082/api/puntos-verdes';
 
   private nextCollection: CollectionRoute = {
     day: 'Miércoles',
@@ -27,10 +24,14 @@ export class RecyclingService {
     rank: 'Top 15%',
   };
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  getPuntosVerdes(): Observable<GreenPoint[]> {
+    return this.http.get<GreenPoint[]>(this.apiUrl);
+  }
 
   getNearbyPoints(): Observable<GreenPoint[]> {
-    return of(this.nearbyPoints);
+    return this.getPuntosVerdes();
   }
 
   getNextCollection(): Observable<CollectionRoute> {
