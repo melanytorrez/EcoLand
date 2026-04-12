@@ -142,7 +142,10 @@
             </div>
           </div>
 
-          <div class="space-y-4 mb-6">
+          <div class="space-y-4 mb-6" *ngIf="!isLoading; else loadingPoints">
+            <div *ngIf="error" class="p-4 bg-red-50 text-red-700 rounded-2xl text-center text-sm">
+              {{ error }}
+            </div>
             <div *ngFor="let point of nearbyPoints" class="p-4 bg-[#E8F5E9] rounded-2xl">
               <div class="flex justify-between items-start mb-2">
                 <p class="font-semibold text-gray-900 text-sm">{{ point.name }}</p>
@@ -160,7 +163,17 @@
                 <span>{{ point.schedule }}</span>
               </div>
             </div>
+            <div *ngIf="!error && nearbyPoints.length === 0" class="p-4 text-center text-gray-500 text-sm">
+              No hay puntos verdes registrados.
+            </div>
           </div>
+
+          <!-- Loading Skeleton -->
+          <ng-template #loadingPoints>
+            <div class="space-y-4 mb-6 animate-pulse">
+              <div *ngFor="let i of [1,2,3]" class="p-4 bg-gray-100 rounded-2xl h-20"></div>
+            </div>
+          </ng-template>
 
           <button class="w-full px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold hover:shadow-lg transition-all">
             Ver todos los puntos

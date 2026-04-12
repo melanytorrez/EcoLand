@@ -4,11 +4,13 @@ import { HttpHeaders } from '@angular/common/http';
 import { Campaign } from '../models/campaign.model';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CampaignService {
-  private apiUrl = 'http://localhost:8082/api/campaigns';
+  private apiUrl = `${environment.apiUrl}/api/campaigns`;
 
   constructor(private http: HttpClient) { }
 

@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit {
     { icon: 'users', label: 'Total Participantes', value: '...' },
     { icon: 'tree-deciduous', label: 'Total Campañas', value: '...' },
   ];
-
+  
+  isLoadingStats = true;
+  isLoadingCampaigns = true;
   campaigns: Campaign[] = [];
 
   constructor(
@@ -27,9 +29,11 @@ export class HomeComponent implements OnInit {
     this.campaignService.getCampaigns().subscribe({
       next: (campaigns) => {
         this.campaigns = campaigns.slice(0, 3);
+        this.isLoadingCampaigns = false;
       },
       error: () => {
         this.campaigns = [];
+        this.isLoadingCampaigns = false;
       }
     });
 
@@ -38,8 +42,10 @@ export class HomeComponent implements OnInit {
         this.stats[0].value = data.activeCampaigns.toLocaleString();
         this.stats[1].value = data.totalParticipants.toLocaleString();
         this.stats[2].value = data.totalCampaigns.toLocaleString();
+        this.isLoadingStats = false;
       },
       error: () => {
+        this.isLoadingStats = false;
         // En caso de error, dejamos los valores predeterminados '...'
       }
     });
