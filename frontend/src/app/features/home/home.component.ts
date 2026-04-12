@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     private statisticsService: StatisticsService
   ) {}
 
+  ngOnInit(): void {
     this.campaignService.getCampaigns().subscribe({
       next: (campaigns) => {
         this.campaigns = campaigns.slice(0, 3);
