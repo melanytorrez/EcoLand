@@ -12,28 +12,49 @@ export class ReciclajeComponent implements OnInit {
   nearbyPoints: GreenPoint[] = [];
   nextCollection: CollectionRoute | undefined;
   impact: EnvironmentalImpact | undefined;
-  isLoading = true;
-  error: string | null = null;
+  loadingPoints = false;
+  pointsError = '';
+  showInteractiveMap = false;
+  showNextRoute = false;
+  showStatistics = false;
 
   constructor(private recyclingService: RecyclingService) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.error = null;
-    
-    this.recyclingService.getNearbyPoints().subscribe({
-      next: (points) => {
+    this.loadingPoints = true;
+    this.pointsError = '';
+
+    this.recyclingService.getPuntosVerdes().subscribe({
+      next: points => {
         this.nearbyPoints = points;
-        this.isLoading = false;
+        this.loadingPoints = false;
       },
-      error: (err) => {
-        console.error('Error fetching green points:', err);
-        this.error = 'No se pudieron cargar los puntos verdes.';
-        this.isLoading = false;
+      error: () => {
+        this.nearbyPoints = [];
+        this.pointsError = 'No se pudieron cargar los puntos verdes. Intenta nuevamente más tarde.';
+        this.loadingPoints = false;
       }
     });
 
-    this.recyclingService.getNextCollection().subscribe(route => this.nextCollection = route);
-    this.recyclingService.getEnvironmentalImpact().subscribe(impact => this.impact = impact);
+    if (this.showNextRoute) {
+      this.recyclingService.getNextCollection().subscribe(route => this.nextCollection = route);
+    }
+
+    if (this.showStatistics) {
+      this.recyclingService.getEnvironmentalImpact().subscribe(impact => this.impact = impact);
+    }
+  }
+
+  getPointStatus(point: GreenPoint): 'Abierto' | 'Cerrado' {
+    return point.activo ? 'Abierto' : 'Cerrado';
+  }
+
+  getPointHours(point: GreenPoint): string {
+    if (!point.horarios?.length) {
+      return 'Horario no disponible';
+    }
+
+    const horario = point.horarios[0];
+    return `${horario.diaSemana} ${horario.horaApertura} - ${horario.horaCierre}`;
   }
 }

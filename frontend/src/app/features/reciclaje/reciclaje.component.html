@@ -17,7 +17,7 @@
   </section>
 
   <!-- Interactive Map -->
-  <section class="py-16 bg-[#E8F5E9]">
+  <section class="py-16 bg-[#E8F5E9]" *ngIf="showInteractiveMap">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="mb-8">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Mapa Interactivo</h2>
@@ -129,7 +129,7 @@
   <!-- Quick Info Cards -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid lg:grid-cols-3 gap-8">
+      <div class="grid gap-8" [ngClass]="(showNextRoute || showStatistics) ? 'lg:grid-cols-3' : 'lg:grid-cols-1'">
         <!-- Nearby Green Points -->
         <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
           <div class="flex items-center gap-4 mb-6">
@@ -142,30 +142,55 @@
             </div>
           </div>
 
-          <div class="space-y-4 mb-6" *ngIf="!isLoading; else loadingPoints">
-            <div *ngIf="error" class="p-4 bg-red-50 text-red-700 rounded-2xl text-center text-sm">
-              {{ error }}
+          <div class="space-y-4 mb-6">
+            <div *ngIf="loadingPoints" class="p-6 bg-[#E8F5E9] rounded-2xl flex items-center gap-3 text-sm text-gray-700">
+              <div class="w-4 h-4 rounded-full border-2 border-[#2E7D32] border-t-transparent animate-spin"></div>
+              Cargando puntos verdes...
             </div>
-            <div *ngFor="let point of nearbyPoints" class="p-4 bg-[#E8F5E9] rounded-2xl">
-              <div class="flex justify-between items-start mb-2">
-                <p class="font-semibold text-gray-900 text-sm">{{ point.name }}</p>
-                <span
-                  class="text-xs px-2 py-1 rounded-full"
-                  [ngClass]="point.status === 'Abierto' ? 'bg-[#4CAF50] text-white' : 'bg-gray-300 text-gray-700'"
-                >
-                  {{ point.status }}
-                </span>
+
+            <div *ngIf="pointsError && !loadingPoints" class="p-4 bg-red-50 border border-red-200 rounded-2xl text-sm text-red-700">
+              {{ pointsError }}
+            </div>
+
+            <ng-container *ngIf="!loadingPoints && !pointsError">
+              <div *ngIf="nearbyPoints.length; else emptyPoints" class="space-y-4">
+                <div *ngFor="let point of nearbyPoints" class="p-4 bg-[#E8F5E9] rounded-2xl">
+                  <div class="flex justify-between items-start gap-4 mb-3">
+                    <div>
+                      <p class="font-semibold text-gray-900 text-sm">{{ point.nombre }}</p>
+                      <p class="text-xs text-gray-600 mt-1">{{ point.direccion }}</p>
+                    </div>
+                    <span
+                      class="text-xs px-2 py-1 rounded-full shrink-0"
+                      [ngClass]="getPointStatus(point) === 'Abierto' ? 'bg-[#4CAF50] text-white' : 'bg-gray-300 text-gray-700'"
+                    >
+                      {{ getPointStatus(point) }}
+                    </span>
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-2 text-xs text-gray-600 mb-3">
+                    <div class="flex items-center gap-2">
+                      <lucide-icon name="navigation" class="w-3 h-3"></lucide-icon>
+                      <span>{{ point.zona }}</span>
+                    </div>
+                    <span>•</span>
+                    <span>{{ getPointHours(point) }}</span>
+                  </div>
+
+                  <div *ngIf="point.tiposMaterial?.length" class="flex flex-wrap gap-2">
+                    <span *ngFor="let material of point.tiposMaterial" class="text-[11px] px-2 py-1 rounded-full bg-white text-[#2E7D32] border border-[#A5D6A7]">
+                      {{ material }}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div class="flex items-center gap-2 text-xs text-gray-600">
-                <lucide-icon name="navigation" class="w-3 h-3"></lucide-icon>
-                <span>{{ point.distance }}</span>
-                <span>•</span>
-                <span>{{ point.schedule }}</span>
-              </div>
-            </div>
-            <div *ngIf="!error && nearbyPoints.length === 0" class="p-4 text-center text-gray-500 text-sm">
-              No hay puntos verdes registrados.
-            </div>
+
+              <ng-template #emptyPoints>
+                <div class="p-6 bg-[#E8F5E9] rounded-2xl text-sm text-gray-700">
+                  No hay puntos verdes disponibles por ahora.
+                </div>
+              </ng-template>
+            </ng-container>
           </div>
 
           <!-- Loading Skeleton -->
@@ -181,7 +206,7 @@
         </div>
 
         <!-- Next Collection -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100" *ngIf="nextCollection">
+        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100" *ngIf="showNextRoute && nextCollection">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg">
               <lucide-icon name="truck" class="w-7 h-7 text-white"></lucide-icon>
@@ -221,7 +246,7 @@
         </div>
 
         <!-- Environmental Impact -->
-        <div class="bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] rounded-3xl shadow-xl p-8 text-white" *ngIf="impact">
+        <div class="bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] rounded-3xl shadow-xl p-8 text-white" *ngIf="showStatistics && impact">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
               <lucide-icon name="trending-up" class="w-7 h-7 text-white"></lucide-icon>
