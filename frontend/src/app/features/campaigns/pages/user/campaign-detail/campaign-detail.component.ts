@@ -72,7 +72,16 @@ export class CampaignDetailComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        if (err.status === 409 || err.error?.includes('Ya estás inscrito') || err.message?.includes('Ya estás inscrito')) {
+        let msg = '';
+        if (typeof err?.error === 'string') {
+          msg = err.error;
+        } else if (typeof err?.error?.message === 'string') {
+          msg = err.error.message;
+        } else if (typeof err?.message === 'string') {
+          msg = err.message;
+        }
+
+        if (err.status === 409 || msg.includes('Ya estás inscrito')) {
            this.participationError = 'Ya estás inscrito en esta campaña';
         } else {
            this.participationError = 'Error al intentar inscribirse. Inténtalo más tarde.';
