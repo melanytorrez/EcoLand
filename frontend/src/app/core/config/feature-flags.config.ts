@@ -8,6 +8,6 @@ export interface FeatureFlags {
 export const FEATURE_FLAGS: FeatureFlags = {
   reforestacion: true,
   campanasReciclaje: false,
-  reciclaje: false,
-  estadisticas: false,
+  reciclaje: true,
+  estadisticas: true,
 };
