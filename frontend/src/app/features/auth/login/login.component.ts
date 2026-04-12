@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
@@ -38,7 +38,13 @@ export class LoginComponent {
     };
   }
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private route: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private authService: AuthService, 
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
+  ) {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
@@ -51,12 +57,19 @@ export class LoginComponent {
 
   }
 
+  isLoading = false;
+
   onSubmit() {
 
     if (this.loginForm.invalid) {
       this.error = this.strings.errorRequired;
       return;
     }
+
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    this.error = '';
 
     const { email, password, role } = this.loginForm.value;
 
@@ -72,6 +85,8 @@ export class LoginComponent {
           this.error = selectedRole === 'admin'
             ? 'Tu cuenta no tiene permisos de administrador.'
             : 'Tu cuenta es de administrador. Elige el acceso de administrador.';
+          this.isLoading = false;
+          this.cdr.detectChanges();
           return;
         }
         
@@ -83,7 +98,9 @@ export class LoginComponent {
       },
       error: (err: any) => {
         console.error('Error al iniciar sesión', err);
+        this.isLoading = false;
         this.error = 'Contraseña o Correo incorrectos intente de nuevo';
+        this.cdr.detectChanges();
       }
     });
 
