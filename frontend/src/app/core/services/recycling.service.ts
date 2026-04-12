@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../models/recycling.model';
 
@@ -9,7 +8,7 @@ import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../models/recy
   providedIn: 'root'
 })
 export class RecyclingService {
-  private apiUrl = `${environment.apiUrl}/api/puntos-verdes`;
+  private readonly apiUrl = `${environment.apiUrl}/api/puntos-verdes`;
 
   private nextCollection: CollectionRoute = {
     day: 'Miércoles',
@@ -28,17 +27,12 @@ export class RecyclingService {
 
   constructor(private http: HttpClient) {}
 
+  getPuntosVerdes(): Observable<GreenPoint[]> {
+    return this.http.get<GreenPoint[]>(this.apiUrl);
+  }
+
   getNearbyPoints(): Observable<GreenPoint[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      map(puntos => puntos.map(p => ({
-        name: p.nombre,
-        distance: p.zona || 'Cerca de ti',
-        status: (p.estado === 'ACTIVO' || p.estado === 'Abierto') ? 'Abierto' : 'Cerrado',
-        schedule: p.horarios && p.horarios.length > 0 
-          ? `${p.horarios[0].diaSemana} ${p.horarios[0].horaApertura}-${p.horarios[0].horaCierre}`
-          : 'Horario no disponible'
-      } as GreenPoint)))
-    );
+    return this.getPuntosVerdes();
   }
 
   getNextCollection(): Observable<CollectionRoute> {

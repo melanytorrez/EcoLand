@@ -28,6 +28,15 @@ public class PuntoVerde {
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
 
+    public boolean isActivo() {
+        if (estado == null) {
+            return false;
+        }
+
+        String normalizedEstado = estado.trim().toLowerCase();
+        return normalizedEstado.equals("abierto") || normalizedEstado.equals("activo") || normalizedEstado.equals("true") || normalizedEstado.equals("1");
+    }
+
     public List<PuntoVerdeHorario> getHorarios() { return horarios; }
     public void setHorarios(List<PuntoVerdeHorario> horarios) { this.horarios = horarios; }
 
