@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { MonthlyStat, DistributionStat, ZoneStat, SummaryStat } from '../models/statistics.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatisticsService {
+  private apiUrl = `${environment.apiUrl}/api/statistics`;
   private stats: SummaryStat[] = [
     { icon: 'TreeDeciduous', label: 'Árboles Plantados', value: '15,432', change: '+1,234 este mes', color: 'from-[#2E7D32] to-[#4CAF50]' },
     { icon: 'Recycle', label: 'Kg Reciclados', value: '328,567', change: '+12,450 este mes', color: 'from-blue-500 to-blue-700' },
@@ -71,7 +73,7 @@ export class StatisticsService {
   }
 
   getQuickStats(): Observable<{ totalCampaigns: number; activeCampaigns: number; totalParticipants: number }> {
-    return this.http.get<any>('http://localhost:8082/api/statistics/quick');
+    return this.http.get<any>(`${this.apiUrl}/quick`);
   }
 }
 
