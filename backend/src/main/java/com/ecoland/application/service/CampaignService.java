@@ -3,10 +3,13 @@ package com.ecoland.application.service;
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.in.CampaignUseCase;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
+import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
+import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,9 +22,11 @@ public class CampaignService implements CampaignUseCase {
     private static final Logger logger = LoggerFactory.getLogger(CampaignService.class);
 
     private final CampaignRepositoryPort campaignRepositoryPort;
+    private final JpaUsuarioCampaignRepository usuarioCampaignRepository;
 
-    public CampaignService(CampaignRepositoryPort campaignRepositoryPort) {
+    public CampaignService(CampaignRepositoryPort campaignRepositoryPort, JpaUsuarioCampaignRepository usuarioCampaignRepository) {
         this.campaignRepositoryPort = campaignRepositoryPort;
+        this.usuarioCampaignRepository = usuarioCampaignRepository;
         seedData();
     }
 
@@ -89,11 +94,19 @@ public class CampaignService implements CampaignUseCase {
         try {
             Campaign campaign = getCampaignById(id);
 
+            if (usuarioCampaignRepository.existsByUsuarioEmailAndCampaignId(userEmail, id)) {
+                logger.error("Error al inscribir usuario {}: Ya está en la campaña {}", userEmail, id);
+                throw new IllegalStateException("Ya estás inscrito en esta campaña");
+            }
+
             if (campaign.getParticipants() >= campaign.getSpots()) {
                 logger.error("Error al inscribir usuario {}: La campaña {} ya no tiene cupos disponibles", userEmail,
                         id);
                 throw new IllegalStateException("La campaña ya no tiene cupos disponibles");
             }
+
+            UsuarioCampaignEntity relacion = new UsuarioCampaignEntity(userEmail, id, LocalDateTime.now().toString());
+            usuarioCampaignRepository.save(relacion);
 
             campaign.setParticipants(campaign.getParticipants() + 1);
             Campaign updatedCampaign = campaignRepositoryPort.save(campaign);

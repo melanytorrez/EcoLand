@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
@@ -25,6 +25,7 @@ export class RegisterComponent {
 
   registerForm: FormGroup;
   error = '';
+  isLoading = false;
 
   get emailRules() {
     const val = this.registerForm?.get('email')?.value || '';
@@ -47,7 +48,7 @@ export class RegisterComponent {
 
   strings = AUTH_STRINGS;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
@@ -79,31 +80,41 @@ export class RegisterComponent {
       return;
     }
 
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    this.error = '';
+
     const { fullName, email, password, role } = this.registerForm.value;
 
     this.authService.register({ nombre: fullName, email, password, role }).subscribe({
       next: (response: any) => {
         console.log('Registro exitoso', response);
         this.authService.setSession(response);
+        this.isLoading = false;
         this.router.navigate(['/']);
       },
       error: (err: any) => {
         console.error('Error en el registro', err);
+        this.isLoading = false;
+        
         if (err?.error?.message) {
           this.error = err.error.message;
+          this.cdr.detectChanges();
           return;
         }
 
-        // Validation errors can arrive as { field: message } map
         if (err?.error && typeof err.error === 'object') {
           const firstValidationMessage = Object.values(err.error)[0];
           if (typeof firstValidationMessage === 'string') {
             this.error = firstValidationMessage;
+            this.cdr.detectChanges();
             return;
           }
         }
 
         this.error = 'Error al registrar. Por favor, inténtelo de nuevo.';
+        this.cdr.detectChanges();
       }
     });
   }
