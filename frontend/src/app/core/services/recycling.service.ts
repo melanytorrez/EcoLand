@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../models/recycling.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecyclingService {
-  private readonly apiUrl = 'http://localhost:8082/api/puntos-verdes';
+  private readonly apiUrl = `${environment.apiUrl}/api/puntos-verdes`;
 
   private nextCollection: CollectionRoute = {
     day: 'Miércoles',
