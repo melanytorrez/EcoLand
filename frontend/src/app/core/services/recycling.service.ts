@@ -33,7 +33,7 @@ export class RecyclingService {
       map(puntos => puntos.map(p => ({
         name: p.nombre,
         distance: p.zona || 'Cerca de ti',
-        status: p.estado === 'Abierto' ? 'Abierto' : 'Cerrado',
+        status: (p.estado === 'ACTIVO' || p.estado === 'Abierto') ? 'Abierto' : 'Cerrado',
         schedule: p.horarios && p.horarios.length > 0 
           ? `${p.horarios[0].diaSemana} ${p.horarios[0].horaApertura}-${p.horarios[0].horaCierre}`
           : 'Horario no disponible'
