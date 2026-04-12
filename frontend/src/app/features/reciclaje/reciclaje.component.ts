@@ -14,6 +14,9 @@ export class ReciclajeComponent implements OnInit {
   impact: EnvironmentalImpact | undefined;
   loadingPoints = false;
   pointsError = '';
+  showInteractiveMap = false;
+  showNextRoute = false;
+  showStatistics = false;
 
   constructor(private recyclingService: RecyclingService) {}
 
@@ -33,8 +36,13 @@ export class ReciclajeComponent implements OnInit {
       }
     });
 
-    this.recyclingService.getNextCollection().subscribe(route => this.nextCollection = route);
-    this.recyclingService.getEnvironmentalImpact().subscribe(impact => this.impact = impact);
+    if (this.showNextRoute) {
+      this.recyclingService.getNextCollection().subscribe(route => this.nextCollection = route);
+    }
+
+    if (this.showStatistics) {
+      this.recyclingService.getEnvironmentalImpact().subscribe(impact => this.impact = impact);
+    }
   }
 
   getPointStatus(point: GreenPoint): 'Abierto' | 'Cerrado' {

@@ -17,7 +17,7 @@
   </section>
 
   <!-- Interactive Map -->
-  <section class="py-16 bg-[#E8F5E9]">
+  <section class="py-16 bg-[#E8F5E9]" *ngIf="showInteractiveMap">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="mb-8">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Mapa Interactivo</h2>
@@ -129,7 +129,7 @@
   <!-- Quick Info Cards -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid lg:grid-cols-3 gap-8">
+      <div class="grid gap-8" [ngClass]="(showNextRoute || showStatistics) ? 'lg:grid-cols-3' : 'lg:grid-cols-1'">
         <!-- Nearby Green Points -->
         <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
           <div class="flex items-center gap-4 mb-6">
@@ -199,7 +199,7 @@
         </div>
 
         <!-- Next Collection -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100" *ngIf="nextCollection">
+        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100" *ngIf="showNextRoute && nextCollection">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg">
               <lucide-icon name="truck" class="w-7 h-7 text-white"></lucide-icon>
@@ -239,7 +239,7 @@
         </div>
 
         <!-- Environmental Impact -->
-        <div class="bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] rounded-3xl shadow-xl p-8 text-white" *ngIf="impact">
+        <div class="bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] rounded-3xl shadow-xl p-8 text-white" *ngIf="showStatistics && impact">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
               <lucide-icon name="trending-up" class="w-7 h-7 text-white"></lucide-icon>
