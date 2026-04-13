@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/campaigns")
-@CrossOrigin(origins = "*") // Para facilitar el desarrollo con Angular
 public class CampaignController {
 
     private final CampaignUseCase campaignUseCase;

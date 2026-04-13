@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/puntos-verdes")
-@CrossOrigin(origins = "*") // Permite el acceso desde Netlify y Local para pruebas
 public class PuntoVerdeController {
 
     private final PuntoVerdeUseCase puntoVerdeUseCase;

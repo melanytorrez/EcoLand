@@ -68,7 +68,8 @@ public class SecurityConfig {
             "http://localhost:*", 
             "http://127.0.0.1:*",
             "https://*.netlify.app",
-            "https://ecoland.netlify.app"
+            "https://ecoland.netlify.app",
+            "https://ecolandfront.netlify.app"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
