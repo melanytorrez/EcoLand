@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../models/recycling.model';
 
@@ -28,7 +29,18 @@ export class RecyclingService {
   constructor(private http: HttpClient) {}
 
   getPuntosVerdes(): Observable<GreenPoint[]> {
-    return this.http.get<GreenPoint[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map(puntos => puntos.map(p => ({
+        id: p.id,
+        nombre: p.nombre,
+        direccion: p.direccion,
+        zona: p.zona || 'Cerca de ti',
+        estado: p.estado,
+        activo: p.estado === 'ACTIVO' || p.estado === 'Abierto',
+        horarios: p.horarios,
+        tiposMaterial: p.tiposMaterial
+      } as GreenPoint)))
+    );
   }
 
   getNearbyPoints(): Observable<GreenPoint[]> {
