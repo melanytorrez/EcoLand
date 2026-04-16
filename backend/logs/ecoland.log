@@ -1,0 +1,615 @@
+2026-04-16 14:51:17 [main] INFO  com.ecoland.EcoLandApplication - Starting EcoLandApplication using Java 21.0.10 with PID 3716 (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\target\classes started by torre in D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend)
+2026-04-16 14:51:17 [main] DEBUG com.ecoland.EcoLandApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-16 14:51:17 [main] INFO  com.ecoland.EcoLandApplication - The following 1 profile is active: "default"
+2026-04-16 14:51:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 14:51:20 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 198 ms. Found 7 JPA repository interfaces.
+2026-04-16 14:51:22 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+2026-04-16 14:51:22 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 14:51:22 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-04-16 14:51:22 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 14:51:22 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5513 ms
+2026-04-16 14:51:23 [main] DEBUG c.e.i.security.JwtFilter - Filter 'jwtFilter' configured for use
+2026-04-16 14:51:23 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-16 14:51:23 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-04-16 14:51:23 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-16 14:51:24 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 14:51:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 14:51:25 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@102af1bb
+2026-04-16 14:51:25 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 14:51:26 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 14:51:29 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-16 14:51:30 [main] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_8`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_8`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:446)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:268)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.ecoland.EcoLandApplication.main(EcoLandApplication.java:10)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_8`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:770)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:653)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
+	... 37 common frames omitted
+2026-04-16 14:51:30 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 14:51:31 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 14:51:33 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-16 14:51:33 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 1fec5a2b-309b-4cc5-be46-f8eeaf7f3802
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-16 14:51:34 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@aad1270, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e64b248, org.springframework.security.web.context.SecurityContextHolderFilter@3d707885, org.springframework.security.web.header.HeaderWriterFilter@4a9a0d9d, org.springframework.web.filter.CorsFilter@6e5dc02d, org.springframework.security.web.authentication.logout.LogoutFilter@5a7e0d68, com.ecoland.infrastructure.security.JwtFilter@208205ed, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6eec564c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58477355, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7e4f5062, org.springframework.security.web.session.SessionManagementFilter@339b9869, org.springframework.security.web.access.ExceptionTranslationFilter@2531049f, org.springframework.security.web.access.intercept.AuthorizationFilter@126f428e]
+2026-04-16 14:51:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+2026-04-16 14:51:36 [main] INFO  com.ecoland.EcoLandApplication - Started EcoLandApplication in 20.409 seconds (process running for 21.749)
+2026-04-16 14:52:33 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 14:52:33 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 14:52:33 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2026-04-16 14:52:33 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 14:52:33 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 14:52:33 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 14:52:33 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 14:52:33 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 14:52:33 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 14:52:33 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 14:52:33 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 14:52:33 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 14:52:33 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 48ms
+2026-04-16 14:52:33 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 83ms
+2026-04-16 14:58:19 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 14:58:19 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 14:58:19 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 14:58:19 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 14:58:19 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 14:58:19 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 14:58:19 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 14:58:19 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 14:58:19 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 14:58:19 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 18ms
+2026-04-16 14:58:19 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 23ms
+2026-04-16 15:00:46 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:00:46 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:00:46 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:00:46 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:00:46 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:00:46 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:00:46 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:00:46 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:00:46 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:00:46 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 16ms
+2026-04-16 15:00:46 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 27ms
+2026-04-16 15:01:29 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 15:01:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 15:01:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 15:01:58 [main] INFO  com.ecoland.EcoLandApplication - Starting EcoLandApplication using Java 21.0.10 with PID 7000 (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\target\classes started by torre in D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend)
+2026-04-16 15:01:58 [main] DEBUG com.ecoland.EcoLandApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-16 15:01:58 [main] INFO  com.ecoland.EcoLandApplication - The following 1 profile is active: "default"
+2026-04-16 15:02:00 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 15:02:00 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 183 ms. Found 7 JPA repository interfaces.
+2026-04-16 15:02:02 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+2026-04-16 15:02:02 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 15:02:02 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-04-16 15:02:02 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 15:02:02 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4060 ms
+2026-04-16 15:02:02 [main] DEBUG c.e.i.security.JwtFilter - Filter 'jwtFilter' configured for use
+2026-04-16 15:02:02 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-16 15:02:03 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-04-16 15:02:03 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-16 15:02:03 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 15:02:03 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 15:02:04 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7c956dda
+2026-04-16 15:02:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 15:02:04 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 15:02:06 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-16 15:02:06 [main] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_12`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_12`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:446)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:268)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.ecoland.EcoLandApplication.main(EcoLandApplication.java:10)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_12`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:770)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:653)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
+	... 37 common frames omitted
+2026-04-16 15:02:06 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 15:02:07 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 15:02:08 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-16 15:02:09 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 304e8d65-0aff-4215-8e9b-113735d03eef
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-16 15:02:09 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3ad9f06a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@72cb5d7d, org.springframework.security.web.context.SecurityContextHolderFilter@962e03a, org.springframework.security.web.header.HeaderWriterFilter@1b9075c9, org.springframework.web.filter.CorsFilter@19b89a23, org.springframework.security.web.authentication.logout.LogoutFilter@15c27b65, com.ecoland.infrastructure.security.JwtFilter@10244722, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1bc6a43c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3bced0d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6d1a4522, org.springframework.security.web.session.SessionManagementFilter@7900d917, org.springframework.security.web.access.ExceptionTranslationFilter@9760f17, org.springframework.security.web.access.intercept.AuthorizationFilter@2acb6c9a]
+2026-04-16 15:02:10 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+2026-04-16 15:02:10 [main] INFO  com.ecoland.EcoLandApplication - Started EcoLandApplication in 13.603 seconds (process running for 14.41)
+2026-04-16 15:03:12 [http-nio-8082-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 15:03:12 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 15:03:12 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-16 15:03:12 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:03:12 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:03:12 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:03:12 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:03:12 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:03:12 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:03:12 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:03:12 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:03:12 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:03:12 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 60ms
+2026-04-16 15:03:12 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 93ms
+2026-04-16 15:03:24 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:03:24 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:03:24 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:03:24 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:03:24 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:03:24 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:03:24 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:03:24 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:03:24 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:03:24 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 20ms
+2026-04-16 15:03:24 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 26ms
+2026-04-16 15:04:06 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 15:04:06 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 15:04:06 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 15:09:12 [main] INFO  com.ecoland.EcoLandApplication - Starting EcoLandApplication using Java 21.0.10 with PID 19636 (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\target\classes started by torre in D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend)
+2026-04-16 15:09:12 [main] DEBUG com.ecoland.EcoLandApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-16 15:09:12 [main] INFO  com.ecoland.EcoLandApplication - The following 1 profile is active: "default"
+2026-04-16 15:09:14 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 15:09:14 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 267 ms. Found 7 JPA repository interfaces.
+2026-04-16 15:09:17 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+2026-04-16 15:09:17 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 15:09:17 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-04-16 15:09:17 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 15:09:17 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4513 ms
+2026-04-16 15:09:17 [main] DEBUG c.e.i.security.JwtFilter - Filter 'jwtFilter' configured for use
+2026-04-16 15:09:17 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-16 15:09:17 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-04-16 15:09:17 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-16 15:09:18 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 15:09:18 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 15:09:19 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@225e09f0
+2026-04-16 15:09:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 15:09:19 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 15:09:22 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-16 15:09:22 [main] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_1c`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_1c`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:446)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:268)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.ecoland.EcoLandApplication.main(EcoLandApplication.java:10)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_1c`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:770)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:653)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
+	... 37 common frames omitted
+2026-04-16 15:09:22 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 15:09:23 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 15:09:25 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-16 15:09:26 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 083c5079-8472-4cef-856d-49a2dea23c13
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-16 15:09:27 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@23ac164d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4057babc, org.springframework.security.web.context.SecurityContextHolderFilter@363b7709, org.springframework.security.web.header.HeaderWriterFilter@6193340e, org.springframework.web.filter.CorsFilter@274de4bc, org.springframework.security.web.authentication.logout.LogoutFilter@3ed7fc6f, com.ecoland.infrastructure.security.JwtFilter@3a00b15d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@71bbbb9f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7fef485d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7bbc3b6e, org.springframework.security.web.session.SessionManagementFilter@25727f74, org.springframework.security.web.access.ExceptionTranslationFilter@63714a1, org.springframework.security.web.access.intercept.AuthorizationFilter@1476e447]
+2026-04-16 15:09:28 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+2026-04-16 15:09:28 [main] INFO  com.ecoland.EcoLandApplication - Started EcoLandApplication in 16.587 seconds (process running for 17.57)
+2026-04-16 15:13:11 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 15:13:11 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 15:13:11 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-04-16 15:13:11 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:13:11 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:13:11 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:11 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:11 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:13:11 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:13:11 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:13:11 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:13:11 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:13:11 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 49ms
+2026-04-16 15:13:11 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 82ms
+2026-04-16 15:13:18 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:13:18 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:13:18 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:18 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:18 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:13:18 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:13:18 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:13:18 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:13:18 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:13:18 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 14ms
+2026-04-16 15:13:18 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 24ms
+2026-04-16 15:13:22 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:13:22 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:22 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:13:22 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:13:22 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:22 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:13:22 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:13:22 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:13:22 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:13:22 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 13ms
+2026-04-16 15:13:22 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 18ms
+2026-04-16 15:13:27 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:13:27 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:27 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:13:27 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:13:27 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:13:27 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:13:27 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:27 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:13:27 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:13:27 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 32ms
+2026-04-16 15:13:27 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 20ms
+2026-04-16 15:13:33 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:13:33 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:33 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:13:33 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:13:33 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:13:33 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 18ms
+2026-04-16 15:13:57 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 15:13:57 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:57 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 15:13:57 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 15:13:57 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 15:13:57 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 15:13:57 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 15:13:57 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 15:13:57 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 15:13:57 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 14ms
+2026-04-16 15:13:57 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 17ms
+2026-04-16 15:20:36 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 15:20:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 15:20:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 16:10:13 [main] INFO  com.ecoland.EcoLandApplication - Starting EcoLandApplication using Java 21.0.10 with PID 22012 (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\target\classes started by torre in D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend)
+2026-04-16 16:10:13 [main] DEBUG com.ecoland.EcoLandApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-16 16:10:13 [main] INFO  com.ecoland.EcoLandApplication - The following 1 profile is active: "default"
+2026-04-16 16:10:15 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 16:10:15 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 216 ms. Found 7 JPA repository interfaces.
+2026-04-16 16:10:17 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+2026-04-16 16:10:17 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 16:10:17 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-04-16 16:10:17 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 16:10:17 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4511 ms
+2026-04-16 16:10:17 [main] DEBUG c.e.i.security.JwtFilter - Filter 'jwtFilter' configured for use
+2026-04-16 16:10:18 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-16 16:10:18 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-04-16 16:10:18 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-16 16:10:19 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 16:10:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 16:10:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75a226ea
+2026-04-16 16:10:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 16:10:20 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 16:10:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-16 16:10:23 [main] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_26`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table usuario_roles 
+       add constraint FKf17a8iecmphfntlqrnkmwroom 
+       foreign key (rol_id) 
+       references roles_app (id)" via JDBC [Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_26`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:446)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:268)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.ecoland.EcoLandApplication.main(EcoLandApplication.java:10)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ecoland_db`.`#sql-1b28_26`, CONSTRAINT `FKf17a8iecmphfntlqrnkmwroom` FOREIGN KEY (`rol_id`) REFERENCES `roles_app` (`id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:770)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:653)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
+	... 37 common frames omitted
+2026-04-16 16:10:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 16:10:25 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 16:10:27 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-16 16:10:27 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: ffde7dbc-3592-43de-b385-c90a396e93f5
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-16 16:10:28 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@72cb5d7d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19b89a23, org.springframework.security.web.context.SecurityContextHolderFilter@472073bb, org.springframework.security.web.header.HeaderWriterFilter@75be6796, org.springframework.web.filter.CorsFilter@6d1a4522, org.springframework.security.web.authentication.logout.LogoutFilter@106a6420, com.ecoland.infrastructure.security.JwtFilter@373e6b9d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5f3fa154, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@158774d3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1835b24b, org.springframework.security.web.session.SessionManagementFilter@7bb50de0, org.springframework.security.web.access.ExceptionTranslationFilter@13cfa1ec, org.springframework.security.web.access.intercept.AuthorizationFilter@10db002c]
+2026-04-16 16:10:29 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+2026-04-16 16:10:29 [main] INFO  com.ecoland.EcoLandApplication - Started EcoLandApplication in 17.489 seconds (process running for 18.528)
+2026-04-16 16:11:54 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 16:11:54 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 16:11:54 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-04-16 16:11:54 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 16:11:54 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 16:11:54 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 16:11:54 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 16:11:54 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 16:11:54 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 16:11:54 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 16:11:54 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 16:11:54 [http-nio-8082-exec-3] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 16:11:54 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 51ms
+2026-04-16 16:11:54 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 80ms
+2026-04-16 16:33:58 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 16:33:58 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 16:33:58 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 16:33:58 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 16:33:58 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 16:33:58 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 16:33:58 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 16:33:58 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 16:33:58 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 16:33:58 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 16ms
+2026-04-16 16:33:58 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 24ms
+2026-04-16 16:35:15 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 16:35:15 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 16:35:15 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 16:35:15 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 16:35:15 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 16:35:15 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 16:35:15 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 16:35:15 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 16:35:15 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 16:35:15 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 20ms
+2026-04-16 16:35:15 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 36ms
+2026-04-16 17:25:59 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:25:59 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:25:59 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:25:59 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 17:25:59 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:25:59 [http-nio-8082-exec-4] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:25:59 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:25:59 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 33ms
+2026-04-16 17:25:59 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:25:59 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 17:26:00 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:26:00 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:26:00 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:26:00 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 17:26:00 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:26:00 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 46ms
+2026-04-16 17:26:00 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 117ms
+2026-04-16 17:26:00 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 17:26:00 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:26:00 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 17:26:00 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 17:26:00 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 21ms
+2026-04-16 17:26:00 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 17:26:00 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:26:00 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:26:00 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 17:26:00 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:26:00 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 17:26:00 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:26:00 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:26:00 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:26:00 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 16ms
+2026-04-16 17:26:00 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 29ms
+2026-04-16 17:27:08 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:27:08 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:27:08 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:27:08 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:27:08 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:27:08 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 11ms
+2026-04-16 17:27:39 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/puntos-verdes
+2026-04-16 17:27:39 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:27:39 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/puntos-verdes
+2026-04-16 17:27:39 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: PuntoVerdeController.getAll() con argumentos: []
+2026-04-16 17:27:39 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: PuntoVerdeController.getAll() | Tiempo de ejecución: 153ms
+2026-04-16 17:27:48 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:27:48 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 17:27:48 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:27:48 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:27:48 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:27:48 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 17:27:48 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:27:48 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 17:27:48 [http-nio-8082-exec-4] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:27:48 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 15ms
+2026-04-16 17:27:48 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 19ms
+2026-04-16 17:42:51 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:42:51 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 17:42:51 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:42:51 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:42:51 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 17:42:51 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:42:51 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 17:42:51 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:42:51 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:42:51 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 40ms
+2026-04-16 17:42:51 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 48ms
+2026-04-16 17:42:51 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:42:51 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 17:42:51 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:42:51 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:42:51 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:42:51 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:42:51 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 17:42:51 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 17:42:51 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:42:51 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 18ms
+2026-04-16 17:42:51 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 31ms
+2026-04-16 17:42:55 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-16 17:42:55 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-16 17:42:55 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:42:55 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-16 17:42:55 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-16 17:42:55 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-16 17:42:55 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-16 17:42:55 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: []
+2026-04-16 17:42:55 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-16 17:42:55 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 10ms
+2026-04-16 17:42:55 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 47ms
+2026-04-16 17:43:00 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m8s827ms201µs300ns).

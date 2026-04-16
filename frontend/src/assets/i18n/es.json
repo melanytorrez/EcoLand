@@ -36,6 +36,41 @@
     "admin": "Panel Admin",
     "logout": "Cerrar sesión"
   },
+  "logout": {
+    "title": "¿Cerrar sesión?",
+    "subtitle": "¿Estás seguro de salir?",
+    "confirm": "Sí, salir",
+    "cancel": "Cancelar"
+  },
+  "home": {
+    "hero": {
+      "badge": "Cochabamba más verde",
+      "title": "Construyamos juntos un Cochabamba más verde",
+      "subtitle": "Participa en campañas de reforestación y mejora el reciclaje en tu ciudad.",
+      "ctaReforestation": "Ver campañas",
+      "ctaRecycling": "Explorar reciclaje"
+    },
+    "stats": {
+      "activeCampaigns": "Campañas Activas",
+      "totalParticipants": "Total Participantes",
+      "totalCampaigns": "Total Campañas"
+    },
+    "reforestation": {
+      "badge": "Reforestación",
+      "title": "Campañas activas de reforestación",
+      "subtitle": "Únete a nuestras campañas y ayuda a plantar árboles en Cochabamba",
+      "spots": "cupos",
+      "participate": "Participar",
+      "viewAll": "Ver todas las campañas"
+    },
+    "recycling": {
+      "badge": "Reciclaje Inteligente",
+      "title": "Descubre puntos verdes y rutas de recolección",
+      "description": "Encuentra los centros de reciclaje más cercanos, conoce las rutas de los camiones y contribuye a un Cochabamba más limpio.",
+      "ctaExplore": "Explorar sistema de reciclaje",
+      "ctaCampaigns": "Ver campañas de reciclaje"
+    }
+  },
   "campaigns": {
     "activeTitle": "Campañas activas",
     "participate": "Participar",

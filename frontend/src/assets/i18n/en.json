@@ -36,6 +36,41 @@
     "admin": "Admin Panel",
     "logout": "Log Out"
   },
+  "logout": {
+    "title": "Log out?",
+    "subtitle": "Are you sure you want to leave?",
+    "confirm": "Yes, log out",
+    "cancel": "Cancel"
+  },
+  "home": {
+    "hero": {
+      "badge": "A greener Cochabamba",
+      "title": "Let's build a greener Cochabamba together",
+      "subtitle": "Join reforestation campaigns and improve recycling in your city.",
+      "ctaReforestation": "View campaigns",
+      "ctaRecycling": "Explore recycling"
+    },
+    "stats": {
+      "activeCampaigns": "Active Campaigns",
+      "totalParticipants": "Total Participants",
+      "totalCampaigns": "Total Campaigns"
+    },
+    "reforestation": {
+      "badge": "Reforestation",
+      "title": "Active reforestation campaigns",
+      "subtitle": "Join our campaigns and help plant trees in Cochabamba",
+      "spots": "spots",
+      "participate": "Participate",
+      "viewAll": "View all campaigns"
+    },
+    "recycling": {
+      "badge": "Smart Recycling",
+      "title": "Discover green points and collection routes",
+      "description": "Find the nearest recycling centers, learn about truck routes, and contribute to a cleaner Cochabamba.",
+      "ctaExplore": "Explore the recycling system",
+      "ctaCampaigns": "View recycling campaigns"
+    }
+  },
   "campaigns": {
     "activeTitle": "Active campaigns",
     "participate": "Participate",

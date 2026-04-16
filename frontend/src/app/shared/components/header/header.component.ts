@@ -46,13 +46,13 @@ export class HeaderComponent {
   showLogoutModal = false;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private featureFlagService: FeatureFlagService,
     private authService: AuthService,
     private translate: TranslateService
   ) {
-    this.translate.setDefaultLang('es');
-    this.translate.use('es');
+    // Sincronizar el indicador visual con el idioma activo (guardado en localStorage)
+    this.currentLang = localStorage.getItem('ecoland_lang') || 'es';
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
@@ -77,5 +77,7 @@ export class HeaderComponent {
   switchLanguage(lang: string) {
     this.currentLang = lang;
     this.translate.use(lang);
+    // Persistir preferencia del usuario
+    localStorage.setItem('ecoland_lang', lang);
   }
 }

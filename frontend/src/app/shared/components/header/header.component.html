@@ -101,21 +101,21 @@
       <lucide-icon name="log-out" style="width: 24px; height: 24px; color: #dc2626;"></lucide-icon>
     </div>
     
-    <h3 style="font-size: 1.125rem; font-weight: 700; text-align: center; color: #111827; margin: 0 0 8px 0;">¿Cerrar sesión?</h3>
-    <p style="font-size: 0.8rem; text-align: center; color: #6b7280; margin: 0 0 20px 0;">¿Estás seguro de salir?</p>
+    <h3 style="font-size: 1.125rem; font-weight: 700; text-align: center; color: #111827; margin: 0 0 8px 0;">{{ 'logout.title' | translate }}</h3>
+    <p style="font-size: 0.8rem; text-align: center; color: #6b7280; margin: 0 0 20px 0;">{{ 'logout.subtitle' | translate }}</p>
     
     <div style="display: flex; flex-direction: column; gap: 8px;">
       <!-- Main Action (Aceptar) -->
       <button 
         (click)="confirmLogout()"
         style="width: 100%; padding: 10px; background-color: #dc2626; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
-        Sí, salir
+        {{ 'logout.confirm' | translate }}
       </button>
       <!-- Secondary Action (Cancelar) -->
       <button 
         (click)="cancelLogout()"
         style="width: 100%; padding: 10px; background-color: white; color: #4b5563; border: 1px solid #d1d5db; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
-        Cancelar
+        {{ 'logout.cancel' | translate }}
       </button>
     </div>
     
