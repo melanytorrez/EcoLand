@@ -4,6 +4,7 @@ import { filter } from 'rxjs';
 import { FeatureFlagService } from '../../../core/services/feature-flag.service';
 import { FeatureFlags } from '../../../core/config/feature-flags.config';
 import { AuthService } from '../../../core/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +14,14 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class HeaderComponent {
   currentPath = '';
+  currentLang = 'es';
 
   allNavItems = [
-    { path: '/', label: 'Inicio', feature: null },
-    { path: '/reforestacion', label: 'Reforestación', feature: 'reforestacion' },
-    { path: '/campanas-reciclaje', label: 'Campañas de Reciclaje', feature: 'campanasReciclaje' },
-    { path: '/reciclaje', label: 'Reciclaje', feature: 'reciclaje' },
-    { path: '/estadisticas', label: 'Estadísticas', feature: 'estadisticas' },
+    { path: '/', label: 'navigation.home', feature: null },
+    { path: '/reforestacion', label: 'navigation.reforestation', feature: 'reforestacion' },
+    { path: '/campanas-reciclaje', label: 'navigation.campaigns', feature: 'campanasReciclaje' },
+    { path: '/reciclaje', label: 'navigation.recycling', feature: 'reciclaje' },
+    { path: '/estadisticas', label: 'navigation.stats', feature: 'estadisticas' },
   ];
 
   get navItems() {
@@ -46,8 +48,11 @@ export class HeaderComponent {
   constructor(
     private router: Router, 
     private featureFlagService: FeatureFlagService,
-    private authService: AuthService
+    private authService: AuthService,
+    private translate: TranslateService
   ) {
+    this.translate.setDefaultLang('es');
+    this.translate.use('es');
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
@@ -67,5 +72,10 @@ export class HeaderComponent {
 
   cancelLogout() {
     this.showLogoutModal = false;
+  }
+
+  switchLanguage(lang: string) {
+    this.currentLang = lang;
+    this.translate.use(lang);
   }
 }

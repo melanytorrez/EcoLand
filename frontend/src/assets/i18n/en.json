@@ -1,0 +1,57 @@
+{
+  "auth": {
+    "title": "Log In",
+    "subtitle": "Welcome back to EcoLand",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "roleLabel": "User type",
+    "roleUser": "User",
+    "roleAdmin": "Administrator",
+    "loginButton": "Log In",
+    "registerQuestion": "Don't have an account?",
+    "registerLink": "Sign up here",
+    "registerTitle": "Create account",
+    "registerSubtitle": "Join the EcoLand community",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "John Doe",
+    "confirmPasswordLabel": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "registerButton": "Create account",
+    "errorPasswordMismatch": "Passwords do not match",
+    "loginQuestion": "Already have an account?",
+    "loginLink": "Log in here",
+    "backHome": "← Back to home",
+    "errorRequired": "Please fill in all fields",
+    "errorInvalidEmail": "Invalid email format",
+    "errorInvalidPassword": "Password does not meet security requirements"
+  },
+  "navigation": {
+    "home": "Home",
+    "reforestation": "Reforestation",
+    "recycling": "Recycling",
+    "stats": "Statistics",
+    "admin": "Admin Panel",
+    "logout": "Log Out"
+  },
+  "campaigns": {
+    "activeTitle": "Active campaigns",
+    "participate": "Participate",
+    "spotsAvailable": "spots available",
+    "loading": "Loading campaigns...",
+    "errorLoading": "Error loading campaigns"
+  },
+  "stats": {
+    "title": "Environmental Impact",
+    "treesPlanted": "Trees Planted",
+    "kgRecycled": "Kg Recycled",
+    "volunteers": "Active Volunteers"
+  },
+  "shared": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete"
+  }
+}
