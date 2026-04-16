@@ -26,7 +26,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     HttpClientModule,
     TranslateModule.forRoot({
       defaultLanguage: 'es',
@@ -35,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
