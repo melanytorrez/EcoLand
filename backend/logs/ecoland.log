@@ -1121,3 +1121,17 @@ This generated password is for development use only. Your security configuration
 2026-04-18 19:52:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
 2026-04-18 19:52:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
 2026-04-18 19:52:55 [main] INFO  c.e.i.a.i.w.PuntoVerdeControllerTest - Started PuntoVerdeControllerTest in 3.465 seconds (process running for 5.219)
+2026-04-18 19:56:16 [main] INFO  c.e.i.a.in.web.UsuarioControllerTest - Starting UsuarioControllerTest using Java 21.0.10 with PID 18188 (started by diego in D:\Semestres\9no\TallerSisInfo\EcoLand\EcoLand\backend)
+2026-04-18 19:56:16 [main] DEBUG c.e.i.a.in.web.UsuarioControllerTest - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-18 19:56:16 [main] INFO  c.e.i.a.in.web.UsuarioControllerTest - The following 1 profile is active: "default"
+2026-04-18 19:56:18 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 3dc62a4d-496b-405f-9e21-f8ea64a1663c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-18 19:56:18 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@258a8584, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59127611, org.springframework.security.web.context.SecurityContextHolderFilter@58b8f9e3, org.springframework.security.web.header.HeaderWriterFilter@2729bb71, org.springframework.web.filter.CorsFilter@553ce348, org.springframework.security.web.csrf.CsrfFilter@29892a77, org.springframework.security.web.authentication.logout.LogoutFilter@14656be5, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7ff09659, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5a51336a, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7417ef4f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@11bdab37, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5f6e2ad9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3212bfd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5c0e2ec, org.springframework.security.web.access.ExceptionTranslationFilter@338d47b, org.springframework.security.web.access.intercept.AuthorizationFilter@59a94d0f]
+2026-04-18 19:56:18 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-18 19:56:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-18 19:56:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-04-18 19:56:18 [main] INFO  c.e.i.a.in.web.UsuarioControllerTest - Started UsuarioControllerTest in 2.651 seconds (process running for 3.64)
