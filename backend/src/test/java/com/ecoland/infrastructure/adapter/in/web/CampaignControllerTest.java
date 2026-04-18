@@ -68,7 +68,6 @@ class CampaignControllerTest {
         Campaign campaign = new Campaign();
         campaign.setId(1L);
 
-        // Creamos el token que inyectaremos manualmente
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                 "test@ecoland.com", null, Collections.emptyList());
 
@@ -82,7 +81,6 @@ class CampaignControllerTest {
 
     @Test
     void testParticipate_Unauthorized_WhenNoUser() throws Exception {
-        // Al no enviar .principal(), authentication será null y saltará tu "if" manual
         mockMvc.perform(post("/api/campaigns/1/participate"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(content().string("Debes iniciar sesion para participar en una campana"));

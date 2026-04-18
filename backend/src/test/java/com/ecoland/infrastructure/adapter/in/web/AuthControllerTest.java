@@ -5,7 +5,7 @@ import com.ecoland.application.dto.LoginRequest;
 import com.ecoland.application.dto.RegisterRequest;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
-import com.ecoland.infrastructure.security.JwtService; // Asegúrate de importar esto
+import com.ecoland.infrastructure.security.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

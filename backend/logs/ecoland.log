@@ -1107,3 +1107,17 @@ This generated password is for development use only. Your security configuration
 2026-04-18 00:30:59 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
 2026-04-18 00:30:59 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
 2026-04-18 00:31:00 [main] INFO  c.e.i.a.i.web.CampaignControllerTest - Started CampaignControllerTest in 8.572 seconds (process running for 11.612)
+2026-04-18 19:52:52 [main] INFO  c.e.i.a.i.w.PuntoVerdeControllerTest - Starting PuntoVerdeControllerTest using Java 21.0.10 with PID 17244 (started by diego in D:\Semestres\9no\TallerSisInfo\EcoLand\EcoLand\backend)
+2026-04-18 19:52:52 [main] DEBUG c.e.i.a.i.w.PuntoVerdeControllerTest - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-18 19:52:52 [main] INFO  c.e.i.a.i.w.PuntoVerdeControllerTest - The following 1 profile is active: "default"
+2026-04-18 19:52:55 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 45f55e47-7f2b-4268-ba82-32f24f6a96ba
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-18 19:52:55 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4468fda8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5fc1e4fb, org.springframework.security.web.context.SecurityContextHolderFilter@7ffcb232, org.springframework.security.web.header.HeaderWriterFilter@5d9bb69b, org.springframework.web.filter.CorsFilter@29aa4bc9, org.springframework.security.web.csrf.CsrfFilter@75f4d8a8, org.springframework.security.web.authentication.logout.LogoutFilter@48af5f38, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@14201a90, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7462ba4b, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6fd7aba8, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@51e94b7d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5feb82b3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2d38db6f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6c519e47, org.springframework.security.web.access.ExceptionTranslationFilter@6f68756d, org.springframework.security.web.access.intercept.AuthorizationFilter@6a2badb1]
+2026-04-18 19:52:55 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-18 19:52:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-18 19:52:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2026-04-18 19:52:55 [main] INFO  c.e.i.a.i.w.PuntoVerdeControllerTest - Started PuntoVerdeControllerTest in 3.465 seconds (process running for 5.219)
