@@ -1,0 +1,151 @@
+{
+  "auth": {
+    "title": "Iniciar sesión",
+    "subtitle": "Bienvenido de nuevo a EcoLand",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tu@email.com",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "••••••••",
+    "roleLabel": "Tipo de usuario",
+    "roleUser": "Usuario",
+    "roleAdmin": "Administrador",
+    "loginButton": "Iniciar sesión",
+    "registerQuestion": "¿No tienes una cuenta?",
+    "registerLink": "Regístrate aquí",
+    "registerTitle": "Crear cuenta",
+    "registerSubtitle": "Únete a la comunidad EcoLand",
+    "fullNameLabel": "Nombre completo",
+    "fullNamePlaceholder": "Juan Pérez",
+    "confirmPasswordLabel": "Confirmar contraseña",
+    "confirmPasswordPlaceholder": "Repite tu contraseña",
+    "registerButton": "Crear cuenta",
+    "errorPasswordMismatch": "Las contraseñas no coinciden",
+    "loginQuestion": "¿Ya tienes una cuenta?",
+    "loginLink": "Inicia sesión aquí",
+    "backHome": "← Volver al inicio",
+    "errorRequired": "Por favor complete todos los campos",
+    "errorInvalidEmail": "Formato de correo inválido",
+    "errorInvalidPassword": "La contraseña no cumple los requisitos de seguridad"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "reforestation": "Reforestación",
+    "campaigns": "Campañas de Reciclaje",
+    "recycling": "Reciclaje",
+    "stats": "Estadísticas",
+    "admin": "Panel Admin",
+    "logout": "Cerrar sesión"
+  },
+  "logout": {
+    "title": "¿Cerrar sesión?",
+    "subtitle": "¿Estás seguro de salir?",
+    "confirm": "Sí, salir",
+    "cancel": "Cancelar"
+  },
+  "home": {
+    "hero": {
+      "badge": "Cochabamba más verde",
+      "title": "Construyamos juntos un Cochabamba más verde",
+      "subtitle": "Participa en campañas de reforestación y mejora el reciclaje en tu ciudad.",
+      "ctaReforestation": "Ver campañas",
+      "ctaRecycling": "Explorar reciclaje"
+    },
+    "stats": {
+      "activeCampaigns": "Campañas Activas",
+      "totalParticipants": "Total Participantes",
+      "totalCampaigns": "Total Campañas"
+    },
+    "reforestation": {
+      "badge": "Reforestación",
+      "title": "Campañas activas de reforestación",
+      "subtitle": "Únete a nuestras campañas y ayuda a plantar árboles en Cochabamba",
+      "spots": "cupos",
+      "participate": "Participar",
+      "viewAll": "Ver todas las campañas"
+    },
+    "recycling": {
+      "badge": "Reciclaje Inteligente",
+      "title": "Descubre puntos verdes y rutas de recolección",
+      "description": "Encuentra los centros de reciclaje más cercanos, conoce las rutas de los camiones y contribuye a un Cochabamba más limpio.",
+      "ctaExplore": "Explorar sistema de reciclaje",
+      "ctaCampaigns": "Ver campañas de reciclaje"
+    }
+  },
+  "campaigns": {
+    "activeTitle": "Campañas activas",
+    "participate": "Participar",
+    "spotsAvailable": "cupos disponibles",
+    "loading": "Cargando campañas...",
+    "errorLoading": "Error al cargar las campañas"
+  },
+  "stats": {
+    "title": "Impacto Ambiental",
+    "treesPlanted": "Árboles Plantados",
+    "kgRecycled": "Kg Reciclados",
+    "volunteers": "Voluntarios Activos"
+  },
+  "shared": {
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar"
+  },
+  "footer": {
+    "description": "Plataforma líder en gestión ambiental de Cochabamba. Juntos construimos un futuro más verde y sostenible.",
+    "location": "Cochabamba, Bolivia",
+    "platform": "Plataforma",
+    "help": "Ayuda",
+    "faq": "Preguntas frecuentes",
+    "userGuide": "Guía de usuario",
+    "contact": "Contacto",
+    "terms": "Términos y condiciones",
+    "copyright": "© 2026 EcoLand. Todos los derechos reservados. Haciendo de Cochabamba una ciudad más verde 🌱"
+  },
+  "reforestacion": {
+    "heroBadge": "🌳 Campañas de Reforestación",
+    "heroTitle": "Sé parte del cambio",
+    "heroSubtitle": "Únete a nuestras campañas de reforestación y ayuda a recuperar los espacios verdes de Cochabamba.",
+    "searchPlaceholder": "Buscar campaña por nombre o ubicación...",
+    "filter": "Filtrar",
+    "loading": "Obteniendo campañas desde el bosque...",
+    "retry": "Reintentar conexión",
+    "noResults": "No se encontraron campañas que coincidan con tu búsqueda.",
+    "viewAll": "Ver todas las campañas",
+    "progress": "Progreso de inscripciones",
+    "spotsAvailable": "cupos disponibles de",
+    "organizedBy": "Organizado por:",
+    "participate": "Participar"
+  },
+  "reciclaje": {
+    "heroBadge": "♻️ Sistema de Reciclaje",
+    "heroTitle": "Recicla inteligentemente",
+    "heroSubtitle": "Encuentra puntos verdes, conoce las rutas de recolección y sigue el camino de los recicladores en Cochabamba.",
+    "mapTitle": "Mapa Interactivo",
+    "mapSubtitle": "Explora puntos verdes, rutas de camiones y trayectorias de recicladores",
+    "legendTitle": "Leyenda",
+    "legendGreenPoints": "Puntos Verdes",
+    "legendTruckRoutes": "Rutas Basura",
+    "legendRecyclers": "Recicladores",
+    "greenPointsTitle": "Puntos Verdes",
+    "greenPointsSubtitle": "Cercanos a ti",
+    "loadingPoints": "Cargando puntos verdes...",
+    "noPoints": "No hay puntos verdes disponibles por ahora.",
+    "viewAllPoints": "Ver todos los puntos",
+    "nextRouteTitle": "Próxima Ruta",
+    "nextRouteSubtitle": "Recolección de basura",
+    "routeDay": "Día:",
+    "routeDate": "Fecha:",
+    "routeTime": "Hora:",
+    "routeZone": "Zona:",
+    "routeVehicle": "Vehículo:",
+    "viewAllRoutes": "Ver todas las rutas",
+    "impactTitle": "Tu Impacto",
+    "impactSubtitle": "Ambiental personal",
+    "impactRecycled": "Total Reciclado",
+    "impactTrees": "Árboles Salvados",
+    "impactCo2": "CO₂ Reducido",
+    "impactRankTitle": "Tu Ranking",
+    "impactRankSubtitle": "de todos los recicladores",
+    "viewAllStats": "Ver estadísticas completas"
+  }
+}

@@ -10,12 +10,12 @@
           <span class="text-2xl font-bold">EcoLand</span>
         </div>
         <p class="text-[#A5D6A7] leading-relaxed mb-6">
-          Plataforma líder en gestión ambiental de Cochabamba. Juntos construimos un futuro más verde y sostenible.
+          {{ 'footer.description' | translate }}
         </p>
         <div class="space-y-3">
           <div class="flex items-center gap-3 text-[#A5D6A7]">
             <lucide-icon name="map-pin" class="w-4 h-4"></lucide-icon>
-            <span class="text-sm">Cochabamba, Bolivia</span>
+            <span class="text-sm">{{ 'footer.location' | translate }}</span>
           </div>
           <div class="flex items-center gap-3 text-[#A5D6A7]">
             <lucide-icon name="mail" class="w-4 h-4"></lucide-icon>
@@ -30,26 +30,26 @@
 
       <!-- Links -->
       <div>
-        <h3 class="font-semibold text-lg mb-4">Plataforma</h3>
+        <h3 class="font-semibold text-lg mb-4">{{ 'footer.platform' | translate }}</h3>
         <ul class="space-y-3">
           <li>
             <a routerLink="/reforestacion" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Reforestación
+              {{ 'navigation.reforestation' | translate }}
             </a>
           </li>
           <li>
             <a routerLink="/reciclaje" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Reciclaje
+              {{ 'navigation.recycling' | translate }}
             </a>
           </li>
           <li>
             <a routerLink="/estadisticas" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Estadísticas
+              {{ 'navigation.stats' | translate }}
             </a>
           </li>
           <li>
             <a routerLink="/admin" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Panel Admin
+              {{ 'navigation.admin' | translate }}
             </a>
           </li>
         </ul>
@@ -57,26 +57,26 @@
 
       <!-- Support -->
       <div>
-        <h3 class="font-semibold text-lg mb-4">Ayuda</h3>
+        <h3 class="font-semibold text-lg mb-4">{{ 'footer.help' | translate }}</h3>
         <ul class="space-y-3">
           <li>
             <a href="#" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Preguntas frecuentes
+              {{ 'footer.faq' | translate }}
             </a>
           </li>
           <li>
             <a href="#" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Guía de usuario
+              {{ 'footer.userGuide' | translate }}
             </a>
           </li>
           <li>
             <a href="#" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Contacto
+              {{ 'footer.contact' | translate }}
             </a>
           </li>
           <li>
             <a href="#" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
-              Términos y condiciones
+              {{ 'footer.terms' | translate }}
             </a>
           </li>
         </ul>
@@ -86,7 +86,7 @@
     <!-- Bottom Bar -->
     <div class="pt-8 border-t border-white/20 text-center">
       <p class="text-[#A5D6A7] text-sm">
-        © 2026 EcoLand. Todos los derechos reservados. Haciendo de Cochabamba una ciudad más verde 🌱
+        {{ 'footer.copyright' | translate }}
       </p>
     </div>
   </div>

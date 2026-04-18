@@ -1,0 +1,151 @@
+{
+  "auth": {
+    "title": "Log In",
+    "subtitle": "Welcome back to EcoLand",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "roleLabel": "User type",
+    "roleUser": "User",
+    "roleAdmin": "Administrator",
+    "loginButton": "Log In",
+    "registerQuestion": "Don't have an account?",
+    "registerLink": "Sign up here",
+    "registerTitle": "Create account",
+    "registerSubtitle": "Join the EcoLand community",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "John Doe",
+    "confirmPasswordLabel": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "registerButton": "Create account",
+    "errorPasswordMismatch": "Passwords do not match",
+    "loginQuestion": "Already have an account?",
+    "loginLink": "Log in here",
+    "backHome": "← Back to home",
+    "errorRequired": "Please fill in all fields",
+    "errorInvalidEmail": "Invalid email format",
+    "errorInvalidPassword": "Password does not meet security requirements"
+  },
+  "navigation": {
+    "home": "Home",
+    "reforestation": "Reforestation",
+    "campaigns": "Recycling Campaigns",
+    "recycling": "Recycling",
+    "stats": "Statistics",
+    "admin": "Admin Panel",
+    "logout": "Log Out"
+  },
+  "logout": {
+    "title": "Log out?",
+    "subtitle": "Are you sure you want to leave?",
+    "confirm": "Yes, log out",
+    "cancel": "Cancel"
+  },
+  "home": {
+    "hero": {
+      "badge": "A greener Cochabamba",
+      "title": "Let's build a greener Cochabamba together",
+      "subtitle": "Join reforestation campaigns and improve recycling in your city.",
+      "ctaReforestation": "View campaigns",
+      "ctaRecycling": "Explore recycling"
+    },
+    "stats": {
+      "activeCampaigns": "Active Campaigns",
+      "totalParticipants": "Total Participants",
+      "totalCampaigns": "Total Campaigns"
+    },
+    "reforestation": {
+      "badge": "Reforestation",
+      "title": "Active reforestation campaigns",
+      "subtitle": "Join our campaigns and help plant trees in Cochabamba",
+      "spots": "spots",
+      "participate": "Participate",
+      "viewAll": "View all campaigns"
+    },
+    "recycling": {
+      "badge": "Smart Recycling",
+      "title": "Discover green points and collection routes",
+      "description": "Find the nearest recycling centers, learn about truck routes, and contribute to a cleaner Cochabamba.",
+      "ctaExplore": "Explore the recycling system",
+      "ctaCampaigns": "View recycling campaigns"
+    }
+  },
+  "campaigns": {
+    "activeTitle": "Active campaigns",
+    "participate": "Participate",
+    "spotsAvailable": "spots available",
+    "loading": "Loading campaigns...",
+    "errorLoading": "Error loading campaigns"
+  },
+  "stats": {
+    "title": "Environmental Impact",
+    "treesPlanted": "Trees Planted",
+    "kgRecycled": "Kg Recycled",
+    "volunteers": "Active Volunteers"
+  },
+  "shared": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete"
+  },
+  "footer": {
+    "description": "Leading environmental management platform in Cochabamba. Together we build a greener and more sustainable future.",
+    "location": "Cochabamba, Bolivia",
+    "platform": "Platform",
+    "help": "Help",
+    "faq": "Frequently Asked Questions",
+    "userGuide": "User Guide",
+    "contact": "Contact",
+    "terms": "Terms and Conditions",
+    "copyright": "© 2026 EcoLand. All rights reserved. Making Cochabamba a greener city 🌱"
+  },
+  "reforestacion": {
+    "heroBadge": "🌳 Reforestation Campaigns",
+    "heroTitle": "Be part of the change",
+    "heroSubtitle": "Join our reforestation campaigns and help recover green spaces in Cochabamba.",
+    "searchPlaceholder": "Search campaign by name or location...",
+    "filter": "Filter",
+    "loading": "Getting campaigns from the forest...",
+    "retry": "Retry connection",
+    "noResults": "No campaigns found matching your search.",
+    "viewAll": "View all campaigns",
+    "progress": "Registration progress",
+    "spotsAvailable": "spots available of",
+    "organizedBy": "Organized by:",
+    "participate": "Participate"
+  },
+  "reciclaje": {
+    "heroBadge": "♻️ Recycling System",
+    "heroTitle": "Recycle smartly",
+    "heroSubtitle": "Find green points, know the collection routes, and follow the path of recyclers in Cochabamba.",
+    "mapTitle": "Interactive Map",
+    "mapSubtitle": "Explore green points, truck routes, and recycler trajectories",
+    "legendTitle": "Legend",
+    "legendGreenPoints": "Green Points",
+    "legendTruckRoutes": "Garbage Routes",
+    "legendRecyclers": "Recyclers",
+    "greenPointsTitle": "Green Points",
+    "greenPointsSubtitle": "Near you",
+    "loadingPoints": "Loading green points...",
+    "noPoints": "No green points available right now.",
+    "viewAllPoints": "View all points",
+    "nextRouteTitle": "Next Route",
+    "nextRouteSubtitle": "Garbage collection",
+    "routeDay": "Day:",
+    "routeDate": "Date:",
+    "routeTime": "Time:",
+    "routeZone": "Zone:",
+    "routeVehicle": "Vehicle:",
+    "viewAllRoutes": "View all routes",
+    "impactTitle": "Your Impact",
+    "impactSubtitle": "Personal Environmental",
+    "impactRecycled": "Total Recycled",
+    "impactTrees": "Trees Saved",
+    "impactCo2": "Reduced CO₂",
+    "impactRankTitle": "Your Ranking",
+    "impactRankSubtitle": "of all recyclers",
+    "viewAllStats": "View full statistics"
+  }
+}

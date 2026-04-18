@@ -11,9 +11,9 @@ import { StatisticsService } from '../../core/services/statistics.service';
 })
 export class HomeComponent implements OnInit {
   stats = [
-    { icon: 'trending-up', label: 'Campañas Activas', value: '...' },
-    { icon: 'users', label: 'Total Participantes', value: '...' },
-    { icon: 'tree-deciduous', label: 'Total Campañas', value: '...' },
+    { icon: 'trending-up', label: 'home.stats.activeCampaigns', value: '...' },
+    { icon: 'users', label: 'home.stats.totalParticipants', value: '...' },
+    { icon: 'tree-deciduous', label: 'home.stats.totalCampaigns', value: '...' },
   ];
   
   isLoadingStats = true;
