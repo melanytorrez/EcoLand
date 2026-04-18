@@ -31,13 +31,8 @@ class AuthControllerTest {
     @MockBean
     private AuthUseCase authUseCase;
 
-    // --- MOCKS DE SEGURIDAD PARA EVITAR EL FALLO DE CONTEXTO ---
     @MockBean
     private JwtService jwtService;
-    // Si tienes un UserDetailsService personalizado que usa el filtro, añádelo también:
-    // @MockBean
-    // private UserDetailsService userDetailsService;
-    // ----------------------------------------------------------
 
     @Autowired
     private ObjectMapper objectMapper;
