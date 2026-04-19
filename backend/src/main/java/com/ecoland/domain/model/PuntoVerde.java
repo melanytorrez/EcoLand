@@ -10,6 +10,8 @@ public class PuntoVerde {
     private String estado;
     private List<PuntoVerdeHorario> horarios;
     private List<String> tiposMaterial;
+    private Double latitud;
+    private Double longitud;
 
     public PuntoVerde() {}
 
@@ -42,5 +44,11 @@ public class PuntoVerde {
 
     public List<String> getTiposMaterial() { return tiposMaterial; }
     public void setTiposMaterial(List<String> tiposMaterial) { this.tiposMaterial = tiposMaterial; }
+
+    public Double getLatitud() { return latitud; }
+    public void setLatitud(Double latitud) { this.latitud = latitud; }
+
+    public Double getLongitud() { return longitud; }
+    public void setLongitud(Double longitud) { this.longitud = longitud; }
 
 }
