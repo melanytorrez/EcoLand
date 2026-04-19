@@ -1,16 +1,14 @@
 -- ============================================
 -- Script: Poblar coordenadas de Puntos Verdes
 -- Proyecto: EcoLand (Sprint 4 - US17)
--- Descripción: Añade columnas de geolocalización
---              y crea puntos verdes estratégicos
---              en Cochabamba, Bolivia.
+-- Descripción: Script para actualizar coordenadas
+--              reales y crear nuevos puntos.
+-- NOTA: Ejecutar el backend primero para que 
+--       Hibernate cree las columnas automáticamente.
 -- ============================================
 
--- 1. Añadir columnas si no existen (MySQL)
-ALTER TABLE puntos_verdes ADD COLUMN IF NOT EXISTS latitud DOUBLE;
-ALTER TABLE puntos_verdes ADD COLUMN IF NOT EXISTS longitud DOUBLE;
-
--- 2. Actualizar puntos existentes con coordenadas reales
+-- 1. Actualizar puntos existentes con coordenadas reales
+SET SQL_SAFE_UPDATES = 0;
 UPDATE puntos_verdes SET latitud = -17.3936, longitud = -66.1571 WHERE nombre LIKE '%Plaza Colón%';
 UPDATE puntos_verdes SET latitud = -17.4030, longitud = -66.1685 WHERE nombre LIKE '%Cancha%';
 UPDATE puntos_verdes SET latitud = -17.3780, longitud = -66.1560 WHERE nombre LIKE '%Tunari%';

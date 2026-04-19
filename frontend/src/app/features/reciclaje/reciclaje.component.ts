@@ -58,7 +58,9 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.initMap();
+    setTimeout(() => {
+      this.initMap();
+    }, 100);
   }
 
   ngOnDestroy(): void {
@@ -90,6 +92,11 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 19
     }).addTo(this.map);
+
+    // Force Leaflet to recalculate container size
+    setTimeout(() => {
+      this.map.invalidateSize();
+    }, 200);
 
     // Try to get user location
     if (navigator.geolocation) {
