@@ -3,17 +3,21 @@ package com.ecoland.application.service;
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
+import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class CampaignServiceTest {
 
     @Mock
@@ -22,99 +26,131 @@ class CampaignServiceTest {
     @Mock
     private JpaUsuarioCampaignRepository usuarioCampaignRepository;
 
-    @InjectMocks
     private CampaignService campaignService;
+    private Campaign campaign;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+       when(campaignRepositoryPort.findAll()).thenReturn(List.of(new Campaign()));
 
-    @Test
-    void testGetCampaignById_Success() {
-        // Arrange
-        Long campaignId = 1L;
-        Campaign campaign = new Campaign();
-        campaign.setId(campaignId);
-        campaign.setTitle("Test Campaign");
+        campaignService = new CampaignService(campaignRepositoryPort, usuarioCampaignRepository);
 
-        when(campaignRepositoryPort.findById(campaignId)).thenReturn(Optional.of(campaign));
+        clearInvocations(campaignRepositoryPort);
 
-        // Act
-        Campaign result = campaignService.getCampaignById(campaignId);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(campaignId, result.getId());
-        assertEquals("Test Campaign", result.getTitle());
-        verify(campaignRepositoryPort, times(1)).findById(campaignId);
-    }
-
-    @Test
-    void testGetCampaignById_NotFound() {
-        // Arrange
-        Long campaignId = 99L;
-        when(campaignRepositoryPort.findById(campaignId)).thenReturn(Optional.empty());
-
-        // Act & Assert
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            campaignService.getCampaignById(campaignId);
-        });
-
-        assertTrue(exception.getMessage().contains("Campaign not found"));
-        verify(campaignRepositoryPort, times(1)).findById(campaignId);
-    }
-
-    @Test
-    void testParticipateInCampaign_Success() {
-        // Arrange
-        Long campaignId = 1L;
-        String email = "test@eco.com";
-        Campaign campaign = new Campaign();
-        campaign.setId(campaignId);
+        campaign = new Campaign();
+        campaign.setId(1L);
+        campaign.setTitle("Original Title");
         campaign.setParticipants(10);
         campaign.setSpots(20);
+    }
 
-        when(campaignRepositoryPort.findById(campaignId)).thenReturn(Optional.of(campaign));
-        when(usuarioCampaignRepository.existsByUsuarioEmailAndCampaignId(email, campaignId)).thenReturn(false);
+    @Test
+    void getAllCampaigns_ShouldReturnList() {
+        when(campaignRepositoryPort.findAll()).thenReturn(Arrays.asList(campaign));
+
+        List<Campaign> result = campaignService.getAllCampaigns();
+
+        assertEquals(1, result.size());
+        verify(campaignRepositoryPort, times(1)).findAll();
+    }
+
+    @Test
+    void getCampaignById_Success() {
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
+
+        Campaign result = campaignService.getCampaignById(1L);
+
+        assertNotNull(result);
+        assertEquals(1L, result.getId());
+    }
+
+    @Test
+    void getCampaignById_NotFound_ShouldThrowException() {
+        when(campaignRepositoryPort.findById(99L)).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> campaignService.getCampaignById(99L));
+    }
+
+    @Test
+    void saveCampaign_Success() {
         when(campaignRepositoryPort.save(any(Campaign.class))).thenReturn(campaign);
 
-        // Act
-        Campaign result = campaignService.participateInCampaign(campaignId, email);
+        Campaign result = campaignService.saveCampaign(campaign);
 
-        // Assert
-        assertEquals(11, result.getParticipants());
-        verify(usuarioCampaignRepository, times(1)).save(any());
+        assertNotNull(result);
         verify(campaignRepositoryPort, times(1)).save(campaign);
     }
 
     @Test
-    void testParticipateInCampaign_AlreadyRegistered() {
-        // Arrange
-        Long id = 1L;
-        String email = "test@eco.com";
-        when(campaignRepositoryPort.findById(id)).thenReturn(Optional.of(new Campaign()));
-        when(usuarioCampaignRepository.existsByUsuarioEmailAndCampaignId(email, id)).thenReturn(true);
+    void saveCampaign_Error_ShouldThrowException() {
+        when(campaignRepositoryPort.save(any())).thenThrow(new RuntimeException("DB Error"));
 
-        // Act & Assert
-        assertThrows(IllegalStateException.class, () -> {
-            campaignService.participateInCampaign(id, email);
-        }, "Ya estás inscrito en esta campaña");
+        assertThrows(RuntimeException.class, () -> campaignService.saveCampaign(campaign));
     }
 
     @Test
-    void testParticipateInCampaign_NoSpots() {
+    void updateCampaign_Success() {
         // Arrange
-        Long id = 1L;
-        Campaign fullCampaign = new Campaign();
-        fullCampaign.setParticipants(50);
-        fullCampaign.setSpots(50);
+        Campaign updatedInfo = new Campaign();
+        updatedInfo.setTitle("New Title");
+        updatedInfo.setSpots(30);
 
-        when(campaignRepositoryPort.findById(id)).thenReturn(Optional.of(fullCampaign));
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
+        when(campaignRepositoryPort.save(any())).thenAnswer(i -> i.getArguments()[0]);
 
-        // Act & Assert
-        assertThrows(IllegalStateException.class, () -> {
-            campaignService.participateInCampaign(id, "user@eco.com");
-        }, "La campaña ya no tiene cupos disponibles");
+        // Act
+        Campaign result = campaignService.updateCampaign(1L, updatedInfo);
+
+        // Assert
+        assertEquals("New Title", result.getTitle());
+        assertEquals(30, result.getSpots());
+        verify(campaignRepositoryPort, times(1)).save(any(Campaign.class));
+    }
+
+    @Test
+    void participateInCampaign_Success() {
+        String email = "user@test.com";
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
+        when(usuarioCampaignRepository.existsByUsuarioEmailAndCampaignId(email, 1L)).thenReturn(false);
+        when(campaignRepositoryPort.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+        Campaign result = campaignService.participateInCampaign(1L, email);
+
+        assertEquals(11, result.getParticipants());
+        verify(usuarioCampaignRepository, times(1)).save(any(UsuarioCampaignEntity.class));
+        verify(campaignRepositoryPort, times(1)).save(any(Campaign.class));
+    }
+
+    @Test
+    void participateInCampaign_AlreadyRegistered_ShouldThrowException() {
+        String email = "user@test.com";
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
+        when(usuarioCampaignRepository.existsByUsuarioEmailAndCampaignId(email, 1L)).thenReturn(true);
+
+        assertThrows(IllegalStateException.class, () -> campaignService.participateInCampaign(1L, email));
+    }
+
+    @Test
+    void participateInCampaign_NoSpots_ShouldThrowException() {
+        campaign.setParticipants(20);
+        campaign.setSpots(20);
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
+
+        assertThrows(IllegalStateException.class, () -> campaignService.participateInCampaign(1L, "any@test.com"));
+    }
+
+    @Test
+    void deleteCampaign_Success() {
+        doNothing().when(campaignRepositoryPort).deleteById(1L);
+
+        assertDoesNotThrow(() -> campaignService.deleteCampaign(1L));
+        verify(campaignRepositoryPort, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void deleteCampaign_Error_ShouldThrowException() {
+        doThrow(new RuntimeException("Delete Error")).when(campaignRepositoryPort).deleteById(1L);
+
+        assertThrows(RuntimeException.class, () -> campaignService.deleteCampaign(1L));
     }
 }

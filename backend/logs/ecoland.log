@@ -1655,3 +1655,231 @@ This generated password is for development use only. Your security configuration
 2026-04-18 20:03:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
 2026-04-18 20:03:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
 2026-04-18 20:03:13 [main] INFO  c.e.i.a.in.web.UsuarioControllerTest - Started UsuarioControllerTest in 0.482 seconds (process running for 9.44)
+2026-04-18 20:18:49 [main] INFO  c.e.i.a.i.web.CampaignControllerTest - Starting CampaignControllerTest using Java 21.0.10 with PID 6504 (started by diego in D:\Semestres\9no\TallerSisInfo\EcoLand\EcoLand\backend)
+2026-04-18 20:18:49 [main] DEBUG c.e.i.a.i.web.CampaignControllerTest - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-18 20:18:49 [main] INFO  c.e.i.a.i.web.CampaignControllerTest - The following 1 profile is active: "default"
+2026-04-18 20:18:51 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d039a383-6473-41bf-8934-08a3105df890
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-18 20:18:52 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4225f809, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@18f5c465, org.springframework.security.web.context.SecurityContextHolderFilter@d65ceed, org.springframework.security.web.header.HeaderWriterFilter@63190692, org.springframework.web.filter.CorsFilter@218bac29, org.springframework.security.web.csrf.CsrfFilter@48558c6b, org.springframework.security.web.authentication.logout.LogoutFilter@2d87c930, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@57f6467b, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@fdd4be8, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7d71b492, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2e7e9e86, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@25df9fd3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@c70fac7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1079fe85, org.springframework.security.web.access.ExceptionTranslationFilter@3d1144b9, org.springframework.security.web.access.intercept.AuthorizationFilter@6df6cc86]
+2026-04-18 20:18:52 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-18 20:18:52 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-18 20:18:52 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2026-04-18 20:18:52 [main] INFO  c.e.i.a.i.web.CampaignControllerTest - Started CampaignControllerTest in 3.692 seconds (process running for 8.52)
+2026-04-18 20:18:53 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.ecoland.infrastructure.adapter.in.web.PuntoVerdeControllerTest]: PuntoVerdeControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-18 20:18:53 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.ecoland.EcoLandApplication for test class com.ecoland.infrastructure.adapter.in.web.PuntoVerdeControllerTest
+2026-04-18 20:18:53 [main] INFO  c.e.i.a.i.w.PuntoVerdeControllerTest - Starting PuntoVerdeControllerTest using Java 21.0.10 with PID 6504 (started by diego in D:\Semestres\9no\TallerSisInfo\EcoLand\EcoLand\backend)
+2026-04-18 20:18:53 [main] DEBUG c.e.i.a.i.w.PuntoVerdeControllerTest - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-18 20:18:53 [main] INFO  c.e.i.a.i.w.PuntoVerdeControllerTest - The following 1 profile is active: "default"
+2026-04-18 20:18:53 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: b72b8cd1-1ec8-4a21-af35-408e3ba99936
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-18 20:18:53 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@59ef3101, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@691a7180, org.springframework.security.web.context.SecurityContextHolderFilter@57faedb7, org.springframework.security.web.header.HeaderWriterFilter@41b2b7f5, org.springframework.web.filter.CorsFilter@28d38f70, org.springframework.security.web.csrf.CsrfFilter@57c74a8e, org.springframework.security.web.authentication.logout.LogoutFilter@8a24159, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@48512b38, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@105e4eeb, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6265e59b, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@526303e2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3a845efc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@44875491, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@42a2a7ef, org.springframework.security.web.access.ExceptionTranslationFilter@6bf184d, org.springframework.security.web.access.intercept.AuthorizationFilter@14b48e22]
+2026-04-18 20:18:53 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-18 20:18:53 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-18 20:18:53 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-04-18 20:18:53 [main] INFO  c.e.i.a.i.w.PuntoVerdeControllerTest - Started PuntoVerdeControllerTest in 0.401 seconds (process running for 9.672)
+2026-04-18 20:18:53 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.ecoland.infrastructure.adapter.in.web.AuthControllerTest]: AuthControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-18 20:18:53 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.ecoland.EcoLandApplication for test class com.ecoland.infrastructure.adapter.in.web.AuthControllerTest
+2026-04-18 20:18:53 [main] INFO  c.e.i.a.in.web.AuthControllerTest - Starting AuthControllerTest using Java 21.0.10 with PID 6504 (started by diego in D:\Semestres\9no\TallerSisInfo\EcoLand\EcoLand\backend)
+2026-04-18 20:18:53 [main] DEBUG c.e.i.a.in.web.AuthControllerTest - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-18 20:18:53 [main] INFO  c.e.i.a.in.web.AuthControllerTest - The following 1 profile is active: "default"
+2026-04-18 20:18:54 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 56c8826f-6a1c-445e-a68a-386d5be1d372
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-18 20:18:54 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4a850b9c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@69e27937, org.springframework.security.web.context.SecurityContextHolderFilter@46ece4ed, org.springframework.security.web.header.HeaderWriterFilter@2f4507b5, org.springframework.web.filter.CorsFilter@546b843c, org.springframework.security.web.csrf.CsrfFilter@4ba96778, org.springframework.security.web.authentication.logout.LogoutFilter@a98c79d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@357dc73, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1b73148f, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@61dc1305, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4fbf47ab, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@46fed9ef, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c8cc004, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3672d49, org.springframework.security.web.access.ExceptionTranslationFilter@78a4419d, org.springframework.security.web.access.intercept.AuthorizationFilter@73ba1fc4]
+2026-04-18 20:18:54 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-18 20:18:54 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-18 20:18:54 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-04-18 20:18:54 [main] INFO  c.e.i.a.in.web.AuthControllerTest - Started AuthControllerTest in 0.303 seconds (process running for 10.245)
+2026-04-18 20:18:54 [main] INFO  c.e.i.adapter.in.web.AuthController - Intento de login para el usuario: admin@ecoland.com
+2026-04-18 20:18:54 [main] INFO  c.e.i.adapter.in.web.AuthController - Login exitoso para el usuario: admin@ecoland.com
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Usuario user@eco.com solicita inscribirse en la campaña con id: 1
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
+2026-04-18 20:18:54 [main] ERROR c.e.a.service.CampaignService - Error al inscribir usuario user@eco.com: La campaña 1 ya no tiene cupos disponibles
+2026-04-18 20:18:54 [main] ERROR c.e.a.service.CampaignService - Error al inscribir al usuario user@eco.com en la campaña con id 1: La campaña ya no tiene cupos disponibles
+java.lang.IllegalStateException: La campaña ya no tiene cupos disponibles
+	at com.ecoland.application.service.CampaignService.participateInCampaign(CampaignService.java:105)
+	at com.ecoland.application.service.CampaignServiceTest.lambda$testParticipateInCampaign_NoSpots$2(CampaignServiceTest.java:117)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:39)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3131)
+	at com.ecoland.application.service.CampaignServiceTest.testParticipateInCampaign_NoSpots(CampaignServiceTest.java:116)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:66)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Usuario test@eco.com solicita inscribirse en la campaña con id: 1
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Usuario test@eco.com inscrito exitosamente en la campaña con id: 1. Participantes actuales: 11
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 99
+2026-04-18 20:18:54 [main] ERROR c.e.a.service.CampaignService - Error al obtener campaña: No se encontró la campaña con id 99
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Usuario test@eco.com solicita inscribirse en la campaña con id: 1
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
+2026-04-18 20:18:54 [main] ERROR c.e.a.service.CampaignService - Error al inscribir usuario test@eco.com: Ya está en la campaña 1
+2026-04-18 20:18:54 [main] ERROR c.e.a.service.CampaignService - Error al inscribir al usuario test@eco.com en la campaña con id 1: Ya estás inscrito en esta campaña
+java.lang.IllegalStateException: Ya estás inscrito en esta campaña
+	at com.ecoland.application.service.CampaignService.participateInCampaign(CampaignService.java:99)
+	at com.ecoland.application.service.CampaignServiceTest.lambda$testParticipateInCampaign_AlreadyRegistered$1(CampaignServiceTest.java:101)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:39)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3131)
+	at com.ecoland.application.service.CampaignServiceTest.testParticipateInCampaign_AlreadyRegistered(CampaignServiceTest.java:100)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:66)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+2026-04-18 20:18:54 [main] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
+2026-04-18 20:18:54 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.ecoland.infrastructure.adapter.in.web.UsuarioControllerTest]: UsuarioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-18 20:18:54 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.ecoland.EcoLandApplication for test class com.ecoland.infrastructure.adapter.in.web.UsuarioControllerTest
+2026-04-18 20:18:54 [main] INFO  c.e.i.a.in.web.UsuarioControllerTest - Starting UsuarioControllerTest using Java 21.0.10 with PID 6504 (started by diego in D:\Semestres\9no\TallerSisInfo\EcoLand\EcoLand\backend)
+2026-04-18 20:18:54 [main] DEBUG c.e.i.a.in.web.UsuarioControllerTest - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-18 20:18:54 [main] INFO  c.e.i.a.in.web.UsuarioControllerTest - The following 1 profile is active: "default"
+2026-04-18 20:18:55 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 3474a5cd-b902-4156-a775-f99f6123467c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-18 20:18:55 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@f82e30a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@21e6b862, org.springframework.security.web.context.SecurityContextHolderFilter@220553f7, org.springframework.security.web.header.HeaderWriterFilter@20a5617, org.springframework.web.filter.CorsFilter@643b8edd, org.springframework.security.web.csrf.CsrfFilter@36c6cc68, org.springframework.security.web.authentication.logout.LogoutFilter@5e2603cf, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@a89e229, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@77c74774, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7d7b9b56, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@64dfa0cc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@22207e53, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@272d0768, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@65f9ad40, org.springframework.security.web.access.ExceptionTranslationFilter@a0b51a, org.springframework.security.web.access.intercept.AuthorizationFilter@5cce5088]
+2026-04-18 20:18:55 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-18 20:18:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-18 20:18:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-04-18 20:18:55 [main] INFO  c.e.i.a.in.web.UsuarioControllerTest - Started UsuarioControllerTest in 0.274 seconds (process running for 11.054)
