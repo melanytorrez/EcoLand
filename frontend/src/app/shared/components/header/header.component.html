@@ -19,28 +19,44 @@
           class="text-base font-medium transition-colors relative"
           [ngClass]="currentPath === item.path ? 'text-[#2E7D32]' : 'text-gray-600 hover:text-[#4CAF50]'"
         >
-          {{ item.label }}
+          {{ item.label | translate }}
           <span *ngIf="currentPath === item.path" class="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50]"></span>
         </a>
       </nav>
 
-      <!-- Auth Buttons -->
+      <!-- Auth Buttons and Language Switcher -->
       <div class="flex items-center gap-3">
+        <!-- Language Switcher -->
+        <div class="flex items-center gap-1 bg-gray-100 p-1 rounded-xl mr-2">
+          <button 
+            (click)="switchLanguage('es')"
+            [ngClass]="currentLang === 'es' ? 'bg-white shadow-sm text-[#2E7D32] font-semibold' : 'text-gray-500 hover:text-gray-700'"
+            class="px-3 py-1.5 text-sm rounded-lg transition-all">
+            ES
+          </button>
+          <button 
+            (click)="switchLanguage('en')"
+            [ngClass]="currentLang === 'en' ? 'bg-white shadow-sm text-[#2E7D32] font-semibold' : 'text-gray-500 hover:text-gray-700'"
+            class="px-3 py-1.5 text-sm rounded-lg transition-all">
+            EN
+          </button>
+        </div>
+
         <ng-container *ngIf="isAuthenticated; else loginButtons">
-          <!-- Admin View Button -->
-          <a
-            *ngIf="isAdmin"
-            routerLink="/admin"
-            class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-2xl hover:shadow-lg hover:shadow-purple-500/30 transition-all font-semibold"
-          >
-            <lucide-icon name="shield" class="w-4 h-4"></lucide-icon>
-            Vista Administrador
-          </a>
+            <!-- Admin View Button -->
+            <a
+              *ngIf="isAdmin"
+              routerLink="/admin"
+              class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-2xl hover:shadow-lg hover:shadow-purple-500/30 transition-all font-semibold"
+            >
+              <lucide-icon name="shield" class="w-4 h-4"></lucide-icon>
+              {{ 'navigation.admin' | translate }}
+            </a>
           
           <!-- User Info -->
           <div class="hidden md:flex items-center gap-2 px-4 py-2.5 bg-[#E8F5E9] rounded-2xl">
             <lucide-icon name="user" class="w-4 h-4 text-[#2E7D32]"></lucide-icon>
-            <span class="text-sm font-medium text-[#2E7D32]">{{ user?.nombre || user?.email || user?.sub || 'Usuario' }}</span>
+            <span class="text-sm font-medium text-[#2E7D32]">{{ user?.nombre || user?.email || user?.sub || ('auth.roleUser' | translate) }}</span>
           </div>
 
           <!-- Logout Button -->
@@ -49,7 +65,7 @@
             class="flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:bg-gray-100 rounded-2xl transition-all"
           >
             <lucide-icon name="log-out" class="w-4 h-4"></lucide-icon>
-            Salir
+            {{ 'navigation.logout' | translate }}
           </button>
         </ng-container>
 
@@ -59,14 +75,14 @@
             class="hidden md:flex items-center gap-2 px-5 py-2.5 text-[#2E7D32] hover:bg-[#E8F5E9] rounded-2xl transition-all"
           >
             <lucide-icon name="log-in" class="w-4 h-4"></lucide-icon>
-            Iniciar sesión
+            {{ 'auth.loginButton' | translate }}
           </a>
           <a
             routerLink="/register"
             class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl hover:shadow-lg hover:shadow-[#4CAF50]/30 transition-all"
           >
             <lucide-icon name="user-plus" class="w-4 h-4"></lucide-icon>
-            Registrarse
+            {{ 'auth.registerButton' | translate }}
           </a>
         </ng-template>
       </div>
@@ -85,21 +101,21 @@
       <lucide-icon name="log-out" style="width: 24px; height: 24px; color: #dc2626;"></lucide-icon>
     </div>
     
-    <h3 style="font-size: 1.125rem; font-weight: 700; text-align: center; color: #111827; margin: 0 0 8px 0;">¿Cerrar sesión?</h3>
-    <p style="font-size: 0.8rem; text-align: center; color: #6b7280; margin: 0 0 20px 0;">¿Estás seguro de salir?</p>
+    <h3 style="font-size: 1.125rem; font-weight: 700; text-align: center; color: #111827; margin: 0 0 8px 0;">{{ 'logout.title' | translate }}</h3>
+    <p style="font-size: 0.8rem; text-align: center; color: #6b7280; margin: 0 0 20px 0;">{{ 'logout.subtitle' | translate }}</p>
     
     <div style="display: flex; flex-direction: column; gap: 8px;">
       <!-- Main Action (Aceptar) -->
       <button 
         (click)="confirmLogout()"
         style="width: 100%; padding: 10px; background-color: #dc2626; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
-        Sí, salir
+        {{ 'logout.confirm' | translate }}
       </button>
       <!-- Secondary Action (Cancelar) -->
       <button 
         (click)="cancelLogout()"
         style="width: 100%; padding: 10px; background-color: white; color: #4b5563; border: 1px solid #d1d5db; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
-        Cancelar
+        {{ 'logout.cancel' | translate }}
       </button>
     </div>
     

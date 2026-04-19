@@ -2388,3 +2388,10 @@ html {
     opacity: .5;
   }
 }
+
+@media (min-width: 768px) {
+  .md\:flex { display: flex !important; }
+  .md\:text-6xl { font-size: var(--text-6xl); line-height: var(--text-6xl--line-height); }
+  .md\:text-2xl { font-size: var(--text-2xl); line-height: var(--text-2xl--line-height); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
