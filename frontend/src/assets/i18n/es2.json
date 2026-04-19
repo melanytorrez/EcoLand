@@ -1,0 +1,63 @@
+{
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Bienvenido de nuevo a EcoLand",
+      "inputs": {
+        "email": {
+          "label": "Correo electrónico",
+          "placeholder": "tu@email.com"
+        },
+        "password": {
+          "label": "Contraseña",
+          "placeholder": "••••••••"
+        },
+        "role": {
+          "label": "Tipo de usuario",
+          "user": "Usuario",
+          "admin": "Administrador"
+        }
+      },
+      "submit_button": "Iniciar sesión",
+      "loading": "Cargando...",
+      "footer": {
+        "register_question": "¿No tienes una cuenta?",
+        "register_link": "Regístrate aquí",
+        "back_home": "← Volver al inicio"
+      }
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "subtitle": "Únete a la comunidad EcoLand",
+      "inputs": {
+        "full_name": { "label": "Nombre completo", "placeholder": "Juan Pérez" },
+        "confirm_password": { "label": "Confirmar contraseña", "placeholder": "Repite tu contraseña" }
+      },
+      "submit_button": "Crear cuenta",
+      "footer": {
+        "login_question": "¿Ya tienes una cuenta?",
+        "login_link": "Inicia sesión aquí"
+      },
+    "validation": {
+      "required": "El campo es obligatorio.",
+      "required_email": "El correo es obligatorio.",
+      "required_password": "La contraseña es obligatoria.",
+      "invalid_email": "Formato de correo inválido",
+      "missing_at": "Falta el símbolo @ en el correo.",
+      "missing_com": "El correo debe terminar en .com.",
+      "password_mismatch": "Las contraseñas no coinciden.",
+      "password_rules": {
+        "min_length": "Mínimo 8 caracteres.",
+        "upper": "Falta una letra mayúscula.",
+        "lower": "Falta una letra minúscula.",
+        "number": "Falta un número.",
+        "special": "Falta un carácter especial."
+        }
+    }
+  },
+    "shared": {
+        "or_separator": "o",
+        "loading_generic": "Cargando..."
+    }
+  }
+}
