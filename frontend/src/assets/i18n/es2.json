@@ -251,6 +251,32 @@
       "btn_view_stats": "Ver estadísticas completas"
     }
   },
+  "recycling_campaign": {
+    "progress": {
+      "title": "Progreso de la Campaña",
+      "subtitle": "¡Estamos muy cerca de la meta!",
+      "current_label": "Recolección actual",
+      "goal_info": "de {{goal}} kg",
+      "participants": "Participantes",
+      "to_reach": "Por alcanzar"
+    },
+    "sections": {
+      "description": "Descripción",
+      "benefits": "Beneficios de Participar",
+      "rewards_title": "Sistema de Recompensas",
+      "rewards_subtitle": "Gana reconocimientos por tu contribución",
+      "people_count": "{{count}} personas"
+    },
+    "sidebar": {
+      "label_date": "Fecha",
+      "label_location": "Ubicación",
+      "label_goal": "Meta de recolección",
+      "btn_join": "Sumarme a la campaña",
+      "btn_back": "Ver otras campañas",
+      "organizer_label": "Organizado por:"
+    },
+    "loading": "Cargando campaña..."
+  },
   "shared": {
     "or_separator": "o",
     "loading_generic": "Cargando...",
