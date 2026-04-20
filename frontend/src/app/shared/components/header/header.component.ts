@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { FeatureFlagService } from '../../../core/services/feature-flag.service';
@@ -12,18 +12,47 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './header.component.css',
   standalone: false
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   currentPath = '';
   currentLang = 'es';
+  showLogoutModal = false;
 
+  // Claves de traducción que coinciden con el objeto "header.nav" del archivo JSON
   allNavItems = [
-    { path: '/', label: 'navigation.home', feature: null },
-    { path: '/reforestacion', label: 'navigation.reforestation', feature: 'reforestacion' },
-    { path: '/campanas-reciclaje', label: 'navigation.campaigns', feature: 'campanasReciclaje' },
-    { path: '/reciclaje', label: 'navigation.recycling', feature: 'reciclaje' },
-    { path: '/estadisticas', label: 'navigation.stats', feature: 'estadisticas' },
+    { path: '/', label: 'header.nav.home', feature: null },
+    { path: '/reforestacion', label: 'header.nav.reforestation', feature: 'reforestacion' },
+    { path: '/reciclaje', label: 'header.nav.recycling', feature: 'reciclaje' },
+    { path: '/estadisticas', label: 'header.nav.stats', feature: 'estadisticas' },
   ];
 
+  constructor(
+    private router: Router,
+    private featureFlagService: FeatureFlagService,
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
+    // 1. Configuración de idiomas al instanciar
+    this.translate.setDefaultLang('es');
+    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
+    this.currentLang = savedLang;
+    this.translate.use(savedLang);
+
+    // 2. Seguimiento de la ruta actual para el indicador visual (la línea verde bajo el link)
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.currentPath = event.urlAfterRedirects;
+    });
+  }
+
+  ngOnInit(): void {
+    // Sincronización inicial de la ruta por si se refresca la página
+    this.currentPath = this.router.url;
+  }
+
+  /**
+   * Filtra los items de navegación basados en las Feature Flags
+   */
   get navItems() {
     return this.allNavItems.filter(item => 
       !item.feature || this.featureFlagService.isFeatureEnabled(item.feature as keyof FeatureFlags)
@@ -40,26 +69,13 @@ export class HeaderComponent {
 
   get isAdmin(): boolean {
     const u = this.user;
+    // Verificamos roles comunes
     return u && (u.role === 'Admin' || u.role === 'Administrador');
   }
 
-  showLogoutModal = false;
-
-  constructor(
-    private router: Router,
-    private featureFlagService: FeatureFlagService,
-    private authService: AuthService,
-    private translate: TranslateService
-  ) {
-    // Sincronizar el indicador visual con el idioma activo (guardado en localStorage)
-    this.currentLang = localStorage.getItem('ecoland_lang') || 'es';
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      this.currentPath = event.urlAfterRedirects;
-    });
-  }
-
+  /**
+   * Control del Modal de Logout
+   */
   logout() {
     this.showLogoutModal = true;
   }
@@ -74,10 +90,12 @@ export class HeaderComponent {
     this.showLogoutModal = false;
   }
 
+  /**
+   * Cambia el idioma de la aplicación y persiste la elección
+   */
   switchLanguage(lang: string) {
     this.currentLang = lang;
     this.translate.use(lang);
-    // Persistir preferencia del usuario
     localStorage.setItem('ecoland_lang', lang);
   }
 }
