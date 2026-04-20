@@ -198,6 +198,15 @@
       "description": "Find the nearest recycling centers, check truck collection routes, and help keep Cochabamba clean.",
       "btn_explore": "Explore recycling system",
       "btn_campaigns": "View recycling campaigns"
+    },
+    "stats": {
+    "activeCampaigns": "Active Campaigns",
+    "totalParticipants": "Total Participants",
+    "totalCampaigns": "Total Campaigns"
+    },
+    "campaigns_section": {
+    "title": "Recent Campaigns",
+    "view_all": "View All"
     }
   },
   "recycling": {

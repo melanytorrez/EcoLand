@@ -198,6 +198,15 @@
       "description": "Encontre os centros de reciclagem mais próximos, confira as rotas dos caminhões e contribua para uma Cochabamba mais limpa.",
       "btn_explore": "Explorar sistema de reciclagem",
       "btn_campaigns": "Ver campanhas de reciclagem"
+    },
+    "stats": {
+    "activeCampaigns": "Campanhas Ativas",
+    "totalParticipants": "Total de Participantes",
+    "totalCampaigns": "Total de Campanhas"
+    },
+    "campaigns_section": {
+    "title": "Campanhas Recentes",
+    "view_all": "Ver Todas"
     }
   },
   "recycling": {

@@ -198,6 +198,15 @@
       "description": "Trouvez les centres de recyclage les plus proches, consultez les itinéraires des camions et contribuez à un Cochabamba plus propre.",
       "btn_explore": "Explorer le système de recyclage",
       "btn_campaigns": "Voir les campagnes de recyclage"
+    },
+    "stats": {
+    "activeCampaigns": "Campagnes actives",
+    "totalParticipants": "Nombre total de participants",
+    "totalCampaigns": "Nombre total de campagnes"
+    },
+    "campaigns_section": {
+    "title": "Campagnes récentes",
+    "view_all": "Tout afficher"
     }
   },
   "recycling": {
