@@ -134,7 +134,7 @@
       }
     }
   },
-"campaign_detail_user": {
+  "campaign_detail_user": {
     "sections": {
       "description": "Descripción",
       "requirements": "Requisitos",
@@ -156,6 +156,48 @@
     "messages": {
       "already_registered_info": "Ya estás inscrito en esta campaña",
       "loading": "Cargando campaña..."
+    }
+  },
+  "recycling_campaigns": {
+    "hero": {
+      "badge": "♻️ Campañas de Reciclaje",
+      "title": "Únete a nuestras campañas",
+      "description": "Participa en desafíos comunitarios de reciclaje y contribuye a alcanzar metas ambientales colectivas."
+    },
+    "filters": {
+      "search_placeholder": "Buscar campaña por nombre o tipo de residuo...",
+      "filter_button": "Filtrar"
+    },
+    "card": {
+      "meta_label": "Meta:",
+      "progress_label": "Progreso de recolección",
+      "progress_of": "de",
+      "participants_count": "{{count}} participantes",
+      "cta_button": "Participar"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "🌱 Cochabamba más verde",
+      "title": "Construyamos juntos un Cochabamba más verde",
+      "description": "Participa en campañas de reforestación y mejora el reciclaje en tu ciudad.",
+      "btn_campaigns": "Ver campañas",
+      "btn_recycling": "Explorar reciclaje"
+    },
+    "reforestation": {
+      "badge": "🌳 Reforestación",
+      "title": "Campañas activas de reforestación",
+      "description": "Únete a nuestras campañas y ayuda a plantar árboles en Cochabamba",
+      "spots": "{{count}} cupos",
+      "btn_participate": "Participar",
+      "btn_view_all": "Ver todas las campañas"
+    },
+    "recycling_promo": {
+      "badge": "♻️ Reciclaje Inteligente",
+      "title": "Descubre puntos verdes y rutas de recolección",
+      "description": "Encuentra los centros de reciclaje más cercanos, conoce las rutas de los camiones y contribuye a un Cochabamba más limpio.",
+      "btn_explore": "Explorar sistema de reciclaje",
+      "btn_campaigns": "Ver campañas de reciclaje"
     }
   },
   "shared": {

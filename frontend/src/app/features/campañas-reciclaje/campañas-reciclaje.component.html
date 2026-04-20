@@ -1,22 +1,20 @@
 <main class="min-h-screen bg-white">
-  <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] text-white py-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="max-w-3xl">
         <div class="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
-          ♻️ Campañas de Reciclaje
+          {{ 'recycling_campaigns.hero.badge' | translate }}
         </div>
         <h1 class="text-5xl font-bold mb-6">
-          Únete a nuestras campañas
+          {{ 'recycling_campaigns.hero.title' | translate }}
         </h1>
         <p class="text-xl text-[#A5D6A7] mb-8">
-          Participa en desafíos comunitarios de reciclaje y contribuye a alcanzar metas ambientales colectivas.
+          {{ 'recycling_campaigns.hero.description' | translate }}
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Search and Filters -->
   <section class="py-8 bg-[#E8F5E9]">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex flex-col md:flex-row gap-4">
@@ -24,7 +22,7 @@
           <lucide-icon name="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></lucide-icon>
           <input
             type="text"
-            placeholder="Buscar campaña por nombre o tipo de residuo..."
+            [placeholder]="'recycling_campaigns.filters.search_placeholder' | translate"
             [(ngModel)]="searchTerm"
             (ngModelChange)="filterCampaigns()"
             class="w-full pl-12 pr-4 py-4 bg-white border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#4CAF50] transition-all"
@@ -32,13 +30,12 @@
         </div>
         <button class="flex items-center gap-2 px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl font-medium hover:border-[#4CAF50] transition-all">
           <lucide-icon name="filter" class="w-5 h-5"></lucide-icon>
-          Filtrar
+          {{ 'recycling_campaigns.filters.filter_button' | translate }}
         </button>
       </div>
     </div>
   </section>
 
-  <!-- Campaigns Grid -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -82,14 +79,13 @@
               </div>
               <div class="flex items-center gap-3 text-gray-600">
                 <lucide-icon name="target" class="w-4 h-4 text-[#4CAF50]"></lucide-icon>
-                <span class="text-sm">Meta: {{ campaign.goal }}</span>
+                <span class="text-sm">{{ 'recycling_campaigns.card.meta_label' | translate }} {{ campaign.goal }}</span>
               </div>
             </div>
 
-            <!-- Progress Section -->
             <div class="mb-6 p-4 bg-[#E8F5E9] rounded-2xl">
               <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-medium text-gray-600">Progreso de recolección</span>
+                <span class="text-xs font-medium text-gray-600">{{ 'recycling_campaigns.card.progress_label' | translate }}</span>
                 <span class="text-xs font-bold text-[#2E7D32]">{{ calculatePercentage(campaign.collected, campaign.goalAmount) }}%</span>
               </div>
               <div class="h-2.5 bg-white rounded-full overflow-hidden mb-3">
@@ -103,7 +99,7 @@
                   {{ campaign.collected | number }} kg
                 </span>
                 <span class="text-xs text-gray-500">
-                  de {{ campaign.goalAmount | number }} kg
+                  {{ 'recycling_campaigns.card.progress_of' | translate }} {{ campaign.goalAmount | number }} kg
                 </span>
               </div>
             </div>
@@ -111,15 +107,17 @@
             <div class="flex items-center justify-between mb-6">
               <div class="flex items-center gap-2 text-gray-600">
                 <lucide-icon name="recycle" class="w-4 h-4 text-[#4CAF50]"></lucide-icon>
-                <span class="text-sm font-medium">{{ campaign.participants }} participantes</span>
+                <span class="text-sm font-medium">
+                  {{ 'recycling_campaigns.card.participants_count' | translate:{count: campaign.participants} }}
+                </span>
               </div>
             </div>
 
             <a
               [routerLink]="['/campanas-reciclaje', campaign.id]"
-              class="block w-full px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white text-center rounded-2xl font-semibold hover:shadow-lg hover:shadow-[#4CAF50]/30 transition-all font-semibold"
+              class="block w-full px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white text-center rounded-2xl font-semibold hover:shadow-lg hover:shadow-[#4CAF50]/30 transition-all"
             >
-              Participar
+              {{ 'recycling_campaigns.card.cta_button' | translate }}
             </a>
           </div>
         </div>
