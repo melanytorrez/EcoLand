@@ -54,11 +54,7 @@
         "special": "Falta un carácter especial."
         }
     }
-  },
-    "shared": {
-        "or_separator": "o",
-        "loading_generic": "Cargando..."
-    }
+  }
   },
   "campaign_detail": {
     "sections": {
@@ -80,6 +76,62 @@
     "states": {
       "loading": "Cargando campaña...",
       "error_back": "Volver a campañas"
+    }
+  },
+  "campaign_admin": {
+    "header": {
+      "title": "Gestión de Campañas",
+      "subtitle": "Administra las campañas de reforestación",
+      "btn_new": "Nueva Campaña"
+    },
+    "search": {
+      "placeholder": "Buscar por título o ubicación..."
+    },
+    "table": {
+      "col_campaign": "Campaña",
+      "col_date": "Fecha",
+      "col_location": "Ubicación",
+      "col_participants": "Participantes",
+      "col_organizer": "Organizador",
+      "col_status": "Estado",
+      "col_actions": "Acciones",
+      "tooltip_edit": "Editar",
+      "tooltip_delete": "Eliminar"
+    },
+    "modal": {
+      "title_new": "Nueva Campaña",
+      "title_edit": "Editar Campaña",
+      "subtitle_new": "Completa todos los campos para crear la campaña",
+      "subtitle_edit": "Completa todos los campos para actualizar la campaña",
+      "btn_cancel": "Cancelar",
+      "btn_save_new": "✓ Crear Campaña",
+      "btn_save_edit": "✓ Guardar Cambios"
+    },
+    "form": {
+      "labels": {
+        "title": "Título de la campaña *",
+        "date": "Fecha de la campaña *",
+        "spots": "Cupos disponibles *",
+        "location": "Ubicación *",
+        "status": "Estado de la campaña",
+        "organizer": "Organizador *",
+        "description": "Descripción de la campaña *",
+        "image_url": "URL de imagen",
+        "optional": "(opcional)"
+      },
+      "placeholders": {
+        "title": "Ej: Reforestación Parque Tunari 2026",
+        "spots": "Ej: 50",
+        "location": "Ej: Parque Nacional Tunari",
+        "organizer": "Ej: Alcaldía de Cochabamba",
+        "description": "Describe los objetivos, actividades y detalles importantes de la campaña...",
+        "image_url": "https://ejemplo.com/imagen.jpg"
+      },
+      "status_options": {
+        "scheduled": "Programada",
+        "active": "Activa",
+        "finished": "Finalizada"
+      }
     }
   },
   "shared": {
