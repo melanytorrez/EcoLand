@@ -341,6 +341,22 @@
       }
     }
   },
+  "admin_sidebar": {
+    "logo": {
+      "subtitle": "Panel Administrativo"
+    },
+    "nav": {
+      "dashboard": "Panel de Control",
+      "reforestation": "Reforestación",
+      "recycling": "Reciclaje",
+      "users": "Usuarios",
+      "reports": "Reportes",
+      "settings": "Configuración"
+    },
+    "footer": {
+      "user_view": "Vista Usuario"
+    }
+  },
   "shared": {
     "or_separator": "o",
     "loading_generic": "Cargando...",

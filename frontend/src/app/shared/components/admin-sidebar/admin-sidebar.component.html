@@ -1,5 +1,4 @@
 <aside class="w-72 bg-gradient-to-b from-[#2E7D32] to-[#1B5E20] text-white flex flex-col min-h-screen sticky top-0">
-  <!-- Logo -->
   <div class="p-6 border-b border-white/10">
     <a routerLink="/admin" class="flex items-center gap-3">
       <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg">
@@ -7,11 +6,10 @@
       </div>
       <div>
         <h1 class="text-xl font-bold">EcoLand</h1>
-        <p class="text-xs text-[#A5D6A7]">Panel Administrativo</p>
+        <p class="text-xs text-[#A5D6A7]">{{ 'admin_sidebar.logo.subtitle' | translate }}</p>
       </div>
     </a>
   </div>
-
   <!-- Navigation -->
   <nav class="flex-1 p-4 space-y-2">
     <a
@@ -31,7 +29,7 @@
       class="flex items-center gap-3 px-4 py-3 text-[#A5D6A7] hover:bg-white/10 hover:text-white rounded-2xl transition-all cursor-pointer"
     >
       <lucide-icon name="log-out" class="w-5 h-5"></lucide-icon>
-      <span class="font-medium">Vista Usuario</span>
+      <span class="font-medium">{{ 'admin_sidebar.footer.user_view' | translate }}</span>
     </a>
   </div>
 </aside>
