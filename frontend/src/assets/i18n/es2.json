@@ -134,8 +134,36 @@
       }
     }
   },
+"campaign_detail_user": {
+    "sections": {
+      "description": "Descripción",
+      "requirements": "Requisitos",
+      "organizer_info": "Información del Organizador",
+      "contact": "Contacto:"
+    },
+    "sidebar": {
+      "date_label": "Fecha",
+      "time_label": "Horario",
+      "location_label": "Ubicación",
+      "spots_label": "Participantes inscritos",
+      "spots_available_of": "{{current}} de {{total}}",
+      "cta_button": "Quiero ser voluntario",
+      "cta_no_spots": "Sin cupos disponibles",
+      "cta_processing": "Procesando...",
+      "cta_already_registered": "✓ Ya estás inscrito",
+      "back_link": "Ver otras campañas"
+    },
+    "messages": {
+      "already_registered_info": "Ya estás inscrito en esta campaña",
+      "loading": "Cargando campaña..."
+    }
+  },
   "shared": {
     "or_separator": "o",
-    "loading_generic": "Cargando..."
+    "loading_generic": "Cargando...",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar"
   }
 }
