@@ -16,13 +16,20 @@ export class HeaderComponent implements OnInit {
   currentPath = '';
   currentLang = 'es';
   showLogoutModal = false;
+  langOpen = false;
 
-  // Claves de traducción que coinciden con el objeto "header.nav" del archivo JSON
+  languages = [
+    { code: 'es', label: 'Español',   flag: '🇧🇴' },
+    { code: 'en', label: 'English',   flag: '🇬🇧' },
+    { code: 'pt', label: 'Português', flag: '🇧🇷' },
+    { code: 'fr', label: 'Français',  flag: '🇫🇷' },
+  ];
+
   allNavItems = [
-    { path: '/', label: 'header.nav.home', feature: null },
+    { path: '/',              label: 'header.nav.home',          feature: null },
     { path: '/reforestacion', label: 'header.nav.reforestation', feature: 'reforestacion' },
-    { path: '/reciclaje', label: 'header.nav.recycling', feature: 'reciclaje' },
-    { path: '/estadisticas', label: 'header.nav.stats', feature: 'estadisticas' },
+    { path: '/reciclaje',     label: 'header.nav.recycling',     feature: 'reciclaje' },
+    { path: '/estadisticas',  label: 'header.nav.stats',         feature: 'estadisticas' },
   ];
 
   constructor(
@@ -31,13 +38,11 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private translate: TranslateService
   ) {
-    // 1. Configuración de idiomas al instanciar
     this.translate.setDefaultLang('es');
     const savedLang = localStorage.getItem('ecoland_lang') || 'es';
     this.currentLang = savedLang;
     this.translate.use(savedLang);
 
-    // 2. Seguimiento de la ruta actual para el indicador visual (la línea verde bajo el link)
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
@@ -46,15 +51,15 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Sincronización inicial de la ruta por si se refresca la página
     this.currentPath = this.router.url;
   }
 
-  /**
-   * Filtra los items de navegación basados en las Feature Flags
-   */
+  get currentLanguage() {
+    return this.languages.find(l => l.code === this.currentLang) ?? this.languages[0];
+  }
+
   get navItems() {
-    return this.allNavItems.filter(item => 
+    return this.allNavItems.filter(item =>
       !item.feature || this.featureFlagService.isFeatureEnabled(item.feature as keyof FeatureFlags)
     );
   }
@@ -69,13 +74,9 @@ export class HeaderComponent implements OnInit {
 
   get isAdmin(): boolean {
     const u = this.user;
-    // Verificamos roles comunes
     return u && (u.role === 'Admin' || u.role === 'Administrador');
   }
 
-  /**
-   * Control del Modal de Logout
-   */
   logout() {
     this.showLogoutModal = true;
   }
@@ -90,9 +91,6 @@ export class HeaderComponent implements OnInit {
     this.showLogoutModal = false;
   }
 
-  /**
-   * Cambia el idioma de la aplicación y persiste la elección
-   */
   switchLanguage(lang: string) {
     this.currentLang = lang;
     this.translate.use(lang);
