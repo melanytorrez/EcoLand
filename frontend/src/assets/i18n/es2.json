@@ -200,6 +200,57 @@
       "btn_campaigns": "Ver campañas de reciclaje"
     }
   },
+  "recycling": {
+    "hero": {
+      "badge": "♻️ Sistema de Reciclaje",
+      "title": "Recicla inteligentemente",
+      "description": "Encuentra puntos verdes, conoce las rutas de recolección y sigue el camino de los recicladores en Cochabamba."
+    },
+    "map": {
+      "title": "Mapa Interactivo",
+      "subtitle": "Explora puntos verdes, rutas de camiones y trayectorias de recicladores",
+      "legend": {
+        "title": "Leyenda",
+        "points": "Puntos Verdes",
+        "routes": "Rutas Basura",
+        "recyclers": "Recicladores"
+      },
+      "markers": {
+        "green_point": "Punto Verde • Abierto",
+        "truck_active": "Camión en servicio",
+        "recycler_active": "Reciclador activo"
+      }
+    },
+    "points_card": {
+      "title": "Puntos Verdes",
+      "subtitle": "Cercanos a ti",
+      "loading": "Cargando puntos verdes...",
+      "empty": "No hay puntos verdes disponibles por ahora.",
+      "btn_view_all": "Ver todos los puntos",
+      "status_open": "Abierto",
+      "status_closed": "Cerrado"
+    },
+    "route_card": {
+      "title": "Próxima Ruta",
+      "subtitle": "Recolección de basura",
+      "label_day": "Día:",
+      "label_date": "Fecha:",
+      "label_time": "Hora:",
+      "label_zone": "Zona:",
+      "label_vehicle": "Vehículo:",
+      "btn_view_all": "Ver todas las rutas"
+    },
+    "impact_card": {
+      "title": "Tu Impacto",
+      "subtitle": "Ambiental personal",
+      "recycled": "Total Reciclado",
+      "trees": "Árboles Salvados",
+      "co2": "CO₂ Reducido",
+      "ranking": "Tu Ranking",
+      "ranking_suffix": "de todos los recicladores",
+      "btn_view_stats": "Ver estadísticas completas"
+    }
+  },
   "shared": {
     "or_separator": "o",
     "loading_generic": "Cargando...",
