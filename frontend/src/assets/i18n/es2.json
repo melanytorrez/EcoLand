@@ -277,6 +277,29 @@
     },
     "loading": "Cargando campaña..."
   },
+  "reforestation": {
+    "hero": {
+      "badge": "🌳 Campañas de Reforestación",
+      "title": "Sé parte del cambio",
+      "description": "Únete a nuestras campañas de reforestación y ayuda a recuperar los espacios verdes de Cochabamba."
+    },
+    "filters": {
+      "placeholder": "Buscar campaña por nombre o ubicación...",
+      "btn_filter": "Filtrar"
+    },
+    "states": {
+      "loading": "Obteniendo campañas desde el bosque...",
+      "error_retry": "Reintentar conexión",
+      "no_results": "No se encontraron campañas que coincidan con tu búsqueda.",
+      "view_all": "Ver todas las campañas"
+    },
+    "card": {
+      "progress_label": "Progreso de inscripciones",
+      "spots_available": "{{available}} cupos disponibles de {{total}}",
+      "organizer_label": "Organizado por:",
+      "btn_participate": "Participar"
+    }
+  },
   "shared": {
     "or_separator": "o",
     "loading_generic": "Cargando...",
