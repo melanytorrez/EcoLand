@@ -357,6 +357,26 @@
       "user_view": "Vista Usuario"
     }
   },
+  "footer": {
+    "description": "Plataforma líder en gestión ambiental de Cochabamba. Juntos construimos un futuro más verde y sostenible.",
+    "columns": {
+      "platform": {
+        "title": "Plataforma",
+        "reforestation": "Reforestación",
+        "recycling": "Reciclaje",
+        "stats": "Estadísticas",
+        "admin": "Administración"
+      },
+      "support": {
+        "title": "Ayuda",
+        "faq": "Preguntas frecuentes",
+        "guide": "Guía de usuario",
+        "contact": "Contacto",
+        "terms": "Términos y condiciones"
+      }
+    },
+    "bottom": "© 2026 EcoLand. Todos los derechos reservados. Haciendo de Cochabamba una ciudad más verde 🌱"
+  },
   "shared": {
     "or_separator": "o",
     "loading_generic": "Cargando...",
