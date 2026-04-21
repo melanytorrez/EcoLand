@@ -1,31 +1,60 @@
 {
   "auth": {
-    "title": "Log In",
-    "subtitle": "Welcome back to EcoLand",
-    "emailLabel": "Email address",
-    "emailPlaceholder": "you@email.com",
-    "passwordLabel": "Password",
-    "passwordPlaceholder": "••••••••",
-    "roleLabel": "User type",
-    "roleUser": "User",
-    "roleAdmin": "Administrator",
-    "loginButton": "Log In",
-    "registerQuestion": "Don't have an account?",
-    "registerLink": "Sign up here",
-    "registerTitle": "Create account",
-    "registerSubtitle": "Join the EcoLand community",
-    "fullNameLabel": "Full name",
-    "fullNamePlaceholder": "John Doe",
-    "confirmPasswordLabel": "Confirm password",
-    "confirmPasswordPlaceholder": "Repeat your password",
-    "registerButton": "Create account",
-    "errorPasswordMismatch": "Passwords do not match",
-    "loginQuestion": "Already have an account?",
-    "loginLink": "Log in here",
-    "backHome": "← Back to home",
-    "errorRequired": "Please fill in all fields",
-    "errorInvalidEmail": "Invalid email format",
-    "errorInvalidPassword": "Password does not meet security requirements"
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Welcome back to EcoLand",
+      "inputs": {
+        "email": {
+          "label": "Email address",
+          "placeholder": "you@email.com"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "••••••••"
+        },
+        "role": {
+          "label": "User type",
+          "user": "User",
+          "admin": "Administrator"
+        }
+      },
+      "submit_button": "Sign in",
+      "loading": "Loading...",
+      "footer": {
+        "register_question": "Don't have an account?",
+        "register_link": "Sign up here",
+        "back_home": "← Back to home"
+      }
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "Join the EcoLand community",
+      "inputs": {
+        "full_name": { "label": "Full name", "placeholder": "John Smith" },
+        "confirm_password": { "label": "Confirm password", "placeholder": "Repeat your password" }
+      },
+      "submit_button": "Create account",
+      "footer": {
+        "login_question": "Already have an account?",
+        "login_link": "Sign in here"
+      },
+      "validation": {
+        "required": "This field is required.",
+        "required_email": "Email is required.",
+        "required_password": "Password is required.",
+        "invalid_email": "Invalid email format.",
+        "missing_at": "Email must include the @ symbol.",
+        "missing_com": "Email must end in .com.",
+        "password_mismatch": "Passwords do not match.",
+        "password_rules": {
+          "min_length": "Minimum 8 characters.",
+          "upper": "Must include at least one uppercase letter.",
+          "lower": "Must include at least one lowercase letter.",
+          "number": "Must include at least one number.",
+          "special": "Must include at least one special character."
+        }
+      }
+    }
   },
   "navigation": {
     "home": "Home",
@@ -36,19 +65,13 @@
     "admin": "Admin Panel",
     "logout": "Log Out"
   },
-  "logout": {
-    "title": "Log out?",
-    "subtitle": "Are you sure you want to leave?",
-    "confirm": "Yes, log out",
-    "cancel": "Cancel"
-  },
   "home": {
     "hero": {
-      "badge": "A greener Cochabamba",
+      "badge": "🌱 A greener Cochabamba",
       "title": "Let's build a greener Cochabamba together",
-      "subtitle": "Join reforestation campaigns and improve recycling in your city.",
-      "ctaReforestation": "View campaigns",
-      "ctaRecycling": "Explore recycling"
+      "description": "Join reforestation campaigns and improve recycling in your city.",
+      "btn_campaigns": "View campaigns",
+      "btn_recycling": "Explore recycling"
     },
     "stats": {
       "activeCampaigns": "Active Campaigns",
@@ -56,96 +79,162 @@
       "totalCampaigns": "Total Campaigns"
     },
     "reforestation": {
-      "badge": "Reforestation",
+      "badge": "🌳 Reforestation",
       "title": "Active reforestation campaigns",
-      "subtitle": "Join our campaigns and help plant trees in Cochabamba",
-      "spots": "spots",
-      "participate": "Participate",
-      "viewAll": "View all campaigns"
+      "description": "Join our campaigns and help plant trees in Cochabamba",
+      "spots": "{{count}} spots",
+      "btn_participate": "Join",
+      "btn_view_all": "View all campaigns"
     },
-    "recycling": {
-      "badge": "Smart Recycling",
+    "recycling_promo": {
+      "badge": "♻️ Smart Recycling",
       "title": "Discover green points and collection routes",
-      "description": "Find the nearest recycling centers, learn about truck routes, and contribute to a cleaner Cochabamba.",
-      "ctaExplore": "Explore the recycling system",
-      "ctaCampaigns": "View recycling campaigns"
+      "description": "Find the nearest recycling centers, check truck collection routes, and help keep Cochabamba clean.",
+      "btn_explore": "Explore recycling system",
+      "btn_campaigns": "View recycling campaigns"
+    },
+    "campaigns_section": {
+      "title": "Recent Campaigns",
+      "view_all": "View All"
     }
   },
-  "campaigns": {
-    "activeTitle": "Active campaigns",
-    "participate": "Participate",
-    "spotsAvailable": "spots available",
-    "loading": "Loading campaigns...",
-    "errorLoading": "Error loading campaigns"
+  "campaign_detail": {
+    "sections": {
+      "description": "Description",
+      "requirements": "Requirements",
+      "organizer_info": "Organizer Information",
+      "contact": "Contact:"
+    },
+    "sidebar": {
+      "date_label": "Date",
+      "time_label": "Schedule",
+      "location_label": "Location",
+      "spots_label": "Available spots",
+      "spots_available_of": "{{available}} of {{total}}",
+      "cta_button": "I want to volunteer",
+      "cta_loading": "Registering...",
+      "back_link": "View other campaigns"
+    }
   },
-  "stats": {
-    "title": "Environmental Impact",
-    "treesPlanted": "Trees Planted",
-    "kgRecycled": "Kg Recycled",
-    "volunteers": "Active Volunteers"
+  "recycling": {
+    "hero": {
+      "badge": "♻️ Recycling System",
+      "title": "Recycle smarter",
+      "description": "Find green points, check collection routes, and follow recyclers across Cochabamba."
+    },
+    "map": {
+      "title": "Interactive Map",
+      "subtitle": "Explore green points, truck routes, and recycler paths",
+      "legend": {
+        "title": "Legend",
+        "points": "Green Points",
+        "routes": "Waste Routes",
+        "recyclers": "Recyclers"
+      },
+      "markers": {
+        "green_point": "Green Point • Open",
+        "truck_active": "Truck in service",
+        "recycler_active": "Active recycler"
+      }
+    },
+    "points_card": {
+      "title": "Green Points",
+      "subtitle": "Near you",
+      "loading": "Loading green points...",
+      "empty": "No green points available right now.",
+      "btn_view_all": "View all points",
+      "status_open": "Open",
+      "status_closed": "Closed"
+    },
+    "route_card": {
+      "title": "Next Route",
+      "subtitle": "Waste collection",
+      "label_day": "Day:",
+      "label_date": "Date:",
+      "label_time": "Time:",
+      "label_zone": "Zone:",
+      "label_vehicle": "Vehicle:",
+      "btn_view_all": "View all routes"
+    },
+    "impact_card": {
+      "title": "Your Impact",
+      "subtitle": "Personal environmental footprint",
+      "recycled": "Total Recycled",
+      "trees": "Trees Saved",
+      "co2": "CO₂ Reduced",
+      "ranking": "Your Ranking",
+      "ranking_suffix": "out of all recyclers",
+      "btn_view_stats": "View full statistics"
+    }
+  },
+  "reforestation": {
+    "hero": {
+      "badge": "🌳 Reforestation Campaigns",
+      "title": "Be part of the change",
+      "description": "Join our reforestation campaigns and help restore the green spaces of Cochabamba."
+    },
+    "filters": {
+      "placeholder": "Search campaign by name or location...",
+      "btn_filter": "Filter"
+    },
+    "states": {
+      "loading": "Fetching campaigns from the forest...",
+      "view_all": "View all campaigns"
+    },
+    "card": {
+      "progress_label": "Registration progress",
+      "spots_available": "{{available}} spots available out of {{total}}",
+      "organizer_label": "Organized by:",
+      "btn_participate": "Join"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "reforestation": "Reforestation",
+      "recycling": "Recycling",
+      "stats": "Statistics"
+    },
+    "buttons": {
+      "admin_panel": "Admin Panel",
+      "logout": "Sign out",
+      "login": "Sign in",
+      "register": "Sign up"
+    },
+    "user_default": "User"
+  },
+  "footer": {
+    "description": "Cochabamba's leading environmental management platform. Together we're building a greener, more sustainable future.",
+    "columns": {
+      "platform": {
+        "title": "Platform",
+        "reforestation": "Reforestation",
+        "recycling": "Recycling",
+        "stats": "Statistics",
+        "admin": "Administration"
+      },
+      "support": {
+        "title": "Help",
+        "faq": "Frequently asked questions",
+        "guide": "User guide",
+        "contact": "Contact",
+        "terms": "Terms and conditions"
+      }
+    },
+    "bottom": "© 2026 EcoLand. All rights reserved. Making Cochabamba a greener city 🌱"
+  },
+  "logout_modal": {
+    "title": "Sign out?",
+    "message": "Are you sure you want to leave?",
+    "confirm": "Yes, sign out",
+    "cancel": "Cancel"
   },
   "shared": {
+    "or_separator": "or",
+    "loading_generic": "Loading...",
     "confirm": "Confirm",
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete"
-  },
-  "footer": {
-    "description": "Leading environmental management platform in Cochabamba. Together we build a greener and more sustainable future.",
-    "location": "Cochabamba, Bolivia",
-    "platform": "Platform",
-    "help": "Help",
-    "faq": "Frequently Asked Questions",
-    "userGuide": "User Guide",
-    "contact": "Contact",
-    "terms": "Terms and Conditions",
-    "copyright": "© 2026 EcoLand. All rights reserved. Making Cochabamba a greener city 🌱"
-  },
-  "reforestacion": {
-    "heroBadge": "🌳 Reforestation Campaigns",
-    "heroTitle": "Be part of the change",
-    "heroSubtitle": "Join our reforestation campaigns and help recover green spaces in Cochabamba.",
-    "searchPlaceholder": "Search campaign by name or location...",
-    "filter": "Filter",
-    "loading": "Getting campaigns from the forest...",
-    "retry": "Retry connection",
-    "noResults": "No campaigns found matching your search.",
-    "viewAll": "View all campaigns",
-    "progress": "Registration progress",
-    "spotsAvailable": "spots available of",
-    "organizedBy": "Organized by:",
-    "participate": "Participate"
-  },
-  "reciclaje": {
-    "heroBadge": "♻️ Recycling System",
-    "heroTitle": "Recycle smartly",
-    "heroSubtitle": "Find green points, know the collection routes, and follow the path of recyclers in Cochabamba.",
-    "mapTitle": "Interactive Map",
-    "mapSubtitle": "Explore green points, truck routes, and recycler trajectories",
-    "legendTitle": "Legend",
-    "legendGreenPoints": "Green Points",
-    "legendTruckRoutes": "Garbage Routes",
-    "legendRecyclers": "Recyclers",
-    "greenPointsTitle": "Green Points",
-    "greenPointsSubtitle": "Near you",
-    "loadingPoints": "Loading green points...",
-    "noPoints": "No green points available right now.",
-    "viewAllPoints": "View all points",
-    "nextRouteTitle": "Next Route",
-    "nextRouteSubtitle": "Garbage collection",
-    "routeDay": "Day:",
-    "routeDate": "Date:",
-    "routeTime": "Time:",
-    "routeZone": "Zone:",
-    "routeVehicle": "Vehicle:",
-    "viewAllRoutes": "View all routes",
-    "impactTitle": "Your Impact",
-    "impactSubtitle": "Personal Environmental",
-    "impactRecycled": "Total Recycled",
-    "impactTrees": "Trees Saved",
-    "impactCo2": "Reduced CO₂",
-    "impactRankTitle": "Your Ranking",
-    "impactRankSubtitle": "of all recyclers",
-    "viewAllStats": "View full statistics"
   }
 }
