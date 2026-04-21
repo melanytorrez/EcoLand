@@ -55,6 +55,12 @@ spring.datasource.username=tu_usuario
 spring.datasource.password=tu_contrasena
 spring.jpa.hibernate.ddl-auto=update
 ```
+🔹 Importante:
+
+Este proyecto utiliza una base de datos local (localhost), por lo que debes reemplazar los valores (username, password y nombre de la base de datos si lo deseas) según tu entorno.
+Se recomienda crear la base de datos con el nombre: ecoland_db para evitar problemas de configuración.
+Una vez configurado correctamente, al ejecutar el backend por primera vez, se generarán automáticamente datos iniciales en la base de datos.
+
 Ejecutar el backend:
 ```bash
 mvn spring-boot:run
@@ -99,7 +105,9 @@ EcoLand/
 └── README.md
 ```
 
----
-
 
 *EcoLand es un proyecto académico desarrollado para el Taller de Sistemas de Información.*
+
+-------------
+
+
