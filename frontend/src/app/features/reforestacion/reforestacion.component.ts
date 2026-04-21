@@ -32,7 +32,7 @@ export class ReforestacionComponent implements OnInit {
   loadCampaigns(): void {
     this.isLoading = true;
     this.error = null;
-    this.campaignService.getCampaigns().subscribe({
+    this.campaignService.getCampaigns('REFORESTATION').subscribe({
       next: (campaigns) => {
         this.campaigns = campaigns;
         this.filteredCampaigns = campaigns;

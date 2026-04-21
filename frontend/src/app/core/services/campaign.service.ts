@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Campaign } from '../models/campaign.model';
 import { Observable } from 'rxjs';
 
@@ -14,8 +13,12 @@ export class CampaignService {
 
   constructor(private http: HttpClient) { }
 
-  getCampaigns(): Observable<Campaign[]> {
-    return this.http.get<Campaign[]>(this.apiUrl);
+  getCampaigns(category?: string): Observable<Campaign[]> {
+    let params = new HttpParams();
+    if (category) {
+      params = params.set('category', category);
+    }
+    return this.http.get<Campaign[]>(this.apiUrl, { params });
   }
 
   getCampaignById(id: number): Observable<Campaign> {
