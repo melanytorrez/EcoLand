@@ -20,7 +20,10 @@ public class CampaignController {
     }
 
     @GetMapping
-    public List<Campaign> getAll() {
+    public List<Campaign> getAll(@RequestParam(required = false) com.ecoland.domain.model.CampaignCategory category) {
+        if (category != null) {
+            return campaignUseCase.getCampaignsByCategory(category);
+        }
         return campaignUseCase.getAllCampaigns();
     }
 

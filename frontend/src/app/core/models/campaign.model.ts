@@ -13,4 +13,5 @@ export interface Campaign {
   status: string;
   description?: string;
   requirements?: string[];
+  category?: 'REFORESTATION' | 'RECYCLING';
 }

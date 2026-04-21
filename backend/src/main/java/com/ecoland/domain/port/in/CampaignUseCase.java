@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface CampaignUseCase {
     List<Campaign> getAllCampaigns();
+    List<Campaign> getCampaignsByCategory(com.ecoland.domain.model.CampaignCategory category);
     Campaign getCampaignById(Long id);
     Campaign saveCampaign(Campaign campaign);
     Campaign updateCampaign(Long id, Campaign campaign);
