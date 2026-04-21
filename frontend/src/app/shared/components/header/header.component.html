@@ -20,46 +20,6 @@
           }"
         >
           {{ item.label | translate }}
-<<<<<<< HEAD
-          <span *ngIf="currentPath === item.path" class="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50]"></span>
-        </a>
-      </nav>
-
-      <!-- Auth Buttons and Language Switcher -->
-      <div class="flex items-center gap-3">
-        <!-- Language Switcher -->
-        <div class="flex items-center gap-1 bg-gray-100 p-1 rounded-xl mr-2">
-          <button 
-            (click)="switchLanguage('es')"
-            [ngClass]="currentLang === 'es' ? 'bg-white shadow-sm text-[#2E7D32] font-semibold' : 'text-gray-500 hover:text-gray-700'"
-            class="px-3 py-1.5 text-sm rounded-lg transition-all">
-            ES
-          </button>
-          <button 
-            (click)="switchLanguage('en')"
-            [ngClass]="currentLang === 'en' ? 'bg-white shadow-sm text-[#2E7D32] font-semibold' : 'text-gray-500 hover:text-gray-700'"
-            class="px-3 py-1.5 text-sm rounded-lg transition-all">
-            EN
-          </button>
-        </div>
-
-        <ng-container *ngIf="isAuthenticated; else loginButtons">
-            <!-- Admin View Button -->
-            <a
-              *ngIf="isAdmin"
-              routerLink="/admin"
-              class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-2xl hover:shadow-lg hover:shadow-purple-500/30 transition-all font-semibold"
-            >
-              <lucide-icon name="shield" class="w-4 h-4"></lucide-icon>
-              {{ 'navigation.admin' | translate }}
-            </a>
-          
-          <!-- User Info -->
-          <div class="hidden md:flex items-center gap-2 px-4 py-2.5 bg-[#E8F5E9] rounded-2xl">
-            <lucide-icon name="user" class="w-4 h-4 text-[#2E7D32]"></lucide-icon>
-            <span class="text-sm font-medium text-[#2E7D32]">{{ user?.nombre || user?.email || user?.sub || ('auth.roleUser' | translate) }}</span>
-          </div>
-=======
           <span
             *ngIf="currentPath === item.path"
             class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[#2E7D32] rounded-full"
@@ -69,7 +29,6 @@
 
       <!-- Right side -->
       <div class="flex items-center gap-3">
->>>>>>> HU12-Translator-
 
         <!-- Language dropdown -->
         <div class="relative">
@@ -77,24 +36,19 @@
             (click)="langOpen = !langOpen"
             class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-[#E8F5E9] hover:border-[#4CAF50] hover:text-[#2E7D32] transition-all"
           >
-<<<<<<< HEAD
-            <lucide-icon name="log-out" class="w-4 h-4"></lucide-icon>
-            {{ 'navigation.logout' | translate }}
-=======
             <span>{{ currentLanguage.flag }}</span>
             <span class="hidden sm:inline">{{ currentLanguage.code | uppercase }}</span>
             <lucide-icon name="chevron-down" class="w-3.5 h-3.5 transition-transform" [ngClass]="{'rotate-180': langOpen}"></lucide-icon>
->>>>>>> HU12-Translator-
           </button>
 
-          <!-- Panel siempre en el DOM, visible/oculto con opacity y pointer-events -->
+          <!-- Dropdown panel -->
           <div
             class="absolute right-0 mt-2 w-44 bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden z-50 transition-all duration-150"
             [ngClass]="langOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'"
           >
             <button
               *ngFor="let lang of languages"
-              (click)="switchLanguage(lang.code); langOpen = false"
+              (click)="switchLanguage(lang.code)"
               class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-[#E8F5E9] hover:text-[#2E7D32] transition-colors"
               [ngClass]="{'bg-[#E8F5E9] text-[#2E7D32] font-semibold': currentLang === lang.code}"
             >
@@ -124,7 +78,7 @@
           <div class="flex items-center gap-2">
             <div class="hidden sm:flex flex-col items-end">
               <span class="text-sm font-semibold text-gray-800 leading-tight">
-                {{ user?.fullName || ('header.user_default' | translate) }}
+                {{ user?.fullName || user?.nombre || ('header.user_default' | translate) }}
               </span>
               <span class="text-xs text-gray-400 leading-tight">{{ user?.email }}</span>
             </div>
@@ -144,23 +98,13 @@
             routerLink="/auth/login"
             class="px-4 py-2 text-sm font-semibold text-[#2E7D32] hover:bg-[#E8F5E9] rounded-xl transition-colors"
           >
-<<<<<<< HEAD
-            <lucide-icon name="log-in" class="w-4 h-4"></lucide-icon>
-            {{ 'auth.loginButton' | translate }}
-=======
             {{ 'header.buttons.login' | translate }}
->>>>>>> HU12-Translator-
           </a>
           <a
             routerLink="/auth/register"
             class="px-4 py-2 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all"
           >
-<<<<<<< HEAD
-            <lucide-icon name="user-plus" class="w-4 h-4"></lucide-icon>
-            {{ 'auth.registerButton' | translate }}
-=======
             {{ 'header.buttons.register' | translate }}
->>>>>>> HU12-Translator-
           </a>
         </ng-template>
 
@@ -169,7 +113,7 @@
   </div>
 </header>
 
-<!-- Overlay para cerrar el dropdown al hacer click fuera -->
+<!-- Overlay to close dropdown -->
 <div
   *ngIf="langOpen"
   class="fixed inset-0 z-40"
@@ -185,24 +129,6 @@
     <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
       <lucide-icon name="log-out" class="w-8 h-8 text-red-500"></lucide-icon>
     </div>
-<<<<<<< HEAD
-    
-    <h3 style="font-size: 1.125rem; font-weight: 700; text-align: center; color: #111827; margin: 0 0 8px 0;">{{ 'logout.title' | translate }}</h3>
-    <p style="font-size: 0.8rem; text-align: center; color: #6b7280; margin: 0 0 20px 0;">{{ 'logout.subtitle' | translate }}</p>
-    
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      <!-- Main Action (Aceptar) -->
-      <button 
-        (click)="confirmLogout()"
-        style="width: 100%; padding: 10px; background-color: #dc2626; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
-        {{ 'logout.confirm' | translate }}
-      </button>
-      <!-- Secondary Action (Cancelar) -->
-      <button 
-        (click)="cancelLogout()"
-        style="width: 100%; padding: 10px; background-color: white; color: #4b5563; border: 1px solid #d1d5db; border-radius: 12px; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
-        {{ 'logout.cancel' | translate }}
-=======
     <h2 class="text-xl font-bold text-gray-900 mb-2">{{ 'logout_modal.title' | translate }}</h2>
     <p class="text-gray-500 mb-6">{{ 'logout_modal.message' | translate }}</p>
     <div class="flex gap-3">
@@ -217,7 +143,6 @@
         class="flex-1 px-4 py-3 bg-red-500 text-white font-semibold rounded-2xl hover:bg-red-600 transition-colors"
       >
         {{ 'logout_modal.confirm' | translate }}
->>>>>>> HU12-Translator-
       </button>
     </div>
   </div>

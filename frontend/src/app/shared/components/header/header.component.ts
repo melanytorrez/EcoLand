@@ -15,24 +15,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
   currentPath = '';
   currentLang = 'es';
-<<<<<<< HEAD
-
-  allNavItems = [
-    { path: '/', label: 'navigation.home', feature: null },
-    { path: '/reforestacion', label: 'navigation.reforestation', feature: 'reforestacion' },
-    { path: '/campanas-reciclaje', label: 'navigation.campaigns', feature: 'campanasReciclaje' },
-    { path: '/reciclaje', label: 'navigation.recycling', feature: 'reciclaje' },
-    { path: '/estadisticas', label: 'navigation.stats', feature: 'estadisticas' },
-=======
   showLogoutModal = false;
   langOpen = false;
 
   languages = [
     { code: 'es', label: 'Español',   flag: '🇧🇴' },
-    { code: 'en', label: 'English',   flag: '🇬🇧' },
-    { code: 'pt', label: 'Português', flag: '🇧🇷' },
-    { code: 'fr', label: 'Français',  flag: '🇫🇷' },
->>>>>>> HU12-Translator-
+    { code: 'en', label: 'English',   flag: '🇬🇧' }
   ];
 
   allNavItems = [
@@ -87,26 +75,6 @@ export class HeaderComponent implements OnInit {
     return u && (u.role === 'Admin' || u.role === 'Administrador');
   }
 
-<<<<<<< HEAD
-  showLogoutModal = false;
-
-  constructor(
-    private router: Router,
-    private featureFlagService: FeatureFlagService,
-    private authService: AuthService,
-    private translate: TranslateService
-  ) {
-    // Sincronizar el indicador visual con el idioma activo (guardado en localStorage)
-    this.currentLang = localStorage.getItem('ecoland_lang') || 'es';
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      this.currentPath = event.urlAfterRedirects;
-    });
-  }
-
-=======
->>>>>>> HU12-Translator-
   logout() {
     this.showLogoutModal = true;
   }
@@ -124,13 +92,7 @@ export class HeaderComponent implements OnInit {
   switchLanguage(lang: string) {
     this.currentLang = lang;
     this.translate.use(lang);
-<<<<<<< HEAD
-    // Persistir preferencia del usuario
     localStorage.setItem('ecoland_lang', lang);
+    this.langOpen = false;
   }
 }
-=======
-    localStorage.setItem('ecoland_lang', lang);
-  }
-}
->>>>>>> HU12-Translator-
