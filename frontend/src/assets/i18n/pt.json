@@ -259,6 +259,7 @@
       "ranking_suffix": "entre todos os recicladores",
       "btn_view_stats": "Ver estatísticas completas"
     }
+    "ERROR_LOAD_POINTS": "Não foi possível carregar os pontos verdes. Tente novamente mais tarde."
   },
   "recycling_campaign": {
     "progress": {

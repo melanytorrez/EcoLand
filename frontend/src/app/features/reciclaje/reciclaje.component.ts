@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { RecyclingService } from '../../core/services/recycling.service';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../../core/models/recycling.model';
 import * as L from 'leaflet';
@@ -27,7 +28,10 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly CBBA_LAT = -17.3935;
   private readonly CBBA_LNG = -66.1570;
 
-  constructor(private recyclingService: RecyclingService) {}
+  constructor(
+  private recyclingService: RecyclingService,
+  private translate: TranslateService
+) {}
 
   ngOnInit(): void {
     this.loadingPoints = true;
@@ -43,7 +47,7 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       error: () => {
         this.nearbyPoints = [];
-        this.pointsError = 'No se pudieron cargar los puntos verdes. Intenta nuevamente más tarde.';
+        this.pointsError = this.translate.instant('RECYCLING.ERROR_LOAD_POINTS');
         this.loadingPoints = false;
       }
     });

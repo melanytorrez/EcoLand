@@ -166,6 +166,7 @@
       "ranking_suffix": "de todos los recicladores",
       "btn_view_stats": "Ver estadísticas completas"
     }
+    "ERROR_LOAD_POINTS": "No se pudieron cargar los puntos verdes. Intenta nuevamente más tarde."
   },
   "reforestation": {
     "hero": {

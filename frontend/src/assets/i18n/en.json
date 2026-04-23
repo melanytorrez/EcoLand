@@ -166,6 +166,7 @@
       "ranking_suffix": "out of all recyclers",
       "btn_view_stats": "View full statistics"
     }
+    "ERROR_LOAD_POINTS": "Could not load green points. Please try again later."
   },
   "reforestation": {
     "hero": {
