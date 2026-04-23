@@ -41,14 +41,14 @@
             <lucide-icon name="chevron-down" class="w-3.5 h-3.5 transition-transform" [ngClass]="{'rotate-180': langOpen}"></lucide-icon>
           </button>
 
-          <!-- Panel siempre en el DOM, visible/oculto con opacity y pointer-events -->
+          <!-- Dropdown panel -->
           <div
             class="absolute right-0 mt-2 w-44 bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden z-50 transition-all duration-150"
             [ngClass]="langOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'"
           >
             <button
               *ngFor="let lang of languages"
-              (click)="switchLanguage(lang.code); langOpen = false"
+              (click)="switchLanguage(lang.code)"
               class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-[#E8F5E9] hover:text-[#2E7D32] transition-colors"
               [ngClass]="{'bg-[#E8F5E9] text-[#2E7D32] font-semibold': currentLang === lang.code}"
             >
@@ -78,7 +78,7 @@
           <div class="flex items-center gap-2">
             <div class="hidden sm:flex flex-col items-end">
               <span class="text-sm font-semibold text-gray-800 leading-tight">
-                {{ user?.fullName || ('header.user_default' | translate) }}
+                {{ user?.fullName || user?.nombre || ('header.user_default' | translate) }}
               </span>
               <span class="text-xs text-gray-400 leading-tight">{{ user?.email }}</span>
             </div>
@@ -113,7 +113,7 @@
   </div>
 </header>
 
-<!-- Overlay para cerrar el dropdown al hacer click fuera -->
+<!-- Overlay to close dropdown -->
 <div
   *ngIf="langOpen"
   class="fixed inset-0 z-40"

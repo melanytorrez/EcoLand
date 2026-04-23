@@ -95,5 +95,6 @@ export class HeaderComponent implements OnInit {
     this.currentLang = lang;
     this.translate.use(lang);
     localStorage.setItem('ecoland_lang', lang);
+    this.langOpen = false;
   }
 }

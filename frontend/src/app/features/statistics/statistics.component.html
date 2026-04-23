@@ -1,4 +1,5 @@
 <main class="min-h-screen bg-white">
+  <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] text-white py-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="max-w-3xl">
@@ -15,136 +16,170 @@
     </div>
   </section>
 
-  <section class="py-16 bg-[#E8F5E9]">
+  <!-- Summary Cards Section -->
+  <section class="py-16 bg-[#E8F5E9]" *ngIf="!isLoading; else loadingState">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div *ngFor="let stat of summaryStats" class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1">
-          <div [ngClass]="stat.color" class="w-16 h-16 bg-gradient-to-br rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-            <lucide-icon [name]="stat.icon | lowercase" class="w-8 h-8 text-white"></lucide-icon>
+        <div *ngFor="let stat of summaryCards" class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1">
+          <div class="w-16 h-16 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <lucide-icon [name]="stat.icon" class="w-8 h-8 text-white"></lucide-icon>
           </div>
           <p class="text-4xl font-bold text-gray-900 mb-2">{{ stat.value }}</p>
-          <p class="text-gray-600 font-medium mb-3">{{ stat.label }}</p>
-          <p class="text-sm text-[#4CAF50] font-semibold">{{ stat.change }}</p>
+          <p class="text-gray-600 font-medium">{{ stat.label }}</p>
+          <p class="text-sm text-gray-500 mt-2">{{ stat.subtitle }}</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-16">
+  <!-- Monthly Trees & Residue Distribution -->
+  <section class="py-16 bg-gray-50" *ngIf="!isLoading">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-8 mb-8">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Monthly Planted Trees -->
         <div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-12 h-12 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center">
-              <lucide-icon name="tree-deciduous" class="w-6 h-6 text-white"></lucide-icon>
+              <lucide-icon name="leaf" class="w-6 h-6 text-white"></lucide-icon>
             </div>
             <div>
-              <h3 class="text-xl font-bold text-gray-900">{{ 'stats.charts.trees.title' | translate }}</h3>
-              <p class="text-sm text-gray-600">{{ 'stats.charts.trees.subtitle' | translate }}</p>
+              <h3 class="text-xl font-bold text-gray-900">Árboles Plantados</h3>
+              <p class="text-sm text-gray-600">Progreso mensual</p>
             </div>
           </div>
-          <div class="h-[300px]">
+          <div class="h-[350px]">
             <canvas baseChart
-              [data]="barChartData"
-              [options]="barChartOptions"
-              [type]="barChartType">
+              [data]="monthlyChartData"
+              [options]="monthlyChartOptions"
+              [type]="monthlyChartType">
             </canvas>
           </div>
         </div>
 
+        <!-- Residue Distribution -->
         <div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
           <div class="flex items-center gap-4 mb-6">
-            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center">
+            <div class="w-12 h-12 bg-gradient-to-br from-[#0284c7] to-[#0ea5e9] rounded-2xl flex items-center justify-center">
               <lucide-icon name="recycle" class="w-6 h-6 text-white"></lucide-icon>
             </div>
             <div>
-              <h3 class="text-xl font-bold text-gray-900">{{ 'stats.charts.waste.title' | translate }}</h3>
-              <p class="text-sm text-gray-600">{{ 'stats.charts.waste.subtitle' | translate }}</p>
+              <h3 class="text-xl font-bold text-gray-900">Distribución de Residuos</h3>
+              <p class="text-sm text-gray-600">Por tipo de material</p>
             </div>
           </div>
-          <div class="h-[300px]">
+          <div class="h-[350px]">
             <canvas baseChart
-              [data]="pieChartData"
-              [options]="pieChartOptions"
-              [type]="pieChartType">
+              [data]="residueChartData"
+              [options]="residueChartOptions"
+              [type]="residueChartType">
             </canvas>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-100 mb-8">
+  <!-- Zone Activity & Volunteer Growth -->
+  <section class="py-16" *ngIf="!isLoading">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Zone Activity -->
+        <div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 bg-gradient-to-br from-[#8b5cf6] to-[#a78bfa] rounded-2xl flex items-center justify-center">
+              <lucide-icon name="map-pin" class="w-6 h-6 text-white"></lucide-icon>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Actividad por Zona</h3>
+              <p class="text-sm text-gray-600">Reciclaje y reforestación</p>
+            </div>
+          </div>
+          <div class="h-[350px]">
+            <canvas baseChart
+              [data]="zoneChartData"
+              [options]="zoneChartOptions"
+              [type]="zoneChartType">
+            </canvas>
+          </div>
+        </div>
+
+        <!-- Volunteer Growth -->
+        <div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 bg-gradient-to-br from-[#f97316] to-[#fb923c] rounded-2xl flex items-center justify-center">
+              <lucide-icon name="users" class="w-6 h-6 text-white"></lucide-icon>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Crecimiento de Voluntarios</h3>
+              <p class="text-sm text-gray-600">Participación mensual</p>
+            </div>
+          </div>
+          <div class="h-[350px]">
+            <canvas baseChart
+              [data]="volunteerChartData"
+              [options]="volunteerChartOptions"
+              [type]="volunteerChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campaign vs Participants -->
+  <section class="py-16 bg-gray-50" *ngIf="!isLoading">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
         <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl flex items-center justify-center">
+          <div class="w-12 h-12 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center">
             <lucide-icon name="trending-up" class="w-6 h-6 text-white"></lucide-icon>
           </div>
           <div>
-            <h3 class="text-xl font-bold text-gray-900">{{ 'stats.charts.zones.title' | translate }}</h3>
-            <p class="text-sm text-gray-600">{{ 'stats.charts.zones.subtitle' | translate }}</p>
+            <h3 class="text-xl font-bold text-gray-900">Campaña vs Participantes</h3>
+            <p class="text-sm text-gray-600">Participación real por campaña registrada</p>
           </div>
         </div>
         <div class="h-[350px]">
           <canvas baseChart
-            [data]="zoneChartData"
-            [options]="zoneChartOptions"
-            [type]="zoneChartType">
-          </canvas>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-700 rounded-2xl flex items-center justify-center">
-            <lucide-icon name="users" class="w-6 h-6 text-white"></lucide-icon>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-gray-900">{{ 'stats.charts.volunteers.title' | translate }}</h3>
-            <p class="text-sm text-gray-600">{{ 'stats.charts.volunteers.subtitle' | translate }}</p>
-          </div>
-        </div>
-        <div class="h-[350px]">
-          <canvas baseChart
-            [data]="lineChartData"
-            [options]="lineChartOptions"
-            [type]="lineChartType">
+            [data]="campaignChartData"
+            [options]="campaignChartOptions"
+            [type]="campaignChartType">
           </canvas>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-16 bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9]">
+  <!-- Cumulative Environmental Impact Section -->
+  <section class="py-20 bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9]" *ngIf="!isLoading">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-gray-900 mb-4">
-          {{ 'stats.summary.title' | translate }}
-        </h2>
-        <p class="text-lg text-gray-600">
-          {{ 'stats.summary.subtitle' | translate }}
-        </p>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Impacto Ambiental Acumulado</h2>
+        <p class="text-lg text-gray-600">El resultado de nuestro esfuerzo colectivo</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-3xl p-8 text-center shadow-xl">
-          <div class="text-6xl mb-4">🌳</div>
-          <p class="text-5xl font-bold text-[#2E7D32] mb-2">15,432</p>
-          <p class="text-gray-600 font-medium mb-4">{{ 'stats.summary.trees.label' | translate }}</p>
-          <p class="text-sm text-gray-500">{{ 'stats.summary.trees.equivalent' | translate }}</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 text-center shadow-xl">
-          <div class="text-6xl mb-4">♻️</div>
-          <p class="text-5xl font-bold text-[#2E7D32] mb-2">328 ton</p>
-          <p class="text-gray-600 font-medium mb-4">{{ 'stats.summary.recycling.label' | translate }}</p>
-          <p class="text-sm text-gray-500">{{ 'stats.summary.recycling.equivalent' | translate }}</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 text-center shadow-xl">
-          <div class="text-6xl mb-4">💧</div>
-          <p class="text-5xl font-bold text-[#2E7D32] mb-2">2.4M L</p>
-          <p class="text-gray-600 font-medium mb-4">{{ 'stats.summary.water.label' | translate }}</p>
-          <p class="text-sm text-gray-500">{{ 'stats.summary.water.equivalent' | translate }}</p>
+        <div *ngFor="let card of impactCards" class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2">
+          <div class="text-5xl font-bold text-[#2E7D32] mb-4">{{ card.value }}</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">{{ card.label }}</h3>
+          <p class="text-gray-600">{{ card.detail }}</p>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Loading State -->
+  <ng-template #loadingState>
+    <section class="py-16 bg-[#E8F5E9]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div *ngFor="let i of [1,2,3,4]" class="bg-white rounded-3xl p-8 shadow animate-pulse">
+            <div class="w-16 h-16 bg-gray-200 rounded-2xl mb-6"></div>
+            <div class="h-10 bg-gray-200 rounded w-3/4 mb-3"></div>
+            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-template>
 </main>
