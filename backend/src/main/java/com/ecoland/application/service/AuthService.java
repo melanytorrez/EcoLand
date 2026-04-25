@@ -93,7 +93,7 @@ public class AuthService implements AuthUseCase {
         try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
                     // TODO: Replace with real Google Client ID
-                    .setAudience(Collections.singletonList("YOUR_GOOGLE_CLIENT_ID"))
+                    .setAudience(Collections.singletonList("453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com"))
                     .build();
 
             // When testing locally without a real token or real Client ID, this will fail.

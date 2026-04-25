@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 export class CustomTranslateLoader implements TranslateLoader {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   getTranslation(lang: string): Observable<any> {
     return this.http.get(`./assets/i18n/${lang}.json`);
   }
@@ -47,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('YOUR_GOOGLE_CLIENT_ID')
+            provider: new GoogleLoginProvider('453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com')
           }
         ],
         onError: (err) => {
