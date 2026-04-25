@@ -229,6 +229,88 @@
     "confirm": "Sí, salir",
     "cancel": "Cancelar"
   },
+  "admin_page":{
+    "side_bar": {
+      "user_view": "Vista de usuario",
+      "logo": {
+        "subtitle": "Administra campañas, usuarios y más"
+      }
+    },
+    "campaign_management": {
+      "title": "Gestión de Campañas",
+      "subtitle": "Ayudemos a mantener nuestras campañas organizadas y efectivas",
+      "create_button": "Nueva campaña",
+      "search": "Buscar campañas por nombre o ubicación...",
+      "table": {
+        "name": "Nombre",
+        "location": "Ubicación",
+        "date": "Fecha",
+        "spots": "Cupos",
+        "organizer": "Organizador",
+        "status": "Estado",
+        "actions": "Acciones",
+        "edit": "Editar",
+        "delete": "Eliminar"
+      },
+      "loading": "Cargando campañas...",
+      "empty": "No hay campañas para mostrar."
+    },
+    "campaign_form": {
+      "title_create": "Crear nueva campaña",
+      "title_edit": "Editar campaña",
+      "subtitle_create": "Llena los detalles para crear una nueva campaña de reforestación",
+      "subtitle_edit": "Actualiza los detalles de la campaña",
+      "fields": {
+        "name": "Nombre de la campaña",
+        "description": "Descripción detallada de la campaña",
+        "date": "Fecha de la campaña",
+        "location": "Ubicación de la campaña",
+        "spots": "Número de cupos disponibles",
+        "status": "Estado de la campaña",
+        "organizer": "Organizador de la campaña",
+        "image_url": "URL de la imagen",
+        "optional": "opcional"
+      },
+      "status_options": {
+          "scheduled": "Programada",
+          "active": "Activa",
+          "finished": "Finalizada"
+      },
+      "placeholders": {
+        "name": "Ej: Reforestación en el Parque Tunari",
+        "description": "Ej: Únete a nosotros para plantar árboles y restaurar el ecosistema del Parque Tunari. Necesitamos voluntarios para plantar 500 árboles el próximo sábado.",
+        "date": "Selecciona la fecha de la campaña",
+        "location": "Ej: Parque Tunari, Cochabamba",
+        "spots": "Ej: 50",
+        "organizer": "Ej: Fundación EcoLand",
+        "image_url": "Ej: https://example.com/imagen-campaña.jpg"
+      },
+      "btn_save_new": "Crear campaña",
+      "btn_save_edit": "Guardar cambios",
+      "btn_cancel": "Cancelar",
+      "loading_create": "Creando campaña...",
+      "loading_edit": "Guardando cambios...",
+      "validation": {
+        "name": "El título es requerido",
+        "description": "La descripción es requerida",
+        "date": "La fecha es requerida",
+        "location": "La ubicación es requerida",
+        "spots": "Los cupos deben ser mayores a 0",
+        "organizer": "El organizador es requerido"
+      }
+    },
+    "alert": {
+      "confirm_delete": "¿Está seguro de eliminar permanentemente esta campaña de la base de datos?",
+      "admin_login_required": "Error: Debe iniciar sesión como administrador.",
+      "campaign_deleted": "Campaña eliminada correctamente.",
+      "delete_error": "Hubo un error al intentar eliminar la campaña de la base de datos.",
+      "session_expired": "Error: Sesión de administrador expirada o inválida. Por favor, vuelva a iniciar sesión.",
+      "campaign_updated": "¡Campaña actualizada exitosamente en la base de datos!",
+      "update_error": "Ocurrió un error al actualizar la campaña en el servidor.",
+      "campaign_created": "¡Campaña guardada exitosamente en la base de datos!",
+      "create_error": "Ocurrió un error al guardar la campaña en el servidor."
+    }
+  },
   "shared": {
     "or_separator": "o",
     "loading_generic": "Cargando...",

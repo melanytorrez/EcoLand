@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CampaignService } from '../../../../../core/services/campaign.service';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { Campaign } from '../../../../../core/models/campaign.model';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface CampaignFormData {
   title: string;
@@ -23,7 +24,7 @@ export class CampaignFormComponent implements OnInit {
   searchTerm: string = '';
   showModal: boolean = false;
   editingId: number | null = null;
-  
+
   formData: CampaignFormData = {
     title: '',
     date: '',
@@ -34,14 +35,14 @@ export class CampaignFormComponent implements OnInit {
     description: '',
     image: '',
   };
-  
-  formErrors: Record<string, string> = {};
 
+  formErrors: Record<string, string> = {};
   campaigns: Campaign[] = [];
 
   constructor(
     private campaignService: CampaignService,
-    private authService: AuthService
+    private authService: AuthService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -68,21 +69,22 @@ export class CampaignFormComponent implements OnInit {
   }
 
   handleDelete(id: number): void {
-    if (confirm('¿Está seguro de eliminar permanentemente esta campaña de la base de datos?')) {
+    if (confirm(this.translate.instant('admin_page.alert.confirm_delete'))) {
       const token = this.authService.getToken();
+
       if (!token) {
-        alert('Error: Debe iniciar sesión como administrador.');
+        alert(this.translate.instant('admin_page.alert.admin_login_required'));
         return;
       }
 
       this.campaignService.deleteCampaign(id, token).subscribe({
         next: () => {
           this.loadCampaigns();
-          alert('Campaña eliminada correctamente.');
+          alert(this.translate.instant('admin_page.alert.campaign_deleted'));
         },
         error: (err) => {
           console.error('Error al eliminar campaña', err);
-          alert('Hubo un error al intentar eliminar la campaña de la base de datos.');
+          alert(this.translate.instant('admin_page.alert.delete_error'));
         }
       });
     }
@@ -92,22 +94,27 @@ export class CampaignFormComponent implements OnInit {
     const errors: Record<string, string> = {};
 
     if (!this.formData.title.trim()) {
-      errors['title'] = 'El título es requerido';
+      errors['title'] = this.translate.instant('admin_page.campaign_form.validation.name');
     }
+
     if (!this.formData.date) {
-      errors['date'] = 'La fecha es requerida';
+      errors['date'] = this.translate.instant('admin_page.campaign_form.validation.date');
     }
+
     if (!this.formData.location.trim()) {
-      errors['location'] = 'La ubicación es requerida';
+      errors['location'] = this.translate.instant('admin_page.campaign_form.validation.location');
     }
+
     if (!this.formData.spots || parseInt(this.formData.spots) <= 0) {
-      errors['spots'] = 'Los cupos deben ser mayores a 0';
+      errors['spots'] = this.translate.instant('admin_page.campaign_form.validation.spots');
     }
+
     if (!this.formData.organizer.trim()) {
-      errors['organizer'] = 'El organizador es requerido';
+      errors['organizer'] = this.translate.instant('admin_page.campaign_form.validation.organizer');
     }
+
     if (!this.formData.description.trim()) {
-      errors['description'] = 'La descripción es requerida';
+      errors['description'] = this.translate.instant('admin_page.campaign_form.validation.description');
     }
 
     this.formErrors = errors;
@@ -120,8 +127,9 @@ export class CampaignFormComponent implements OnInit {
     }
 
     const token = this.authService.getToken();
+
     if (!token) {
-      alert('Error: Sesión de administrador expirada o inválida. Por favor, vuelva a iniciar sesión.');
+      alert(this.translate.instant('admin_page.alert.session_expired'));
       return;
     }
 
@@ -137,16 +145,16 @@ export class CampaignFormComponent implements OnInit {
       image: this.formData.image,
     };
 
-    if (this.editingId) {
+    if (this.editingId !== null) {
       this.campaignService.updateCampaign(this.editingId, newCampaign, token).subscribe({
         next: () => {
           this.loadCampaigns();
           this.closeModal();
-          alert('¡Campaña actualizada exitosamente en la base de datos MySQL!');
+          alert(this.translate.instant('admin_page.alert.campaign_updated'));
         },
         error: (err) => {
           console.error('Error actualizando en BD:', err);
-          alert('Ocurrió un error al actualizar la campaña en el servidor.');
+          alert(this.translate.instant('admin_page.alert.update_error'));
         }
       });
     } else {
@@ -154,11 +162,11 @@ export class CampaignFormComponent implements OnInit {
         next: () => {
           this.loadCampaigns();
           this.closeModal();
-          alert('¡Campaña guardada exitosamente en la base de datos MySQL!');
+          alert(this.translate.instant('admin_page.alert.campaign_created'));
         },
         error: (err) => {
           console.error('Error guardando en BD:', err);
-          alert('Ocurrió un error al guardar la campaña en el servidor.');
+          alert(this.translate.instant('admin_page.alert.create_error'));
         }
       });
     }
@@ -166,33 +174,41 @@ export class CampaignFormComponent implements OnInit {
 
   formatDateForDisplay(dateString: string): string {
     if (!dateString) return '';
+
     const parts = dateString.split('-');
+
     if (parts.length === 3) {
       const [year, month, day] = parts;
       return `${day}/${month}/${year}`;
     }
+
     return dateString;
   }
 
   formatDateForInput(dateString: string): string {
     if (!dateString) return '';
+
     const parts = dateString.split('/');
+
     if (parts.length === 3) {
       const [day, month, year] = parts;
       return `${year}-${month}-${day}`;
     }
+
     return dateString;
   }
 
   openModal(campaign?: Campaign): void {
     this.formErrors = {};
+
     if (campaign) {
       this.editingId = campaign.id;
+
       this.formData = {
         title: campaign.title,
         date: this.formatDateForInput(campaign.date),
-        location: campaign.location,
         spots: campaign.spots ? campaign.spots.toString() : '',
+        location: campaign.location,
         status: (campaign.status as 'Activa' | 'Programada' | 'Finalizada') || 'Programada',
         organizer: campaign.organizer,
         description: campaign.description || '',
@@ -200,6 +216,7 @@ export class CampaignFormComponent implements OnInit {
       };
     } else {
       this.editingId = null;
+
       this.formData = {
         title: '',
         date: '',
@@ -211,12 +228,14 @@ export class CampaignFormComponent implements OnInit {
         image: '',
       };
     }
+
     this.showModal = true;
   }
 
   closeModal(): void {
     this.showModal = false;
     this.editingId = null;
+
     this.formData = {
       title: '',
       date: '',
@@ -227,6 +246,7 @@ export class CampaignFormComponent implements OnInit {
       description: '',
       image: '',
     };
+
     this.formErrors = {};
   }
 
@@ -234,16 +254,20 @@ export class CampaignFormComponent implements OnInit {
     switch (status) {
       case 'Activa':
         return 'bg-[#4CAF50] text-white';
+
       case 'Programada':
         return 'bg-blue-100 text-blue-700';
+
       case 'Finalizada':
         return 'bg-gray-100 text-gray-600';
+
       default:
         return 'bg-gray-100 text-gray-600';
     }
   }
 
   getPercentage(participants: number, spots: number): number {
+    if (!spots || spots <= 0) return 0;
     return (participants / spots) * 100;
   }
 }
