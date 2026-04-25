@@ -3,6 +3,10 @@ package com.ecoland.infrastructure.security;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
+import com.ecoland.domain.model.Usuario;
+import java.util.Optional;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +32,10 @@ class JwtFilterTest {
     private HttpServletRequest request;
 
     @Mock
+    private UsuarioRepositoryPort usuarioRepositoryPort;
+
+
+    @Mock
     private HttpServletResponse response;
 
     @Mock
@@ -51,6 +59,8 @@ class JwtFilterTest {
         when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
         when(jwtService.isTokenValid(token)).thenReturn(true);
         when(jwtService.extractEmail(token)).thenReturn(email);
+        when(usuarioRepositoryPort.findByEmail(email)).thenReturn(Optional.of(new Usuario()));
+
 
         // Act
         jwtFilter.doFilterInternal(request, response, filterChain);
@@ -103,6 +113,7 @@ class JwtFilterTest {
         when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
         when(jwtService.isTokenValid(token)).thenReturn(true);
         when(jwtService.extractEmail(token)).thenReturn("test@mail.com");
+
 
         SecurityContextHolder.getContext().setAuthentication(
                 mock(org.springframework.security.core.Authentication.class)
