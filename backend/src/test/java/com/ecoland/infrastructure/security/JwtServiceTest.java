@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class JwtServiceTest {
 
-    private final JwtService jwtService = new JwtService();
+    private final JwtService jwtService = new JwtService("test-secret-key-that-is-at-least-32-characters-long");
 
     @Test
     @DisplayName("Should generate a valid token")
