@@ -258,7 +258,53 @@
       "campaign_not_found": "Campaña no encontrada.",
       "load_error": "No se pudo cargar la campaña de reciclaje."
     }
-  },  
+  }, 
+  "stats": {
+    "hero": {
+      "badge": "📊 Estadísticas Ambientales",
+      "title": "Nuestro impacto en números",
+      "description": "Visualiza el progreso colectivo de Cochabamba hacia un futuro más verde y sostenible."
+    },
+    "charts":{
+      "tress": {
+        "title": "Árboles plantados",
+        "subtitle": "Progreso mensual"
+      },
+      "waste": {
+        "title": "Distribución de Residuos",
+        "subtitle": "Por tipo de material"
+      },
+      "zones": {
+        "title": "Actividad por Zona",
+        "subtitle": "Reciclaje y reforestación"
+      },
+      "volunteers": {
+        "title": "Crecimiento de Voluntarios",
+        "subtitle": "Participación mensual"
+      }
+    },
+    "summary": {
+      "title": "Impacto Ambiental Acumulado",
+      "subtitle": "El resultado de nuestro esfuerzo colectivo",
+      "trees":{
+        "label": "Árboles plantados",
+        "equivalent": "Equivalente a {{count}} hectáreas de bosque"
+      },
+      "recycling":{
+        "label": "Residuos reciclados",
+        "equivalent": "Reducción de {{count}} toneladas de CO₂"
+      },
+      "water":{
+        "label": "Agua ahorrada",
+        "equivalent": "Gracias al reciclaje de papel y plástico"
+      }
+    },
+    "datasets": {
+      "trees_planted": "Árboles Plantados",
+      "kg_recycled": "Kg Reciclados",
+      "active_volunteers": "Voluntarios Activos"
+    }
+  }, 
   "header": {
     "nav": {
       "home": "Inicio",
