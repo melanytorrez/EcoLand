@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RecyclingCampaignService } from '../../core/services/recycling-campaign.service';
+import { CampaignService } from '../../core/services/campaign.service';
 import { RecyclingCampaign } from '../../core/models/recycling-campaign.model';
+import { Campaign } from '../../core/models/campaign.model';
 
 @Component({
   selector: 'app-campanas-reciclaje',
@@ -13,12 +14,26 @@ export class CampañasReciclajeComponent implements OnInit {
   filteredCampaigns: RecyclingCampaign[] = [];
   searchTerm: string = '';
 
-  constructor(private recyclingCampaignService: RecyclingCampaignService) {}
+  constructor(private campaignService: CampaignService) {}
 
   ngOnInit(): void {
-    this.recyclingCampaignService.getCampaigns().subscribe(campaigns => {
-      this.campaigns = campaigns;
-      this.filteredCampaigns = campaigns;
+    this.campaignService.getCampaigns('RECYCLING').subscribe((campaigns: Campaign[]) => {
+      const mapped = campaigns.map(c => ({
+        id: c.id,
+        image: c.image,
+        name: c.title,
+        wasteType: 'Reciclaje',
+        date: c.date,
+        location: c.location,
+        goal: `${c.spots} kg`,
+        collected: c.participants,
+        goalAmount: c.spots,
+        status: c.status,
+        participants: c.participants,
+        typeColor: 'green'
+      } as RecyclingCampaign));
+      this.campaigns = mapped;
+      this.filteredCampaigns = mapped;
     });
   }
 
