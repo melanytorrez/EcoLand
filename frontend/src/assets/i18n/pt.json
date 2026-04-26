@@ -122,7 +122,15 @@
       "cta_button": "Quero ser voluntário",
       "cta_loading": "Registrando...",
       "back_link": "Ver outras campanhas"
-    }
+    },
+    "messages": {
+      "invalid_campaign": "Campanha não válida.",
+      "load_error": "Não se pôde carregar o detalhe da campanha.",
+      "login_required": "Você deve estar logado para participar de uma campanha de reflorestamento.",
+      "no_session": "Nenhuma sessão ativa encontrada.",
+      "participation_success": "Participação registrada com sucesso.",
+      "participation_error": "Não foi possível completar a participação. Tente novamente."
+     }
   },
   "recycling": {
     "hero": {

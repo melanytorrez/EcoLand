@@ -122,6 +122,14 @@
       "cta_button": "I want to volunteer",
       "cta_loading": "Registering...",
       "back_link": "View other campaigns"
+    },
+    "messages": {
+      "invalid_campaign": "Invalid campaign.",
+      "load_error": "Failed to load campaign details.",
+      "login_required": "You must be logged in to participate in a reforestation campaign.",
+      "no_session": "No active session found.",
+      "participation_success": "Participation registered successfully.",
+      "participation_error": "Failed to complete participation. Please try again."
     }
   },
   "recycling": {

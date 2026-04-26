@@ -128,6 +128,14 @@
       "cta_button": "Je veux être bénévole",
       "cta_loading": "Inscription en cours...",
       "back_link": "Voir d'autres campagnes"
+    },
+    "messages": {
+      "invalid_campaign": "Campagne non valide.",
+      "load_error": "Impossible de charger les détails de la campagne.",
+      "login_required": "Vous devez être connecté pour participer à une campagne de reforestation.",
+      "no_session": "Aucune session active trouvée.",
+      "participation_success": "Participation enregistrée avec succès.",
+      "participation_error": "Impossible de finaliser la participation. Veuillez réessayer."
     }
   },
   "recycling": {
