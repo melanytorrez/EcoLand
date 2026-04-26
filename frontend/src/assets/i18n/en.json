@@ -22,16 +22,27 @@
       "loading": "Loading...",
       "footer": {
         "register_question": "Don't have an account?",
-        "register_link": "Sign up here",
+        "register_link": "Register here",
         "back_home": "← Back to home"
+      },
+      "errors": {
+        "no_admin_permissions": "Your account does not have administrator permissions.",
+        "admin_account_required": "Your account is an administrator account. Choose administrator access.",
+        "invalid_credentials": "Incorrect password or email, please try again."
       }
     },
     "register": {
-      "title": "Create an account",
+      "title": "Create account",
       "subtitle": "Join the EcoLand community",
       "inputs": {
-        "full_name": { "label": "Full name", "placeholder": "John Smith" },
-        "confirm_password": { "label": "Confirm password", "placeholder": "Repeat your password" }
+        "full_name": {
+          "label": "Full name",
+          "placeholder": "John Smith"
+        },
+        "confirm_password": {
+          "label": "Confirm password",
+          "placeholder": "Repeat your password"
+        }
       },
       "submit_button": "Create account",
       "footer": {
@@ -42,17 +53,20 @@
         "required": "This field is required.",
         "required_email": "Email is required.",
         "required_password": "Password is required.",
-        "invalid_email": "Invalid email format.",
-        "missing_at": "Email must include the @ symbol.",
-        "missing_com": "Email must end in .com.",
+        "invalid_email": "Invalid email format",
+        "missing_at": "The @ symbol is missing from the email.",
+        "missing_com": "The email must end in .com.",
         "password_mismatch": "Passwords do not match.",
         "password_rules": {
           "min_length": "Minimum 8 characters.",
-          "upper": "Must include at least one uppercase letter.",
-          "lower": "Must include at least one lowercase letter.",
-          "number": "Must include at least one number.",
-          "special": "Must include at least one special character."
+          "upper": "An uppercase letter is missing.",
+          "lower": "A lowercase letter is missing.",
+          "number": "A number is missing.",
+          "special": "A special character is missing."
         }
+      },
+      "messages": {
+        "generic_error": "Registration error. Please try again."
       }
     }
   },
@@ -63,13 +77,13 @@
     "recycling": "Recycling",
     "stats": "Statistics",
     "admin": "Admin Panel",
-    "logout": "Log Out"
+    "logout": "Sign out"
   },
   "home": {
     "hero": {
       "badge": "🌱 A greener Cochabamba",
       "title": "Let's build a greener Cochabamba together",
-      "description": "Join reforestation campaigns and improve recycling in your city.",
+      "description": "Participate in reforestation campaigns and improve recycling in your city.",
       "btn_campaigns": "View campaigns",
       "btn_recycling": "Explore recycling"
     },
@@ -83,19 +97,19 @@
       "title": "Active reforestation campaigns",
       "description": "Join our campaigns and help plant trees in Cochabamba",
       "spots": "{{count}} spots",
-      "btn_participate": "Join",
+      "btn_participate": "Participate",
       "btn_view_all": "View all campaigns"
     },
     "recycling_promo": {
       "badge": "♻️ Smart Recycling",
       "title": "Discover green points and collection routes",
-      "description": "Find the nearest recycling centers, check truck collection routes, and help keep Cochabamba clean.",
+      "description": "Find the nearest recycling centers, check truck routes and contribute to a cleaner Cochabamba.",
       "btn_explore": "Explore recycling system",
       "btn_campaigns": "View recycling campaigns"
     },
     "campaigns_section": {
-      "title": "Recent Campaigns",
-      "view_all": "View All"
+      "title": "Recent campaigns",
+      "view_all": "View all"
     }
   },
   "campaign_detail": {
@@ -113,18 +127,35 @@
       "spots_available_of": "{{available}} of {{total}}",
       "cta_button": "I want to volunteer",
       "cta_loading": "Registering...",
+      "cta_already_registered": "You are already registered",
+      "cta_no_spots": "No spots available",
       "back_link": "View other campaigns"
+    },
+    "messages": {
+      "invalid_campaign": "Invalid campaign.",
+      "load_error": "Could not load campaign details.",
+      "login_required": "You must sign in to participate in a reforestation campaign.",
+      "no_session": "No active session found.",
+      "participation_success": "Participation registered successfully.",
+      "participation_error": "Could not complete participation. Please try again.",
+      "already_registered_info": "You are already enrolled in this campaign.",
+      "loading": "Loading campaign...",
+      "participation_error_late": "Error trying to register. Please try again later."
+    },
+    "states": {
+      "loading": "Loading campaign...",
+      "error_back": "Back to campaigns"
     }
   },
   "recycling": {
     "hero": {
       "badge": "♻️ Recycling System",
-      "title": "Recycle smarter",
-      "description": "Find green points, check collection routes, and follow recyclers across Cochabamba."
+      "title": "Recycle smartly",
+      "description": "Find green points, check collection routes and track recyclers in Cochabamba."
     },
     "map": {
       "title": "Interactive Map",
-      "subtitle": "Explore green points, truck routes, and recycler paths",
+      "subtitle": "Explore green points, truck routes and recycler paths",
       "legend": {
         "title": "Legend",
         "points": "Green Points",
@@ -134,7 +165,12 @@
       "markers": {
         "green_point": "Green Point • Open",
         "truck_active": "Truck in service",
-        "recycler_active": "Active recycler"
+        "recycler_active": "Active recycler",
+        "your_location": "📍 Your location"
+      },
+      "popup": {
+        "open": "Open",
+        "closed": "Closed"
       }
     },
     "points_card": {
@@ -142,9 +178,11 @@
       "subtitle": "Near you",
       "loading": "Loading green points...",
       "empty": "No green points available right now.",
+      "error": "Could not load green points. Please try again later.",
       "btn_view_all": "View all points",
       "status_open": "Open",
-      "status_closed": "Closed"
+      "status_closed": "Closed",
+      "hours_unavailable": "Hours not available"
     },
     "route_card": {
       "title": "Next Route",
@@ -158,20 +196,23 @@
     },
     "impact_card": {
       "title": "Your Impact",
-      "subtitle": "Personal environmental footprint",
+      "subtitle": "Personal environmental",
       "recycled": "Total Recycled",
       "trees": "Trees Saved",
       "co2": "CO₂ Reduced",
       "ranking": "Your Ranking",
-      "ranking_suffix": "out of all recyclers",
+      "ranking_suffix": "of all recyclers",
       "btn_view_stats": "View full statistics"
+    },
+    "messages": {
+      "geolocation_unavailable": "Geolocation unavailable, using center of Cochabamba"
     }
   },
   "reforestation": {
     "hero": {
       "badge": "🌳 Reforestation Campaigns",
       "title": "Be part of the change",
-      "description": "Join our reforestation campaigns and help restore the green spaces of Cochabamba."
+      "description": "Join our reforestation campaigns and help recover the green spaces of Cochabamba."
     },
     "filters": {
       "placeholder": "Search campaign by name or location...",
@@ -179,13 +220,95 @@
     },
     "states": {
       "loading": "Fetching campaigns from the forest...",
-      "view_all": "View all campaigns"
+      "view_all": "View all campaigns",
+      "error_retry": "Error loading campaigns. Please try again.",
+      "no_results": "No campaigns matching your search."
     },
     "card": {
-      "progress_label": "Registration progress",
-      "spots_available": "{{available}} spots available out of {{total}}",
+      "progress_label": "Enrollment progress",
+      "spots_available": "{{available}} spots available of {{total}}",
       "organizer_label": "Organized by:",
-      "btn_participate": "Join"
+      "btn_participate": "Participate"
+    },
+    "messages": {
+      "load_error": "Could not load campaigns. Please check your connection.",
+      "login_required": "You must sign in to participate in a reforestation campaign."
+    }
+  },
+  "recycling_campaigns": {
+    "progress": {
+      "title": "Recycling campaigns in Cochabamba",
+      "subtitle": "Participate in our recycling campaigns and contribute to a cleaner and more sustainable city",
+      "current_lable": "Current campaigns",
+      "goal_info": "Our goal is to recycle {{goal}} kg of waste this year. Join us to reach this goal and make Cocha a greener city!",
+      "participants": "Active participants",
+      "to_reach": "Every action counts for a cleaner Cocha!"
+    },
+    "sections": {
+      "description": "Description",
+      "benefits": "Benefits of Participating",
+      "rewards_title": "Rewards System",
+      "rewards_subtitle": "Earn recognition for your contribution",
+      "people_count": "{{count}} people participating"
+    },
+    "sidebar": {
+      "label_date": "Date:",
+      "label_location": "Location:",
+      "label_goal": "Recycling goal:",
+      "btn_join": "I want to participate!",
+      "btn_back": "View other campaigns",
+      "organizer_label": "Organized by:"
+    },
+    "loading": "Loading recycling campaigns...",
+    "messages": {
+      "campaign_not_found": "Campaign not found.",
+      "load_error": "Could not load the recycling campaign."
+    }
+  },
+  "stats": {
+    "hero": {
+      "badge": "📊 Environmental Statistics",
+      "title": "Our impact in numbers",
+      "description": "Visualize Cochabamba's collective progress toward a greener, more sustainable future."
+    },
+    "charts": {
+      "tress": {
+        "title": "Trees planted",
+        "subtitle": "Monthly progress"
+      },
+      "waste": {
+        "title": "Waste Distribution",
+        "subtitle": "By material type"
+      },
+      "zones": {
+        "title": "Activity by Zone",
+        "subtitle": "Recycling and reforestation"
+      },
+      "volunteers": {
+        "title": "Volunteer Growth",
+        "subtitle": "Monthly participation"
+      }
+    },
+    "summary": {
+      "title": "Cumulative Environmental Impact",
+      "subtitle": "The result of our collective effort",
+      "trees": {
+        "label": "Trees planted",
+        "equivalent": "Equivalent to {{count}} hectares of forest"
+      },
+      "recycling": {
+        "label": "Waste recycled",
+        "equivalent": "Reduction of {{count}} tonnes of CO₂"
+      },
+      "water": {
+        "label": "Water saved",
+        "equivalent": "Thanks to paper and plastic recycling"
+      }
+    },
+    "datasets": {
+      "trees_planted": "Trees Planted",
+      "kg_recycled": "Kg Recycled",
+      "active_volunteers": "Active Volunteers"
     }
   },
   "header": {
@@ -199,12 +322,12 @@
       "admin_panel": "Admin Panel",
       "logout": "Sign out",
       "login": "Sign in",
-      "register": "Sign up"
+      "register": "Register"
     },
     "user_default": "User"
   },
   "footer": {
-    "description": "Cochabamba's leading environmental management platform. Together we're building a greener, more sustainable future.",
+    "description": "Leading platform for environmental management in Cochabamba. Together we build a greener and more sustainable future.",
     "columns": {
       "platform": {
         "title": "Platform",
@@ -228,6 +351,88 @@
     "message": "Are you sure you want to leave?",
     "confirm": "Yes, sign out",
     "cancel": "Cancel"
+  },
+  "admin_page": {
+    "side_bar": {
+      "user_view": "User view",
+      "logo": {
+        "subtitle": "Manage campaigns, users and more"
+      }
+    },
+    "campaign_management": {
+      "title": "Campaign Management",
+      "subtitle": "Let's keep our campaigns organized and effective",
+      "create_button": "New campaign",
+      "search": "Search campaigns by name or location...",
+      "table": {
+        "name": "Name",
+        "location": "Location",
+        "date": "Date",
+        "spots": "Spots",
+        "organizer": "Organizer",
+        "status": "Status",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "loading": "Loading campaigns...",
+      "empty": "No campaigns to display."
+    },
+    "campaign_form": {
+      "title_create": "Create new campaign",
+      "title_edit": "Edit campaign",
+      "subtitle_create": "Fill in the details to create a new reforestation campaign",
+      "subtitle_edit": "Update the campaign details",
+      "fields": {
+        "name": "Campaign name",
+        "description": "Detailed campaign description",
+        "date": "Campaign date",
+        "location": "Campaign location",
+        "spots": "Number of available spots",
+        "status": "Campaign status",
+        "organizer": "Campaign organizer",
+        "image_url": "Image URL",
+        "optional": "optional"
+      },
+      "status_options": {
+        "scheduled": "Scheduled",
+        "active": "Active",
+        "finished": "Finished"
+      },
+      "placeholders": {
+        "name": "e.g. Reforestation at Tunari Park",
+        "description": "e.g. Join us to plant trees and restore the Tunari Park ecosystem. We need volunteers to plant 500 trees next Saturday.",
+        "date": "Select the campaign date",
+        "location": "e.g. Tunari Park, Cochabamba",
+        "spots": "e.g. 50",
+        "organizer": "e.g. EcoLand Foundation",
+        "image_url": "e.g. https://example.com/campaign-image.jpg"
+      },
+      "btn_save_new": "Create campaign",
+      "btn_save_edit": "Save changes",
+      "btn_cancel": "Cancel",
+      "loading_create": "Creating campaign...",
+      "loading_edit": "Saving changes...",
+      "validation": {
+        "name": "Title is required",
+        "description": "Description is required",
+        "date": "Date is required",
+        "location": "Location is required",
+        "spots": "Spots must be greater than 0",
+        "organizer": "Organizer is required"
+      }
+    },
+    "alert": {
+      "confirm_delete": "Are you sure you want to permanently delete this campaign from the database?",
+      "admin_login_required": "Error: You must sign in as administrator.",
+      "campaign_deleted": "Campaign deleted successfully.",
+      "delete_error": "An error occurred while trying to delete the campaign from the database.",
+      "session_expired": "Error: Administrator session expired or invalid. Please sign in again.",
+      "campaign_updated": "Campaign updated successfully in the database!",
+      "update_error": "An error occurred while updating the campaign on the server.",
+      "campaign_created": "Campaign saved successfully in the database!",
+      "create_error": "An error occurred while saving the campaign on the server."
+    }
   },
   "shared": {
     "or_separator": "or",
