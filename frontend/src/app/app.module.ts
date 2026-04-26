@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
@@ -18,6 +18,17 @@ export class CustomTranslateLoader implements TranslateLoader {
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
+}
+
+export function appInitializerFactory(translate: TranslateService) {
+  return () => new Promise<void>((resolve) => {
+    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
+    translate.setDefaultLang('es');
+    translate.use(savedLang).subscribe({
+      next: () => resolve(),
+      error: () => resolve()
+    });
+  });
 }
 
 @NgModule({
@@ -39,7 +50,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule
   ],
   providers: [
-    provideCharts(withDefaultRegisterables())
+    provideCharts(withDefaultRegisterables()),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

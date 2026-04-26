@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { LucideAngularModule, Leaf, LogIn, UserPlus, Shield, LogOut, User, TreeDeciduous, Recycle, TrendingUp, Users, MapPin, Calendar, Mail, Phone, Menu, X, Search, Filter, Clock, CheckCircle, Target, Award, Truck, Navigation, Lock, Plus, Edit, Trash2, Image, LayoutDashboard, Route, BarChart3 } from 'lucide-angular';
+import { LucideAngularModule, Leaf, LogIn, UserPlus, Shield, LogOut, User, TreeDeciduous, Recycle, TrendingUp, Users, MapPin, Calendar, Mail, Phone, Menu, X, Search, Filter, Clock, CheckCircle, Target, Award, Truck, Navigation, Lock, Plus, Edit, Trash2, Image, LayoutDashboard, Route, BarChart3, ChevronDown, Check } from 'lucide-angular';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -20,7 +20,7 @@ import { AdminLayoutComponent } from './components/admin-layout/admin-layout.com
     CommonModule,
     RouterModule,
     TranslateModule,
-    LucideAngularModule.pick({ Leaf, LogIn, UserPlus, Shield, LogOut, User, TreeDeciduous, Recycle, TrendingUp, Users, MapPin, Calendar, Mail, Phone, Menu, X, Search, Filter, Clock, CheckCircle, Target, Award, Truck, Navigation, Lock, Plus, Edit, Trash2, Image, LayoutDashboard, Route, BarChart3 })
+    LucideAngularModule.pick({ Leaf, LogIn, UserPlus, Shield, LogOut, User, TreeDeciduous, Recycle, TrendingUp, Users, MapPin, Calendar, Mail, Phone, Menu, X, Search, Filter, Clock, CheckCircle, Target, Award, Truck, Navigation, Lock, Plus, Edit, Trash2, Image, LayoutDashboard, Route, BarChart3, ChevronDown, Check })
   ],
   exports: [
     HeaderComponent,
