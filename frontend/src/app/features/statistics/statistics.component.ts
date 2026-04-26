@@ -3,6 +3,7 @@ import { StatisticsService } from '../../core/services/statistics.service';
 import { SummaryStat } from '../../core/models/statistics.model';
 import { ChartConfiguration, ChartData, ChartType, registerables } from 'chart.js';
 import { Chart } from 'chart.js';
+import { TranslateService } from '@ngx-translate/core';
 
 Chart.register(...registerables);
 
@@ -37,17 +38,19 @@ export class StatisticsComponent implements OnInit {
       y: { grid: { color: '#f3f4f6' } }
     }
   };
+
   public barChartType: ChartType = 'bar';
+
   public barChartData: ChartData<'bar'> = {
     labels: [],
     datasets: [
-      { 
-        data: [], 
-        backgroundColor: '#4CAF50', 
+      {
+        data: [],
+        backgroundColor: '#4CAF50',
         borderColor: '#2E7D32',
         borderWidth: 1,
         borderRadius: 12,
-        label: 'Árboles Plantados' 
+        label: ''
       }
     ]
   };
@@ -63,7 +66,9 @@ export class StatisticsComponent implements OnInit {
       }
     }
   };
+
   public pieChartType: ChartType = 'pie';
+
   public pieChartData: ChartData<'pie'> = {
     labels: [],
     datasets: [{ data: [], backgroundColor: [] }]
@@ -81,12 +86,14 @@ export class StatisticsComponent implements OnInit {
       legend: { position: 'bottom' }
     }
   };
+
   public zoneChartType: ChartType = 'bar';
+
   public zoneChartData: ChartData<'bar'> = {
     labels: [],
     datasets: [
-      { data: [], label: 'Kg Reciclados', backgroundColor: '#4CAF50', borderRadius: 0 },
-      { data: [], label: 'Árboles Plantados', backgroundColor: '#2E7D32', borderRadius: 0 }
+      { data: [], label: '', backgroundColor: '#4CAF50', borderRadius: 0 },
+      { data: [], label: '', backgroundColor: '#2E7D32', borderRadius: 0 }
     ]
   };
 
@@ -102,13 +109,15 @@ export class StatisticsComponent implements OnInit {
       y: { grid: { color: '#f3f4f6' } }
     }
   };
+
   public lineChartType: ChartType = 'line';
+
   public lineChartData: ChartData<'line'> = {
     labels: [],
     datasets: [
       {
         data: [],
-        label: 'Voluntarios Activos',
+        label: '',
         borderColor: '#4CAF50',
         backgroundColor: 'rgba(76, 175, 80, 0.1)',
         fill: true,
@@ -121,9 +130,14 @@ export class StatisticsComponent implements OnInit {
     ]
   };
 
-  constructor(private statsService: StatisticsService) {}
+  constructor(
+    private statsService: StatisticsService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
+    this.initializeTranslations();
+
     this.statsService.getSummaryStats().subscribe(stats => this.summaryStats = stats);
 
     this.statsService.getMonthlyTrees().subscribe(data => {
@@ -147,5 +161,19 @@ export class StatisticsComponent implements OnInit {
       this.lineChartData.labels = data.map(d => d.month);
       this.lineChartData.datasets[0].data = data.map(d => d.value);
     });
+  }
+
+  private initializeTranslations(): void {
+    this.barChartData.datasets[0].label =
+      this.translate.instant('stats.datasets.trees_planted');
+
+    this.zoneChartData.datasets[0].label =
+      this.translate.instant('stats.datasets.kg_recycled');
+
+    this.zoneChartData.datasets[1].label =
+      this.translate.instant('stats.datasets.trees_planted');
+
+    this.lineChartData.datasets[0].label =
+      this.translate.instant('stats.datasets.active_volunteers');
   }
 }

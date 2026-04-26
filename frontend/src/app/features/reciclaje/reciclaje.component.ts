@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '
 import { RecyclingService } from '../../core/services/recycling.service';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../../core/models/recycling.model';
 import * as L from 'leaflet';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reciclaje',
@@ -27,7 +28,11 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly CBBA_LAT = -17.3935;
   private readonly CBBA_LNG = -66.1570;
 
-  constructor(private recyclingService: RecyclingService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private recyclingService: RecyclingService,
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadingPoints = true;
@@ -44,7 +49,7 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       error: () => {
         this.nearbyPoints = [];
-        this.pointsError = 'No se pudieron cargar los puntos verdes. Intenta nuevamente más tarde.';
+        this.pointsError = this.translate.instant('recycling.points_card.error');
         this.loadingPoints = false;
         this.cdr.detectChanges();
       }
@@ -132,7 +137,7 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
 
           this.userMarker = L.marker([userLat, userLng], { icon: userIcon })
             .addTo(this.map)
-            .bindPopup('<strong>📍 Tu ubicación</strong>')
+            .bindPopup(`<strong>${this.translate.instant('recycling.map.markers.your_location')}</strong>`)
             .openPopup();
         },
         () => {
@@ -142,14 +147,12 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     }
 
-    // Add green points if already loaded
     if (this.nearbyPoints.length > 0) {
       this.addMarkersToMap();
     }
   }
 
   private addMarkersToMap(): void {
-    // Clear existing markers
     this.markers.forEach(m => m.remove());
     this.markers = [];
 
@@ -224,7 +227,7 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getPointHours(point: GreenPoint): string {
     if (!point.horarios?.length) {
-      return 'Horario no disponible';
+      return this.translate.instant('recycling.points_card.hours_unavailable');
     }
 
     const horario = point.horarios[0];

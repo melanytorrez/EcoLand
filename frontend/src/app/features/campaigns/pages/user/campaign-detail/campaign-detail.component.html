@@ -161,7 +161,7 @@
                 (click)="participate()"
                 [disabled]="isSubmitting || availableSpots === 0">
                 <span *ngIf="!isSubmitting">{{ availableSpots === 0 ? ('campaign_detail.sidebar.cta_no_spots' | translate) : ('campaign_detail.sidebar.cta_button' | translate) }}</span>
-                <span *ngIf="isSubmitting">{{ 'campaign_detail.sidebar.cta_processing' | translate }}</span>
+                <span *ngIf="isSubmitting">{{ 'campaign_detail.sidebar.cta_loading' | translate }}</span>
               </button>
             </ng-template>
 

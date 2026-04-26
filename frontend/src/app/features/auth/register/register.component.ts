@@ -2,10 +2,9 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
-import { AUTH_STRINGS } from '../../../core/constants/strings.constants';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -48,14 +47,18 @@ export class RegisterComponent {
     };
   }
 
-  strings = AUTH_STRINGS;
-
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
+  ) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
       password: ['', [
-        Validators.required, 
+        Validators.required,
         Validators.minLength(8),
         Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!.*_\-]).{8,}$/)
       ]],
@@ -75,9 +78,9 @@ export class RegisterComponent {
   onSubmit() {
     if (this.registerForm.invalid) {
       if (this.registerForm.hasError('mismatch')) {
-        this.error = this.strings.errorPasswordMismatch;
+        this.error = this.translate.instant('auth.register.validation.password_mismatch');
       } else {
-        this.error = this.strings.errorRequired;
+        this.error = this.translate.instant('auth.register.validation.required');
       }
       return;
     }
@@ -89,7 +92,12 @@ export class RegisterComponent {
 
     const { fullName, email, password, role } = this.registerForm.value;
 
-    this.authService.register({ nombre: fullName, email, password, role }).subscribe({
+    this.authService.register({
+      nombre: fullName,
+      email,
+      password,
+      role
+    }).subscribe({
       next: (response: any) => {
         console.log('Registro exitoso', response);
         this.authService.setSession(response);
@@ -99,7 +107,7 @@ export class RegisterComponent {
       error: (err: any) => {
         console.error('Error en el registro', err);
         this.isLoading = false;
-        
+
         if (err?.error?.message) {
           this.error = err.error.message;
           this.cdr.detectChanges();
@@ -115,10 +123,9 @@ export class RegisterComponent {
           }
         }
 
-        this.error = 'Error al registrar. Por favor, inténtelo de nuevo.';
+        this.error = this.translate.instant('auth.register.messages.generic_error');
         this.cdr.detectChanges();
       }
     });
   }
-
 }

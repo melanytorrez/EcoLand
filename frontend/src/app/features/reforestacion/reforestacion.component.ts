@@ -4,6 +4,7 @@ import { CampaignService } from '../../core/services/campaign.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { AuthService } from '../../core/services/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reforestacion',
@@ -22,7 +23,8 @@ export class ReforestacionComponent implements OnInit {
     private campaignService: CampaignService,
     private authService: AuthService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class ReforestacionComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        this.error = 'No se pudieron cargar las campañas. Por favor, verifica tu conexión.';
+        this.error = this.translate.instant('reforestacion.messages.load_error');
         this.isLoading = false;
         this.cdr.detectChanges();
         console.error('Error loading campaigns:', err);
@@ -75,7 +77,7 @@ export class ReforestacionComponent implements OnInit {
     this.router.navigate(['/login'], {
       queryParams: {
         redirectTo: `/reforestacion/${campaignId}`,
-        message: 'Debes iniciar sesion para participar en una campana de reforestacion.'
+        message: this.translate.instant('reforestacion.messages.login_required')
       }
     });
   }
