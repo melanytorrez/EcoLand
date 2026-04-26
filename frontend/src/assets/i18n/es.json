@@ -121,6 +121,8 @@
       "spots_available_of": "{{available}} de {{total}}",
       "cta_button": "Quiero ser voluntario",
       "cta_loading": "Registrando...",
+      "cta_already_registered": "Ya estás registrado",
+      "cta_no_spots": "Sin cupos disponibles",
       "back_link": "Ver otras campañas"
     },
     "messages": {
@@ -129,7 +131,14 @@
       "login_required": "Debes iniciar sesión para participar en una campaña de reforestación.",
       "no_session": "No se encontró sesión activa.",
       "participation_success": "Participación registrada con éxito.",
-      "participation_error": "No se pudo completar la participación. Intenta nuevamente."
+      "participation_error": "No se pudo completar la participación. Intenta nuevamente.",
+      "already_registered_info": "Ya estás inscrito en esta campaña.",
+      "loading": "Cargando campaña...",
+      "participation_error_late": "Error al intentar inscribirse. Inténtalo más tarde."
+    },
+    "states": {
+      "loading": "Cargando campaña...",
+      "error_back": "Volver a campañas"
     }
   },
   "recycling": {
