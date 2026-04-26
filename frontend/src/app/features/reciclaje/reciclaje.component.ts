@@ -15,9 +15,9 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
   impact: EnvironmentalImpact | undefined;
   loadingPoints = false;
   pointsError = '';
-  showInteractiveMap = false;
-  showNextRoute = false;
-  showStatistics = false;
+  showInteractiveMap = true;
+  showNextRoute = true;
+  showStatistics = true;
 
   private map!: L.Map;
   private markers: L.Marker[] = [];

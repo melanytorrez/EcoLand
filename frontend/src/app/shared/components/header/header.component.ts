@@ -38,10 +38,7 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private translate: TranslateService
   ) {
-    this.translate.setDefaultLang('es');
-    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
-    this.currentLang = savedLang;
-    this.translate.use(savedLang);
+    this.currentLang = localStorage.getItem('ecoland_lang') || 'es';
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)

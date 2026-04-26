@@ -5,18 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
-export class CustomTranslateLoader implements TranslateLoader {
-  constructor(private http: HttpClient) {}
-  getTranslation(lang: string): Observable<any> {
-    return this.http.get(`./assets/i18n/${lang}.json`);
-  }
-}
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new CustomTranslateLoader(http);
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
+
+import { APP_INITIALIZER } from '@angular/core';
+
+export function appInitializerFactory(translate: TranslateService) {
+  return () => {
+    translate.setDefaultLang('es');
+    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
+    return translate.use(savedLang);
+  };
 }
 
 @NgModule({
@@ -37,7 +42,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
