@@ -7,6 +7,8 @@ export interface GreenPoint {
   activo: boolean;
   horarios?: GreenPointSchedule[];
   tiposMaterial?: string[];
+  latitud?: number;
+  longitud?: number;
 }
 
 export interface GreenPointSchedule {

@@ -5,6 +5,7 @@ import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { AUTH_STRINGS } from '../../../core/constants/strings.constants';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ import { AuthService } from '../../../core/services/auth.service';
     CommonModule,
     ReactiveFormsModule,
     LucideAngularModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   providers: [
     { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }

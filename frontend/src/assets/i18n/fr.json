@@ -1,0 +1,418 @@
+{
+  "auth": {
+    "login": {
+      "title": "Se connecter",
+      "subtitle": "Bon retour sur EcoLand",
+      "inputs": {
+        "email": {
+          "label": "Adresse e-mail",
+          "placeholder": "vous@email.com"
+        },
+        "password": {
+          "label": "Mot de passe",
+          "placeholder": "••••••••"
+        },
+        "role": {
+          "label": "Type d'utilisateur",
+          "user": "Utilisateur",
+          "admin": "Administrateur"
+        }
+      },
+      "submit_button": "Se connecter",
+      "loading": "Chargement...",
+      "footer": {
+        "register_question": "Vous n'avez pas encore de compte ?",
+        "register_link": "Inscrivez-vous ici",
+        "back_home": "← Retour à l'accueil"
+      }
+    },
+    "register": {
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez la communauté EcoLand",
+      "inputs": {
+        "full_name": { "label": "Nom complet", "placeholder": "Jean Dupont" },
+        "confirm_password": { "label": "Confirmer le mot de passe", "placeholder": "Répétez votre mot de passe" }
+      },
+      "submit_button": "Créer un compte",
+      "footer": {
+        "login_question": "Vous avez déjà un compte ?",
+        "login_link": "Connectez-vous ici"
+      },
+      "validation": {
+        "required": "Ce champ est obligatoire.",
+        "required_email": "L'adresse e-mail est obligatoire.",
+        "required_password": "Le mot de passe est obligatoire.",
+        "invalid_email": "Format d'e-mail invalide.",
+        "missing_at": "L'e-mail doit contenir le symbole @.",
+        "missing_com": "L'e-mail doit se terminer par .com.",
+        "password_mismatch": "Les mots de passe ne correspondent pas.",
+        "password_rules": {
+          "min_length": "Minimum 8 caractères.",
+          "upper": "Doit contenir au moins une lettre majuscule.",
+          "lower": "Doit contenir au moins une lettre minuscule.",
+          "number": "Doit contenir au moins un chiffre.",
+          "special": "Doit contenir au moins un caractère spécial."
+        }
+      }
+    }
+  },
+  "campaign_detail": {
+    "sections": {
+      "description": "Description",
+      "requirements": "Prérequis",
+      "organizer_info": "Informations sur l'organisateur",
+      "contact": "Contact :"
+    },
+    "sidebar": {
+      "date_label": "Date",
+      "time_label": "Horaire",
+      "location_label": "Lieu",
+      "spots_label": "Places disponibles",
+      "spots_available_of": "{{available}} sur {{total}}",
+      "cta_button": "Je veux être bénévole",
+      "cta_loading": "Inscription en cours...",
+      "back_link": "Voir les autres campagnes"
+    },
+    "states": {
+      "loading": "Chargement de la campagne...",
+      "error_back": "Retour aux campagnes"
+    }
+  },
+  "campaign_admin": {
+    "header": {
+      "title": "Gestion des campagnes",
+      "subtitle": "Administrez les campagnes de reforestation",
+      "btn_new": "Nouvelle campagne"
+    },
+    "search": {
+      "placeholder": "Rechercher par titre ou lieu..."
+    },
+    "table": {
+      "col_campaign": "Campagne",
+      "col_date": "Date",
+      "col_location": "Lieu",
+      "col_participants": "Participants",
+      "col_organizer": "Organisateur",
+      "col_status": "Statut",
+      "col_actions": "Actions",
+      "tooltip_edit": "Modifier",
+      "tooltip_delete": "Supprimer"
+    },
+    "modal": {
+      "title_new": "Nouvelle campagne",
+      "title_edit": "Modifier la campagne",
+      "subtitle_new": "Remplissez tous les champs pour créer la campagne",
+      "subtitle_edit": "Remplissez tous les champs pour mettre à jour la campagne",
+      "btn_cancel": "Annuler",
+      "btn_save_new": "✓ Créer la campagne",
+      "btn_save_edit": "✓ Enregistrer les modifications"
+    },
+    "form": {
+      "labels": {
+        "title": "Titre de la campagne *",
+        "date": "Date de la campagne *",
+        "spots": "Places disponibles *",
+        "location": "Lieu *",
+        "status": "Statut de la campagne",
+        "organizer": "Organisateur *",
+        "description": "Description de la campagne *",
+        "image_url": "URL de l'image",
+        "optional": "(facultatif)"
+      },
+      "placeholders": {
+        "title": "Ex. : Reforestation Parc Tunari 2026",
+        "spots": "Ex. : 50",
+        "location": "Ex. : Parc national Tunari",
+        "organizer": "Ex. : Mairie de Cochabamba",
+        "description": "Décrivez les objectifs, les activités et les détails importants de la campagne...",
+        "image_url": "https://exemple.com/image.jpg"
+      },
+      "status_options": {
+        "scheduled": "Planifiée",
+        "active": "Active",
+        "finished": "Terminée"
+      }
+    }
+  },
+  "campaign_detail_user": {
+    "sections": {
+      "description": "Description",
+      "requirements": "Prérequis",
+      "organizer_info": "Informations sur l'organisateur",
+      "contact": "Contact :"
+    },
+    "sidebar": {
+      "date_label": "Date",
+      "time_label": "Horaire",
+      "location_label": "Lieu",
+      "spots_label": "Participants inscrits",
+      "spots_available_of": "{{current}} sur {{total}}",
+      "cta_button": "Je veux être bénévole",
+      "cta_no_spots": "Aucune place disponible",
+      "cta_processing": "Traitement en cours...",
+      "cta_already_registered": "✓ Vous êtes déjà inscrit",
+      "back_link": "Voir les autres campagnes"
+    },
+    "messages": {
+      "already_registered_info": "Vous êtes déjà inscrit à cette campagne",
+      "loading": "Chargement de la campagne..."
+    }
+  },
+  "recycling_campaigns": {
+    "hero": {
+      "badge": "♻️ Campagnes de recyclage",
+      "title": "Rejoignez nos campagnes",
+      "description": "Participez à des défis communautaires de recyclage et contribuez à atteindre des objectifs environnementaux collectifs."
+    },
+    "filters": {
+      "search_placeholder": "Rechercher une campagne par nom ou type de déchet...",
+      "filter_button": "Filtrer"
+    },
+    "card": {
+      "meta_label": "Objectif :",
+      "progress_label": "Progression de la collecte",
+      "progress_of": "sur",
+      "participants_count": "{{count}} participants",
+      "cta_button": "Participer"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "🌱 Un Cochabamba plus vert",
+      "title": "Construisons ensemble un Cochabamba plus vert",
+      "description": "Participez à des campagnes de reforestation et améliorez le recyclage dans votre ville.",
+      "btn_campaigns": "Voir les campagnes",
+      "btn_recycling": "Explorer le recyclage"
+    },
+    "reforestation": {
+      "badge": "🌳 Reforestation",
+      "title": "Campagnes de reforestation actives",
+      "description": "Rejoignez nos campagnes et aidez à planter des arbres à Cochabamba",
+      "spots": "{{count}} places",
+      "btn_participate": "Participer",
+      "btn_view_all": "Voir toutes les campagnes"
+    },
+    "recycling_promo": {
+      "badge": "♻️ Recyclage intelligent",
+      "title": "Découvrez les points verts et les circuits de collecte",
+      "description": "Trouvez les centres de recyclage les plus proches, consultez les itinéraires des camions et contribuez à un Cochabamba plus propre.",
+      "btn_explore": "Explorer le système de recyclage",
+      "btn_campaigns": "Voir les campagnes de recyclage"
+    },
+    "stats": {
+    "activeCampaigns": "Campagnes actives",
+    "totalParticipants": "Nombre total de participants",
+    "totalCampaigns": "Nombre total de campagnes"
+    },
+    "campaigns_section": {
+    "title": "Campagnes récentes",
+    "view_all": "Tout afficher"
+    }
+  },
+  "recycling": {
+    "hero": {
+      "badge": "♻️ Système de recyclage",
+      "title": "Recyclez intelligemment",
+      "description": "Trouvez des points verts, consultez les circuits de collecte et suivez les recycleurs à Cochabamba."
+    },
+    "map": {
+      "title": "Carte interactive",
+      "subtitle": "Explorez les points verts, les itinéraires des camions et les trajets des recycleurs",
+      "legend": {
+        "title": "Légende",
+        "points": "Points verts",
+        "routes": "Circuits de collecte",
+        "recyclers": "Recycleurs"
+      },
+      "markers": {
+        "green_point": "Point vert • Ouvert",
+        "truck_active": "Camion en service",
+        "recycler_active": "Recycleur actif"
+      }
+    },
+    "points_card": {
+      "title": "Points verts",
+      "subtitle": "À proximité",
+      "loading": "Chargement des points verts...",
+      "empty": "Aucun point vert disponible pour le moment.",
+      "btn_view_all": "Voir tous les points",
+      "status_open": "Ouvert",
+      "status_closed": "Fermé"
+    },
+    "route_card": {
+      "title": "Prochain circuit",
+      "subtitle": "Collecte des déchets",
+      "label_day": "Jour :",
+      "label_date": "Date :",
+      "label_time": "Heure :",
+      "label_zone": "Zone :",
+      "label_vehicle": "Véhicule :",
+      "btn_view_all": "Voir tous les circuits"
+    },
+    "impact_card": {
+      "title": "Votre impact",
+      "subtitle": "Empreinte environnementale personnelle",
+      "recycled": "Total recyclé",
+      "trees": "Arbres sauvés",
+      "co2": "CO₂ réduit",
+      "ranking": "Votre classement",
+      "ranking_suffix": "parmi tous les recycleurs",
+      "btn_view_stats": "Voir les statistiques complètes"
+    }
+  },
+  "recycling_campaign": {
+    "progress": {
+      "title": "Avancement de la campagne",
+      "subtitle": "Nous sommes très proches de l'objectif !",
+      "current_label": "Collecte actuelle",
+      "goal_info": "sur {{goal}} kg",
+      "participants": "Participants",
+      "to_reach": "Reste à atteindre"
+    },
+    "sections": {
+      "description": "Description",
+      "benefits": "Avantages de la participation",
+      "rewards_title": "Système de récompenses",
+      "rewards_subtitle": "Obtenez une reconnaissance pour votre contribution",
+      "people_count": "{{count}} personnes"
+    },
+    "sidebar": {
+      "label_date": "Date",
+      "label_location": "Lieu",
+      "label_goal": "Objectif de collecte",
+      "btn_join": "Rejoindre cette campagne",
+      "btn_back": "Voir les autres campagnes",
+      "organizer_label": "Organisé par :"
+    },
+    "loading": "Chargement de la campagne..."
+  },
+  "reforestation": {
+    "hero": {
+      "badge": "🌳 Campagnes de reforestation",
+      "title": "Soyez acteur du changement",
+      "description": "Rejoignez nos campagnes de reforestation et contribuez à restaurer les espaces verts de Cochabamba."
+    },
+    "filters": {
+      "placeholder": "Rechercher une campagne par nom ou lieu...",
+      "btn_filter": "Filtrer"
+    },
+    "states": {
+      "loading": "Récupération des campagnes depuis la forêt...",
+      "error_retry": "Réessayer",
+      "no_results": "Aucune campagne ne correspond à votre recherche.",
+      "view_all": "Voir toutes les campagnes"
+    },
+    "card": {
+      "progress_label": "Progression des inscriptions",
+      "spots_available": "{{available}} places disponibles sur {{total}}",
+      "organizer_label": "Organisé par :",
+      "btn_participate": "Participer"
+    }
+  },
+  "stats": {
+    "hero": {
+      "badge": "📊 Statistiques environnementales",
+      "title": "Notre impact en chiffres",
+      "description": "Visualisez les progrès collectifs de Cochabamba vers un avenir plus vert et plus durable."
+    },
+    "charts": {
+      "trees": {
+        "title": "Arbres plantés",
+        "subtitle": "Progression mensuelle"
+      },
+      "waste": {
+        "title": "Répartition des déchets",
+        "subtitle": "Par type de matériau"
+      },
+      "zones": {
+        "title": "Activité par zone",
+        "subtitle": "Recyclage et reforestation"
+      },
+      "volunteers": {
+        "title": "Croissance des bénévoles",
+        "subtitle": "Participation mensuelle"
+      }
+    },
+    "summary": {
+      "title": "Impact environnemental cumulé",
+      "subtitle": "Le résultat de notre effort collectif",
+      "trees": {
+        "label": "Arbres plantés",
+        "equivalent": "Équivalent à 185 hectares de forêt"
+      },
+      "recycling": {
+        "label": "Déchets recyclés",
+        "equivalent": "Réduction de 520 tonnes de CO₂"
+      },
+      "water": {
+        "label": "Eau économisée",
+        "equivalent": "Grâce au recyclage du papier et du plastique"
+      }
+    }
+  },
+  "admin_sidebar": {
+    "logo": {
+      "subtitle": "Panneau d'administration"
+    },
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "reforestation": "Reforestation",
+      "recycling": "Recyclage",
+      "users": "Utilisateurs",
+      "reports": "Rapports",
+      "settings": "Paramètres"
+    },
+    "footer": {
+      "user_view": "Vue utilisateur"
+    }
+  },
+  "footer": {
+    "description": "Principale plateforme de gestion environnementale de Cochabamba. Ensemble, nous construisons un avenir plus vert et plus durable.",
+    "columns": {
+      "platform": {
+        "title": "Plateforme",
+        "reforestation": "Reforestation",
+        "recycling": "Recyclage",
+        "stats": "Statistiques",
+        "admin": "Administration"
+      },
+      "support": {
+        "title": "Aide",
+        "faq": "Foire aux questions",
+        "guide": "Guide utilisateur",
+        "contact": "Contact",
+        "terms": "Conditions d'utilisation"
+      }
+    },
+    "bottom": "© 2026 EcoLand. Tous droits réservés. Faire de Cochabamba une ville plus verte 🌱"
+  },
+  "header": {
+    "nav": {
+      "home": "Accueil",
+      "reforestation": "Reforestation",
+      "recycling": "Recyclage",
+      "stats": "Statistiques"
+    },
+    "buttons": {
+      "admin_panel": "Panneau admin",
+      "logout": "Se déconnecter",
+      "login": "Se connecter",
+      "register": "S'inscrire"
+    },
+    "user_default": "Utilisateur"
+  },
+  "logout_modal": {
+    "title": "Se déconnecter ?",
+    "message": "Êtes-vous sûr de vouloir quitter ?",
+    "confirm": "Oui, se déconnecter",
+    "cancel": "Annuler"
+  },
+  "shared": {
+    "or_separator": "ou",
+    "loading_generic": "Chargement...",
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer"
+  }
+}

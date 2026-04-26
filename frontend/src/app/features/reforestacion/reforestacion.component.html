@@ -1,23 +1,20 @@
-
 <main class="min-h-screen bg-white">
-  <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] text-white py-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="max-w-3xl">
         <div class="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
-          {{ 'reforestacion.heroBadge' | translate }}
+          {{ 'reforestation.hero.badge' | translate }}
         </div>
         <h1 class="text-5xl font-bold mb-6">
-          {{ 'reforestacion.heroTitle' | translate }}
+          {{ 'reforestation.hero.title' | translate }}
         </h1>
         <p class="text-xl text-[#A5D6A7] mb-8">
-          {{ 'reforestacion.heroSubtitle' | translate }}
+          {{ 'reforestation.hero.description' | translate }}
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Search and Filters -->
   <section class="py-8 bg-[#E8F5E9]">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex flex-col md:flex-row gap-4">
@@ -25,7 +22,7 @@
           <lucide-icon name="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></lucide-icon>
           <input
             type="text"
-            [placeholder]="'reforestacion.searchPlaceholder' | translate"
+            [placeholder]="'reforestation.filters.placeholder' | translate"
             [(ngModel)]="searchTerm"
             (ngModelChange)="filterCampaigns()"
             class="w-full pl-12 pr-4 py-4 bg-white border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#4CAF50] transition-all"
@@ -33,35 +30,31 @@
         </div>
         <button class="flex items-center gap-2 px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl font-medium hover:border-[#4CAF50] transition-all">
           <lucide-icon name="filter" class="w-5 h-5"></lucide-icon>
-          {{ 'reforestacion.filter' | translate }}
+          {{ 'reforestation.filters.btn_filter' | translate }}
         </button>
       </div>
     </div>
   </section>
 
-  <!-- Campaigns Grid -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <!-- Loading State -->
       <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-20 w-full col-span-full">
         <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-[#2E7D32] mb-4"></div>
-        <p class="text-gray-600 font-medium italic">{{ 'reforestacion.loading' | translate }}</p>
+        <p class="text-gray-600 font-medium italic">{{ 'reforestation.states.loading' | translate }}</p>
       </div>
 
-      <!-- Error State -->
       <div *ngIf="error && !isLoading" class="bg-red-50 border-2 border-red-200 rounded-3xl p-8 text-center col-span-full">
         <lucide-icon name="alert-circle" class="w-12 h-12 text-red-500 mx-auto mb-4"></lucide-icon>
         <p class="text-red-800 font-bold text-lg mb-2">{{ error }}</p>
         <button (click)="loadCampaigns()" class="mt-4 px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors">
-          {{ 'reforestacion.retry' | translate }}
+          {{ 'reforestation.states.error_retry' | translate }}
         </button>
       </div>
 
-      <!-- No Results State -->
       <div *ngIf="!isLoading && !error && filteredCampaigns.length === 0" class="text-center py-20 col-span-full">
-        <p class="text-gray-500 text-xl font-medium">{{ 'reforestacion.noResults' | translate }}</p>
+        <p class="text-gray-500 text-xl font-medium">{{ 'reforestation.states.no_results' | translate }}</p>
         <button (click)="searchTerm = ''; filterCampaigns()" class="mt-4 text-[#2E7D32] font-bold hover:underline">
-          {{ 'reforestacion.viewAll' | translate }}
+          {{ 'reforestation.states.view_all' | translate }}
         </button>
       </div>
 
@@ -83,7 +76,7 @@
             <div class="absolute bottom-4 left-4 right-4">
               <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-3">
                 <div class="flex justify-between items-center mb-2">
-                  <span class="text-xs font-medium text-gray-600">{{ 'reforestacion.progress' | translate }}</span>
+                  <span class="text-xs font-medium text-gray-600">{{ 'reforestation.card.progress_label' | translate }}</span>
                   <span class="text-xs font-bold text-[#2E7D32]">{{ calculatePercentage(campaign.participants, campaign.spots) }}%</span>
                 </div>
                 <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -111,22 +104,22 @@
               <div class="flex items-center gap-3 text-gray-600">
                 <lucide-icon name="users" class="w-4 h-4 text-[#4CAF50]"></lucide-icon>
                 <span class="text-sm">
-                  {{ campaign.spots - campaign.participants }} {{ 'reforestacion.spotsAvailable' | translate }} {{ campaign.spots }}
+                  {{ 'reforestation.card.spots_available' | translate:{available: (campaign.spots - campaign.participants), total: campaign.spots} }}
                 </span>
               </div>
             </div>
 
             <div class="mb-6 p-3 bg-[#E8F5E9] rounded-2xl">
-              <p class="text-xs text-gray-600 mb-1">{{ 'reforestacion.organizedBy' | translate }}</p>
+              <p class="text-xs text-gray-600 mb-1">{{ 'reforestation.card.organizer_label' | translate }}</p>
               <p class="text-sm font-semibold text-[#2E7D32]">{{ campaign.organizer }}</p>
             </div>
 
             <button
               type="button"
               (click)="participate(campaign.id)"
-              class="block w-full px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white text-center rounded-2xl font-semibold hover:shadow-lg hover:shadow-[#4CAF50]/30 transition-all font-semibold"
+              class="block w-full px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white text-center rounded-2xl font-semibold hover:shadow-lg hover:shadow-[#4CAF50]/30 transition-all"
             >
-              {{ 'reforestacion.participate' | translate }}
+              {{ 'reforestation.card.btn_participate' | translate }}
             </button>
           </div>
         </div>
@@ -134,4 +127,3 @@
     </div>
   </section>
 </main>
-
