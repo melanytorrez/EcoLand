@@ -24,6 +24,11 @@
         "register_question": "Don't have an account?",
         "register_link": "Register here",
         "back_home": "← Back to home"
+      },
+      "errors": {
+        "no_admin_permissions": "Your account does not have administrator permissions.",
+        "admin_account_required": "Your account is an administrator account. Please choose administrator access.",
+        "invalid_credentials": "Invalid password or email, please try again."
       }
     },
     "register": {
@@ -53,6 +58,9 @@
           "number": "A number is missing.",
           "special": "A special character is missing."
         }
+      },
+      "messages": {
+        "generic_error": "Registration failed. Please try again."
       }
     }
   },

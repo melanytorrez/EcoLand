@@ -24,6 +24,11 @@
         "register_question": "Vous n'avez pas de compte ?",
         "register_link": "Inscrivez-vous ici",
         "back_home": "← Retour à l'accueil"
+      },
+      "errors": {
+        "no_admin_permissions": "Votre compte n'a pas les permissions d'administrateur.",
+        "admin_account_required": "Votre compte est un compte administrateur. Veuillez choisir l'accès administrateur.",
+        "invalid_credentials": "Mot de passe ou e-mail invalide, veuillez réessayer."
       }
     },
     "register": {
@@ -59,6 +64,9 @@
           "number": "Un chiffre est manquant.",
           "special": "Un caractère spécial est manquant."
         }
+      },
+      "messages": {
+        "generic_error": "L'inscription a échoué. Veuillez réessayer."
       }
     }
   },

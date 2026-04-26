@@ -24,6 +24,11 @@
         "register_question": "¿No tienes una cuenta?",
         "register_link": "Regístrate aquí",
         "back_home": "← Volver al inicio"
+      },
+      "errors": {
+        "no_admin_permissions": "Tu cuenta no tiene permisos de administrador.",
+        "admin_account_required": "Tu cuenta es de administrador. Elige el acceso de administrador.",
+        "invalid_credentials": "Contraseña o correo incorrectos, intenta de nuevo."
       }
     },
     "register": {
@@ -53,6 +58,9 @@
           "number": "Falta un número.",
           "special": "Falta un carácter especial."
         }
+      },
+      "messages": {
+        "generic_error": "Error al registrar. Por favor, inténtelo de nuevo."
       }
     }
   },

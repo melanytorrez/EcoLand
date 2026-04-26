@@ -24,6 +24,11 @@
         "register_question": "Não tem uma conta?",
         "register_link": "Cadastre-se aqui",
         "back_home": "← Voltar ao início"
+      },
+      "errors": {
+        "no_admin_permissions": "Sua conta não tem permissões de administrador.",
+        "admin_account_required": "Sua conta é de administrador. Escolha o acesso de administrador.",
+        "invalid_credentials": "Senha ou e-mail incorretos, tente novamente."
       }
     },
     "register": {
@@ -53,6 +58,9 @@
           "number": "Falta um número.",
           "special": "Falta um caractere especial."
         }
+      },
+      "messages": {
+        "generic_error": "O cadastro falhou. Tente novamente."
       }
     }
   },
