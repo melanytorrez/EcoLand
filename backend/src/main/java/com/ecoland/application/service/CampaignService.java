@@ -140,7 +140,8 @@ public class CampaignService implements CampaignUseCase {
     }
 
     private void seedData() {
-        if (campaignRepositoryPort.findAll().isEmpty()) {
+        List<Campaign> all = campaignRepositoryPort.findAll();
+        if (all.isEmpty()) {
             Campaign c1 = new Campaign();
             c1.setTitle("Reforestación en el Parque Central");
             c1.setImage(
@@ -174,6 +175,20 @@ public class CampaignService implements CampaignUseCase {
             c2.setRequirements(Arrays.asList("Pala pequeña", "Protector solar"));
             c2.setCategory(com.ecoland.domain.model.CampaignCategory.REFORESTATION);
             campaignRepositoryPort.save(c2);
+        } else {
+            // Migrar registros antiguos que no tienen categoría asignada
+            for (Campaign c : all) {
+                if (c.getCategory() == null) {
+                    String title = c.getTitle() != null ? c.getTitle().toLowerCase() : "";
+                    if (title.contains("reciclaj") || title.contains("limpieza") || title.contains("botellas")) {
+                        c.setCategory(com.ecoland.domain.model.CampaignCategory.RECYCLING);
+                    } else {
+                        c.setCategory(com.ecoland.domain.model.CampaignCategory.REFORESTATION);
+                    }
+                    campaignRepositoryPort.save(c);
+                    logger.info("Migrated legacy campaign id {} to category {}", c.getId(), c.getCategory());
+                }
+            }
         }
     }
 }

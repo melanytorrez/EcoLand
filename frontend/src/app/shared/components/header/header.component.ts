@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { FeatureFlagService } from '../../../core/services/feature-flag.service';
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     { code: 'es', label: 'Español',   flag: '🇧🇴' },
     { code: 'en', label: 'English',   flag: '🇬🇧' },
     { code: 'pt', label: 'Português', flag: '🇧🇷' },
-    { code: 'fr', label: 'Français',  flag: '🇫🇷' }
+    { code: 'fr', label: 'Français',  flag: '🇫🇷' },
   ];
 
   allNavItems = [
@@ -36,22 +36,29 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private featureFlagService: FeatureFlagService,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {
-    this.translate.setDefaultLang('es');
-    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
-    this.currentLang = savedLang;
-    this.translate.use(savedLang);
-
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      this.currentPath = event.urlAfterRedirects;
-    });
+    // Inicializar idioma desde el servicio o storage
+    this.currentLang = this.translate.currentLang || localStorage.getItem('ecoland_lang') || 'es';
   }
 
   ngOnInit(): void {
     this.currentPath = this.router.url;
+
+    // Suscribirse a cambios de navegación para actualizar path y forzar renderizado
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.currentPath = event.urlAfterRedirects;
+      this.cdr.detectChanges();
+    });
+
+    // Suscribirse a cambios de idioma
+    this.translate.onLangChange.subscribe(event => {
+      this.currentLang = event.lang;
+      this.cdr.detectChanges();
+    });
   }
 
   get currentLanguage() {

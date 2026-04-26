@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
@@ -22,7 +22,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
   error = '';
@@ -44,9 +44,9 @@ export class LoginComponent {
     private authService: AuthService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private ngZone: NgZone
   ) {
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
       password: ['', Validators.required],
@@ -57,8 +57,42 @@ export class LoginComponent {
     this.infoMessage = this.route.snapshot.queryParamMap.get('message') || '';
   }
 
-  onSubmit() {
+  ngOnInit(): void {
+    this.renderGoogleButton();
+  }
 
+  ngOnDestroy(): void {}
+
+  private renderGoogleButton(): void {
+    const googleApi = (window as any)['google'];
+    if (googleApi?.accounts?.id) {
+      googleApi.accounts.id.initialize({
+        client_id: '453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com',
+        callback: (response: any) => {
+          this.ngZone.run(() => {
+            if (response?.credential) {
+              this.loginWithGoogle(response.credential);
+            }
+          });
+        }
+      });
+      const btnContainer = document.getElementById('google-signin-btn-login');
+      if (btnContainer) {
+        googleApi.accounts.id.renderButton(btnContainer, {
+          type: 'standard',
+          size: 'large',
+          theme: 'outline',
+          text: 'signin_with',
+          width: 350
+        });
+      }
+    } else {
+      // Google API not loaded yet, retry after a short delay
+      setTimeout(() => this.renderGoogleButton(), 500);
+    }
+  }
+
+  onSubmit() {
     if (this.loginForm.invalid) {
       this.error = this.translate.instant('auth.register.validation.required');
       return;
@@ -98,6 +132,34 @@ export class LoginComponent {
         console.error('Error al iniciar sesión', err);
         this.isLoading = false;
         this.error = this.translate.instant('auth.login.errors.invalid_credentials');
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  loginWithGoogle(idToken: string) {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.error = '';
+
+    const role = this.loginForm.get('role')?.value;
+
+    this.authService.loginWithGoogle(idToken).subscribe({
+      next: (response: any) => {
+        this.authService.setSession(response);
+
+        const actualRole = this.authService.normalizeRole(response?.role);
+
+        if (actualRole === 'admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigateByUrl(this.redirectTo || '/');
+        }
+      },
+      error: (err: any) => {
+        console.error('Error al iniciar sesión con Google', err);
+        this.isLoading = false;
+        this.error = 'Error autenticando con Google. Intente de nuevo.';
         this.cdr.detectChanges();
       }
     });

@@ -6,4 +6,5 @@ import com.ecoland.domain.model.Usuario;
 public interface AuthUseCase {
     AuthResponse login(String email, String password);
     AuthResponse register(Usuario usuario);
+    AuthResponse loginWithGoogle(String googleTokenId);
 }

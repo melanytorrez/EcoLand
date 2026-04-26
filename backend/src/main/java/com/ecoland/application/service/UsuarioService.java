@@ -3,6 +3,9 @@ package com.ecoland.application.service;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.UsuarioUseCase;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
+import com.ecoland.domain.port.out.CampaignRepositoryPort;
+import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
+import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,9 +14,15 @@ import java.util.Optional;
 public class UsuarioService implements UsuarioUseCase {
 
     private final UsuarioRepositoryPort usuarioRepositoryPort;
+    private final CampaignRepositoryPort campaignRepositoryPort;
+    private final JpaUsuarioCampaignRepository usuarioCampaignRepository;
 
-    public UsuarioService(UsuarioRepositoryPort usuarioRepositoryPort) {
+    public UsuarioService(UsuarioRepositoryPort usuarioRepositoryPort,
+                          CampaignRepositoryPort campaignRepositoryPort,
+                          JpaUsuarioCampaignRepository usuarioCampaignRepository) {
         this.usuarioRepositoryPort = usuarioRepositoryPort;
+        this.campaignRepositoryPort = campaignRepositoryPort;
+        this.usuarioCampaignRepository = usuarioCampaignRepository;
     }
 
     @Override
@@ -39,5 +48,16 @@ public class UsuarioService implements UsuarioUseCase {
     @Override
     public void deleteUsuario(Long id) {
         usuarioRepositoryPort.deleteById(id);
+    }
+
+    @Override
+    public java.util.List<com.ecoland.domain.model.Campaign> getParticipacionesCompletas(String email) {
+        return usuarioCampaignRepository.findByUsuarioEmail(email)
+                .stream()
+                .map(UsuarioCampaignEntity::getCampaignId)
+                .map(campaignRepositoryPort::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .toList();
     }
 }

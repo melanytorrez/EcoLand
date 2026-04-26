@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { RecyclingService } from '../../core/services/recycling.service';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../../core/models/recycling.model';
 import * as L from 'leaflet';
@@ -16,9 +16,9 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
   impact: EnvironmentalImpact | undefined;
   loadingPoints = false;
   pointsError = '';
-  showInteractiveMap = false;
-  showNextRoute = false;
-  showStatistics = false;
+  showInteractiveMap = true;
+  showNextRoute = true;
+  showStatistics = true;
 
   private map!: L.Map;
   private markers: L.Marker[] = [];
@@ -30,7 +30,8 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private recyclingService: RecyclingService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -44,20 +45,28 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.map) {
           this.addMarkersToMap();
         }
+        this.cdr.detectChanges();
       },
       error: () => {
         this.nearbyPoints = [];
         this.pointsError = this.translate.instant('recycling.points_card.error');
         this.loadingPoints = false;
+        this.cdr.detectChanges();
       }
     });
 
     if (this.showNextRoute) {
-      this.recyclingService.getNextCollection().subscribe(route => this.nextCollection = route);
+      this.recyclingService.getNextCollection().subscribe(route => {
+        this.nextCollection = route;
+        this.cdr.detectChanges();
+      });
     }
 
     if (this.showStatistics) {
-      this.recyclingService.getEnvironmentalImpact().subscribe(impact => this.impact = impact);
+      this.recyclingService.getEnvironmentalImpact().subscribe(impact => {
+        this.impact = impact;
+        this.cdr.detectChanges();
+      });
     }
   }
 

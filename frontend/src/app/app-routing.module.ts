@@ -60,6 +60,10 @@ const routes: Routes = [
         loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
       }
     ]
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
   }
 ];
 

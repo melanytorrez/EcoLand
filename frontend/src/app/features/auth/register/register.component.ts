@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
@@ -22,7 +22,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   registerForm: FormGroup;
   error = '';
@@ -52,7 +52,8 @@ export class RegisterComponent {
     private router: Router,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private ngZone: NgZone
   ) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -67,6 +68,41 @@ export class RegisterComponent {
     }, {
       validators: this.passwordsMatch
     });
+  }
+
+  ngOnInit(): void {
+    this.renderGoogleButton();
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  private renderGoogleButton(): void {
+    const googleApi = (window as any)['google'];
+    if (googleApi?.accounts?.id) {
+      googleApi.accounts.id.initialize({
+        client_id: '453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com',
+        callback: (response: any) => {
+          this.ngZone.run(() => {
+            if (response?.credential) {
+              this.loginWithGoogle(response.credential);
+            }
+          });
+        }
+      });
+      const btnContainer = document.getElementById('google-signin-btn-register');
+      if (btnContainer) {
+        googleApi.accounts.id.renderButton(btnContainer, {
+          type: 'standard',
+          size: 'large',
+          theme: 'outline',
+          text: 'signin_with',
+          width: 350
+        });
+      }
+    } else {
+      setTimeout(() => this.renderGoogleButton(), 500);
+    }
   }
 
   passwordsMatch(group: FormGroup) {
@@ -124,6 +160,26 @@ export class RegisterComponent {
         }
 
         this.error = this.translate.instant('auth.register.messages.generic_error');
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  loginWithGoogle(idToken: string) {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.error = '';
+
+    this.authService.loginWithGoogle(idToken).subscribe({
+      next: (response: any) => {
+        this.authService.setSession(response);
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      },
+      error: (err: any) => {
+        console.error('Error registrando/iniciando con Google', err);
+        this.isLoading = false;
+        this.error = 'Error autenticando con Google. Intente de nuevo.';
         this.cdr.detectChanges();
       }
     });

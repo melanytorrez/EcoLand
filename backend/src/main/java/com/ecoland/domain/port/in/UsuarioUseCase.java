@@ -9,4 +9,5 @@ public interface UsuarioUseCase {
     Optional<Usuario> buscarUsuarioPorEmail(String email);
     Usuario createUsuario(Usuario usuario);
     void deleteUsuario(Long id);
+    java.util.List<com.ecoland.domain.model.Campaign> getParticipacionesCompletas(String email);
 }

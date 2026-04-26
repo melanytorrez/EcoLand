@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+﻿import { Component, OnInit, ApplicationRef, NgZone } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,34 @@ import { TranslateService } from '@ngx-translate/core';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ecoland-angular';
 
-  constructor(public router: Router, private translate: TranslateService) {
-    // Inicializar el idioma en el componente raíz para que esté listo
-    // antes de que cualquier componente hijo renderice sus traducciones.
-    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
-    this.translate.setDefaultLang('es');
-    this.translate.use(savedLang);
+  constructor(
+    public router: Router,
+    private translate: TranslateService,
+    private appRef: ApplicationRef,
+    private ngZone: NgZone
+  ) {}
+
+  ngOnInit() {
+    // Forzar una revisión total cuando cambie el idioma
+    this.translate.onLangChange.subscribe(() => {
+      this.ngZone.run(() => {
+        this.appRef.tick();
+      });
+    });
+
+    // Forzar una revisión total al terminar cualquier navegación
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      setTimeout(() => {
+        this.ngZone.run(() => {
+          this.appRef.tick();
+        });
+      }, 0);
+    });
   }
 
   hideLayout(): boolean {

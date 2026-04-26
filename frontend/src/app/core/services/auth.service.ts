@@ -23,6 +23,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
+  loginWithGoogle(tokenId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/google`, { tokenId });
+  }
+
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }

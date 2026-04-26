@@ -17,8 +17,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
-
 import org.springframework.transaction.annotation.Transactional;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.gson.GsonFactory;
+import java.util.UUID;
+
 
 @Service
 @Transactional
@@ -81,6 +86,51 @@ public class AuthService implements AuthUseCase {
         registrarAuditoria(guardado.getId(), "REGISTER", "Registro de nuevo usuario");
 
         return new AuthResponse(token, guardado.getEmail(), guardado.getNombre(), resolvePrimaryRole(guardado.getRoles()));
+    }
+
+    @Override
+    public AuthResponse loginWithGoogle(String googleTokenId) {
+        try {
+            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+                    // TODO: Replace with real Google Client ID
+                    .setAudience(Collections.singletonList("453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com"))
+                    .build();
+
+            // When testing locally without a real token or real Client ID, this will fail.
+            GoogleIdToken idToken = verifier.verify(googleTokenId);
+            if (idToken == null) {
+                throw new IllegalArgumentException("Token de Google invalido.");
+            }
+
+            GoogleIdToken.Payload payload = idToken.getPayload();
+            String email = payload.getEmail();
+            String name = (String) payload.get("name");
+
+            Usuario usuario = usuarioRepositoryPort.findByEmail(email).orElse(null);
+            
+            if (usuario == null) {
+                usuario = new Usuario();
+                usuario.setEmail(email);
+                usuario.setNombre(name != null ? name : "Usuario Google");
+                usuario.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
+                
+                String requestedRole = "Usuario";
+                Rol persistedRole = rolRepositoryPort.findByNombre(requestedRole)
+                        .orElseGet(() -> rolRepositoryPort.save(new Rol(null, requestedRole)));
+                usuario.setRoles(Collections.singleton(persistedRole));
+                
+                usuario = usuarioRepositoryPort.save(usuario);
+                registrarAuditoria(usuario.getId(), "REGISTER_GOOGLE", "Registro mediante Google");
+            } else {
+                registrarAuditoria(usuario.getId(), "LOGIN_GOOGLE", "Inicio de sesion con Google exitoso");
+            }
+
+            String token = jwtService.generateToken(usuario.getEmail());
+            return new AuthResponse(token, usuario.getEmail(), usuario.getNombre(), resolvePrimaryRole(usuario.getRoles()));
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error verificando token de Google: " + e.getMessage(), e);
+        }
     }
 
     private String resolvePrimaryRole(Set<com.ecoland.domain.model.Rol> roles) {

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JpaUsuarioCampaignRepository extends JpaRepository<UsuarioCampaignEntity, Long> {
     boolean existsByUsuarioEmailAndCampaignId(String email, Long campaignId);
+    java.util.List<UsuarioCampaignEntity> findByUsuarioEmail(String email);
 }
