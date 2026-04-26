@@ -223,6 +223,36 @@
       "btn_participate": "Participar"
     }
   },
+  "recycling_campaigns": {
+    "progress": {
+      "title": "Campañas de reciclaje en Cochabamba",
+      "subtitle": "Participa en nuestras campañas de reciclaje y contribuye una ciudad más limpia y sostenible",
+      "current_lable": "Campañas actuales",
+      "goal_info": "Nuestro objetivo es reciclar {{goal}} kg de residuos este año. ¡Únete a nosotros para alcanzar esta meta y hacer de Cocha una ciudad más verde!",
+      "participants": "Participantes activos",
+      "to_reach": "¡Cada acción cuenta para lograr un Cocha más limpio!"
+    },
+    "sections":{
+      "description":"Descripción",
+      "benefits": "Beneficios de Participar",
+      "rewards_title":"Sistema de Recompensas",
+      "rewards_subtitle":"Gana reconocimientos por tu contribución",
+      "people_count":"{{count}} personas participando"
+    },
+    "sidebar":{
+      "label_date":"Fecha:",
+      "label_location":"Ubicación:",
+      "label_goal":"Meta de reciclaje:",
+      "btn_join":"¡Quiero participar!",
+      "btn_back":"Ver otras campañas",
+      "organizer_label":"Organizado por:"
+    },
+    "loading": "Cargando campañas de reciclaje...",
+    "messages": {
+      "campaign_not_found": "Campaña no encontrada.",
+      "load_error": "No se pudo cargar la campaña de reciclaje."
+    }
+  },  
   "header": {
     "nav": {
       "home": "Inicio",
