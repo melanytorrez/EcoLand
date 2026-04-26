@@ -159,7 +159,12 @@
       "markers": {
         "green_point": "Punto Verde • Abierto",
         "truck_active": "Camión en servicio",
-        "recycler_active": "Reciclador activo"
+        "recycler_active": "Reciclador activo",
+        "your_location": "📍 Tu ubicación"
+      },
+      "popup": {
+        "open": "Abierto",
+        "closed": "Cerrado"
       }
     },
     "points_card": {
@@ -167,9 +172,11 @@
       "subtitle": "Cercanos a ti",
       "loading": "Cargando puntos verdes...",
       "empty": "No hay puntos verdes disponibles por ahora.",
+      "error": "No se pudieron cargar los puntos verdes. Intenta nuevamente más tarde.",
       "btn_view_all": "Ver todos los puntos",
       "status_open": "Abierto",
-      "status_closed": "Cerrado"
+      "status_closed": "Cerrado",
+      "hours_unavailable": "Horario no disponible"
     },
     "route_card": {
       "title": "Próxima Ruta",
@@ -190,6 +197,9 @@
       "ranking": "Tu Ranking",
       "ranking_suffix": "de todos los recicladores",
       "btn_view_stats": "Ver estadísticas completas"
+    },
+    "messages": {
+      "geolocation_unavailable": "Geolocalización no disponible, usando centro de Cochabamba"
     }
   },
   "reforestation": {
