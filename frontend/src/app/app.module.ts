@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
@@ -26,7 +26,7 @@ export function appInitializerFactory(translate: TranslateService) {
   return () => {
     const savedLang = localStorage.getItem('ecoland_lang') || 'es';
     translate.setDefaultLang('es');
-    return firstValueFrom(translate.use(savedLang));
+    return translate.use(savedLang); // Retornar el Observable directamente
   };
 }
 

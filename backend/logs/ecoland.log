@@ -242,3 +242,41 @@ This generated password is for development use only. Your security configuration
 2026-04-26 01:13:31 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
 2026-04-26 01:13:31 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 10ms
 2026-04-26 01:13:31 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 16ms
+2026-04-26 01:13:41 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/puntos-verdes
+2026-04-26 01:13:41 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-26 01:13:41 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/puntos-verdes
+2026-04-26 01:13:41 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: PuntoVerdeController.getAll() con argumentos: []
+2026-04-26 01:13:41 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: PuntoVerdeController.getAll() | Tiempo de ejecución: 71ms
+2026-04-26 01:13:43 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-26 01:13:43 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-26 01:13:43 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-26 01:13:43 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-26 01:13:43 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-26 01:13:43 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-26 01:13:43 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-26 01:13:43 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-26 01:13:43 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-26 01:13:43 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 13ms
+2026-04-26 01:13:43 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 32ms
+2026-04-26 01:19:48 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-26 01:19:48 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-26 01:19:48 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-26 01:19:48 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-26 01:19:48 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-26 01:19:48 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-26 01:19:48 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-26 01:19:48 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-26 01:19:48 [http-nio-8082-exec-8] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-26 01:19:48 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 14ms
+2026-04-26 01:19:48 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 25ms
+2026-04-26 01:20:53 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-26 01:20:53 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-26 01:20:53 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-26 01:20:53 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-26 01:20:53 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-26 01:20:53 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-26 01:20:53 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-26 01:20:53 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-26 01:20:53 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-26 01:20:53 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 11ms
+2026-04-26 01:20:53 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 32ms
