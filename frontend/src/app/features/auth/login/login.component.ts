@@ -5,6 +5,7 @@ import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ReactiveFormsModule,
     LucideAngularModule,
     RouterModule,
-    TranslateModule
+    TranslateModule,
+    GoogleSigninButtonModule
   ],
   providers: [
     { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
@@ -44,7 +46,8 @@ export class LoginComponent {
     private authService: AuthService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private socialAuthService: SocialAuthService
   ) {
 
     this.loginForm = this.fb.group({
@@ -55,6 +58,11 @@ export class LoginComponent {
 
     this.redirectTo = this.route.snapshot.queryParamMap.get('redirectTo') || '';
     this.infoMessage = this.route.snapshot.queryParamMap.get('message') || '';
+    this.socialAuthService.authState.subscribe((user) => {
+      if (user && user.idToken) {
+        this.loginWithGoogle(user.idToken);
+      }
+    });
   }
 
   onSubmit() {
@@ -98,6 +106,34 @@ export class LoginComponent {
         console.error('Error al iniciar sesión', err);
         this.isLoading = false;
         this.error = this.translate.instant('auth.login.errors.invalid_credentials');
+        this.cdr.detectChanges();
+      }
+    });
+  }
+  loginWithGoogle(idToken: string) {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.error = '';
+
+    const role = this.loginForm.get('role')?.value;
+
+    this.authService.loginWithGoogle(idToken).subscribe({
+      next: (response: any) => {
+        this.authService.setSession(response);
+
+        const selectedRole = role === 'Administrador' ? 'admin' : 'usuario';
+        const actualRole = this.authService.normalizeRole(response?.role);
+
+        if (actualRole === 'admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigateByUrl(this.redirectTo || '/');
+        }
+      },
+      error: (err: any) => {
+        console.error('Error al iniciar sesión con Google', err);
+        this.isLoading = false;
+        this.error = 'Error autenticando con Google. Intente de nuevo.';
         this.cdr.detectChanges();
       }
     });

@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     { code: 'es', label: 'Español',   flag: '🇧🇴' },
     { code: 'en', label: 'English',   flag: '🇬🇧' },
     { code: 'pt', label: 'Português', flag: '🇧🇷' },
-    { code: 'fr', label: 'Français',  flag: '🇫🇷' }
+    { code: 'fr', label: 'Français',  flag: '🇫🇷' },
   ];
 
   allNavItems = [

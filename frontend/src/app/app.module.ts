@@ -7,9 +7,10 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 export class CustomTranslateLoader implements TranslateLoader {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   getTranslation(lang: string): Observable<any> {
     // Usamos ruta absoluta para que funcione en cualquier sub-ruta
     return this.http.get(`/assets/i18n/${lang}.json`);
@@ -52,9 +53,25 @@ export function appInitializerFactory(translate: TranslateService, ngZone: NgZon
         deps: [HttpClient]
       }
     }),
-    SharedModule
+    SharedModule,
+    SocialLoginModule
   ],
   providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com')
+          }
+        ],
+        onError: (err) => {
+          console.error('Google Auth Error:', err);
+        }
+      } as SocialAuthServiceConfig,
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,

@@ -79,39 +79,6 @@
     "admin": "Admin Panel",
     "logout": "Sign out"
   },
-  "home": {
-    "hero": {
-      "badge": "🌱 A greener Cochabamba",
-      "title": "Let's build a greener Cochabamba together",
-      "description": "Participate in reforestation campaigns and improve recycling in your city.",
-      "btn_campaigns": "View campaigns",
-      "btn_recycling": "Explore recycling"
-    },
-    "stats": {
-      "activeCampaigns": "Active Campaigns",
-      "totalParticipants": "Total Participants",
-      "totalCampaigns": "Total Campaigns"
-    },
-    "reforestation": {
-      "badge": "🌳 Reforestation",
-      "title": "Active reforestation campaigns",
-      "description": "Join our campaigns and help plant trees in Cochabamba",
-      "spots": "{{count}} spots",
-      "btn_participate": "Participate",
-      "btn_view_all": "View all campaigns"
-    },
-    "recycling_promo": {
-      "badge": "♻️ Smart Recycling",
-      "title": "Discover green points and collection routes",
-      "description": "Find the nearest recycling centers, check truck routes and contribute to a cleaner Cochabamba.",
-      "btn_explore": "Explore recycling system",
-      "btn_campaigns": "View recycling campaigns"
-    },
-    "campaigns_section": {
-      "title": "Recent campaigns",
-      "view_all": "View all"
-    }
-  },
   "campaign_detail": {
     "sections": {
       "description": "Description",
@@ -145,6 +112,95 @@
     "states": {
       "loading": "Loading campaign...",
       "error_back": "Back to campaigns"
+    }
+  },
+  "campaign_admin": {
+    "header": {
+      "title": "Campaign Management",
+      "subtitle": "Manage reforestation campaigns",
+      "btn_new": "New Campaign"
+    },
+    "search": {
+      "placeholder": "Search by title or location..."
+    },
+    "table": {
+      "col_campaign": "Campaign",
+      "col_date": "Date",
+      "col_location": "Location",
+      "col_participants": "Participants",
+      "col_organizer": "Organizer",
+      "col_status": "Status",
+      "col_actions": "Actions",
+      "tooltip_edit": "Edit",
+      "tooltip_delete": "Delete"
+    },
+    "modal": {
+      "title_new": "New Campaign",
+      "title_edit": "Edit Campaign",
+      "subtitle_new": "Fill in all fields to create the campaign",
+      "subtitle_edit": "Fill in all fields to update the campaign",
+      "btn_cancel": "Cancel",
+      "btn_save_new": "✓ Create Campaign",
+      "btn_save_edit": "✓ Save Changes"
+    },
+    "form": {
+      "labels": {
+        "title": "Campaign title *",
+        "date": "Campaign date *",
+        "spots": "Available spots *",
+        "location": "Location *",
+        "status": "Campaign status",
+        "organizer": "Organizer *",
+        "description": "Campaign description *",
+        "image_url": "Image URL",
+        "optional": "(optional)"
+      },
+      "placeholders": {
+        "title": "e.g. Tunari Park Reforestation 2026",
+        "spots": "e.g. 50",
+        "location": "e.g. Tunari National Park",
+        "organizer": "e.g. City Hall of Cochabamba",
+        "description": "Describe the objectives, activities, and important details of the campaign...",
+        "image_url": "https://example.com/image.jpg"
+      },
+      "status_options": {
+        "scheduled": "Scheduled",
+        "active": "Active",
+        "finished": "Finished"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "🌱 A greener Cochabamba",
+      "title": "Let's build a greener Cochabamba together",
+      "description": "Join reforestation campaigns and improve recycling in your city.",
+      "btn_campaigns": "View campaigns",
+      "btn_recycling": "Explore recycling"
+    },
+    "reforestation": {
+      "badge": "🌳 Reforestation",
+      "title": "Active reforestation campaigns",
+      "description": "Join our campaigns and help plant trees in Cochabamba",
+      "spots": "{{count}} spots",
+      "btn_participate": "Join",
+      "btn_view_all": "View all campaigns"
+    },
+    "recycling_promo": {
+      "badge": "♻️ Smart Recycling",
+      "title": "Discover green points and collection routes",
+      "description": "Find the nearest recycling centers, check truck collection routes, and help keep Cochabamba clean.",
+      "btn_explore": "Explore recycling system",
+      "btn_campaigns": "View recycling campaigns"
+    },
+    "stats": {
+      "activeCampaigns": "Active Campaigns",
+      "totalParticipants": "Total Participants",
+      "totalCampaigns": "Total Campaigns"
+    },
+    "campaigns_section": {
+      "title": "Recent Campaigns",
+      "view_all": "View All"
     }
   },
   "recycling": {
@@ -272,8 +328,8 @@
       "description": "Visualize Cochabamba's collective progress toward a greener, more sustainable future."
     },
     "charts": {
-      "tress": {
-        "title": "Trees planted",
+      "trees": {
+        "title": "Trees Planted",
         "subtitle": "Monthly progress"
       },
       "waste": {
@@ -294,11 +350,11 @@
       "subtitle": "The result of our collective effort",
       "trees": {
         "label": "Trees planted",
-        "equivalent": "Equivalent to {{count}} hectares of forest"
+        "equivalent": "Equivalent to 185 hectares of forest"
       },
       "recycling": {
         "label": "Waste recycled",
-        "equivalent": "Reduction of {{count}} tonnes of CO₂"
+        "equivalent": "Reduction of 520 tonnes of CO₂"
       },
       "water": {
         "label": "Water saved",
@@ -311,20 +367,21 @@
       "active_volunteers": "Active Volunteers"
     }
   },
-  "header": {
+  "admin_sidebar": {
+    "logo": {
+      "subtitle": "Admin Panel"
+    },
     "nav": {
-      "home": "Home",
+      "dashboard": "Dashboard",
       "reforestation": "Reforestation",
       "recycling": "Recycling",
-      "stats": "Statistics"
+      "users": "Users",
+      "reports": "Reports",
+      "settings": "Settings"
     },
-    "buttons": {
-      "admin_panel": "Admin Panel",
-      "logout": "Sign out",
-      "login": "Sign in",
-      "register": "Register"
-    },
-    "user_default": "User"
+    "footer": {
+      "user_view": "User View"
+    }
   },
   "footer": {
     "description": "Leading platform for environmental management in Cochabamba. Together we build a greener and more sustainable future.",
@@ -345,6 +402,21 @@
       }
     },
     "bottom": "© 2026 EcoLand. All rights reserved. Making Cochabamba a greener city 🌱"
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "reforestation": "Reforestation",
+      "recycling": "Recycling",
+      "stats": "Statistics"
+    },
+    "buttons": {
+      "admin_panel": "Admin Panel",
+      "logout": "Sign out",
+      "login": "Sign in",
+      "register": "Sign up"
+    },
+    "user_default": "User"
   },
   "logout_modal": {
     "title": "Sign out?",

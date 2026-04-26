@@ -79,39 +79,6 @@
     "admin": "Panel Admin",
     "logout": "Cerrar sesión"
   },
-  "home": {
-    "hero": {
-      "badge": "🌱 Cochabamba más verde",
-      "title": "Construyamos juntos un Cochabamba más verde",
-      "description": "Participa en campañas de reforestación y mejora el reciclaje en tu ciudad.",
-      "btn_campaigns": "Ver campañas",
-      "btn_recycling": "Explorar reciclaje"
-    },
-    "stats": {
-      "activeCampaigns": "Campañas Activas",
-      "totalParticipants": "Total Participantes",
-      "totalCampaigns": "Total Campañas"
-    },
-    "reforestation": {
-      "badge": "🌳 Reforestación",
-      "title": "Campañas activas de reforestación",
-      "description": "Únete a nuestras campañas y ayuda a plantar árboles en Cochabamba",
-      "spots": "{{count}} cupos",
-      "btn_participate": "Participar",
-      "btn_view_all": "Ver todas las campañas"
-    },
-    "recycling_promo": {
-      "badge": "♻️ Reciclaje Inteligente",
-      "title": "Descubre puntos verdes y rutas de recolección",
-      "description": "Encuentra los centros de reciclaje más cercanos, conoce las rutas de los camiones y contribuye a un Cochabamba más limpio.",
-      "btn_explore": "Explorar sistema de reciclaje",
-      "btn_campaigns": "Ver campañas de reciclaje"
-    },
-    "campaigns_section": {
-      "title": "Campañas recientes",
-      "view_all": "Ver todas"
-    }
-  },
   "campaign_detail": {
     "sections": {
       "description": "Descripción",
@@ -145,6 +112,137 @@
     "states": {
       "loading": "Cargando campaña...",
       "error_back": "Volver a campañas"
+    }
+  },
+  "campaign_admin": {
+    "header": {
+      "title": "Gestión de Campañas",
+      "subtitle": "Administra las campañas de reforestación",
+      "btn_new": "Nueva Campaña"
+    },
+    "search": {
+      "placeholder": "Buscar por título o ubicación..."
+    },
+    "table": {
+      "col_campaign": "Campaña",
+      "col_date": "Fecha",
+      "col_location": "Ubicación",
+      "col_participants": "Participantes",
+      "col_organizer": "Organizador",
+      "col_status": "Estado",
+      "col_actions": "Acciones",
+      "tooltip_edit": "Editar",
+      "tooltip_delete": "Eliminar"
+    },
+    "modal": {
+      "title_new": "Nueva Campaña",
+      "title_edit": "Editar Campaña",
+      "subtitle_new": "Completa todos los campos para crear la campaña",
+      "subtitle_edit": "Completa todos los campos para actualizar la campaña",
+      "btn_cancel": "Cancelar",
+      "btn_save_new": "✓ Crear Campaña",
+      "btn_save_edit": "✓ Guardar Cambios"
+    },
+    "form": {
+      "labels": {
+        "title": "Título de la campaña *",
+        "date": "Fecha de la campaña *",
+        "spots": "Cupos disponibles *",
+        "location": "Ubicación *",
+        "status": "Estado de la campaña",
+        "organizer": "Organizador *",
+        "description": "Descripción de la campaña *",
+        "image_url": "URL de imagen",
+        "optional": "(opcional)"
+      },
+      "placeholders": {
+        "title": "Ej: Reforestación Parque Tunari 2026",
+        "spots": "Ej: 50",
+        "location": "Ej: Parque Nacional Tunari",
+        "organizer": "Ej: Alcaldía de Cochabamba",
+        "description": "Describe los objetivos, actividades y detalles importantes de la campaña...",
+        "image_url": "https://ejemplo.com/imagen.jpg"
+      },
+      "status_options": {
+        "scheduled": "Programada",
+        "active": "Activa",
+        "finished": "Finalizada"
+      }
+    }
+  },
+  "campaign_detail_user": {
+    "sections": {
+      "description": "Descripción",
+      "requirements": "Requisitos",
+      "organizer_info": "Información del Organizador",
+      "contact": "Contacto:"
+    },
+    "sidebar": {
+      "date_label": "Fecha",
+      "time_label": "Horario",
+      "location_label": "Ubicación",
+      "spots_label": "Participantes inscritos",
+      "spots_available_of": "{{current}} de {{total}}",
+      "cta_button": "Quiero ser voluntario",
+      "cta_no_spots": "Sin cupos disponibles",
+      "cta_processing": "Procesando...",
+      "cta_already_registered": "✓ Ya estás inscrito",
+      "back_link": "Ver otras campañas"
+    },
+    "messages": {
+      "already_registered_info": "Ya estás inscrito en esta campaña",
+      "loading": "Cargando campaña..."
+    }
+  },
+  "recycling_campaigns": {
+    "hero": {
+      "badge": "♻️ Campañas de Reciclaje",
+      "title": "Únete a nuestras campañas",
+      "description": "Participa en desafíos comunitarios de reciclaje y contribuye a alcanzar metas ambientales colectivas."
+    },
+    "filters": {
+      "search_placeholder": "Buscar campaña por nombre o tipo de residuo...",
+      "filter_button": "Filtrar"
+    },
+    "card": {
+      "meta_label": "Meta:",
+      "progress_label": "Progreso de recolección",
+      "progress_of": "de",
+      "participants_count": "{{count}} participantes",
+      "cta_button": "Participar"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "🌱 Cochabamba más verde",
+      "title": "Construyamos juntos un Cochabamba más verde",
+      "description": "Participa en campañas de reforestación y mejora el reciclaje en tu ciudad.",
+      "btn_campaigns": "Ver campañas",
+      "btn_recycling": "Explorar reciclaje"
+    },
+    "reforestation": {
+      "badge": "🌳 Reforestación",
+      "title": "Campañas activas de reforestación",
+      "description": "Únete a nuestras campañas y ayuda a plantar árboles en Cochabamba",
+      "spots": "{{count}} cupos",
+      "btn_participate": "Participar",
+      "btn_view_all": "Ver todas las campañas"
+    },
+    "recycling_promo": {
+      "badge": "♻️ Reciclaje Inteligente",
+      "title": "Descubre puntos verdes y rutas de recolección",
+      "description": "Encuentra los centros de reciclaje más cercanos, conoce las rutas de los camiones y contribuye a un Cochabamba más limpio.",
+      "btn_explore": "Explorar sistema de reciclaje",
+      "btn_campaigns": "Ver campañas de reciclaje"
+    },
+    "stats": {
+      "activeCampaigns": "Campañas Activas",
+      "totalParticipants": "Total Participantes",
+      "totalCampaigns": "Total Campañas"
+    },
+    "campaigns_section": {
+      "title": "Campañas recientes",
+      "view_all": "Ver todas"
     }
   },
   "recycling": {
@@ -208,6 +306,32 @@
       "geolocation_unavailable": "Geolocalización no disponible, usando centro de Cochabamba"
     }
   },
+  "recycling_campaign": {
+    "progress": {
+      "title": "Progreso de la Campaña",
+      "subtitle": "¡Estamos muy cerca de la meta!",
+      "current_label": "Recolección actual",
+      "goal_info": "de {{goal}} kg",
+      "participants": "Participantes",
+      "to_reach": "Por alcanzar"
+    },
+    "sections": {
+      "description": "Descripción",
+      "benefits": "Beneficios de Participar",
+      "rewards_title": "Sistema de Recompensas",
+      "rewards_subtitle": "Gana reconocimientos por tu contribución",
+      "people_count": "{{count}} personas"
+    },
+    "sidebar": {
+      "label_date": "Fecha",
+      "label_location": "Ubicación",
+      "label_goal": "Meta de recolección",
+      "btn_join": "Sumarme a la campaña",
+      "btn_back": "Ver otras campañas",
+      "organizer_label": "Organizado por:"
+    },
+    "loading": "Cargando campaña..."
+  },
   "reforestation": {
     "hero": {
       "badge": "🌳 Campañas de Reforestación",
@@ -235,45 +359,15 @@
       "login_required": "Debes iniciar sesión para participar en una campaña de reforestación."
     }
   },
-  "recycling_campaigns": {
-    "progress": {
-      "title": "Campañas de reciclaje en Cochabamba",
-      "subtitle": "Participa en nuestras campañas de reciclaje y contribuye una ciudad más limpia y sostenible",
-      "current_lable": "Campañas actuales",
-      "goal_info": "Nuestro objetivo es reciclar {{goal}} kg de residuos este año. ¡Únete a nosotros para alcanzar esta meta y hacer de Cocha una ciudad más verde!",
-      "participants": "Participantes activos",
-      "to_reach": "¡Cada acción cuenta para lograr un Cocha más limpio!"
-    },
-    "sections":{
-      "description":"Descripción",
-      "benefits": "Beneficios de Participar",
-      "rewards_title":"Sistema de Recompensas",
-      "rewards_subtitle":"Gana reconocimientos por tu contribución",
-      "people_count":"{{count}} personas participando"
-    },
-    "sidebar":{
-      "label_date":"Fecha:",
-      "label_location":"Ubicación:",
-      "label_goal":"Meta de reciclaje:",
-      "btn_join":"¡Quiero participar!",
-      "btn_back":"Ver otras campañas",
-      "organizer_label":"Organizado por:"
-    },
-    "loading": "Cargando campañas de reciclaje...",
-    "messages": {
-      "campaign_not_found": "Campaña no encontrada.",
-      "load_error": "No se pudo cargar la campaña de reciclaje."
-    }
-  }, 
   "stats": {
     "hero": {
       "badge": "📊 Estadísticas Ambientales",
       "title": "Nuestro impacto en números",
       "description": "Visualiza el progreso colectivo de Cochabamba hacia un futuro más verde y sostenible."
     },
-    "charts":{
-      "tress": {
-        "title": "Árboles plantados",
+    "charts": {
+      "trees": {
+        "title": "Árboles Plantados",
         "subtitle": "Progreso mensual"
       },
       "waste": {
@@ -292,15 +386,15 @@
     "summary": {
       "title": "Impacto Ambiental Acumulado",
       "subtitle": "El resultado de nuestro esfuerzo colectivo",
-      "trees":{
+      "trees": {
         "label": "Árboles plantados",
-        "equivalent": "Equivalente a {{count}} hectáreas de bosque"
+        "equivalent": "Equivalente a 185 hectáreas de bosque"
       },
-      "recycling":{
+      "recycling": {
         "label": "Residuos reciclados",
-        "equivalent": "Reducción de {{count}} toneladas de CO₂"
+        "equivalent": "Reducción de 520 toneladas de CO₂"
       },
-      "water":{
+      "water": {
         "label": "Agua ahorrada",
         "equivalent": "Gracias al reciclaje de papel y plástico"
       }
@@ -310,21 +404,22 @@
       "kg_recycled": "Kg Reciclados",
       "active_volunteers": "Voluntarios Activos"
     }
-  }, 
-  "header": {
+  },
+  "admin_sidebar": {
+    "logo": {
+      "subtitle": "Panel Administrativo"
+    },
     "nav": {
-      "home": "Inicio",
+      "dashboard": "Panel de Control",
       "reforestation": "Reforestación",
       "recycling": "Reciclaje",
-      "stats": "Estadísticas"
+      "users": "Usuarios",
+      "reports": "Reportes",
+      "settings": "Configuración"
     },
-    "buttons": {
-      "admin_panel": "Panel Admin",
-      "logout": "Cerrar sesión",
-      "login": "Iniciar sesión",
-      "register": "Registrarse"
-    },
-    "user_default": "Usuario"
+    "footer": {
+      "user_view": "Vista Usuario"
+    }
   },
   "footer": {
     "description": "Plataforma líder en gestión ambiental de Cochabamba. Juntos construimos un futuro más verde y sostenible.",
@@ -346,13 +441,28 @@
     },
     "bottom": "© 2026 EcoLand. Todos los derechos reservados. Haciendo de Cochabamba una ciudad más verde 🌱"
   },
+  "header": {
+    "nav": {
+      "home": "Inicio",
+      "reforestation": "Reforestación",
+      "recycling": "Reciclaje",
+      "stats": "Estadísticas"
+    },
+    "buttons": {
+      "admin_panel": "Panel Admin",
+      "logout": "Cerrar sesión",
+      "login": "Iniciar sesión",
+      "register": "Registrarse"
+    },
+    "user_default": "Usuario"
+  },
   "logout_modal": {
     "title": "¿Cerrar sesión?",
     "message": "¿Estás seguro de salir?",
     "confirm": "Sí, salir",
     "cancel": "Cancelar"
   },
-  "admin_page":{
+  "admin_page": {
     "side_bar": {
       "user_view": "Vista de usuario",
       "logo": {

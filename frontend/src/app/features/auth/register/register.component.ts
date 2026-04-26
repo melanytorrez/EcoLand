@@ -5,6 +5,7 @@ import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ReactiveFormsModule,
     LucideAngularModule,
     RouterModule,
-    TranslateModule
+    TranslateModule,
+    GoogleSigninButtonModule
   ],
   providers: [
     { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
@@ -52,7 +54,8 @@ export class RegisterComponent {
     private router: Router,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private socialAuthService: SocialAuthService
   ) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -66,6 +69,12 @@ export class RegisterComponent {
       role: ['Usuario']
     }, {
       validators: this.passwordsMatch
+    });
+
+    this.socialAuthService.authState.subscribe((user) => {
+      if (user && user.idToken) {
+        this.loginWithGoogle(user.idToken);
+      }
     });
   }
 
@@ -128,4 +137,22 @@ export class RegisterComponent {
       }
     });
   }
-}
+  loginWithGoogle(idToken: string) {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.error = '';
+
+    this.authService.loginWithGoogle(idToken).subscribe({
+      next: (response: any) => {
+        this.authService.setSession(response);
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      },
+      error: (err: any) => {
+        console.error('Error registrando/iniciando con Google', err);
+        this.isLoading = false;
+        this.error = 'Error autenticando con Google. Intente de nuevo.';
+        this.cdr.detectChanges();
+      }
+    });
+  }
