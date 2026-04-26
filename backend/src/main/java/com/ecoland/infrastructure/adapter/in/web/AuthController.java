@@ -3,6 +3,7 @@ package com.ecoland.infrastructure.adapter.in.web;
 import com.ecoland.application.dto.AuthResponse;
 import com.ecoland.application.dto.LoginRequest;
 import com.ecoland.application.dto.RegisterRequest;
+import com.ecoland.application.dto.GoogleLoginRequest;
 import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
@@ -51,5 +52,19 @@ public class AuthController {
         return ResponseEntity.ok(authUseCase.register(usuario));
     }
 
-
+    @PostMapping("/google")
+    public ResponseEntity<AuthResponse> loginWithGoogle(@Valid @RequestBody GoogleLoginRequest request) {
+        logger.info("Intento de login con Google para token asociado");
+        try {
+            AuthResponse response = authUseCase.loginWithGoogle(request.getTokenId());
+            logger.info("Login con Google exitoso: {}", response.getEmail());
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            logger.warn("Token de Google invalido: {}", e.getMessage());
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            logger.error("Error al iniciar sesion con Google", e);
+            throw new RuntimeException("Error autenticando con Google", e);
+        }
+    }
 }

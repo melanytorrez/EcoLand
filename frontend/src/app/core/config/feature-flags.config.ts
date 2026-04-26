@@ -9,5 +9,5 @@ export const FEATURE_FLAGS: FeatureFlags = {
   reforestacion: true,
   campanasReciclaje: false,
   reciclaje: true,
-  estadisticas: false,
+  estadisticas: true,
 };
