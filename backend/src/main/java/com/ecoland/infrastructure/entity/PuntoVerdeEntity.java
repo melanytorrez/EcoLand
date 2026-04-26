@@ -31,6 +31,9 @@ public class PuntoVerdeEntity {
     @Column(name = "tipo_material")
     private List<String> tiposMaterial;
 
+    private Double latitud;
+    private Double longitud;
+
     public PuntoVerdeEntity() {
     }
 
@@ -88,6 +91,22 @@ public class PuntoVerdeEntity {
 
     public void setTiposMaterial(List<String> tiposMaterial) {
         this.tiposMaterial = tiposMaterial;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
     }
 
 }

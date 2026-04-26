@@ -38,7 +38,9 @@ export class RecyclingService {
         estado: p.estado,
         activo: p.estado === 'ACTIVO' || p.estado === 'Abierto',
         horarios: p.horarios,
-        tiposMaterial: p.tiposMaterial
+        tiposMaterial: p.tiposMaterial,
+        latitud: p.latitud,
+        longitud: p.longitud
       } as GreenPoint)))
     );
   }

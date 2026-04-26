@@ -1,5 +1,6 @@
 package com.ecoland.infrastructure.security;
 
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,9 +24,11 @@ public class JwtFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
     private final JwtService jwtService;
+    private final UsuarioRepositoryPort usuarioRepositoryPort;
 
-    public JwtFilter(JwtService jwtService) {
+    public JwtFilter(JwtService jwtService, UsuarioRepositoryPort usuarioRepositoryPort) {
         this.jwtService = jwtService;
+        this.usuarioRepositoryPort = usuarioRepositoryPort;
     }
 
     @Override
@@ -49,6 +52,15 @@ public class JwtFilter extends OncePerRequestFilter {
             String email = jwtService.extractEmail(token);
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                // Verificar que el usuario realmente existe en la base de datos
+                boolean userExists = usuarioRepositoryPort.findByEmail(email).isPresent();
+
+                if (!userExists) {
+                    logger.warn("Intento de acceso con token válido pero usuario inexistente: {}", email);
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
+                }
+
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

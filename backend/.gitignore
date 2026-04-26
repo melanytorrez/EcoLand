@@ -1,7 +1,7 @@
 target/
 *.txt
 *.log
-logs/
+logs/*
 boot_log*.txt
 
 # Ignore IDE files if they ever get created
