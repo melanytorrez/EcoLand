@@ -16,17 +16,24 @@ export class CustomTranslateLoader implements TranslateLoader {
   }
 }
 
-import { APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, NgZone } from '@angular/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
 }
 
-export function appInitializerFactory(translate: TranslateService) {
+export function appInitializerFactory(translate: TranslateService, ngZone: NgZone) {
   return () => {
-    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
-    translate.setDefaultLang('es');
-    return translate.use(savedLang); // Retornar el Observable directamente
+    return new Promise((resolve) => {
+      ngZone.run(() => {
+        const savedLang = localStorage.getItem('ecoland_lang') || 'es';
+        translate.setDefaultLang('es');
+        translate.use(savedLang).subscribe({
+          next: () => resolve(true),
+          error: () => resolve(true) // Resolvemos igual para no bloquear la app si falla el JSON
+        });
+      });
+    });
   };
 }
 
@@ -51,7 +58,7 @@ export function appInitializerFactory(translate: TranslateService) {
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
-      deps: [TranslateService],
+      deps: [TranslateService, NgZone],
       multi: true
     }
   ],
