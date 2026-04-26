@@ -2,10 +2,9 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
-import { AUTH_STRINGS } from '../../../core/constants/strings.constants';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -29,8 +28,7 @@ export class LoginComponent {
   error = '';
   infoMessage = '';
   redirectTo = '';
-
-  strings = AUTH_STRINGS;
+  isLoading = false;
 
   get emailRules() {
     const val = this.loginForm?.get('email')?.value || '';
@@ -41,30 +39,28 @@ export class LoginComponent {
   }
 
   constructor(
-    private fb: FormBuilder, 
-    private router: Router, 
-    private authService: AuthService, 
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ) {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
       password: ['', Validators.required],
-      role: ['Usuario']
+      role: ['user']
     });
 
     this.redirectTo = this.route.snapshot.queryParamMap.get('redirectTo') || '';
     this.infoMessage = this.route.snapshot.queryParamMap.get('message') || '';
-
   }
-
-  isLoading = false;
 
   onSubmit() {
 
     if (this.loginForm.invalid) {
-      this.error = this.strings.errorRequired;
+      this.error = this.translate.instant('auth.register.validation.required');
       return;
     }
 
@@ -85,13 +81,13 @@ export class LoginComponent {
         if (selectedRole !== actualRole) {
           this.authService.logout();
           this.error = selectedRole === 'admin'
-            ? 'Tu cuenta no tiene permisos de administrador.'
-            : 'Tu cuenta es de administrador. Elige el acceso de administrador.';
+            ? this.translate.instant('auth.login.errors.no_admin_permissions')
+            : this.translate.instant('auth.login.errors.admin_account_required');
           this.isLoading = false;
           this.cdr.detectChanges();
           return;
         }
-        
+
         if (actualRole === 'admin') {
           this.router.navigate(['/admin']);
         } else {
@@ -101,11 +97,9 @@ export class LoginComponent {
       error: (err: any) => {
         console.error('Error al iniciar sesión', err);
         this.isLoading = false;
-        this.error = 'Contraseña o Correo incorrectos intente de nuevo';
+        this.error = this.translate.instant('auth.login.errors.invalid_credentials');
         this.cdr.detectChanges();
       }
     });
-
   }
-
 }

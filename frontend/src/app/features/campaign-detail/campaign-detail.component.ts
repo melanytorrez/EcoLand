@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CampaignService } from '../../core/services/campaign.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-campaign-detail',
@@ -25,7 +25,8 @@ export class CampaignDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private campaignService: CampaignService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -33,13 +34,13 @@ export class CampaignDetailComponent implements OnInit {
     const id = idParam ? Number(idParam) : null;
 
     if (!id) {
-      this.errorMessage = 'Campana no valida.';
+      this.errorMessage = this.translate.instant('campaign_detail.messages.invalid_campaign');
       return;
     }
 
     this.isLoading = true;
     this.errorMessage = null;
-    
+
     this.campaignService.getCampaignById(id).subscribe({
       next: (campaign) => {
         this.campaign = campaign;
@@ -50,7 +51,7 @@ export class CampaignDetailComponent implements OnInit {
         this.isLoading = false;
       },
       error: () => {
-        this.errorMessage = 'No se pudo cargar el detalle de la campana.';
+        this.errorMessage = this.translate.instant('campaign_detail.messages.load_error');
         this.isLoading = false;
       }
     });
@@ -62,7 +63,7 @@ export class CampaignDetailComponent implements OnInit {
       this.router.navigate(['/login'], {
         queryParams: {
           redirectTo: currentUrl,
-          message: 'Debes iniciar sesion para participar en una campana de reforestacion.'
+          message: this.translate.instant('campaign_detail.messages.login_required')
         }
       });
       return;
@@ -74,7 +75,7 @@ export class CampaignDetailComponent implements OnInit {
 
     const token = this.authService.getToken();
     if (!token) {
-      this.participationError = 'No se encontro sesion activa.';
+      this.participationError = this.translate.instant('campaign_detail.messages.no_session');
       return;
     }
 
@@ -87,14 +88,14 @@ export class CampaignDetailComponent implements OnInit {
         this.campaign = updatedCampaign;
         this.percentage = Math.round((updatedCampaign.participants / updatedCampaign.spots) * 100);
         this.availableSpots = updatedCampaign.spots - updatedCampaign.participants;
-        this.participationMessage = 'Participacion registrada con exito.';
+        this.participationMessage = this.translate.instant('campaign_detail.messages.participation_success');
         this.participationLoading = false;
       },
       error: (error: any) => {
         const backendMessage = error?.error;
         this.participationError = typeof backendMessage === 'string' && backendMessage
           ? backendMessage
-          : 'No se pudo completar la participacion. Intenta nuevamente.';
+          : this.translate.instant('campaign_detail.messages.participation_error');
         this.participationLoading = false;
       }
     });
