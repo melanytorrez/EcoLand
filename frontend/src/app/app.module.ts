@@ -16,8 +16,20 @@ export class CustomTranslateLoader implements TranslateLoader {
   }
 }
 
+import { APP_INITIALIZER } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { firstValueFrom } from 'rxjs';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
+}
+
+export function appInitializerFactory(translate: TranslateService) {
+  return () => {
+    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
+    translate.setDefaultLang('es');
+    return firstValueFrom(translate.use(savedLang));
+  };
 }
 
 @NgModule({
@@ -29,7 +41,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'es',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -38,7 +49,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
