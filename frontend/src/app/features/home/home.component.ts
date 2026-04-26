@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Campaign } from '../../core/models/campaign.model';
 import { CampaignService } from '../../core/services/campaign.service';
 import { StatisticsService } from '../../core/services/statistics.service';
@@ -23,8 +24,17 @@ export class HomeComponent implements OnInit {
   constructor(
     private campaignService: CampaignService,
     private statisticsService: StatisticsService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
+  ) {
+    // Garantizar que la vista se actualice apenas las traducciones estén listas
+    this.translate.get('home.hero.title').subscribe(() => {
+      this.cdr.detectChanges();
+    });
+    this.translate.onLangChange.subscribe(() => {
+      this.cdr.detectChanges();
+    });
+  }
 
   ngOnInit(): void {
     this.campaignService.getCampaigns().subscribe({
