@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
@@ -17,8 +17,6 @@ export class CustomTranslateLoader implements TranslateLoader {
 }
 
 import { APP_INITIALIZER } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { firstValueFrom } from 'rxjs';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
