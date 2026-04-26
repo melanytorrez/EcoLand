@@ -214,13 +214,19 @@
     },
     "states": {
       "loading": "Obteniendo campañas desde el bosque...",
-      "view_all": "Ver todas las campañas"
+      "view_all": "Ver todas las campañas",
+      "error_retry": "Error al cargar campañas. Intenta nuevamente.",
+      "no_results": "No se encontraron campañas que coincidan con tu búsqueda."
     },
     "card": {
       "progress_label": "Progreso de inscripciones",
       "spots_available": "{{available}} cupos disponibles de {{total}}",
       "organizer_label": "Organizado por:",
       "btn_participate": "Participar"
+    },
+    "messages": {
+      "load_error": "No se pudieron cargar las campañas. Por favor, verifica tu conexión.",
+      "login_required": "Debes iniciar sesión para participar en una campaña de reforestación."
     }
   },
   "recycling_campaigns": {
