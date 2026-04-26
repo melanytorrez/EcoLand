@@ -77,9 +77,9 @@
         <ng-container *ngIf="isAuthenticated; else guestButtons">
           <div class="flex items-center gap-2">
             <div class="hidden sm:flex flex-col items-end">
-              <span class="text-sm font-semibold text-gray-800 leading-tight">
+              <a routerLink="/profile" class="text-sm font-semibold text-gray-800 leading-tight hover:text-[#2E7D32] transition-colors cursor-pointer">
                 {{ user?.fullName || user?.nombre || ('header.user_default' | translate) }}
-              </span>
+              </a>
               <span class="text-xs text-gray-400 leading-tight">{{ user?.email }}</span>
             </div>
             <button

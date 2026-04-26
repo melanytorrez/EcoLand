@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
@@ -37,7 +38,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    provideCharts(withDefaultRegisterables())
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
