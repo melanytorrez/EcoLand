@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Campaign } from '../../core/models/campaign.model';
 import { CampaignService } from '../../core/services/campaign.service';
 import { StatisticsService } from '../../core/services/statistics.service';
@@ -22,7 +22,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private campaignService: CampaignService,
-    private statisticsService: StatisticsService
+    private statisticsService: StatisticsService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -30,10 +31,12 @@ export class HomeComponent implements OnInit {
       next: (campaigns) => {
         this.campaigns = campaigns.slice(0, 3);
         this.isLoadingCampaigns = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.campaigns = [];
         this.isLoadingCampaigns = false;
+        this.cdr.detectChanges();
       }
     });
 
@@ -43,9 +46,11 @@ export class HomeComponent implements OnInit {
         this.stats[1].value = data.totalParticipants.toLocaleString();
         this.stats[2].value = data.totalCampaigns.toLocaleString();
         this.isLoadingStats = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.isLoadingStats = false;
+        this.cdr.detectChanges();
         // En caso de error, dejamos los valores predeterminados '...'
       }
     });

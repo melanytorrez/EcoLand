@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { RecyclingService } from '../../core/services/recycling.service';
 import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../../core/models/recycling.model';
 import * as L from 'leaflet';
@@ -27,7 +27,7 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly CBBA_LAT = -17.3935;
   private readonly CBBA_LNG = -66.1570;
 
-  constructor(private recyclingService: RecyclingService) {}
+  constructor(private recyclingService: RecyclingService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadingPoints = true;
@@ -40,20 +40,28 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.map) {
           this.addMarkersToMap();
         }
+        this.cdr.detectChanges();
       },
       error: () => {
         this.nearbyPoints = [];
         this.pointsError = 'No se pudieron cargar los puntos verdes. Intenta nuevamente más tarde.';
         this.loadingPoints = false;
+        this.cdr.detectChanges();
       }
     });
 
     if (this.showNextRoute) {
-      this.recyclingService.getNextCollection().subscribe(route => this.nextCollection = route);
+      this.recyclingService.getNextCollection().subscribe(route => {
+        this.nextCollection = route;
+        this.cdr.detectChanges();
+      });
     }
 
     if (this.showStatistics) {
-      this.recyclingService.getEnvironmentalImpact().subscribe(impact => this.impact = impact);
+      this.recyclingService.getEnvironmentalImpact().subscribe(impact => {
+        this.impact = impact;
+        this.cdr.detectChanges();
+      });
     }
   }
 

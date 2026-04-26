@@ -22,11 +22,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 import { APP_INITIALIZER } from '@angular/core';
 
+import { firstValueFrom } from 'rxjs';
+
 export function appInitializerFactory(translate: TranslateService) {
   return () => {
     translate.setDefaultLang('es');
     const savedLang = localStorage.getItem('ecoland_lang') || 'es';
-    return translate.use(savedLang);
+    // Usamos firstValueFrom para garantizar que Angular espere la resolución de la Promesa
+    return firstValueFrom(translate.use(savedLang));
   };
 }
 
