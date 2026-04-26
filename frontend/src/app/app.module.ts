@@ -12,7 +12,6 @@ import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) { }
   getTranslation(lang: string): Observable<any> {
-    // Usamos ruta absoluta para que funcione en cualquier sub-ruta
     return this.http.get(`/assets/i18n/${lang}.json`);
   }
 }
@@ -31,7 +30,7 @@ export function appInitializerFactory(translate: TranslateService, ngZone: NgZon
         translate.setDefaultLang('es');
         translate.use(savedLang).subscribe({
           next: () => resolve(true),
-          error: () => resolve(true) // Resolvemos igual para no bloquear la app si falla el JSON
+          error: () => resolve(true)
         });
       });
     });
@@ -67,7 +66,7 @@ export function appInitializerFactory(translate: TranslateService, ngZone: NgZon
             provider: new GoogleLoginProvider('453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com')
           }
         ],
-        onError: (err) => {
+        onError: (err: any) => {
           console.error('Google Auth Error:', err);
         }
       } as SocialAuthServiceConfig,

@@ -1,11 +1,10 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +14,7 @@ import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-
     ReactiveFormsModule,
     LucideAngularModule,
     RouterModule,
-    TranslateModule,
-    GoogleSigninButtonModule
+    TranslateModule
   ],
   providers: [
     { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
@@ -24,7 +22,7 @@ import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
   error = '';
@@ -47,9 +45,8 @@ export class LoginComponent {
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private translate: TranslateService,
-    private socialAuthService: SocialAuthService
+    private ngZone: NgZone
   ) {
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
       password: ['', Validators.required],
@@ -58,15 +55,44 @@ export class LoginComponent {
 
     this.redirectTo = this.route.snapshot.queryParamMap.get('redirectTo') || '';
     this.infoMessage = this.route.snapshot.queryParamMap.get('message') || '';
-    this.socialAuthService.authState.subscribe((user) => {
-      if (user && user.idToken) {
-        this.loginWithGoogle(user.idToken);
+  }
+
+  ngOnInit(): void {
+    this.renderGoogleButton();
+  }
+
+  ngOnDestroy(): void {}
+
+  private renderGoogleButton(): void {
+    const googleApi = (window as any)['google'];
+    if (googleApi?.accounts?.id) {
+      googleApi.accounts.id.initialize({
+        client_id: '453422657382-mpgsm4p398f0s54848p4uhmrop3uueu6.apps.googleusercontent.com',
+        callback: (response: any) => {
+          this.ngZone.run(() => {
+            if (response?.credential) {
+              this.loginWithGoogle(response.credential);
+            }
+          });
+        }
+      });
+      const btnContainer = document.getElementById('google-signin-btn-login');
+      if (btnContainer) {
+        googleApi.accounts.id.renderButton(btnContainer, {
+          type: 'standard',
+          size: 'large',
+          theme: 'outline',
+          text: 'signin_with',
+          width: 350
+        });
       }
-    });
+    } else {
+      // Google API not loaded yet, retry after a short delay
+      setTimeout(() => this.renderGoogleButton(), 500);
+    }
   }
 
   onSubmit() {
-
     if (this.loginForm.invalid) {
       this.error = this.translate.instant('auth.register.validation.required');
       return;
@@ -110,6 +136,7 @@ export class LoginComponent {
       }
     });
   }
+
   loginWithGoogle(idToken: string) {
     if (this.isLoading) return;
     this.isLoading = true;
@@ -121,7 +148,6 @@ export class LoginComponent {
       next: (response: any) => {
         this.authService.setSession(response);
 
-        const selectedRole = role === 'Administrador' ? 'admin' : 'usuario';
         const actualRole = this.authService.normalizeRole(response?.role);
 
         if (actualRole === 'admin') {
