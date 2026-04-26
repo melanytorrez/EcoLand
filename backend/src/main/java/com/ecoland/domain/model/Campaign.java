@@ -17,6 +17,7 @@ public class Campaign {
     private String status;
     private String description;
     private List<String> requirements;
+    private CampaignCategory category;
 
     public Campaign() {}
 
@@ -62,4 +63,7 @@ public class Campaign {
 
     public List<String> getRequirements() { return requirements; }
     public void setRequirements(List<String> requirements) { this.requirements = requirements; }
+
+    public CampaignCategory getCategory() { return category; }
+    public void setCategory(CampaignCategory category) { this.category = category; }
 }

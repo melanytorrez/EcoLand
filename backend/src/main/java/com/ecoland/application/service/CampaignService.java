@@ -37,6 +37,12 @@ public class CampaignService implements CampaignUseCase {
     }
 
     @Override
+    public List<Campaign> getCampaignsByCategory(com.ecoland.domain.model.CampaignCategory category) {
+        logger.info("Solicitud para obtener las campañas de la categoría: {}", category);
+        return campaignRepositoryPort.findByCategory(category);
+    }
+
+    @Override
     public Campaign getCampaignById(Long id) {
         logger.info("Solicitud para obtener la campaña con id: {}", id);
         return campaignRepositoryPort.findById(id)
@@ -78,6 +84,7 @@ public class CampaignService implements CampaignUseCase {
             existingCampaign.setStatus(campaign.getStatus());
             existingCampaign.setDescription(campaign.getDescription());
             existingCampaign.setRequirements(campaign.getRequirements());
+            existingCampaign.setCategory(campaign.getCategory());
 
             Campaign updatedCampaign = campaignRepositoryPort.save(existingCampaign);
             logger.info("Campaña con id: {} actualizada exitosamente", id);
@@ -148,6 +155,7 @@ public class CampaignService implements CampaignUseCase {
             c1.setStatus("Activa");
             c1.setDescription("Únete a nosotros para plantar más de 200 árboles nativos.");
             c1.setRequirements(Arrays.asList("Guantes de trabajo", "Agua personal", "Ropa cómoda"));
+            c1.setCategory(com.ecoland.domain.model.CampaignCategory.REFORESTATION);
             campaignRepositoryPort.save(c1);
 
             Campaign c2 = new Campaign();
@@ -164,6 +172,7 @@ public class CampaignService implements CampaignUseCase {
             c2.setStatus("Activa");
             c2.setDescription("Campaña masiva de reforestación para recuperar el pulmón de la zona norte.");
             c2.setRequirements(Arrays.asList("Pala pequeña", "Protector solar"));
+            c2.setCategory(com.ecoland.domain.model.CampaignCategory.REFORESTATION);
             campaignRepositoryPort.save(c2);
         }
     }

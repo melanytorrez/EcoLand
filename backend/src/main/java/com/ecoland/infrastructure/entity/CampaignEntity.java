@@ -2,6 +2,7 @@ package com.ecoland.infrastructure.entity;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.ecoland.domain.model.CampaignCategory;
 
 @Entity
 @Table(name = "campaigns")
@@ -34,6 +35,9 @@ public class CampaignEntity {
     @CollectionTable(name = "campaign_requirements", joinColumns = @JoinColumn(name = "campaign_id"))
     @Column(name = "requirement")
     private List<String> requirements;
+
+    @Enumerated(EnumType.STRING)
+    private CampaignCategory category;
 
     public CampaignEntity() {
     }
@@ -149,5 +153,13 @@ public class CampaignEntity {
 
     public void setRequirements(List<String> requirements) {
         this.requirements = requirements;
+    }
+
+    public CampaignCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(CampaignCategory category) {
+        this.category = category;
     }
 }

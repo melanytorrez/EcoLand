@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import com.ecoland.domain.model.CampaignCategory;
 
 @Component
 public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
@@ -22,6 +23,13 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
     @Override
     public List<Campaign> findAll() {
         return repository.findAll().stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Campaign> findByCategory(CampaignCategory category) {
+        return repository.findByCategory(category).stream()
                 .map(this::toDomain)
                 .collect(Collectors.toList());
     }
@@ -59,6 +67,7 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
         domain.setStatus(entity.getStatus());
         domain.setDescription(entity.getDescription());
         domain.setRequirements(entity.getRequirements());
+        domain.setCategory(entity.getCategory());
         return domain;
     }
 
@@ -78,6 +87,7 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
         entity.setStatus(campaign.getStatus());
         entity.setDescription(campaign.getDescription());
         entity.setRequirements(campaign.getRequirements());
+        entity.setCategory(campaign.getCategory());
         return entity;
     }
 }
