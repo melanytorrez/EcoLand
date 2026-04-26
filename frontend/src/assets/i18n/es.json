@@ -35,8 +35,14 @@
       "title": "Crear cuenta",
       "subtitle": "Únete a la comunidad EcoLand",
       "inputs": {
-        "full_name": { "label": "Nombre completo", "placeholder": "Juan Pérez" },
-        "confirm_password": { "label": "Confirmar contraseña", "placeholder": "Repite tu contraseña" }
+        "full_name": { 
+          "label": "Nombre completo", 
+          "placeholder": "Juan Pérez" 
+        },
+        "confirm_password": { 
+          "label": "Confirmar contraseña", 
+          "placeholder": "Repite tu contraseña" 
+        }
       },
       "submit_button": "Crear cuenta",
       "footer": {

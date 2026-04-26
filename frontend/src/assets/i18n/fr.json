@@ -6,7 +6,7 @@
       "inputs": {
         "email": {
           "label": "Adresse e-mail",
-          "placeholder": "vous@email.com"
+          "placeholder": "toi@email.com"
         },
         "password": {
           "label": "Mot de passe",
@@ -27,8 +27,8 @@
       },
       "errors": {
         "no_admin_permissions": "Votre compte n'a pas les permissions d'administrateur.",
-        "admin_account_required": "Votre compte est un compte administrateur. Veuillez choisir l'accès administrateur.",
-        "invalid_credentials": "Mot de passe ou e-mail invalide, veuillez réessayer."
+        "admin_account_required": "Votre compte est administrateur. Choisissez l'accès administrateur.",
+        "invalid_credentials": "Mot de passe ou e-mail incorrect, réessayez."
       }
     },
     "register": {
@@ -66,14 +66,14 @@
         }
       },
       "messages": {
-        "generic_error": "L'inscription a échoué. Veuillez réessayer."
+        "generic_error": "Erreur lors de l'inscription. Veuillez réessayer."
       }
     }
   },
   "navigation": {
     "home": "Accueil",
     "reforestation": "Reboisement",
-    "campaigns": "Campagnes de recyclage",
+    "campaigns": "Campagnes de Recyclage",
     "recycling": "Recyclage",
     "stats": "Statistiques",
     "admin": "Panneau Admin",
@@ -81,9 +81,9 @@
   },
   "home": {
     "hero": {
-      "badge": "🌱 Un Cochabamba plus vert",
+      "badge": "🌱 Cochabamba plus verte",
       "title": "Construisons ensemble un Cochabamba plus vert",
-      "description": "Participez à des campagnes de reboisement et améliorez le recyclage dans votre ville.",
+      "description": "Participez aux campagnes de reboisement et améliorez le recyclage dans votre ville.",
       "btn_campaigns": "Voir les campagnes",
       "btn_recycling": "Explorer le recyclage"
     },
@@ -103,7 +103,7 @@
     "recycling_promo": {
       "badge": "♻️ Recyclage Intelligent",
       "title": "Découvrez les points verts et les itinéraires de collecte",
-      "description": "Trouvez les centres de recyclage les plus proches, découvrez les itinéraires des camions et contribuez à un Cochabamba plus propre.",
+      "description": "Trouvez les centres de recyclage les plus proches, consultez les itinéraires des camions et contribuez à un Cochabamba plus propre.",
       "btn_explore": "Explorer le système de recyclage",
       "btn_campaigns": "Voir les campagnes de recyclage"
     },
@@ -115,7 +115,7 @@
   "campaign_detail": {
     "sections": {
       "description": "Description",
-      "requirements": "Exigences",
+      "requirements": "Conditions requises",
       "organizer_info": "Informations sur l'organisateur",
       "contact": "Contact :"
     },
@@ -127,22 +127,31 @@
       "spots_available_of": "{{available}} sur {{total}}",
       "cta_button": "Je veux être bénévole",
       "cta_loading": "Inscription en cours...",
-      "back_link": "Voir d'autres campagnes"
+      "cta_already_registered": "Vous êtes déjà inscrit",
+      "cta_no_spots": "Aucune place disponible",
+      "back_link": "Voir les autres campagnes"
     },
     "messages": {
       "invalid_campaign": "Campagne non valide.",
-      "load_error": "Impossible de charger les détails de la campagne.",
-      "login_required": "Vous devez être connecté pour participer à une campagne de reforestation.",
+      "load_error": "Impossible de charger le détail de la campagne.",
+      "login_required": "Vous devez vous connecter pour participer à une campagne de reboisement.",
       "no_session": "Aucune session active trouvée.",
       "participation_success": "Participation enregistrée avec succès.",
-      "participation_error": "Impossible de finaliser la participation. Veuillez réessayer."
+      "participation_error": "Impossible de compléter la participation. Réessayez.",
+      "already_registered_info": "Vous êtes déjà inscrit à cette campagne.",
+      "loading": "Chargement de la campagne...",
+      "participation_error_late": "Erreur lors de la tentative d'inscription. Réessayez plus tard."
+    },
+    "states": {
+      "loading": "Chargement de la campagne...",
+      "error_back": "Retour aux campagnes"
     }
   },
   "recycling": {
     "hero": {
       "badge": "♻️ Système de Recyclage",
       "title": "Recyclez intelligemment",
-      "description": "Trouvez des points verts, découvrez les itinéraires de collecte et suivez le parcours des recycleurs à Cochabamba."
+      "description": "Trouvez des points verts, consultez les itinéraires de collecte et suivez le parcours des recycleurs à Cochabamba."
     },
     "map": {
       "title": "Carte Interactive",
@@ -150,13 +159,18 @@
       "legend": {
         "title": "Légende",
         "points": "Points Verts",
-        "routes": "Itinéraires Poubelles",
+        "routes": "Routes Déchets",
         "recyclers": "Recycleurs"
       },
       "markers": {
         "green_point": "Point Vert • Ouvert",
         "truck_active": "Camion en service",
-        "recycler_active": "Recycleur actif"
+        "recycler_active": "Recycleur actif",
+        "your_location": "📍 Votre position"
+      },
+      "popup": {
+        "open": "Ouvert",
+        "closed": "Fermé"
       }
     },
     "points_card": {
@@ -164,13 +178,15 @@
       "subtitle": "Près de vous",
       "loading": "Chargement des points verts...",
       "empty": "Aucun point vert disponible pour le moment.",
+      "error": "Impossible de charger les points verts. Réessayez plus tard.",
       "btn_view_all": "Voir tous les points",
       "status_open": "Ouvert",
-      "status_closed": "Fermé"
+      "status_closed": "Fermé",
+      "hours_unavailable": "Horaires non disponibles"
     },
     "route_card": {
-      "title": "Prochain Itinéraire",
-      "subtitle": "Collecte des ordures",
+      "title": "Prochaine Route",
+      "subtitle": "Collecte des déchets",
       "label_day": "Jour :",
       "label_date": "Date :",
       "label_time": "Heure :",
@@ -187,13 +203,16 @@
       "ranking": "Votre Classement",
       "ranking_suffix": "parmi tous les recycleurs",
       "btn_view_stats": "Voir les statistiques complètes"
+    },
+    "messages": {
+      "geolocation_unavailable": "Géolocalisation non disponible, utilisation du centre de Cochabamba"
     }
   },
   "reforestation": {
     "hero": {
       "badge": "🌳 Campagnes de Reboisement",
       "title": "Faites partie du changement",
-      "description": "Rejoignez nos campagnes de reboisement et aidez à restaurer les espaces verts de Cochabamba."
+      "description": "Rejoignez nos campagnes de reboisement et aidez à récupérer les espaces verts de Cochabamba."
     },
     "filters": {
       "placeholder": "Rechercher une campagne par nom ou lieu...",
@@ -201,13 +220,95 @@
     },
     "states": {
       "loading": "Récupération des campagnes depuis la forêt...",
-      "view_all": "Voir toutes les campagnes"
+      "view_all": "Voir toutes les campagnes",
+      "error_retry": "Erreur de chargement des campagnes. Réessayez.",
+      "no_results": "Aucune campagne correspondant à votre recherche."
     },
     "card": {
       "progress_label": "Progression des inscriptions",
       "spots_available": "{{available}} places disponibles sur {{total}}",
       "organizer_label": "Organisé par :",
       "btn_participate": "Participer"
+    },
+    "messages": {
+      "load_error": "Impossible de charger les campagnes. Veuillez vérifier votre connexion.",
+      "login_required": "Vous devez vous connecter pour participer à une campagne de reboisement."
+    }
+  },
+  "recycling_campaigns": {
+    "progress": {
+      "title": "Campagnes de recyclage à Cochabamba",
+      "subtitle": "Participez à nos campagnes de recyclage et contribuez à une ville plus propre et durable",
+      "current_lable": "Campagnes actuelles",
+      "goal_info": "Notre objectif est de recycler {{goal}} kg de déchets cette année. Rejoignez-nous pour atteindre cet objectif et faire de Cocha une ville plus verte !",
+      "participants": "Participants actifs",
+      "to_reach": "Chaque action compte pour un Cocha plus propre !"
+    },
+    "sections": {
+      "description": "Description",
+      "benefits": "Avantages de la Participation",
+      "rewards_title": "Système de Récompenses",
+      "rewards_subtitle": "Gagnez des reconnaissances pour votre contribution",
+      "people_count": "{{count}} personnes participent"
+    },
+    "sidebar": {
+      "label_date": "Date :",
+      "label_location": "Lieu :",
+      "label_goal": "Objectif de recyclage :",
+      "btn_join": "Je veux participer !",
+      "btn_back": "Voir les autres campagnes",
+      "organizer_label": "Organisé par :"
+    },
+    "loading": "Chargement des campagnes de recyclage...",
+    "messages": {
+      "campaign_not_found": "Campagne introuvable.",
+      "load_error": "Impossible de charger la campagne de recyclage."
+    }
+  },
+  "stats": {
+    "hero": {
+      "badge": "📊 Statistiques Environnementales",
+      "title": "Notre impact en chiffres",
+      "description": "Visualisez les progrès collectifs de Cochabamba vers un avenir plus vert et durable."
+    },
+    "charts": {
+      "tress": {
+        "title": "Arbres plantés",
+        "subtitle": "Progrès mensuel"
+      },
+      "waste": {
+        "title": "Répartition des Déchets",
+        "subtitle": "Par type de matériau"
+      },
+      "zones": {
+        "title": "Activité par Zone",
+        "subtitle": "Recyclage et reboisement"
+      },
+      "volunteers": {
+        "title": "Croissance des Bénévoles",
+        "subtitle": "Participation mensuelle"
+      }
+    },
+    "summary": {
+      "title": "Impact Environnemental Cumulé",
+      "subtitle": "Le résultat de notre effort collectif",
+      "trees": {
+        "label": "Arbres plantés",
+        "equivalent": "Équivalent à {{count}} hectares de forêt"
+      },
+      "recycling": {
+        "label": "Déchets recyclés",
+        "equivalent": "Réduction de {{count}} tonnes de CO₂"
+      },
+      "water": {
+        "label": "Eau économisée",
+        "equivalent": "Grâce au recyclage du papier et du plastique"
+      }
+    },
+    "datasets": {
+      "trees_planted": "Arbres Plantés",
+      "kg_recycled": "Kg Recyclés",
+      "active_volunteers": "Bénévoles Actifs"
     }
   },
   "header": {
@@ -226,7 +327,7 @@
     "user_default": "Utilisateur"
   },
   "footer": {
-    "description": "Plateforme leader en gestion environnementale de Cochabamba. Ensemble, nous construisons un avenir plus vert et durable.",
+    "description": "Plateforme leader en gestion environnementale à Cochabamba. Ensemble, nous construisons un avenir plus vert et durable.",
     "columns": {
       "platform": {
         "title": "Plateforme",
@@ -243,7 +344,7 @@
         "terms": "Conditions générales"
       }
     },
-    "bottom": "© 2026 EcoLand. Tous droits réservés. Faire de Cochabamba une ville plus verte 🌱"
+    "bottom": "© 2026 EcoLand. Tous droits réservés. Faisons de Cochabamba une ville plus verte 🌱"
   },
   "logout_modal": {
     "title": "Se déconnecter ?",
@@ -260,7 +361,7 @@
     },
     "campaign_management": {
       "title": "Gestion des Campagnes",
-      "subtitle": "Gardons nos campagnes organisées et efficaces",
+      "subtitle": "Aidons à maintenir nos campagnes organisées et efficaces",
       "create_button": "Nouvelle campagne",
       "search": "Rechercher des campagnes par nom ou lieu...",
       "table": {
@@ -299,13 +400,13 @@
         "finished": "Terminée"
       },
       "placeholders": {
-        "name": "Ex. : Reboisement au Parc Tunari",
-        "description": "Ex. : Rejoignez-nous pour planter des arbres et restaurer l'écosystème du Parc Tunari. Nous avons besoin de bénévoles pour planter 500 arbres samedi prochain.",
+        "name": "Ex : Reboisement au Parc Tunari",
+        "description": "Ex : Rejoignez-nous pour planter des arbres et restaurer l'écosystème du Parc Tunari. Nous avons besoin de bénévoles pour planter 500 arbres samedi prochain.",
         "date": "Sélectionnez la date de la campagne",
-        "location": "Ex. : Parc Tunari, Cochabamba",
-        "spots": "Ex. : 50",
-        "organizer": "Ex. : Fondation EcoLand",
-        "image_url": "Ex. : https://example.com/image-campagne.jpg"
+        "location": "Ex : Parc Tunari, Cochabamba",
+        "spots": "Ex : 50",
+        "organizer": "Ex : Fondation EcoLand",
+        "image_url": "Ex : https://example.com/image-campagne.jpg"
       },
       "btn_save_new": "Créer la campagne",
       "btn_save_edit": "Enregistrer les modifications",
@@ -317,13 +418,13 @@
         "description": "La description est requise",
         "date": "La date est requise",
         "location": "Le lieu est requis",
-        "spots": "Les places doivent être supérieures à 0",
+        "spots": "Le nombre de places doit être supérieur à 0",
         "organizer": "L'organisateur est requis"
       }
     },
     "alert": {
       "confirm_delete": "Êtes-vous sûr de vouloir supprimer définitivement cette campagne de la base de données ?",
-      "admin_login_required": "Erreur : Vous devez être connecté en tant qu'administrateur.",
+      "admin_login_required": "Erreur : Vous devez vous connecter en tant qu'administrateur.",
       "campaign_deleted": "Campagne supprimée avec succès.",
       "delete_error": "Une erreur s'est produite lors de la suppression de la campagne de la base de données.",
       "session_expired": "Erreur : Session administrateur expirée ou invalide. Veuillez vous reconnecter.",
