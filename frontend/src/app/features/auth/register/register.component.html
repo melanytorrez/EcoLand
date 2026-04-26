@@ -1,218 +1,179 @@
 <div class="min-h-screen bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] flex items-center justify-center p-6">
   <div class="w-full max-w-md">
 
-    <!-- Logo -->
     <a routerLink="/" class="flex items-center justify-center gap-3 group w-full mb-8">
       <div class="w-12 h-12 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
         <lucide-icon name="leaf" class="w-7 h-7 text-white"></lucide-icon>
       </div>
       <span class="text-2xl font-bold bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] bg-clip-text text-transparent">
-        EcoLand
+        EcoLand 
       </span>
     </a>
 
-    <!-- Card -->
     <div class="bg-white rounded-3xl shadow-2xl p-8 border-2 border-gray-100">
 
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-2">
-          {{ strings.registerTitle }}
+          {{ 'auth.register.title' | translate }}
         </h1>
         <p class="text-gray-600">
-          {{ strings.registerSubtitle }}
+          {{ 'auth.register.subtitle' | translate }}
         </p>
       </div>
 
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
 
-        <!-- FULL NAME -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            {{ strings.fullNameLabel }}
+            {{ 'auth.register.inputs.full_name.label' | translate }}
           </label>
           <div class="relative">
-            <!-- User Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <circle cx="12" cy="7" r="4" stroke-width="2"/>
               <path stroke-width="2" d="M5.5 21a8.38 8.38 0 0113 0"/>
             </svg>
             <input
               type="text"
               formControlName="fullName"
-              [placeholder]="strings.fullNamePlaceholder"
+              [placeholder]="'auth.register.inputs.full_name.placeholder' | translate"
               class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
           </div>
         </div>
 
-        <!-- EMAIL -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            {{ strings.emailLabel }}
+            {{ 'auth.login.inputs.email.label' | translate }}
           </label>
           <div class="relative">
-            <!-- Mail Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-width="2" d="M4 4h16v16H4z"/>
-              <path stroke-width="2" d="M22 6l-10 7L2 6"/>
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-width="2" d="M4 4h16v16H4z"/><path stroke-width="2" d="M22 6l-10 7L2 6"/>
             </svg>
             <input
               type="email"
               formControlName="email"
-              [placeholder]="strings.emailPlaceholder"
+              [placeholder]="'auth.login.inputs.email.placeholder' | translate"
               class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
           </div>
           <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" 
                class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">
-            <span *ngIf="registerForm.get('email')?.errors?.['required']">⚠️ El correo es obligatorio.</span>
+            <span *ngIf="registerForm.get('email')?.errors?.['required']">⚠️ {{ 'auth.validation.required_email' | translate }}</span>
             <ng-container *ngIf="!registerForm.get('email')?.errors?.['required']">
-              <span *ngIf="!emailRules.hasAt">⚠️ Falta el símbolo &#64; en el correo.</span>
-              <span *ngIf="!emailRules.hasCom">⚠️ El correo debe terminar en .com.</span>
+              <span *ngIf="!emailRules.hasAt">⚠️ {{ 'auth.validation.missing_at' | translate }}</span>
+              <span *ngIf="!emailRules.hasCom">⚠️ {{ 'auth.validation.missing_com' | translate }}</span>
             </ng-container>
           </div>
         </div>
 
-        <!-- PASSWORD -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            {{ strings.passwordLabel }}
+            {{ 'auth.login.inputs.password.label' | translate }}
           </label>
           <div class="relative">
-            <!-- Lock Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <rect x="5" y="11" width="14" height="10" rx="2" stroke-width="2"/>
               <path stroke-width="2" d="M8 11V7a4 4 0 018 0v4"/>
             </svg>
             <input
               type="password"
               formControlName="password"
-              [placeholder]="strings.passwordPlaceholder"
+              [placeholder]="'auth.login.inputs.password.placeholder' | translate"
               class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
           </div>
           <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" 
                class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">
-            <span *ngIf="registerForm.get('password')?.errors?.['required']">⚠️ La contraseña es obligatoria.</span>
+            <span *ngIf="registerForm.get('password')?.errors?.['required']">⚠️ {{ 'auth.validation.required_password' | translate }}</span>
             <ng-container *ngIf="!registerForm.get('password')?.errors?.['required']">
-              <span *ngIf="!passwordRules.minLength">⚠️ Mínimo 8 caracteres.</span>
-              <span *ngIf="!passwordRules.hasUpper">⚠️ Falta una letra mayúscula.</span>
-              <span *ngIf="!passwordRules.hasLower">⚠️ Falta una letra minúscula.</span>
-              <span *ngIf="!passwordRules.hasNumber">⚠️ Falta un número.</span>
-              <span *ngIf="!passwordRules.hasSpecial">⚠️ Falta un carácter especial.</span>
+              <span *ngIf="!passwordRules.minLength">⚠️ {{ 'auth.validation.password_rules.min_length' | translate }}</span>
+              <span *ngIf="!passwordRules.hasUpper">⚠️ {{ 'auth.validation.password_rules.upper' | translate }}</span>
+              <span *ngIf="!passwordRules.hasLower">⚠️ {{ 'auth.validation.password_rules.lower' | translate }}</span>
+              <span *ngIf="!passwordRules.hasNumber">⚠️ {{ 'auth.validation.password_rules.number' | translate }}</span>
+              <span *ngIf="!passwordRules.hasSpecial">⚠️ {{ 'auth.validation.password_rules.special' | translate }}</span>
             </ng-container>
           </div>
         </div>
 
-        <!-- CONFIRM PASSWORD -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            {{ strings.confirmPasswordLabel }}
+            {{ 'auth.register.inputs.confirm_password.label' | translate }}
           </label>
           <div class="relative">
-            <!-- Lock Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <rect x="5" y="11" width="14" height="10" rx="2" stroke-width="2"/>
               <path stroke-width="2" d="M8 11V7a4 4 0 018 0v4"/>
             </svg>
             <input
               type="password"
               formControlName="confirmPassword"
-              [placeholder]="strings.confirmPasswordPlaceholder"
+              [placeholder]="'auth.register.inputs.confirm_password.placeholder' | translate"
               class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
           </div>
           <div *ngIf="registerForm.hasError('mismatch') && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" 
                class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">
-            <span>⚠️ Las contraseñas no coinciden.</span>
+            <span>⚠️ {{ 'auth.validation.password_mismatch' | translate }}</span>
           </div>
         </div>
 
-        <!-- ROLE -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            {{ strings.roleLabel }}
+            {{ 'auth.login.inputs.role.label' | translate }}
           </label>
           <div class="relative">
-            <!-- User Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <circle cx="12" cy="7" r="4" stroke-width="2"/>
-                <path stroke-width="2" d="M5.5 21a8.38 8.38 0 0113 0"/>
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <circle cx="12" cy="7" r="4" stroke-width="2"/>
+              <path stroke-width="2" d="M5.5 21a8.38 8.38 0 0113 0"/>
             </svg>
-            <select
-                formControlName="role"
-                class="w-full pl-12 pr-10 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl appearance-none"
-            >
-                <option value="Usuario">{{ strings.roleUser }}</option>
-                <option value="Administrador">{{ strings.roleAdmin }}</option>
+            <select formControlName="role" class="w-full pl-12 pr-10 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl appearance-none">
+              <option value="Usuario">{{ 'auth.login.inputs.role.user' | translate }}</option>
+              <option value="Administrador">{{ 'auth.login.inputs.role.admin' | translate }}</option>
             </select>
-            <!-- Custom Arrow -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-width="2" d="M6 9l6 6 6-6"/>
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-width="2" d="M6 9l6 6 6-6"/>
             </svg>
           </div>
         </div>
 
-        <!-- ERROR -->
         <div *ngIf="error" class="p-4 bg-red-50 border-2 border-red-200 rounded-2xl">
-          <p class="text-sm text-red-600 text-center font-medium">
-            {{ error }}
-          </p>
+          <p class="text-sm text-red-600 text-center font-medium">{{ error }}</p>
         </div>
 
-        <!-- BUTTON -->
         <button
           type="submit"
           [disabled]="isLoading"
           class="w-full px-8 py-4 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold text-lg 
           hover:shadow-2xl hover:shadow-[#4CAF50]/30 hover:scale-105 transition-all duration-300 disabled:opacity-75 disabled:cursor-wait"
           >
-          <span *ngIf="!isLoading">{{ strings.registerButton }}</span>
-          <span *ngIf="isLoading">Cargando...</span>
+          <span *ngIf="!isLoading">{{ 'auth.register.submit_button' | translate }}</span>
+          <span *ngIf="isLoading">{{ 'shared.loading_generic' | translate }}</span>
         </button>
 
-        <!-- Divider -->
         <div class="relative">
           <div class="absolute inset-0 flex items-center">
             <div class="w-full border-t border-gray-200"></div>
           </div>
-
           <div class="relative flex justify-center text-sm">
-            <span class="px-4 bg-white text-gray-500">o</span>
+            <span class="px-4 bg-white text-gray-500">{{ 'shared.or_separator' | translate }}</span>
           </div>
         </div>
 
-        <!-- Login link -->
         <div class="text-center">
           <p class="text-gray-600">
-            {{ strings.loginQuestion }}
+            {{ 'auth.register.footer.login_question' | translate }}
             <a routerLink="/login" class="text-[#2E7D32] font-semibold hover:text-[#4CAF50] cursor-pointer">
-              {{ strings.loginLink }}
+              {{ 'auth.register.footer.login_link' | translate }}
             </a>
           </p>
         </div>
 
-        <!-- Back -->
         <div class="text-center pt-4">
           <a routerLink="/" class="text-sm text-gray-500 hover:text-[#2E7D32] cursor-pointer">
-            {{ strings.backHome }}
+            {{ 'auth.login.footer.back_home' | translate }}
           </a>
         </div>
-
       </form>
-
     </div>
   </div>
 </div>
