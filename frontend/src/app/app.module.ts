@@ -8,10 +8,16 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+export class CustomTranslateLoader implements TranslateLoader {
+  constructor(private http: HttpClient) {}
+  getTranslation(lang: string): Observable<any> {
+    // Usamos ruta absoluta para que funcione en cualquier sub-ruta
+    return this.http.get(`/assets/i18n/${lang}.json`);
+  }
+}
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+  return new CustomTranslateLoader(http);
 }
 
 import { APP_INITIALIZER } from '@angular/core';
