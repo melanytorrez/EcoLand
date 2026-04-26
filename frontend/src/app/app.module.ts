@@ -20,19 +20,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
 }
 
-import { APP_INITIALIZER } from '@angular/core';
-
-import { firstValueFrom } from 'rxjs';
-
-export function appInitializerFactory(translate: TranslateService) {
-  return () => {
-    translate.setDefaultLang('es');
-    const savedLang = localStorage.getItem('ecoland_lang') || 'es';
-    // Usamos firstValueFrom para garantizar que Angular espere la resolución de la Promesa
-    return firstValueFrom(translate.use(savedLang));
-  };
-}
-
 @NgModule({
   declarations: [
     AppComponent
@@ -51,14 +38,7 @@ export function appInitializerFactory(translate: TranslateService) {
     }),
     SharedModule
   ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFactory,
-      deps: [TranslateService],
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
