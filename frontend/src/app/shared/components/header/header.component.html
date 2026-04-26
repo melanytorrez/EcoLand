@@ -75,20 +75,26 @@
 
         <!-- Authenticated user -->
         <ng-container *ngIf="isAuthenticated; else guestButtons">
-          <div class="flex items-center gap-2">
-            <div class="hidden sm:flex flex-col items-end">
-              <a routerLink="/profile" class="text-sm font-semibold text-gray-800 leading-tight hover:text-[#2E7D32] transition-colors cursor-pointer">
-                {{ user?.fullName || user?.nombre || ('header.user_default' | translate) }}
-              </a>
-              <span class="text-xs text-gray-400 leading-tight">{{ user?.email }}</span>
-            </div>
+          <div class="flex items-center gap-4">
+            
+            <!-- User Profile Pill -->
+            <a 
+              routerLink="/profile" 
+              class="flex items-center gap-2 px-4 py-2 bg-[#E8F5E9] text-[#2E7D32] rounded-xl font-semibold text-sm hover:bg-[#C8E6C9] transition-colors cursor-pointer"
+            >
+              <lucide-icon name="user" class="w-4 h-4"></lucide-icon>
+              <span>{{ user?.nombre || (user?.email ? user.email.split('@')[0] : ('header.user_default' | translate)) }}</span>
+            </a>
+
+            <!-- Logout Button -->
             <button
               (click)="logout()"
-              class="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+              class="flex items-center gap-2 text-sm font-medium text-[#475569] hover:text-[#334155] transition-colors"
             >
-              <lucide-icon name="log-out" class="w-4 h-4"></lucide-icon>
-              <span class="hidden sm:inline">{{ 'header.buttons.logout' | translate }}</span>
+              <lucide-icon name="log-out" class="w-5 h-5"></lucide-icon>
+              <span class="hidden sm:inline text-[15px]">{{ 'header.buttons.logout' | translate }}</span>
             </button>
+
           </div>
         </ng-container>
 
