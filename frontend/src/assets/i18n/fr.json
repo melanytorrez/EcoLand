@@ -348,9 +348,58 @@
   },
   "logout_modal": {
     "title": "Se déconnecter ?",
-    "message": "Êtes-vous sûr de vouloir quitter ?",
-    "confirm": "Oui, quitter",
+    "message": "Êtes-vous sûr de vouloir partir ?",
+    "confirm": "Oui, se déconnecter",
     "cancel": "Annuler"
+  },
+  "profile": {
+    "header": {
+      "title": "Profil du Bénévole",
+      "subtitle": "Visualisez votre impact environnemental et les objectifs atteints"
+    },
+    "user_info": {
+      "total_participations": "{{count}} participations au total",
+      "role_user": "Utilisateur",
+      "role_admin": "Administrateur"
+    },
+    "stats": {
+      "reforestation": "Activités de Reboisement",
+      "recycling": "Activités de Recyclage"
+    },
+    "charts": {
+      "distribution_title": "Répartition des Participations",
+      "distribution_empty": "Vous n'avez pas encore de participations à représenter.",
+      "monthly_title": "Activité Mensuelle {{year}}"
+    },
+    "badges": {
+      "title": "Mes Badges",
+      "earned": "{{count}} obtenus",
+      "earned_on": "Obtenu le",
+      "empty_title": "Vous n'avez pas encore de badges",
+      "empty_subtitle": "Participez à des activités pour gagner des badges !",
+      "list": {
+        "ref_1": {
+          "title": "Planteur Débutant",
+          "description": "Vous avez participé à votre première campagne de reboisement"
+        },
+        "ref_5": {
+          "title": "Gardien de la Forêt",
+          "description": "Vous avez participé à plus de 5 activités de reboisement"
+        },
+        "rec_1": {
+          "title": "Recycleur Novice",
+          "description": "Vous avez commencé votre parcours dans le recyclage"
+        },
+        "rec_5": {
+          "title": "Recycleur Expert",
+          "description": "Vous avez recyclé dans 5 campagnes ou plus"
+        },
+        "gen_10": {
+          "title": "Éco-Guerrier",
+          "description": "Vous avez complété 10 activités environnementales"
+        }
+      }
+    }
   },
   "admin_page": {
     "side_bar": {

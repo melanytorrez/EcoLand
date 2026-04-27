@@ -352,6 +352,55 @@
     "confirm": "Sim, sair",
     "cancel": "Cancelar"
   },
+  "profile": {
+    "header": {
+      "title": "Perfil do Voluntário",
+      "subtitle": "Visualize seu impacto ambiental e conquistas alcançadas"
+    },
+    "user_info": {
+      "total_participations": "{{count}} participações totais",
+      "role_user": "Usuário",
+      "role_admin": "Administrador"
+    },
+    "stats": {
+      "reforestation": "Atividades de Reflorestamento",
+      "recycling": "Atividades de Reciclagem"
+    },
+    "charts": {
+      "distribution_title": "Distribuição de Participações",
+      "distribution_empty": "Você ainda não tem participações para exibir.",
+      "monthly_title": "Atividade Mensal {{year}}"
+    },
+    "badges": {
+      "title": "Minhas Insígnias",
+      "earned": "{{count}} obtidas",
+      "earned_on": "Obtido em",
+      "empty_title": "Você ainda não tem insígnias",
+      "empty_subtitle": "Participe de atividades para ganhar insígnias!",
+      "list": {
+        "ref_1": {
+          "title": "Semeador Iniciante",
+          "description": "Participou da sua primeira jornada de reflorestamento"
+        },
+        "ref_5": {
+          "title": "Guardião da Floresta",
+          "description": "Participou de mais de 5 atividades de reflorestamento"
+        },
+        "rec_1": {
+          "title": "Reciclador Novato",
+          "description": "Começou sua jornada na reciclagem"
+        },
+        "rec_5": {
+          "title": "Reciclador Especialista",
+          "description": "Reciclou em 5 ou mais jornadas"
+        },
+        "gen_10": {
+          "title": "Eco Guerreiro",
+          "description": "Completou 10 atividades ambientais"
+        }
+      }
+    }
+  },
   "admin_page": {
     "side_bar": {
       "user_view": "Visão do usuário",

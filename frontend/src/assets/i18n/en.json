@@ -424,6 +424,55 @@
     "confirm": "Yes, sign out",
     "cancel": "Cancel"
   },
+  "profile": {
+    "header": {
+      "title": "Volunteer Profile",
+      "subtitle": "Visualize your environmental impact and achieved milestones"
+    },
+    "user_info": {
+      "total_participations": "{{count}} total participations",
+      "role_user": "User",
+      "role_admin": "Administrator"
+    },
+    "stats": {
+      "reforestation": "Reforestation Activities",
+      "recycling": "Recycling Activities"
+    },
+    "charts": {
+      "distribution_title": "Participation Distribution",
+      "distribution_empty": "You have no participations to chart yet.",
+      "monthly_title": "Monthly Activity {{year}}"
+    },
+    "badges": {
+      "title": "My Badges",
+      "earned": "{{count}} earned",
+      "earned_on": "Earned on",
+      "empty_title": "You haven't earned any badges yet",
+      "empty_subtitle": "Participate in activities to earn badges!",
+      "list": {
+        "ref_1": {
+          "title": "Beginner Planter",
+          "description": "Participated in your first reforestation campaign"
+        },
+        "ref_5": {
+          "title": "Forest Guardian",
+          "description": "Participated in more than 5 reforestation activities"
+        },
+        "rec_1": {
+          "title": "Novice Recycler",
+          "description": "Started your journey in recycling"
+        },
+        "rec_5": {
+          "title": "Expert Recycler",
+          "description": "Recycled in 5 or more campaigns"
+        },
+        "gen_10": {
+          "title": "Eco Warrior",
+          "description": "Completed 10 environmental activities"
+        }
+      }
+    }
+  },
   "admin_page": {
     "side_bar": {
       "user_view": "User view",

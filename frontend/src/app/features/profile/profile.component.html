@@ -2,15 +2,17 @@
   <main class="flex-1">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
       <!-- Page Title -->
-      <div class="mb-8">
+      <div class="mb-8 pt-[30px]">
         <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ 'profile.header.title' | translate }}</h1>
         <p class="text-gray-600">{{ 'profile.header.subtitle' | translate }}</p>
       </div>
 
       <div class="space-y-6">
         <!-- Información del Usuario -->
-        <div class="flex items-start gap-6 p-8 bg-gradient-to-r from-[#E8F5E9] to-white rounded-2xl border-2 border-[#A5D6A7] shadow-lg">
-          <div class="w-24 h-24 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center shadow-lg">
+        <div
+          class="flex items-start gap-6 p-8 bg-gradient-to-r from-[#E8F5E9] to-white rounded-2xl border-2 border-[#A5D6A7] shadow-lg">
+          <div
+            class="w-24 h-24 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center shadow-lg">
             <lucide-icon name="user" class="w-12 h-12 text-white"></lucide-icon>
           </div>
           <div class="flex-1">
@@ -19,7 +21,8 @@
             <div class="flex items-center gap-4 mt-4">
               <div class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl shadow-sm">
                 <lucide-icon name="award" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
-                <span class="font-semibold text-[#2E7D32]">{{ (user.role === 'admin' ? 'profile.user_info.role_admin' : 'profile.user_info.role_user') | translate }}</span>
+                <span class="font-semibold text-[#2E7D32]">{{ (user.role === 'admin' ? 'profile.user_info.role_admin' :
+                  'profile.user_info.role_user') | translate }}</span>
               </div>
               <div class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl shadow-sm">
                 <lucide-icon name="trending-up" class="w-5 h-5 text-[#4CAF50]"></lucide-icon>
@@ -51,10 +54,7 @@
           <div class="p-8 bg-white rounded-2xl border-2 border-gray-200 shadow-lg">
             <h3 class="text-2xl font-bold text-gray-800 mb-6">{{ 'profile.charts.distribution_title' | translate }}</h3>
             <div class="w-full h-[300px]" *ngIf="participations.length > 0; else emptyPie">
-              <canvas baseChart
-                [data]="pieChartData"
-                [type]="pieChartType"
-                [options]="pieChartOptions">
+              <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
               </canvas>
             </div>
             <ng-template #emptyPie>
@@ -66,12 +66,10 @@
 
           <!-- Gráfico de Barras -->
           <div class="p-8 bg-white rounded-2xl border-2 border-gray-200 shadow-lg">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">{{ 'profile.charts.monthly_title' | translate:{year: currentYear} }}</h3>
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">{{ 'profile.charts.monthly_title' | translate:{year:
+              currentYear} }}</h3>
             <div class="w-full h-[300px]">
-              <canvas baseChart
-                [data]="barChartData"
-                [type]="barChartType"
-                [options]="barChartOptions">
+              <canvas baseChart [data]="barChartData" [type]="barChartType" [options]="barChartOptions">
               </canvas>
             </div>
           </div>
@@ -88,10 +86,10 @@
           </div>
 
           <div *ngIf="badges.length > 0; else noBadges" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div *ngFor="let badge of badges" 
-                 class="flex items-start gap-4 p-6 bg-gradient-to-r from-[#F1F8F4] to-white rounded-2xl border-2 border-[#E8F5E9] hover:shadow-lg transition-all">
+            <div *ngFor="let badge of badges"
+              class="flex items-start gap-4 p-6 bg-gradient-to-r from-[#F1F8F4] to-white rounded-2xl border-2 border-[#E8F5E9] hover:shadow-lg transition-all">
               <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg"
-                   [ngClass]="badge.type === 'reforestacion' || badge.type === 'general' ? 'bg-gradient-to-br from-[#2E7D32] to-[#4CAF50]' : 'bg-gradient-to-br from-[#4CAF50] to-[#A5D6A7]'">
+                [ngClass]="badge.type === 'reforestacion' || badge.type === 'general' ? 'bg-gradient-to-br from-[#2E7D32] to-[#4CAF50]' : 'bg-gradient-to-br from-[#4CAF50] to-[#A5D6A7]'">
                 <lucide-icon [name]="badge.iconName" class="w-8 h-8 text-white"></lucide-icon>
               </div>
               <div class="flex-1">
