@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
       password: ['', Validators.required],
-      role: ['user']
+      role: ['Usuario']
     });
 
     this.redirectTo = this.route.snapshot.queryParamMap.get('redirectTo') || '';
