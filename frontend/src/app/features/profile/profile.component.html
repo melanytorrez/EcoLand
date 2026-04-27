@@ -3,8 +3,8 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
       <!-- Page Title -->
       <div class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Perfil del Voluntario</h1>
-        <p class="text-gray-600">Visualiza tu impacto ambiental y logros conseguidos</p>
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ 'profile.header.title' | translate }}</h1>
+        <p class="text-gray-600">{{ 'profile.header.subtitle' | translate }}</p>
       </div>
 
       <div class="space-y-6">
@@ -19,12 +19,12 @@
             <div class="flex items-center gap-4 mt-4">
               <div class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl shadow-sm">
                 <lucide-icon name="award" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
-                <span class="font-semibold text-[#2E7D32]">{{ user.role || 'Usuario' }}</span>
+                <span class="font-semibold text-[#2E7D32]">{{ (user.role === 'admin' ? 'profile.user_info.role_admin' : 'profile.user_info.role_user') | translate }}</span>
               </div>
               <div class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl shadow-sm">
                 <lucide-icon name="trending-up" class="w-5 h-5 text-[#4CAF50]"></lucide-icon>
                 <span class="font-semibold text-gray-700">
-                  {{ participations.length }} participaciones totales
+                  {{ 'profile.user_info.total_participations' | translate:{count: participations.length} }}
                 </span>
               </div>
             </div>
@@ -36,12 +36,12 @@
           <div class="p-8 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl text-white shadow-lg">
             <lucide-icon name="tree-pine" class="w-10 h-10 mb-4"></lucide-icon>
             <p class="text-5xl font-bold mb-2">{{ reforestacionCount }}</p>
-            <p class="text-lg opacity-90">Actividades de Reforestación</p>
+            <p class="text-lg opacity-90">{{ 'profile.stats.reforestation' | translate }}</p>
           </div>
           <div class="p-8 bg-gradient-to-br from-[#4CAF50] to-[#A5D6A7] rounded-2xl text-white shadow-lg">
             <lucide-icon name="trash-2" class="w-10 h-10 mb-4"></lucide-icon>
             <p class="text-5xl font-bold mb-2">{{ reciclajeCount }}</p>
-            <p class="text-lg opacity-90">Actividades de Reciclaje</p>
+            <p class="text-lg opacity-90">{{ 'profile.stats.recycling' | translate }}</p>
           </div>
         </div>
 
@@ -49,7 +49,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <!-- Gráfico Circular -->
           <div class="p-8 bg-white rounded-2xl border-2 border-gray-200 shadow-lg">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Distribución de Participaciones</h3>
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">{{ 'profile.charts.distribution_title' | translate }}</h3>
             <div class="w-full h-[300px]" *ngIf="participations.length > 0; else emptyPie">
               <canvas baseChart
                 [data]="pieChartData"
@@ -59,14 +59,14 @@
             </div>
             <ng-template #emptyPie>
               <div class="h-[300px] flex items-center justify-center text-gray-400">
-                Aún no tienes participaciones para graficar.
+                {{ 'profile.charts.distribution_empty' | translate }}
               </div>
             </ng-template>
           </div>
 
           <!-- Gráfico de Barras -->
           <div class="p-8 bg-white rounded-2xl border-2 border-gray-200 shadow-lg">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Actividad Mensual {{ currentYear }}</h3>
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">{{ 'profile.charts.monthly_title' | translate:{year: currentYear} }}</h3>
             <div class="w-full h-[300px]">
               <canvas baseChart
                 [data]="barChartData"
@@ -81,9 +81,9 @@
         <div class="p-8 bg-white rounded-2xl border-2 border-gray-200 shadow-lg">
           <div class="flex items-center gap-3 mb-8">
             <lucide-icon name="award" class="w-8 h-8 text-[#2E7D32]"></lucide-icon>
-            <h3 class="text-2xl font-bold text-gray-800">Mis Insignias</h3>
+            <h3 class="text-2xl font-bold text-gray-800">{{ 'profile.badges.title' | translate }}</h3>
             <span class="ml-auto px-4 py-2 bg-[#E8F5E9] text-[#2E7D32] rounded-xl font-semibold">
-              {{ badges.length }} obtenidas
+              {{ 'profile.badges.earned' | translate:{count: badges.length} }}
             </span>
           </div>
 
@@ -99,7 +99,7 @@
                 <p class="text-gray-600 mt-2">{{ badge.description }}</p>
                 <div class="flex items-center gap-2 mt-3 text-sm text-gray-500">
                   <lucide-icon name="calendar" class="w-4 h-4"></lucide-icon>
-                  <span>Obtenida el {{ badge.earnedDate | date:'dd/MM/yyyy' }}</span>
+                  <span>{{ 'profile.badges.earned_on' | translate }} {{ badge.earnedDate | date:'dd/MM/yyyy' }}</span>
                 </div>
               </div>
             </div>
@@ -108,9 +108,9 @@
           <ng-template #noBadges>
             <div class="text-center py-16">
               <lucide-icon name="award" class="w-20 h-20 mx-auto text-gray-300 mb-4"></lucide-icon>
-              <p class="text-xl text-gray-500 mb-2">Aún no has obtenido insignias</p>
+              <p class="text-xl text-gray-500 mb-2">{{ 'profile.badges.empty_title' | translate }}</p>
               <p class="text-gray-400">
-                ¡Participa en actividades para ganar insignias!
+                {{ 'profile.badges.empty_subtitle' | translate }}
               </p>
             </div>
           </ng-template>
