@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { StatisticsService, ComprehensiveStatistics } from '../../core/services/statistics.service';
 import { ChartConfiguration, ChartData, ChartType, registerables } from 'chart.js';
 import { Chart } from 'chart.js';
@@ -223,10 +223,16 @@ export class StatisticsComponent implements OnInit {
 
   constructor(
     private statsService: StatisticsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    // Asegurar que las traducciones iniciales se procesen
+    this.translate.get('stats.hero.title').subscribe(() => {
+      this.cdr.detectChanges();
+    });
+
     const comprehensive$ = this.statsService.getComprehensiveStatistics().pipe(
       timeout(5000),
       catchError(() => of(this.getDefaultComprehensiveData()))
@@ -243,11 +249,13 @@ export class StatisticsComponent implements OnInit {
     }).pipe(
       finalize(() => {
         this.isLoading = false;
+        this.cdr.detectChanges();
       })
     ).subscribe(({ comprehensive, campaigns }) => {
       this.data = comprehensive;
       this.populateSummaryCards(comprehensive);
       this.populateCharts(comprehensive, campaigns);
+      this.cdr.detectChanges();
     });
   }
 
@@ -274,25 +282,62 @@ export class StatisticsComponent implements OnInit {
   }
 
   private populateCharts(data: ComprehensiveStatistics, campaigns: any[]): void {
+    // Recrear objetos de datos para forzar la actualización de los gráficos (ng2-charts)
+    
     // Monthly planted trees
-    this.monthlyChartData.labels = data.monthlyPlantedTrees.map(m => m.month);
-    this.monthlyChartData.datasets[0].data = data.monthlyPlantedTrees.map(m => m.value);
+    this.monthlyChartData = {
+      labels: data.monthlyPlantedTrees.map(m => m.month),
+      datasets: [
+        {
+          ...this.monthlyChartData.datasets[0],
+          data: data.monthlyPlantedTrees.map(m => m.value)
+        }
+      ]
+    };
 
     // Residue distribution
-    this.residueChartData.labels = data.residueDistribution.map(r => r.type);
-    this.residueChartData.datasets[0].data = data.residueDistribution.map(r => r.percentage);
+    this.residueChartData = {
+      labels: data.residueDistribution.map(r => r.type),
+      datasets: [
+        {
+          ...this.residueChartData.datasets[0],
+          data: data.residueDistribution.map(r => r.percentage)
+        }
+      ]
+    };
 
     // Zone activity
-    this.zoneChartData.labels = data.zoneActivity.map(z => z.zone);
-    this.zoneChartData.datasets[0].data = data.zoneActivity.map(z => z.activities);
+    this.zoneChartData = {
+      labels: data.zoneActivity.map(z => z.zone),
+      datasets: [
+        {
+          ...this.zoneChartData.datasets[0],
+          data: data.zoneActivity.map(z => z.activities)
+        }
+      ]
+    };
 
     // Volunteer growth
-    this.volunteerChartData.labels = data.volunteerGrowth.map(v => v.month);
-    this.volunteerChartData.datasets[0].data = data.volunteerGrowth.map(v => v.totalVolunteers);
+    this.volunteerChartData = {
+      labels: data.volunteerGrowth.map(v => v.month),
+      datasets: [
+        {
+          ...this.volunteerChartData.datasets[0],
+          data: data.volunteerGrowth.map(v => v.totalVolunteers)
+        }
+      ]
+    };
 
     // Campaign vs Participants
-    this.campaignChartData.labels = campaigns.map(c => c.title);
-    this.campaignChartData.datasets[0].data = campaigns.map(c => c.participants);
+    this.campaignChartData = {
+      labels: campaigns.map(c => c.title),
+      datasets: [
+        {
+          ...this.campaignChartData.datasets[0],
+          data: campaigns.map(c => c.participants)
+        }
+      ]
+    };
   }
 
   private getDefaultComprehensiveData(): ComprehensiveStatistics {
