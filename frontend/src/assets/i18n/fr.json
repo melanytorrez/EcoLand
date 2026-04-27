@@ -292,17 +292,27 @@
     "summary": {
       "title": "Impact Environnemental Cumulé",
       "subtitle": "Le résultat de notre effort collectif",
+      "co2": {
+        "label": "CO2 Atténué",
+        "subtitle": "kg/an réduits"
+      },
+      "campaigns": {
+        "label": "Campagnes Terminées"
+      },
       "trees": {
         "label": "Arbres plantés",
-        "equivalent": "Équivalent à {{count}} hectares de forêt"
+        "equivalent": "Équivalent à {{count}} hectares de forêt",
+        "equivalent_dynamic": "Équivalent à {{val}} hectares de forêt"
       },
       "recycling": {
         "label": "Déchets recyclés",
-        "equivalent": "Réduction de {{count}} tonnes de CO₂"
+        "equivalent": "Réduction de {{count}} tonnes de CO₂",
+        "equivalent_dynamic": "Réduction de {{val}} tonnes de CO₂"
       },
       "water": {
         "label": "Eau économisée",
-        "equivalent": "Grâce au recyclage du papier et du plastique"
+        "equivalent": "Grâce au recyclage du papier et du plastique",
+        "subtitle": "litres économisés"
       }
     },
     "datasets": {

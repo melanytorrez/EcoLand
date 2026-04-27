@@ -348,17 +348,27 @@
     "summary": {
       "title": "Cumulative Environmental Impact",
       "subtitle": "The result of our collective effort",
+      "co2": {
+        "label": "Mitigated CO2",
+        "subtitle": "kg/year reduced"
+      },
+      "campaigns": {
+        "label": "Completed Campaigns"
+      },
       "trees": {
         "label": "Trees planted",
-        "equivalent": "Equivalent to 185 hectares of forest"
+        "equivalent": "Equivalent to 185 hectares of forest",
+        "equivalent_dynamic": "Equivalent to {{val}} hectares of forest"
       },
       "recycling": {
         "label": "Waste recycled",
-        "equivalent": "Reduction of 520 tonnes of CO₂"
+        "equivalent": "Reduction of 520 tonnes of CO₂",
+        "equivalent_dynamic": "Reduction of {{val}} tonnes of CO₂"
       },
       "water": {
         "label": "Water saved",
-        "equivalent": "Thanks to paper and plastic recycling"
+        "equivalent": "Thanks to paper and plastic recycling",
+        "subtitle": "liters saved"
       }
     },
     "datasets": {
