@@ -1,21 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
 import { environment } from '../../../environments/environment';
-import { Observable, of, tap, catchError } from 'rxjs';
+import { Observable, of, tap, catchError, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeatureFlagService {
   private features: { [key: string]: boolean } = {};
+  private featuresSubject = new BehaviorSubject<{ [key: string]: boolean }>({});
+  public features$ = this.featuresSubject.asObservable();
   private apiUrl = `${environment.apiUrl}/api/features`;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
+
+  private getHeaders(): { headers: HttpHeaders } {
+    const token = this.authService.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return { headers };
+  }
 
   loadFeatures(): Observable<any> {
-    return this.http.get<{ [key: string]: boolean }>(this.apiUrl).pipe(
+    return this.http.get<{ [key: string]: boolean }>(this.apiUrl, this.getHeaders()).pipe(
       tap(features => {
         this.features = features;
+        this.featuresSubject.next(this.features);
         console.log('Feature Toggles cargados:', this.features);
       }),
       catchError(error => {
@@ -28,6 +44,7 @@ export class FeatureFlagService {
           'estadisticas': true,
           'perfil': true
         };
+        this.featuresSubject.next(this.features);
         return of(this.features);
       })
     );
@@ -48,9 +65,10 @@ export class FeatureFlagService {
   }
 
   updateFeature(featureName: string, enabled: boolean): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${featureName}?enabled=${enabled}`, {}).pipe(
+    return this.http.put<void>(`${this.apiUrl}/${featureName}?enabled=${enabled}`, {}, this.getHeaders()).pipe(
       tap(() => {
         this.features[featureName] = enabled;
+        this.featuresSubject.next(this.features);
       })
     );
   }

@@ -321,319 +321,575 @@ This generated password is for development use only. Your security configuration
 2026-04-28 13:47:46 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
 2026-04-28 13:47:46 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
 2026-04-28 13:47:46 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 19ms
-2026-04-28 14:35:50 [main] INFO  com.ecoland.EcoLandApplication - Starting EcoLandApplication using Java 21.0.10 with PID 11832 (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\target\classes started by torre in D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend)
-2026-04-28 14:35:50 [main] DEBUG com.ecoland.EcoLandApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
-2026-04-28 14:35:50 [main] INFO  com.ecoland.EcoLandApplication - The following 1 profile is active: "default"
-2026-04-28 14:35:52 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-28 14:35:52 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 259 ms. Found 8 JPA repository interfaces.
-2026-04-28 14:35:55 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
-2026-04-28 14:35:55 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-04-28 14:35:55 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-04-28 14:35:55 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-04-28 14:35:55 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4824 ms
-2026-04-28 14:35:55 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-28 14:35:55 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-04-28 14:35:56 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-04-28 14:35:56 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-28 14:35:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-04-28 14:35:58 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@25d0b918
-2026-04-28 14:35:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-04-28 14:35:58 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-28 14:36:01 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-28 14:36:01 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-28 14:36:02 [main] DEBUG c.e.i.security.JwtFilter - Filter 'jwtFilter' configured for use
-2026-04-28 14:36:03 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-04-28 14:36:05 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-28 14:36:06 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 4a4f9fd6-9577-41cc-89de-8ec9a9aac3c6
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-04-28 14:36:06 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@447522b4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3569f0f1, org.springframework.security.web.context.SecurityContextHolderFilter@59464f08, org.springframework.security.web.header.HeaderWriterFilter@a929b6, org.springframework.web.filter.CorsFilter@9a88a92, org.springframework.security.web.authentication.logout.LogoutFilter@21e5feb, com.ecoland.infrastructure.security.JwtFilter@4131f6db, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c5fbe8a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2a85e4f4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@784fb189, org.springframework.security.web.session.SessionManagementFilter@7c8c6922, org.springframework.security.web.access.ExceptionTranslationFilter@9a3d0f4, org.springframework.security.web.access.intercept.AuthorizationFilter@776eedad]
-2026-04-28 14:36:07 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
-2026-04-28 14:36:07 [main] INFO  com.ecoland.EcoLandApplication - Started EcoLandApplication in 18.732 seconds (process running for 19.888)
-2026-04-28 14:36:28 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-28 14:36:28 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-04-28 14:36:28 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
-2026-04-28 14:36:28 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
-2026-04-28 14:36:28 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:36:28 [http-nio-8082-exec-1] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
-2026-04-28 14:36:28 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
-2026-04-28 14:36:28 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
-2026-04-28 14:36:28 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:36:28 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:36:28 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 14:36:28 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:36:28 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:36:28 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:36:28 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 14:36:28 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 14:36:28 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:36:28 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:36:28 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 29ms
-2026-04-28 14:36:28 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 47ms
-2026-04-28 14:37:24 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /auth/register
-2026-04-28 14:37:24 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/register
-2026-04-28 14:37:24 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:24 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/register
-2026-04-28 14:37:24 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AuthController.register() con argumentos: [com.ecoland.application.dto.RegisterRequest@662083d7]
-2026-04-28 14:37:24 [http-nio-8082-exec-4] ERROR c.e.i.aspect.LoggingAspect - !!! Error en el método: AuthController.register() | Mensaje: El email ya está registrado | Tiempo hasta el fallo: 39ms
-2026-04-28 14:37:24 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: GlobalExceptionHandler.handleEmailAlreadyExistsException() con argumentos: [com.ecoland.domain.exception.EmailAlreadyExistsException: El email ya está registrado]
-2026-04-28 14:37:25 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: GlobalExceptionHandler.handleEmailAlreadyExistsException() | Tiempo de ejecución: 2ms
-2026-04-28 14:37:32 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/register
-2026-04-28 14:37:32 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:32 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/register
-2026-04-28 14:37:32 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AuthController.register() con argumentos: [com.ecoland.application.dto.RegisterRequest@3e1b4def]
-2026-04-28 14:37:32 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AuthController.register() | Tiempo de ejecución: 538ms
-2026-04-28 14:37:32 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:37:32 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 14:37:32 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:32 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:32 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 14:37:32 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:37:32 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 14:37:32 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:37:32 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:37:32 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 17ms
-2026-04-28 14:37:32 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 24ms
-2026-04-28 14:37:36 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me/participations
-2026-04-28 14:37:36 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
-2026-04-28 14:37:37 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:37:37 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
-2026-04-28 14:37:37 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:37:37 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 11ms
-2026-04-28 14:37:41 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:37:41 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 14:37:41 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:41 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:37:41 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:41 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 14:37:41 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:37:41 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 14:37:41 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:37:41 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 17ms
-2026-04-28 14:37:41 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 41ms
-2026-04-28 14:37:48 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns/1
-2026-04-28 14:37:48 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:48 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns/1
-2026-04-28 14:37:48 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getById() con argumentos: [1]
-2026-04-28 14:37:48 [http-nio-8082-exec-3] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
-2026-04-28 14:37:48 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getById() | Tiempo de ejecución: 35ms
-2026-04-28 14:37:50 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/campaigns/1/participate
-2026-04-28 14:37:50 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/campaigns/1/participate
-2026-04-28 14:37:50 [http-nio-8082-exec-6] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:37:50 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/campaigns/1/participate
-2026-04-28 14:37:50 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.participate() con argumentos: [1, UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:37:50 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Usuario admin2@gmail.com solicita inscribirse en la campaña con id: 1
-2026-04-28 14:37:50 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
-2026-04-28 14:37:50 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Usuario admin2@gmail.com inscrito exitosamente en la campaña con id: 1. Participantes actuales: 1
-2026-04-28 14:37:50 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.participate() | Tiempo de ejecución: 69ms
-2026-04-28 14:37:56 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:37:56 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 14:37:56 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:56 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:37:56 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:37:56 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 14:37:56 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:37:56 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 14:37:56 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:37:56 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 20ms
-2026-04-28 14:37:56 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 27ms
-2026-04-28 14:38:00 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns/2
-2026-04-28 14:38:00 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:38:00 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns/2
-2026-04-28 14:38:00 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getById() con argumentos: [2]
-2026-04-28 14:38:00 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 2
-2026-04-28 14:38:01 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getById() | Tiempo de ejecución: 10ms
-2026-04-28 14:38:06 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/campaigns/2/participate
-2026-04-28 14:38:06 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/campaigns/2/participate
-2026-04-28 14:38:06 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:38:06 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/campaigns/2/participate
-2026-04-28 14:38:06 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.participate() con argumentos: [2, UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:38:06 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Usuario admin2@gmail.com solicita inscribirse en la campaña con id: 2
-2026-04-28 14:38:06 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 2
-2026-04-28 14:38:06 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Usuario admin2@gmail.com inscrito exitosamente en la campaña con id: 2. Participantes actuales: 46
-2026-04-28 14:38:06 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.participate() | Tiempo de ejecución: 33ms
-2026-04-28 14:38:10 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:38:10 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:38:10 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:38:10 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:38:10 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:38:10 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 14:38:10 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:38:10 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 14:38:10 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 14:38:10 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 16ms
-2026-04-28 14:38:10 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 31ms
-2026-04-28 14:38:18 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
-2026-04-28 14:38:18 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:38:18 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
-2026-04-28 14:38:18 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:38:19 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 30ms
-2026-04-28 14:38:56 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/comprehensive
-2026-04-28 14:38:56 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:38:56 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/comprehensive
-2026-04-28 14:38:56 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getComprehensiveStatistics() con argumentos: []
-2026-04-28 14:38:56 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:38:56 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:38:56 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:38:56 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:38:56 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:38:56 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 12ms
-2026-04-28 14:38:56 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getComprehensiveStatistics() | Tiempo de ejecución: 55ms
-2026-04-28 14:39:02 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
-2026-04-28 14:39:02 [http-nio-8082-exec-9] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:39:02 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
-2026-04-28 14:39:02 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:39:02 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 25ms
-2026-04-28 14:40:58 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:40:58 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 14:40:58 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:40:58 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:40:58 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 14:40:58 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:40:58 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 14:40:58 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:40:58 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:40:58 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 17ms
-2026-04-28 14:40:58 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 48ms
-2026-04-28 14:42:38 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
-2026-04-28 14:42:38 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:42:38 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
-2026-04-28 14:42:38 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:42:38 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 60ms
-2026-04-28 14:42:43 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:42:43 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:42:43 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:42:43 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:42:43 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:42:43 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 14:42:43 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:42:43 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 14:42:43 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 16ms
-2026-04-28 14:42:43 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 14:42:43 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 20ms
-2026-04-28 14:42:44 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
-2026-04-28 14:42:44 [http-nio-8082-exec-9] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:42:44 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
-2026-04-28 14:42:44 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:42:44 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 24ms
-2026-04-28 14:42:53 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
-2026-04-28 14:42:53 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:42:53 [http-nio-8082-exec-8] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
-2026-04-28 14:42:53 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
-2026-04-28 14:42:53 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
-2026-04-28 14:42:53 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:42:53 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
-2026-04-28 14:42:53 [http-nio-8082-exec-7] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin2@gmail.com
-2026-04-28 14:42:53 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
-2026-04-28 14:42:53 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=admin2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
-2026-04-28 14:42:53 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 21ms
-2026-04-28 14:43:53 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:43:53 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:43:53 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:43:53 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:43:53 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:43:53 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 24ms
-2026-04-28 14:46:09 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 14:46:09 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:46:09 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 14:46:09 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 14:46:09 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 14:46:09 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 11ms
-2026-04-28 14:48:32 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/reforestacion?enabled=false
-2026-04-28 14:48:32 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reforestacion?enabled=false
-2026-04-28 14:48:32 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:48:32 [http-nio-8082-exec-4] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features/reforestacion
-2026-04-28 14:48:32 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /error?enabled=false
-2026-04-28 14:48:32 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /error?enabled=false
-2026-04-28 14:48:32 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 14:52:34 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-04-28 14:52:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-04-28 14:52:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-04-28 15:22:16 [main] INFO  com.ecoland.EcoLandApplication - Starting EcoLandApplication using Java 21.0.10 with PID 3132 (D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend\target\classes started by torre in D:\TORREZ\Escritorio\UNIVERSIDAD\SEMESTRE 1-2026\Taller de Sistemas de Informacion\EcoLand\backend)
-2026-04-28 15:22:16 [main] DEBUG com.ecoland.EcoLandApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
-2026-04-28 15:22:16 [main] INFO  com.ecoland.EcoLandApplication - The following 1 profile is active: "default"
-2026-04-28 15:22:17 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-28 15:22:17 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 97 ms. Found 8 JPA repository interfaces.
-2026-04-28 15:22:18 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
-2026-04-28 15:22:18 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-04-28 15:22:18 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-04-28 15:22:18 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-04-28 15:22:18 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2092 ms
-2026-04-28 15:22:18 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-28 15:22:18 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-04-28 15:22:18 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-04-28 15:22:19 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-28 15:22:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-04-28 15:22:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18811c42
-2026-04-28 15:22:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-04-28 15:22:20 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-28 15:22:22 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-28 15:22:22 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-28 15:22:23 [main] DEBUG c.e.i.security.JwtFilter - Filter 'jwtFilter' configured for use
-2026-04-28 15:22:23 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-04-28 15:22:24 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-28 15:22:24 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 7e90f3df-e0dc-48e3-bf3d-e028cca45028
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-04-28 15:22:25 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@243c4ffe, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6c31ed81, org.springframework.security.web.context.SecurityContextHolderFilter@4cd3e2f3, org.springframework.security.web.header.HeaderWriterFilter@15c25cb6, org.springframework.web.filter.CorsFilter@2e2d7dc, org.springframework.security.web.authentication.logout.LogoutFilter@a93c88a, com.ecoland.infrastructure.security.JwtFilter@3fae357f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3bcebb8f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2991524, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@d7b20d9, org.springframework.security.web.session.SessionManagementFilter@58070889, org.springframework.security.web.access.ExceptionTranslationFilter@447522b4, org.springframework.security.web.access.intercept.AuthorizationFilter@125c1134]
-2026-04-28 15:22:26 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
-2026-04-28 15:22:26 [main] INFO  com.ecoland.EcoLandApplication - Started EcoLandApplication in 10.624 seconds (process running for 11.49)
-2026-04-28 15:22:26 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-28 15:22:26 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-04-28 15:22:26 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-04-28 15:22:26 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
-2026-04-28 15:22:26 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:26 [http-nio-8082-exec-1] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
-2026-04-28 15:22:26 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
-2026-04-28 15:22:26 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
-2026-04-28 15:22:26 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:37 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
-2026-04-28 15:22:37 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:37 [http-nio-8082-exec-3] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
-2026-04-28 15:22:37 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
-2026-04-28 15:22:37 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
-2026-04-28 15:22:37 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:37 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 15:22:37 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
-2026-04-28 15:22:37 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:37 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 15:22:37 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:37 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
-2026-04-28 15:22:37 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
-2026-04-28 15:22:37 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 15:22:37 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 15:22:37 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 32ms
-2026-04-28 15:22:37 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 37ms
-2026-04-28 15:22:46 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 15:22:46 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:46 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 15:22:46 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 15:22:46 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 15:22:46 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 6ms
-2026-04-28 15:22:50 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
-2026-04-28 15:22:50 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:22:50 [http-nio-8082-exec-6] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
-2026-04-28 15:22:50 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
-2026-04-28 15:22:50 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
-2026-04-28 15:22:50 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:23:17 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
-2026-04-28 15:23:17 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:23:17 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
-2026-04-28 15:23:17 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
-2026-04-28 15:23:17 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
-2026-04-28 15:23:17 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 7ms
-2026-04-28 15:23:19 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
-2026-04-28 15:23:19 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:23:19 [http-nio-8082-exec-8] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
-2026-04-28 15:23:19 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
-2026-04-28 15:23:19 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
-2026-04-28 15:23:19 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-04-28 15:23:33 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-04-28 15:23:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-04-28 15:23:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-28 13:55:22 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 13:55:22 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 13:55:22 [http-nio-8082-exec-9] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 13:55:22 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 13:55:22 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 13:55:22 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 13:55:22 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 13:55:22 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 13:55:22 [http-nio-8082-exec-1] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 13:55:22 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 13:55:22 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 13:55:22 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 13:55:25 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 13:55:25 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 13:55:25 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 13:55:25 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 13:55:25 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 13:55:25 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 13:55:25 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 13:55:25 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 13:55:25 [http-nio-8082-exec-3] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 13:55:25 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 56ms
+2026-04-28 13:55:25 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 66ms
+2026-04-28 14:05:12 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:05:12 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:12 [http-nio-8082-exec-5] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 14:05:12 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 14:05:12 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 14:05:12 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:12 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:05:12 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:12 [http-nio-8082-exec-7] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 14:05:12 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 14:05:12 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 14:05:12 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:12 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 14:05:12 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 14:05:12 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:12 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:12 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 14:05:12 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 14:05:12 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 14:05:12 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 14:05:12 [http-nio-8082-exec-8] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 14:05:12 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 94ms
+2026-04-28 14:05:12 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 102ms
+2026-04-28 14:05:13 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:05:13 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:13 [http-nio-8082-exec-9] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 14:05:13 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 14:05:13 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 14:05:13 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:13 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:05:13 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:13 [http-nio-8082-exec-1] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 14:05:13 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 14:05:13 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 14:05:13 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:13 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 14:05:13 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 14:05:13 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:13 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:05:13 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 14:05:13 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 14:05:13 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 14:05:13 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 14:05:13 [http-nio-8082-exec-4] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 14:05:13 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 11ms
+2026-04-28 14:05:13 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 14ms
+2026-04-28 14:14:22 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:14:22 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:14:22 [http-nio-8082-exec-5] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 14:14:22 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 14:14:22 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 14:14:22 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:14:27 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/inicio?enabled=false
+2026-04-28 14:14:27 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=false
+2026-04-28 14:14:27 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:14:27 [http-nio-8082-exec-8] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features/inicio
+2026-04-28 14:14:27 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /error?enabled=false
+2026-04-28 14:14:27 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /error?enabled=false
+2026-04-28 14:14:27 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:14:32 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/reforestacion?enabled=false
+2026-04-28 14:14:32 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reforestacion?enabled=false
+2026-04-28 14:14:32 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:14:32 [http-nio-8082-exec-9] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features/reforestacion
+2026-04-28 14:14:32 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /error?enabled=false
+2026-04-28 14:14:32 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /error?enabled=false
+2026-04-28 14:14:32 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:23:07 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=false
+2026-04-28 14:23:07 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:23:07 [http-nio-8082-exec-3] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features/inicio
+2026-04-28 14:23:07 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /error?enabled=false
+2026-04-28 14:23:07 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /error?enabled=false
+2026-04-28 14:23:07 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:23:27 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/inicio?enabled=false
+2026-04-28 14:23:27 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=false
+2026-04-28 14:23:27 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:23:27 [http-nio-8082-exec-6] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features/inicio
+2026-04-28 14:23:27 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /error?enabled=false
+2026-04-28 14:23:27 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /error?enabled=false
+2026-04-28 14:23:27 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:28:03 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features
+2026-04-28 14:28:03 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:28:03 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features
+2026-04-28 14:28:03 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:28:04 [http-nio-8082-exec-7] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:28:04 [http-nio-8082-exec-10] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:28:04 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 14:28:04 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 14:28:04 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:28:04 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 14:28:04 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:28:04 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 14:28:04 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 14:28:04 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 14:28:04 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 14:28:04 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 91ms
+2026-04-28 14:28:04 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 100ms
+2026-04-28 14:40:51 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:40:51 [http-nio-8082-exec-6] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:40:56 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/inicio?enabled=false
+2026-04-28 14:40:56 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=false
+2026-04-28 14:40:56 [http-nio-8082-exec-5] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:41:01 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/reciclaje?enabled=false
+2026-04-28 14:41:01 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reciclaje?enabled=false
+2026-04-28 14:41:01 [http-nio-8082-exec-7] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:41:07 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/estadisticas?enabled=false
+2026-04-28 14:41:07 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/estadisticas?enabled=false
+2026-04-28 14:41:07 [http-nio-8082-exec-9] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:41:10 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/perfil?enabled=false
+2026-04-28 14:41:10 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/perfil?enabled=false
+2026-04-28 14:41:10 [http-nio-8082-exec-3] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:44:43 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:44:43 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:44:43 [http-nio-8082-exec-6] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 14:44:43 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 14:44:43 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 14:44:43 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:44:43 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:44:43 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:44:43 [http-nio-8082-exec-2] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 14:44:43 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 14:44:43 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 14:44:43 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:44:43 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 14:44:43 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 14:44:43 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:44:43 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:44:43 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 14:44:43 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 14:44:43 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 14:44:43 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 14:44:43 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 14:44:43 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 58ms
+2026-04-28 14:44:43 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 62ms
+2026-04-28 14:53:51 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:53:51 [http-nio-8082-exec-9] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:53:51 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 14:53:51 [http-nio-8082-exec-1] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 14:53:51 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 14:53:51 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 14:53:51 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:53:51 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 14:53:51 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 14:53:51 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 14:53:51 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 14:53:51 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 14:53:51 [http-nio-8082-exec-3] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 14:53:51 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 57ms
+2026-04-28 14:53:51 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 64ms
+2026-04-28 15:01:50 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=false
+2026-04-28 15:01:50 [http-nio-8082-exec-5] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 15:09:18 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/reforestacion?enabled=false
+2026-04-28 15:09:18 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reforestacion?enabled=false
+2026-04-28 15:09:18 [http-nio-8082-exec-7] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 15:09:42 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:09:42 [http-nio-8082-exec-9] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 15:09:46 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=false
+2026-04-28 15:09:46 [http-nio-8082-exec-1] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 15:09:48 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reforestacion?enabled=false
+2026-04-28 15:09:48 [http-nio-8082-exec-4] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 15:09:51 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reciclaje?enabled=false
+2026-04-28 15:09:51 [http-nio-8082-exec-3] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 15:09:59 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:09:59 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:09:59 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:09:59 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:09:59 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:09:59 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 71ms
+2026-04-28 15:10:16 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns/2
+2026-04-28 15:10:16 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:10:16 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns/2
+2026-04-28 15:10:16 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getById() con argumentos: [2]
+2026-04-28 15:10:16 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 2
+2026-04-28 15:10:17 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getById() | Tiempo de ejecución: 157ms
+2026-04-28 15:10:18 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/campaigns/2/participate
+2026-04-28 15:10:18 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/campaigns/2/participate
+2026-04-28 15:10:18 [http-nio-8082-exec-8] WARN  c.e.i.security.JwtFilter - Intento de acceso fallido: Token inválido, expirado o manipulado
+2026-04-28 15:10:21 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:10:21 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:10:21 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:10:21 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:10:21 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:10:21 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:10:21 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:10:21 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:10:21 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:10:21 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 20ms
+2026-04-28 15:10:21 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 38ms
+2026-04-28 15:11:17 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /auth/google
+2026-04-28 15:11:17 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/google
+2026-04-28 15:11:17 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:11:17 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/google
+2026-04-28 15:11:17 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AuthController.loginWithGoogle() con argumentos: [com.ecoland.application.dto.GoogleLoginRequest@1e02b65b]
+2026-04-28 15:11:17 [http-nio-8082-exec-3] INFO  c.e.i.adapter.in.web.AuthController - Intento de login con Google para token asociado
+2026-04-28 15:11:19 [http-nio-8082-exec-3] INFO  c.e.i.adapter.in.web.AuthController - Login con Google exitoso: carladianavgonzales@gmail.com
+2026-04-28 15:11:19 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AuthController.loginWithGoogle() | Tiempo de ejecución: 1636ms
+2026-04-28 15:11:19 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:11:19 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:11:19 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:11:19 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:11:19 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:11:19 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:11:19 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:11:19 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:11:19 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:11:19 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 6ms
+2026-04-28 15:11:19 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 8ms
+2026-04-28 15:11:26 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns/1
+2026-04-28 15:11:26 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:11:26 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns/1
+2026-04-28 15:11:26 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getById() con argumentos: [1]
+2026-04-28 15:11:26 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
+2026-04-28 15:11:26 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getById() | Tiempo de ejecución: 18ms
+2026-04-28 15:11:29 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:11:29 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:11:29 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:11:29 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:11:29 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:11:29 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:11:29 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:11:29 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:11:29 [http-nio-8082-exec-8] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:11:29 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 26ms
+2026-04-28 15:11:29 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 34ms
+2026-04-28 15:12:02 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/google
+2026-04-28 15:12:02 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:02 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/google
+2026-04-28 15:12:02 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AuthController.loginWithGoogle() con argumentos: [com.ecoland.application.dto.GoogleLoginRequest@716f3330]
+2026-04-28 15:12:02 [http-nio-8082-exec-7] INFO  c.e.i.adapter.in.web.AuthController - Intento de login con Google para token asociado
+2026-04-28 15:12:04 [http-nio-8082-exec-7] INFO  c.e.i.adapter.in.web.AuthController - Login con Google exitoso: carladianavgonzales@gmail.com
+2026-04-28 15:12:04 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AuthController.loginWithGoogle() | Tiempo de ejecución: 2017ms
+2026-04-28 15:12:04 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:12:04 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:12:04 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:04 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:12:04 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:04 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:12:04 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:12:04 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:12:04 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:12:04 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 11ms
+2026-04-28 15:12:04 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 15ms
+2026-04-28 15:12:09 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me/participations
+2026-04-28 15:12:09 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
+2026-04-28 15:12:09 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales@gmail.com
+2026-04-28 15:12:09 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
+2026-04-28 15:12:09 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=carladianavgonzales@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
+2026-04-28 15:12:09 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 13ms
+2026-04-28 15:12:15 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:12:15 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:12:15 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:15 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:15 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:12:15 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:12:15 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:12:15 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:12:15 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:12:15 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 17ms
+2026-04-28 15:12:15 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 26ms
+2026-04-28 15:12:29 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns/1
+2026-04-28 15:12:29 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:29 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns/1
+2026-04-28 15:12:29 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getById() con argumentos: [1]
+2026-04-28 15:12:29 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
+2026-04-28 15:12:29 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getById() | Tiempo de ejecución: 12ms
+2026-04-28 15:12:32 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/campaigns/1/participate
+2026-04-28 15:12:32 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/campaigns/1/participate
+2026-04-28 15:12:32 [http-nio-8082-exec-10] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales@gmail.com
+2026-04-28 15:12:32 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/campaigns/1/participate
+2026-04-28 15:12:32 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.participate() con argumentos: [1, UsernamePasswordAuthenticationToken [Principal=carladianavgonzales@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
+2026-04-28 15:12:32 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Usuario carladianavgonzales@gmail.com solicita inscribirse en la campaña con id: 1
+2026-04-28 15:12:32 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 1
+2026-04-28 15:12:32 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Usuario carladianavgonzales@gmail.com inscrito exitosamente en la campaña con id: 1. Participantes actuales: 17
+2026-04-28 15:12:32 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.participate() | Tiempo de ejecución: 54ms
+2026-04-28 15:12:36 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns?category=REFORESTATION
+2026-04-28 15:12:36 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:36 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns?category=REFORESTATION
+2026-04-28 15:12:36 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [REFORESTATION]
+2026-04-28 15:12:36 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener las campañas de la categoría: REFORESTATION
+2026-04-28 15:12:36 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 9ms
+2026-04-28 15:12:39 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns/2
+2026-04-28 15:12:39 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:39 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns/2
+2026-04-28 15:12:39 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getById() con argumentos: [2]
+2026-04-28 15:12:39 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 2
+2026-04-28 15:12:39 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getById() | Tiempo de ejecución: 17ms
+2026-04-28 15:12:42 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/campaigns/2/participate
+2026-04-28 15:12:42 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales@gmail.com
+2026-04-28 15:12:42 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/campaigns/2/participate
+2026-04-28 15:12:42 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.participate() con argumentos: [2, UsernamePasswordAuthenticationToken [Principal=carladianavgonzales@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
+2026-04-28 15:12:42 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Usuario carladianavgonzales@gmail.com solicita inscribirse en la campaña con id: 2
+2026-04-28 15:12:42 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener la campaña con id: 2
+2026-04-28 15:12:42 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Usuario carladianavgonzales@gmail.com inscrito exitosamente en la campaña con id: 2. Participantes actuales: 49
+2026-04-28 15:12:42 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.participate() | Tiempo de ejecución: 12ms
+2026-04-28 15:12:46 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
+2026-04-28 15:12:46 [http-nio-8082-exec-4] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales@gmail.com
+2026-04-28 15:12:46 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
+2026-04-28 15:12:46 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=carladianavgonzales@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[]]]
+2026-04-28 15:12:46 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 7ms
+2026-04-28 15:12:56 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:12:56 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:12:56 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:56 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:12:56 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:12:56 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:12:56 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:12:56 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:12:56 [http-nio-8082-exec-3] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:12:56 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 15ms
+2026-04-28 15:12:56 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 22ms
+2026-04-28 15:13:00 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns?category=REFORESTATION
+2026-04-28 15:13:00 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:13:00 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns?category=REFORESTATION
+2026-04-28 15:13:00 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [REFORESTATION]
+2026-04-28 15:13:00 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener las campañas de la categoría: REFORESTATION
+2026-04-28 15:13:00 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 24ms
+2026-04-28 15:13:03 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/puntos-verdes
+2026-04-28 15:13:03 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:13:03 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/puntos-verdes
+2026-04-28 15:13:03 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: PuntoVerdeController.getAll() con argumentos: []
+2026-04-28 15:13:03 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: PuntoVerdeController.getAll() | Tiempo de ejecución: 8ms
+2026-04-28 15:13:25 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:13:25 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/comprehensive
+2026-04-28 15:13:25 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:13:25 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:13:25 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/comprehensive
+2026-04-28 15:13:25 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:13:25 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:13:25 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getComprehensiveStatistics() con argumentos: []
+2026-04-28 15:13:25 [http-nio-8082-exec-10] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:13:25 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 15ms
+2026-04-28 15:13:25 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getComprehensiveStatistics() | Tiempo de ejecución: 44ms
+2026-04-28 15:13:43 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:13:43 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:13:43 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:13:43 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:13:43 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:13:43 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:13:43 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:13:43 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:13:43 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:13:43 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 12ms
+2026-04-28 15:13:43 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 17ms
+2026-04-28 15:14:46 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:14:46 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:46 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:14:46 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:14:46 [http-nio-8082-exec-3] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:14:46 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 27ms
+2026-04-28 15:14:49 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:14:49 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:49 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:14:49 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:14:49 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:14:49 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 7ms
+2026-04-28 15:14:50 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:14:50 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:14:50 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:50 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:14:50 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:50 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:14:50 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:14:50 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:14:50 [http-nio-8082-exec-6] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:14:50 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 4ms
+2026-04-28 15:14:50 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 10ms
+2026-04-28 15:14:52 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:14:52 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:52 [http-nio-8082-exec-10] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 15:14:52 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 15:14:52 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 15:14:52 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:52 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:14:52 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:14:52 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:52 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:14:52 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:52 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:14:52 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:14:52 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:14:52 [http-nio-8082-exec-8] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:14:52 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 6ms
+2026-04-28 15:14:52 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 9ms
+2026-04-28 15:14:54 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:14:54 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:54 [http-nio-8082-exec-7] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 15:14:54 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 15:14:54 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 15:14:54 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:54 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:14:54 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:14:54 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:54 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:54 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:14:54 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:14:54 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:14:54 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:14:54 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:14:54 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 7ms
+2026-04-28 15:14:54 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 11ms
+2026-04-28 15:14:55 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:14:55 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:55 [http-nio-8082-exec-3] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 15:14:55 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 15:14:55 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 15:14:55 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:55 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:14:55 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:14:55 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:55 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:14:55 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:14:55 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:14:55 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:14:55 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:14:55 [http-nio-8082-exec-2] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:14:55 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 7ms
+2026-04-28 15:14:55 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 8ms
+2026-04-28 15:15:08 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:15:08 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:15:08 [http-nio-8082-exec-9] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 15:15:08 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 15:15:08 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 15:15:08 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:15:08 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:15:08 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:15:08 [http-nio-8082-exec-8] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 15:15:08 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 15:15:08 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 15:15:08 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:15:09 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:15:09 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:15:09 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:15:09 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:15:09 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:15:09 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:15:09 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:15:09 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:15:09 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:15:09 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 51ms
+2026-04-28 15:15:09 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 55ms
+2026-04-28 15:17:18 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:17:18 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:17:18 [http-nio-8082-exec-6] WARN  c.e.i.security.SecurityConfig - Acceso no autorizado: Intento de acceso sin autenticación a /api/features
+2026-04-28 15:17:18 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-04-28 15:17:18 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-04-28 15:17:18 [http-nio-8082-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:00 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /auth/register
+2026-04-28 15:19:00 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/register
+2026-04-28 15:19:00 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:00 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/register
+2026-04-28 15:19:00 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AuthController.register() con argumentos: [com.ecoland.application.dto.RegisterRequest@1269d524]
+2026-04-28 15:19:01 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AuthController.register() | Tiempo de ejecución: 180ms
+2026-04-28 15:19:01 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:19:01 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:01 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:19:01 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:19:01 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:01 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:19:01 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:19:01 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:19:01 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:19:01 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 6ms
+2026-04-28 15:19:01 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 23ms
+2026-04-28 15:19:06 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-04-28 15:19:06 [http-nio-8082-exec-4] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carlas@gmail.com
+2026-04-28 15:19:06 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/features
+2026-04-28 15:19:06 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.getAllFeatures() con argumentos: []
+2026-04-28 15:19:06 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.getAllFeatures() | Tiempo de ejecución: 10ms
+2026-04-28 15:19:07 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:19:07 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:07 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:19:07 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:19:07 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:19:07 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 5ms
+2026-04-28 15:19:10 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=false
+2026-04-28 15:19:10 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carlas@gmail.com
+2026-04-28 15:19:10 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /api/features/inicio?enabled=false
+2026-04-28 15:19:10 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.updateFeature() con argumentos: [inicio, false]
+2026-04-28 15:19:10 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.updateFeature() | Tiempo de ejecución: 10ms
+2026-04-28 15:19:11 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reforestacion?enabled=false
+2026-04-28 15:19:11 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carlas@gmail.com
+2026-04-28 15:19:11 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /api/features/reforestacion?enabled=false
+2026-04-28 15:19:11 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.updateFeature() con argumentos: [reforestacion, false]
+2026-04-28 15:19:11 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.updateFeature() | Tiempo de ejecución: 4ms
+2026-04-28 15:19:13 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/reciclaje?enabled=false
+2026-04-28 15:19:13 [http-nio-8082-exec-6] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carlas@gmail.com
+2026-04-28 15:19:13 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /api/features/reciclaje?enabled=false
+2026-04-28 15:19:13 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.updateFeature() con argumentos: [reciclaje, false]
+2026-04-28 15:19:13 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.updateFeature() | Tiempo de ejecución: 6ms
+2026-04-28 15:19:32 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/google
+2026-04-28 15:19:32 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:32 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/google
+2026-04-28 15:19:32 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AuthController.loginWithGoogle() con argumentos: [com.ecoland.application.dto.GoogleLoginRequest@1142abf5]
+2026-04-28 15:19:32 [http-nio-8082-exec-2] INFO  c.e.i.adapter.in.web.AuthController - Intento de login con Google para token asociado
+2026-04-28 15:19:32 [http-nio-8082-exec-2] INFO  c.e.i.adapter.in.web.AuthController - Login con Google exitoso: carladianavgonzales@gmail.com
+2026-04-28 15:19:32 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AuthController.loginWithGoogle() | Tiempo de ejecución: 541ms
+2026-04-28 15:19:33 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:19:33 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/quick
+2026-04-28 15:19:33 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:33 [http-nio-8082-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:33 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:19:33 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/quick
+2026-04-28 15:19:33 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getQuickStats() con argumentos: []
+2026-04-28 15:19:33 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:19:33 [http-nio-8082-exec-5] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:19:33 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 4ms
+2026-04-28 15:19:33 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getQuickStats() | Tiempo de ejecución: 16ms
+2026-04-28 15:19:35 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns?category=REFORESTATION
+2026-04-28 15:19:35 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:35 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns?category=REFORESTATION
+2026-04-28 15:19:35 [http-nio-8082-exec-9] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [REFORESTATION]
+2026-04-28 15:19:35 [http-nio-8082-exec-9] INFO  c.e.a.service.CampaignService - Solicitud para obtener las campañas de la categoría: REFORESTATION
+2026-04-28 15:19:35 [http-nio-8082-exec-9] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 10ms
+2026-04-28 15:19:36 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/puntos-verdes
+2026-04-28 15:19:36 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:36 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/puntos-verdes
+2026-04-28 15:19:36 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: PuntoVerdeController.getAll() con argumentos: []
+2026-04-28 15:19:36 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: PuntoVerdeController.getAll() | Tiempo de ejecución: 5ms
+2026-04-28 15:19:37 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/statistics/comprehensive
+2026-04-28 15:19:37 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-04-28 15:19:37 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:37 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/statistics/comprehensive
+2026-04-28 15:19:37 [http-nio-8082-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:37 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-04-28 15:19:37 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: StatisticsController.getComprehensiveStatistics() con argumentos: []
+2026-04-28 15:19:37 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-04-28 15:19:37 [http-nio-8082-exec-7] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-04-28 15:19:37 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 11ms
+2026-04-28 15:19:37 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: StatisticsController.getComprehensiveStatistics() | Tiempo de ejecución: 12ms
+2026-04-28 15:19:37 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/puntos-verdes
+2026-04-28 15:19:37 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-28 15:19:37 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/puntos-verdes
+2026-04-28 15:19:37 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: PuntoVerdeController.getAll() con argumentos: []
+2026-04-28 15:19:37 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: PuntoVerdeController.getAll() | Tiempo de ejecución: 6ms
+2026-04-28 15:19:45 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/estadisticas?enabled=false
+2026-04-28 15:19:45 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales@gmail.com
+2026-04-28 15:19:45 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /api/features/estadisticas?enabled=false
+2026-04-28 15:19:45 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.updateFeature() con argumentos: [estadisticas, false]
+2026-04-28 15:19:45 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.updateFeature() | Tiempo de ejecución: 8ms
+2026-04-28 15:19:46 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/perfil?enabled=false
+2026-04-28 15:19:46 [http-nio-8082-exec-6] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales@gmail.com
+2026-04-28 15:19:46 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /api/features/perfil?enabled=false
+2026-04-28 15:19:46 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.updateFeature() con argumentos: [perfil, false]
+2026-04-28 15:19:46 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.updateFeature() | Tiempo de ejecución: 7ms
+2026-04-28 15:19:49 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features/inicio?enabled=true
+2026-04-28 15:19:49 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing PUT /api/features/inicio?enabled=true
+2026-04-28 15:19:49 [http-nio-8082-exec-5] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales@gmail.com
+2026-04-28 15:19:49 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured PUT /api/features/inicio?enabled=true
+2026-04-28 15:19:49 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.updateFeature() con argumentos: [inicio, true]
+2026-04-28 15:19:49 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.updateFeature() | Tiempo de ejecución: 7ms
