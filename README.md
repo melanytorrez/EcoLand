@@ -1,6 +1,8 @@
 # 🌱 EcoLand
 
-**EcoLand** es una plataforma integral de concienciación y gestión ambiental diseñada para fomentar prácticas sostenibles en la comunidad de Cochabamba. La plataforma permite gestionar campañas de reforestación, visualizar puntos de reciclaje en tiempo real y realizar un seguimiento del impacto ambiental personal y colectivo.
+**EcoLand** es una plataforma integral de gestión ciudadana diseñada para centralizar, coordinar y potenciar iniciativas de impacto ambiental en la región de Cochabamba. Construido sobre una arquitectura robusta que integra un backend escalable en Spring Boot, el sistema garantiza el manejo seguro y eficiente de la participación voluntaria mediante la validación estricta de procesos en tiempo real. Esto incluye la gestión automatizada de aforos y cupos para campañas ecológicas, el control de roles y permisos mediante autenticación JWT y OAuth2, y la categorización dinámica de eventos de reforestación y reciclaje.
+
+La plataforma destaca por su enfoque en la movilización comunitaria y su capacidad para procesar información ambiental de valor, incluyendo la integración de mapas interactivos para la ubicación de puntos verdes y rutas de recolección de residuos. Al unificar la administración operativa de las campañas, el seguimiento en vivo de metas de recolección y la visualización estadística del impacto ecológico (como reducción de huella de carbono y árboles plantados) en una interfaz fluida e intuitiva, EcoLand reduce significativamente las barreras de participación y empodera a los ciudadanos y organizaciones para transformar su conciencia ambiental en acciones concretas y medibles sin contratiempos.
 
 ---
 
