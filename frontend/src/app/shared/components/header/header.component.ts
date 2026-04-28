@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   ];
 
   allNavItems = [
-    { path: '/',              label: 'header.nav.home',          feature: null },
+    { path: '/',              label: 'header.nav.home',          feature: 'inicio' },
     { path: '/reforestacion', label: 'header.nav.reforestation', feature: 'reforestacion' },
     { path: '/reciclaje',     label: 'header.nav.recycling',     feature: 'reciclaje' },
     { path: '/estadisticas',  label: 'header.nav.stats',         feature: 'estadisticas' },
@@ -57,6 +57,11 @@ export class HeaderComponent implements OnInit {
     // Suscribirse a cambios de idioma
     this.translate.onLangChange.subscribe(event => {
       this.currentLang = event.lang;
+      this.cdr.detectChanges();
+    });
+
+    // Suscribirse a cambios de feature toggles
+    this.featureFlagService.features$.subscribe(() => {
       this.cdr.detectChanges();
     });
   }

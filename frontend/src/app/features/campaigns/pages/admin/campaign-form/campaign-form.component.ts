@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CampaignService } from '../../../../../core/services/campaign.service';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { Campaign } from '../../../../../core/models/campaign.model';
@@ -42,7 +42,8 @@ export class CampaignFormComponent implements OnInit {
   constructor(
     private campaignService: CampaignService,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +54,7 @@ export class CampaignFormComponent implements OnInit {
     this.campaignService.getCampaigns().subscribe({
       next: (data) => {
         this.campaigns = data;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error cargando campañas', err);
@@ -81,6 +83,7 @@ export class CampaignFormComponent implements OnInit {
         next: () => {
           this.loadCampaigns();
           alert(this.translate.instant('admin_page.alert.campaign_deleted'));
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Error al eliminar campaña', err);
@@ -151,6 +154,7 @@ export class CampaignFormComponent implements OnInit {
           this.loadCampaigns();
           this.closeModal();
           alert(this.translate.instant('admin_page.alert.campaign_updated'));
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Error actualizando en BD:', err);
@@ -163,6 +167,7 @@ export class CampaignFormComponent implements OnInit {
           this.loadCampaigns();
           this.closeModal();
           alert(this.translate.instant('admin_page.alert.campaign_created'));
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Error guardando en BD:', err);
@@ -230,6 +235,7 @@ export class CampaignFormComponent implements OnInit {
     }
 
     this.showModal = true;
+    this.cdr.detectChanges();
   }
 
   closeModal(): void {
@@ -248,6 +254,7 @@ export class CampaignFormComponent implements OnInit {
     };
 
     this.formErrors = {};
+    this.cdr.detectChanges();
   }
 
   getStatusColor(status: string): string {

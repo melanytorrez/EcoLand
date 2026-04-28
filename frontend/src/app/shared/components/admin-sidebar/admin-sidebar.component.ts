@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AdminSidebarComponent {
   navItems = [
     { path: '/admin/campanas', label: 'Campañas', icon: 'tree-deciduous' },
+    { path: '/admin/feature-toggles', label: 'Feature Toggles', icon: 'toggle-right' },
   ];
 
   constructor(public router: Router) { }

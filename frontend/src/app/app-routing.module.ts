@@ -9,7 +9,9 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [FeatureFlagGuard],
+    data: { feature: 'inicio' }
   },
   {
     path: '',
@@ -56,14 +58,25 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'campanas',
+        pathMatch: 'full'
+      },
+      {
         path: 'campanas',
         loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
+      },
+      {
+        path: 'feature-toggles',
+        loadChildren: () => import('./features/feature-toggles-admin/feature-toggles-admin-module').then(m => m.FeatureTogglesAdminModule)
       }
     ]
   },
   {
     path: 'profile',
-    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
+    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [FeatureFlagGuard],
+    data: { feature: 'perfil' }
   }
 ];
 
