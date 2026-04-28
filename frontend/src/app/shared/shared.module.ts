@@ -28,7 +28,14 @@ import { IfFeatureDirective } from './directives/if-feature.directive';
     CommonModule,
     RouterModule,
     TranslateModule,
-    LucideAngularModule.pick({ Leaf, LogIn, UserPlus, Shield, LogOut, User, TreeDeciduous, Recycle, TrendingUp, Users, MapPin, Calendar, Mail, Phone, Menu, X, Search, Filter, Clock, CheckCircle, Target, Award, Truck, Navigation, Lock, Plus, Edit, Trash2, Image, LayoutDashboard, Route, BarChart3, ChevronDown, Check })
+    LucideAngularModule.pick({ 
+      Leaf, LogIn, UserPlus, Shield, LogOut, User, TreeDeciduous, Recycle, 
+      TrendingUp, Users, MapPin, Calendar, Mail, Phone, Menu, X, Search, 
+      Filter, Clock, CheckCircle, Target, Award, Truck, Navigation, Lock, 
+      Plus, Edit, Trash2, Image, LayoutDashboard, Route, BarChart3, 
+      ChevronDown, Check, ToggleRight, ToggleLeft, TreePine, Megaphone, 
+      Map, Droplets 
+    })
   ],
   exports: [
     HeaderComponent,

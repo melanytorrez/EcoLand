@@ -58,6 +58,11 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'campanas',
+        pathMatch: 'full'
+      },
+      {
         path: 'campanas',
         loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
       },
