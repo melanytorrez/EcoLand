@@ -52,6 +52,7 @@ export class FeatureTogglesAdmin implements OnInit {
   };
 
   features: FeatureConfig[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private featureFlagService: FeatureFlagService,
@@ -59,7 +60,20 @@ export class FeatureTogglesAdmin implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadFeatures();
+    this.isLoading = true;
+    this.featureFlagService.loadFeatures().subscribe({
+      next: () => {
+        this.loadFeatures();
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error al cargar feature toggles:', err);
+        this.loadFeatures(); // Cargar con lo que tengamos (defaults)
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   loadFeatures(): void {
