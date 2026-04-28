@@ -1,17 +1,57 @@
 import { Injectable } from '@angular/core';
-import { FEATURE_FLAGS, FeatureFlags } from '../config/feature-flags.config';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable, of, tap, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeatureFlagService {
-  private flags: FeatureFlags = FEATURE_FLAGS;
+  private features: { [key: string]: boolean } = {};
+  private apiUrl = `${environment.apiUrl}/api/features`;
 
-  isFeatureEnabled(featureName: keyof FeatureFlags): boolean {
-    return this.flags[featureName] || false;
+  constructor(private http: HttpClient) {}
+
+  loadFeatures(): Observable<any> {
+    return this.http.get<{ [key: string]: boolean }>(this.apiUrl).pipe(
+      tap(features => {
+        this.features = features;
+        console.log('Feature Toggles cargados:', this.features);
+      }),
+      catchError(error => {
+        console.error('Error cargando Feature Toggles. Usando defaults seguros.', error);
+        // Fallback resiliente
+        this.features = {
+          'inicio': true,
+          'reforestacion': true,
+          'reciclaje': true,
+          'estadisticas': true,
+          'perfil': true
+        };
+        return of(this.features);
+      })
+    );
   }
 
-  getFlags(): FeatureFlags {
-    return { ...this.flags };
+  isFeatureEnabled(featureName: string): boolean {
+    return this.features[featureName] !== false; // Por defecto true si no esta definido, o false dependiendo de la regla. Usaremos false estricto:
+    // return this.features[featureName] === true; 
+    // Wait, let's just do: if it's explicitly false in the DB, hide it. Otherwise allow it.
+    if (this.features.hasOwnProperty(featureName)) {
+      return this.features[featureName];
+    }
+    return true; // Falla seguro (dejar pasar) si no existe
+  }
+
+  getFlags(): { [key: string]: boolean } {
+    return { ...this.features };
+  }
+
+  updateFeature(featureName: string, enabled: boolean): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${featureName}?enabled=${enabled}`, {}).pipe(
+      tap(() => {
+        this.features[featureName] = enabled;
+      })
+    );
   }
 }

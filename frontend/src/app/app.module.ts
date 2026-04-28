@@ -23,11 +23,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
 }
 
-import { FeatureToggleService } from './core/services/feature-toggle.service';
+import { FeatureFlagService } from './core/services/feature-flag.service';
 import { lastValueFrom } from 'rxjs';
 
-export function featureToggleInitializerFactory(featureToggleService: FeatureToggleService) {
-  return () => lastValueFrom(featureToggleService.loadFeatures());
+export function featureToggleInitializerFactory(featureFlagService: FeatureFlagService) {
+  return () => lastValueFrom(featureFlagService.loadFeatures());
 }
 
 export function appInitializerFactory(translate: TranslateService, ngZone: NgZone) {
@@ -89,7 +89,7 @@ export function appInitializerFactory(translate: TranslateService, ngZone: NgZon
     {
       provide: APP_INITIALIZER,
       useFactory: featureToggleInitializerFactory,
-      deps: [FeatureToggleService],
+      deps: [FeatureFlagService],
       multi: true
     }
   ],

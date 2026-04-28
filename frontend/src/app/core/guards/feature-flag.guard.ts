@@ -16,10 +16,10 @@ export class FeatureFlagGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const featureName = route.data['feature'] as keyof FeatureFlags;
     
-    if (this.featureFlagService.isFeatureEnabled(featureName)) {
+    if (this.featureFlagService.isFeatureEnabled(featureName as string)) {
       return true;
     }
 
-    return this.router.parseUrl('/');
+    return this.router.parseUrl('/login');
   }
 }

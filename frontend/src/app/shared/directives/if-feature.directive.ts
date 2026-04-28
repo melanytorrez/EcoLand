@@ -1,8 +1,9 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { FeatureToggleService } from '../../core/services/feature-toggle.service';
+import { FeatureFlagService } from '../../core/services/feature-flag.service';
 
 @Directive({
-  selector: '[appIfFeature]'
+  selector: '[appIfFeature]',
+  standalone: false
 })
 export class IfFeatureDirective {
   private hasView = false;
@@ -10,11 +11,11 @@ export class IfFeatureDirective {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
-    private featureToggleService: FeatureToggleService
+    private featureFlagService: FeatureFlagService
   ) {}
 
   @Input() set appIfFeature(featureName: string) {
-    const isEnabled = this.featureToggleService.isEnabled(featureName);
+    const isEnabled = this.featureFlagService.isFeatureEnabled(featureName);
 
     if (isEnabled && !this.hasView) {
       this.viewContainer.createEmbeddedView(this.templateRef);

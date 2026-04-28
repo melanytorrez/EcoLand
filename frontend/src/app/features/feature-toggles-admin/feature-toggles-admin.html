@@ -1,0 +1,113 @@
+<div class="p-8">
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg"
+        style="background: linear-gradient(to bottom right, #9333ea, #7e22ce);">
+        <lucide-icon name="toggle-left" class="w-6 h-6 text-white"></lucide-icon>
+      </div>
+      <h1 class="text-3xl font-bold text-gray-900">Feature Toggles</h1>
+    </div>
+    <p class="text-gray-600">
+      Controla qué funcionalidades están disponibles para los usuarios de la plataforma
+    </p>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="p-6 rounded-2xl text-white shadow-lg"
+      style="background: linear-gradient(to bottom right, #2E7D32, #4CAF50);">
+      <p class="text-sm opacity-90 mb-1">Total de Funcionalidades</p>
+      <p class="text-4xl font-bold">{{ features.length }}</p>
+    </div>
+    <div class="p-6 rounded-2xl text-white shadow-lg"
+      style="background: linear-gradient(to bottom right, #16a34a, #15803d);">
+      <p class="text-sm opacity-90 mb-1">Activas</p>
+      <p class="text-4xl font-bold">
+        {{ activeFeaturesCount }}
+      </p>
+    </div>
+    <div class="p-6 rounded-2xl text-white shadow-lg"
+      style="background: linear-gradient(to bottom right, #4b5563, #374151);">
+      <p class="text-sm opacity-90 mb-1">Desactivadas</p>
+      <p class="text-4xl font-bold">
+        {{ inactiveFeaturesCount }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Feature Toggles List -->
+  <div class="bg-white rounded-2xl border-2 border-gray-200 shadow-lg overflow-hidden">
+    <div class="p-6 border-b-2 border-gray-200" style="background: linear-gradient(to right, #E8F5E9, #ffffff);">
+      <h2 class="text-xl font-bold text-gray-800">Gestión de Funcionalidades</h2>
+      <p class="text-sm text-gray-600 mt-1">
+        Activa o desactiva las funcionalidades disponibles en la vista de usuario
+      </p>
+    </div>
+
+    <div class="divide-y divide-gray-200">
+      <div *ngFor="let feature of features" class="p-6 transition-colors" [class.bg-white]="feature.enabled"
+        [class.hover:bg-[#F1F8F4]]="feature.enabled" [class.bg-gray-50]="!feature.enabled"
+        [class.hover:bg-gray-100]="!feature.enabled">
+        <div class="flex items-center gap-6">
+          <!-- Icon -->
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300"
+            [class.opacity-50]="!feature.enabled" [class.grayscale]="!feature.enabled" [ngClass]="feature.color"
+            [class.bg-gradient-to-br]="true">
+            <lucide-icon [name]="feature.icon" class="w-8 h-8 text-white"></lucide-icon>
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-1">
+              <h3 class="text-lg font-bold" [class.text-gray-800]="feature.enabled"
+                [class.text-gray-500]="!feature.enabled">
+                {{ feature.title }}
+              </h3>
+              <span class="px-3 py-1 rounded-xl text-xs font-semibold" [class.bg-green-100]="feature.enabled"
+                [class.text-green-700]="feature.enabled" [class.bg-gray-200]="!feature.enabled"
+                [class.text-gray-600]="!feature.enabled">
+                {{ feature.enabled ? 'Activa' : 'Desactivada' }}
+              </span>
+            </div>
+            <p class="text-sm" [class.text-gray-600]="feature.enabled" [class.text-gray-500]="!feature.enabled">
+              {{ feature.description }}
+            </p>
+          </div>
+
+          <!-- Toggle Switch -->
+          <div class="flex items-center gap-3">
+            <button type="button" (click)="toggleFeature(feature)"
+              [style.background-color]="feature.enabled ? '#2E7D32' : '#e5e7eb'"
+              class="relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none"
+              role="switch" [attr.aria-checked]="feature.enabled">
+              <span [style.transform]="feature.enabled ? 'translateX(1.5rem)' : 'translateX(0)'"
+                class="pointer-events-none inline-block h-7 w-7 rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Warning Message -->
+  <div class="mt-8 p-6"
+    style="background-color: #FFFBEB !important; border: 1px solid #FEF3C7 !important; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+    <div class="flex gap-4 items-start">
+      <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
+        style="background-color: #F59E0B !important;">
+        <span class="text-white text-[14px] font-black">!</span>
+      </div>
+
+      <div class="flex flex-col">
+        <h4 class="font-bold text-lg mb-1" style="color: #92400E !important;">
+          Advertencia
+        </h4>
+        <p class="text-[15px] leading-relaxed" style="color: #B45309 !important;">
+          Los cambios en los feature toggles afectan inmediatamente a todos los usuarios de la plataforma.
+          Las funcionalidades desactivadas no aparecerán en el menú de navegación ni serán accesibles
+          hasta que las vuelvas a activar.
+        </p>
+      </div>
+    </div>
+  </div>

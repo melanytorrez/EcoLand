@@ -1,28 +1,42 @@
 package com.ecoland.application.service;
 
-import com.ecoland.infrastructure.config.FeatureToggleProperties;
+import com.ecoland.infrastructure.entity.FeatureToggleEntity;
+import com.ecoland.infrastructure.repository.FeatureToggleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class FeatureToggleService {
 
-    private final FeatureToggleProperties properties;
+    private final FeatureToggleRepository repository;
 
-    public FeatureToggleService(FeatureToggleProperties properties) {
-        this.properties = properties;
+    public FeatureToggleService(FeatureToggleRepository repository) {
+        this.repository = repository;
     }
 
     public boolean isEnabled(String featureName) {
         if (featureName == null || featureName.trim().isEmpty()) {
             return false;
         }
-        // Resiliencia: Si no existe el toggle, asumimos que esta desactivado por seguridad
-        return properties.getToggles().getOrDefault(featureName, false);
+        return repository.findByFeatureName(featureName)
+                .map(FeatureToggleEntity::isEnabled)
+                .orElse(false); // Resiliencia: Si no existe, false por seguridad
     }
 
     public Map<String, Boolean> getAllToggles() {
-        return properties.getToggles();
+        return repository.findAll().stream()
+                .collect(Collectors.toMap(
+                        FeatureToggleEntity::getFeatureName,
+                        FeatureToggleEntity::isEnabled
+                ));
+    }
+    
+    public void updateToggle(String featureName, boolean isEnabled) {
+        FeatureToggleEntity entity = repository.findByFeatureName(featureName)
+                .orElseGet(() -> new FeatureToggleEntity(featureName, isEnabled));
+        entity.setEnabled(isEnabled);
+        repository.save(entity);
     }
 }
