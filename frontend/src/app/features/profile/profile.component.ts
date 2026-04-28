@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { TranslateService } from '@ngx-translate/core';
+import { finalize } from 'rxjs/operators';
 
 interface Badge {
   id: string;
@@ -23,6 +25,7 @@ interface Badge {
 export class ProfileComponent implements OnInit {
   user: any = null;
   participations: Campaign[] = [];
+  isLoading = true;
   
   reforestacionCount = 0;
   reciclajeCount = 0;
@@ -71,7 +74,9 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -81,13 +86,50 @@ export class ProfileComponent implements OnInit {
     }
     this.user = this.authService.getUser();
     
-    this.userService.getMyParticipations().subscribe({
-      next: (campaigns) => {
-        this.participations = campaigns;
-        this.calculateStats();
-      },
-      error: (err) => console.error('Error fetching participations', err)
+    this.translate.onLangChange.subscribe(() => {
+      this.updateChartLabels();
+      this.cdr.detectChanges();
     });
+
+    this.userService.getMyParticipations()
+      .pipe(finalize(() => {
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      }))
+      .subscribe({
+        next: (campaigns) => {
+          this.participations = campaigns;
+          this.calculateStats();
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error('Error fetching participations', err);
+          this.cdr.detectChanges();
+        }
+      });
+  }
+
+  private updateChartLabels(): void {
+    // Only update if we have data initialized
+    if (this.pieChartData && this.barChartData) {
+      this.pieChartData = {
+        ...this.pieChartData,
+        labels: [
+          this.translate.instant('profile.stats.reforestation'),
+          this.translate.instant('profile.stats.recycling')
+        ]
+      };
+
+      this.barChartData = {
+        ...this.barChartData,
+        datasets: [
+          { ...this.barChartData.datasets[0], label: this.translate.instant('profile.stats.reforestation') },
+          { ...this.barChartData.datasets[1], label: this.translate.instant('profile.stats.recycling') }
+        ]
+      };
+      
+      this.generateBadges(); // Refresh badge translations
+    }
   }
 
   private calculateStats(): void {
@@ -115,13 +157,23 @@ export class ProfileComponent implements OnInit {
       }
     });
 
-    this.barChartData.datasets[0].data = refData;
-    this.barChartData.datasets[1].data = recData;
+    this.updateChartLabels();
 
-    this.generateBadges();
+    this.pieChartData = {
+      ...this.pieChartData,
+      datasets: [{
+        ...this.pieChartData.datasets[0],
+        data: [this.reforestacionCount, this.reciclajeCount]
+      }]
+    };
     
-    this.pieChartData = { ...this.pieChartData };
-    this.barChartData = { ...this.barChartData };
+    this.barChartData = {
+      ...this.barChartData,
+      datasets: [
+        { ...this.barChartData.datasets[0], data: refData },
+        { ...this.barChartData.datasets[1], data: recData }
+      ]
+    };
   }
 
   private generateBadges(): void {
@@ -129,38 +181,43 @@ export class ProfileComponent implements OnInit {
     
     if (this.reforestacionCount >= 1) {
       newBadges.push({
-        id: 'ref-1', type: 'reforestacion', title: 'Sembrador Principiante',
-        description: 'Participaste en tu primera jornada de reforestación',
+        id: 'ref-1', type: 'reforestacion',
+        title: this.translate.instant('profile.badges.list.ref_1.title'),
+        description: this.translate.instant('profile.badges.list.ref_1.description'),
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
       });
     }
     if (this.reforestacionCount >= 5) {
       newBadges.push({
-        id: 'ref-5', type: 'reforestacion', title: 'Guardián del Bosque',
-        description: 'Has participado en más de 5 actividades de reforestación',
+        id: 'ref-5', type: 'reforestacion',
+        title: this.translate.instant('profile.badges.list.ref_5.title'),
+        description: this.translate.instant('profile.badges.list.ref_5.description'),
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
       });
     }
 
     if (this.reciclajeCount >= 1) {
       newBadges.push({
-        id: 'rec-1', type: 'reciclaje', title: 'Reciclador Novato',
-        description: 'Comenzaste tu camino en el reciclaje',
+        id: 'rec-1', type: 'reciclaje',
+        title: this.translate.instant('profile.badges.list.rec_1.title'),
+        description: this.translate.instant('profile.badges.list.rec_1.description'),
         earnedDate: new Date().toISOString(), iconName: 'trash-2'
       });
     }
     if (this.reciclajeCount >= 5) {
       newBadges.push({
-        id: 'rec-5', type: 'reciclaje', title: 'Reciclador Experto',
-        description: 'Has reciclado en 5 o más jornadas',
+        id: 'rec-5', type: 'reciclaje',
+        title: this.translate.instant('profile.badges.list.rec_5.title'),
+        description: this.translate.instant('profile.badges.list.rec_5.description'),
         earnedDate: new Date().toISOString(), iconName: 'trash-2'
       });
     }
 
     if (this.participations.length >= 10) {
       newBadges.push({
-        id: 'gen-10', type: 'general', title: 'Eco Guerrero',
-        description: 'Completaste 10 actividades ambientales',
+        id: 'gen-10', type: 'general',
+        title: this.translate.instant('profile.badges.list.gen_10.title'),
+        description: this.translate.instant('profile.badges.list.gen_10.description'),
         earnedDate: new Date().toISOString(), iconName: 'award'
       });
     }

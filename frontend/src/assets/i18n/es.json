@@ -386,17 +386,27 @@
     "summary": {
       "title": "Impacto Ambiental Acumulado",
       "subtitle": "El resultado de nuestro esfuerzo colectivo",
+      "co2": {
+        "label": "CO2 Mitigado",
+        "subtitle": "kg/año reducidos"
+      },
+      "campaigns": {
+        "label": "Campañas Completadas"
+      },
       "trees": {
         "label": "Árboles plantados",
-        "equivalent": "Equivalente a 185 hectáreas de bosque"
+        "equivalent": "Equivalente a 185 hectáreas de bosque",
+        "equivalent_dynamic": "Equivalente a {{val}} hectáreas de bosque"
       },
       "recycling": {
         "label": "Residuos reciclados",
-        "equivalent": "Reducción de 520 toneladas de CO₂"
+        "equivalent": "Reducción de 520 toneladas de CO₂",
+        "equivalent_dynamic": "Reducción de {{val}} toneladas de CO₂"
       },
       "water": {
         "label": "Agua ahorrada",
-        "equivalent": "Gracias al reciclaje de papel y plástico"
+        "equivalent": "Gracias al reciclaje de papel y plástico",
+        "subtitle": "litros ahorrados"
       }
     },
     "datasets": {
@@ -461,6 +471,55 @@
     "message": "¿Estás seguro que deseas cerrar sesión?",
     "confirm": "Aceptar",
     "cancel": "Cancelar"
+  },
+  "profile": {
+    "header": {
+      "title": "Perfil del Voluntario",
+      "subtitle": "Visualiza tu impacto ambiental y logros conseguidos"
+    },
+    "user_info": {
+      "total_participations": "{{count}} participaciones totales",
+      "role_user": "Usuario",
+      "role_admin": "Administrador"
+    },
+    "stats": {
+      "reforestation": "Actividades de Reforestación",
+      "recycling": "Actividades de Reciclaje"
+    },
+    "charts": {
+      "distribution_title": "Distribución de Participaciones",
+      "distribution_empty": "Aún no tienes participaciones para graficar.",
+      "monthly_title": "Actividad Mensual {{year}}"
+    },
+    "badges": {
+      "title": "Mis Insignias",
+      "earned": "{{count}} obtenidas",
+      "earned_on": "Obtenida el",
+      "empty_title": "Aún no has obtenido insignias",
+      "empty_subtitle": "¡Participa en actividades para ganar insignias!",
+      "list": {
+        "ref_1": {
+          "title": "Sembrador Principiante",
+          "description": "Participaste en tu primera jornada de reforestación"
+        },
+        "ref_5": {
+          "title": "Guardián del Bosque",
+          "description": "Has participado en más de 5 actividades de reforestación"
+        },
+        "rec_1": {
+          "title": "Reciclador Novato",
+          "description": "Comenzaste tu camino en el reciclaje"
+        },
+        "rec_5": {
+          "title": "Reciclador Experto",
+          "description": "Has reciclado en 5 o más jornadas"
+        },
+        "gen_10": {
+          "title": "Eco Guerrero",
+          "description": "Completaste 10 actividades ambientales"
+        }
+      }
+    }
   },
   "admin_page": {
     "side_bar": {
