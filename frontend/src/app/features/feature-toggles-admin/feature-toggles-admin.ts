@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FeatureFlagService } from '../../core/services/feature-flag.service';
 
 export interface FeatureConfig {
@@ -54,7 +54,8 @@ export class FeatureTogglesAdmin implements OnInit {
   features: FeatureConfig[] = [];
 
   constructor(
-    private featureFlagService: FeatureFlagService
+    private featureFlagService: FeatureFlagService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +73,7 @@ export class FeatureTogglesAdmin implements OnInit {
         ...this.featureConfigMap[key]
       };
     });
+    this.cdr.detectChanges();
   }
 
   get activeFeaturesCount(): number {
@@ -87,6 +89,7 @@ export class FeatureTogglesAdmin implements OnInit {
     
     // Optimistic UI update
     feature.enabled = isChecked;
+    this.cdr.detectChanges();
 
     this.featureFlagService.updateFeature(feature.key, isChecked).subscribe({
       next: () => {
@@ -95,6 +98,7 @@ export class FeatureTogglesAdmin implements OnInit {
       error: (err: any) => {
         // Revert on error
         feature.enabled = !isChecked;
+        this.cdr.detectChanges();
         alert('Ocurrió un error al actualizar el módulo.');
         console.error(err);
       }
