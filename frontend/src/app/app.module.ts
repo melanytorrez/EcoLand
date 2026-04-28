@@ -23,6 +23,13 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
 }
 
+import { FeatureToggleService } from './core/services/feature-toggle.service';
+import { lastValueFrom } from 'rxjs';
+
+export function featureToggleInitializerFactory(featureToggleService: FeatureToggleService) {
+  return () => lastValueFrom(featureToggleService.loadFeatures());
+}
+
 export function appInitializerFactory(translate: TranslateService, ngZone: NgZone) {
   return () => {
     return new Promise((resolve) => {
@@ -77,6 +84,12 @@ export function appInitializerFactory(translate: TranslateService, ngZone: NgZon
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
       deps: [TranslateService, NgZone],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: featureToggleInitializerFactory,
+      deps: [FeatureToggleService],
       multi: true
     }
   ],

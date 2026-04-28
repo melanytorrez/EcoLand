@@ -8,13 +8,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { IfFeatureDirective } from './directives/if-feature.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     AdminSidebarComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    IfFeatureDirective
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { AdminLayoutComponent } from './components/admin-layout/admin-layout.com
     FooterComponent,
     AdminSidebarComponent,
     AdminLayoutComponent,
+    IfFeatureDirective,
     LucideAngularModule,
     CommonModule,
     RouterModule,
