@@ -228,8 +228,15 @@ export class StatisticsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Escuchar cambios de idioma
+    this.translate.onLangChange.subscribe(() => {
+      this.updateTranslations();
+      this.cdr.detectChanges();
+    });
+
     // Asegurar que las traducciones iniciales se procesen
     this.translate.get('stats.hero.title').subscribe(() => {
+      this.updateTranslations();
       this.cdr.detectChanges();
     });
 
@@ -260,25 +267,45 @@ export class StatisticsComponent implements OnInit {
   }
 
   private populateSummaryCards(data: ComprehensiveStatistics): void {
-    this.summaryCards[0].value = data.plantedTrees.toLocaleString();
-    this.summaryCards[0].subtitle = `${(data.plantedTrees / 1000).toFixed(0)} hectáreas de bosque`;
-    
-    this.summaryCards[1].value = data.mitigatedCo2Kg.toLocaleString(undefined, { maximumFractionDigits: 0 });
-    this.summaryCards[1].subtitle = 'kg/año reducidos';
-    
-    this.summaryCards[2].value = data.completedCampaigns.toLocaleString();
-    
-    this.summaryCards[3].value = (data.waterSavedLiters / 1000000).toFixed(1) + 'M';
-    this.summaryCards[3].subtitle = 'litros ahorrados';
+    this.updateTranslations();
+  }
 
-    // Update impact cards
-    this.impactCards[0].value = data.plantedTrees.toLocaleString();
-    this.impactCards[0].detail = `Equivalente a ${(data.forestAreaHectares).toFixed(0)} hectáreas de bosque`;
+  private updateTranslations(): void {
+    if (!this.data) return;
+
+    // Summary Cards
+    this.summaryCards[0].label = this.translate.instant('stats.summary.trees.label');
+    this.summaryCards[0].value = this.data.plantedTrees.toLocaleString();
+    this.summaryCards[0].subtitle = this.translate.instant('stats.summary.trees.equivalent_dynamic', { val: (this.data.plantedTrees / 1000).toFixed(0) });
     
-    this.impactCards[1].value = '328 ton';
-    this.impactCards[1].detail = `Reducción de ${(data.mitigatedCo2Kg / 1000).toFixed(0)} toneladas de CO₂`;
+    this.summaryCards[1].label = this.translate.instant('stats.summary.co2.label');
+    this.summaryCards[1].value = this.data.mitigatedCo2Kg.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    this.summaryCards[1].subtitle = this.translate.instant('stats.summary.co2.subtitle');
     
-    this.impactCards[2].value = (data.waterSavedLiters / 1000000).toFixed(1) + 'M L';
+    this.summaryCards[2].label = this.translate.instant('stats.summary.campaigns.label');
+    this.summaryCards[2].value = this.data.completedCampaigns.toLocaleString();
+    this.summaryCards[2].subtitle = '';
+    
+    this.summaryCards[3].label = this.translate.instant('stats.summary.water.label');
+    this.summaryCards[3].value = (this.data.waterSavedLiters / 1000000).toFixed(1) + 'M';
+    this.summaryCards[3].subtitle = this.translate.instant('stats.summary.water.subtitle');
+
+    // Impact Cards
+    this.impactCards[0].label = this.translate.instant('stats.summary.trees.label');
+    this.impactCards[0].value = this.data.plantedTrees.toLocaleString();
+    this.impactCards[0].detail = this.translate.instant('stats.summary.trees.equivalent_dynamic', { val: (this.data.forestAreaHectares).toFixed(0) });
+    
+    this.impactCards[1].label = this.translate.instant('stats.summary.recycling.label');
+    this.impactCards[1].value = '328 ton'; // If you ever make this dynamic, it goes here
+    this.impactCards[1].detail = this.translate.instant('stats.summary.recycling.equivalent_dynamic', { val: (this.data.mitigatedCo2Kg / 1000).toFixed(0) });
+    
+    this.impactCards[2].label = this.translate.instant('stats.summary.water.label');
+    this.impactCards[2].value = (this.data.waterSavedLiters / 1000000).toFixed(1) + 'M L';
+    this.impactCards[2].detail = this.translate.instant('stats.summary.water.equivalent');
+
+    // Forzar actualización por referencia
+    this.summaryCards = [...this.summaryCards];
+    this.impactCards = [...this.impactCards];
   }
 
   private populateCharts(data: ComprehensiveStatistics, campaigns: any[]): void {

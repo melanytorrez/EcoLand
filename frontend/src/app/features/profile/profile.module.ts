@@ -4,6 +4,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { LucideAngularModule, User, Award, Calendar, TrendingUp, TreePine, Trash2 } from 'lucide-angular';
 import { BaseChartDirective } from 'ng2-charts';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { BaseChartDirective } from 'ng2-charts';
     CommonModule,
     ProfileRoutingModule,
     BaseChartDirective,
+    TranslateModule,
     LucideAngularModule.pick({ User, Award, Calendar, TrendingUp, TreePine, Trash2 })
   ]
 })
