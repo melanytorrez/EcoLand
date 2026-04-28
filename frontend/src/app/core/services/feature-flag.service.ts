@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable, of, tap, catchError } from 'rxjs';
+import { Observable, of, tap, catchError, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeatureFlagService {
   private features: { [key: string]: boolean } = {};
+  private featuresSubject = new BehaviorSubject<{ [key: string]: boolean }>({});
+  public features$ = this.featuresSubject.asObservable();
   private apiUrl = `${environment.apiUrl}/api/features`;
 
   constructor(private http: HttpClient) {}
@@ -16,6 +18,7 @@ export class FeatureFlagService {
     return this.http.get<{ [key: string]: boolean }>(this.apiUrl).pipe(
       tap(features => {
         this.features = features;
+        this.featuresSubject.next(this.features);
         console.log('Feature Toggles cargados:', this.features);
       }),
       catchError(error => {
@@ -28,6 +31,7 @@ export class FeatureFlagService {
           'estadisticas': true,
           'perfil': true
         };
+        this.featuresSubject.next(this.features);
         return of(this.features);
       })
     );
@@ -51,6 +55,7 @@ export class FeatureFlagService {
     return this.http.put<void>(`${this.apiUrl}/${featureName}?enabled=${enabled}`, {}).pipe(
       tap(() => {
         this.features[featureName] = enabled;
+        this.featuresSubject.next(this.features);
       })
     );
   }
