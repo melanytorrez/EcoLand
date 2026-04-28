@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, of, tap, catchError, BehaviorSubject } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,18 @@ export class FeatureFlagService {
   public features$ = this.featuresSubject.asObservable();
   private apiUrl = `${environment.apiUrl}/api/features`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    if (token) {
+      return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+    return new HttpHeaders();
+  }
 
   loadFeatures(): Observable<any> {
-    return this.http.get<{ [key: string]: boolean }>(this.apiUrl).pipe(
+    return this.http.get<{ [key: string]: boolean }>(this.apiUrl, { headers: this.getHeaders() }).pipe(
       tap(features => {
         this.features = features;
         this.featuresSubject.next(this.features);
@@ -52,7 +61,7 @@ export class FeatureFlagService {
   }
 
   updateFeature(featureName: string, enabled: boolean): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${featureName}?enabled=${enabled}`, {}).pipe(
+    return this.http.put<void>(`${this.apiUrl}/${featureName}?enabled=${enabled}`, {}, { headers: this.getHeaders() }).pipe(
       tap(() => {
         this.features[featureName] = enabled;
         this.featuresSubject.next(this.features);
