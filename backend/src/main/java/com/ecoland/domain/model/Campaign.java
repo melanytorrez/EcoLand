@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Campaign {
     private Long id;
+    private Long creatorId;
     private String image;
     private String title;
     private String date;
@@ -24,6 +25,9 @@ public class Campaign {
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
+    public Long getCreatorId() { return creatorId; }
+    public void setCreatorId(Long creatorId) { this.creatorId = creatorId; }
 
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }

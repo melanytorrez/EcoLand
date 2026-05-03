@@ -54,6 +54,7 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
     private Campaign toDomain(CampaignEntity entity) {
         Campaign domain = new Campaign();
         domain.setId(entity.getId());
+        domain.setCreatorId(entity.getCreatorId());
         domain.setImage(entity.getImage());
         domain.setTitle(entity.getTitle());
         domain.setDate(entity.getDate());
@@ -74,6 +75,7 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
     private CampaignEntity toEntity(Campaign campaign) {
         CampaignEntity entity = new CampaignEntity();
         entity.setId(campaign.getId());
+        entity.setCreatorId(campaign.getCreatorId());
         entity.setImage(campaign.getImage());
         entity.setTitle(campaign.getTitle());
         entity.setDate(campaign.getDate());

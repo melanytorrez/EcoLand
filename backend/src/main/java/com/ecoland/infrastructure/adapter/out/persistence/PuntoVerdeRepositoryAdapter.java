@@ -49,6 +49,7 @@ public class PuntoVerdeRepositoryAdapter implements PuntoVerdeRepositoryPort {
     private PuntoVerde toDomain(PuntoVerdeEntity e) {
         PuntoVerde p = new PuntoVerde();
         p.setId(e.getId());
+        p.setCreatorId(e.getCreatorId());
         p.setNombre(e.getNombre());
         p.setDireccion(e.getDireccion());
         p.setZona(e.getZona());
@@ -77,6 +78,7 @@ public class PuntoVerdeRepositoryAdapter implements PuntoVerdeRepositoryPort {
     private PuntoVerdeEntity toEntity(PuntoVerde p) {
         PuntoVerdeEntity e = new PuntoVerdeEntity();
         e.setId(p.getId());
+        e.setCreatorId(p.getCreatorId());
         e.setNombre(p.getNombre());
         e.setDireccion(p.getDireccion());
         e.setZona(p.getZona());

@@ -8,15 +8,17 @@ public class Usuario {
     private String email;
     private String password;
     private Set<Rol> roles;
+    private EstadoSolicitud estadoSolicitud = EstadoSolicitud.NONE;
 
     public Usuario() {}
 
-    public Usuario(Long id, String nombre, String email, String password, Set<Rol> roles) {
+    public Usuario(Long id, String nombre, String email, String password, Set<Rol> roles, EstadoSolicitud estadoSolicitud) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.estadoSolicitud = estadoSolicitud;
     }
 
     public Long getId() { return id; }
@@ -33,4 +35,7 @@ public class Usuario {
 
     public Set<Rol> getRoles() { return roles; }
     public void setRoles(Set<Rol> roles) { this.roles = roles; }
+
+    public EstadoSolicitud getEstadoSolicitud() { return estadoSolicitud; }
+    public void setEstadoSolicitud(EstadoSolicitud estadoSolicitud) { this.estadoSolicitud = estadoSolicitud; }
 }
