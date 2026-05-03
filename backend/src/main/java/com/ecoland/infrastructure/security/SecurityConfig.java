@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/campaigns/**").permitAll()
                         .requestMatchers("/api/statistics/**").permitAll()
                         .requestMatchers("/api/puntos-verdes/**").permitAll()
+                        .requestMatchers("/api/v1/admin/**").hasAuthority("ROLE_ADMINISTRADOR")
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -2,6 +2,7 @@ package com.ecoland.domain.port.in;
 
 import com.ecoland.domain.model.Usuario;
 import java.util.Optional;
+import java.util.List;
 
 public interface UsuarioUseCase {
     Optional<Usuario> getUsuarioById(Long id);
@@ -10,4 +11,9 @@ public interface UsuarioUseCase {
     Usuario createUsuario(Usuario usuario);
     void deleteUsuario(Long id);
     java.util.List<com.ecoland.domain.model.Campaign> getParticipacionesCompletas(String email);
+    
+    void requestLeaderStatus(String email);
+    void approveLeaderRequest(Long userId);
+    void rejectLeaderRequest(Long userId);
+    List<Usuario> getPendingLeaderRequests();
 }

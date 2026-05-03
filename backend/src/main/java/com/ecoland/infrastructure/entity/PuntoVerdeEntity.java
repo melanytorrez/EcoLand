@@ -11,6 +11,9 @@ public class PuntoVerdeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "creator_id")
+    private Long creatorId;
+
     @Column(nullable = false)
     private String nombre;
 
@@ -43,6 +46,14 @@ public class PuntoVerdeEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getNombre() {

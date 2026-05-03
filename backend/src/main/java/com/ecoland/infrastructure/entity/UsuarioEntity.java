@@ -1,5 +1,6 @@
 package com.ecoland.infrastructure.entity;
 
+import com.ecoland.domain.model.EstadoSolicitud;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -28,6 +29,10 @@ public class UsuarioEntity {
     )
     private Set<RolEntity> roles;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_solicitud")
+    private EstadoSolicitud estadoSolicitud = EstadoSolicitud.NONE;
+
     public UsuarioEntity() {}
 
     public Long getId() { return id; }
@@ -44,4 +49,7 @@ public class UsuarioEntity {
 
     public Set<RolEntity> getRoles() { return roles; }
     public void setRoles(Set<RolEntity> roles) { this.roles = roles; }
+
+    public EstadoSolicitud getEstadoSolicitud() { return estadoSolicitud; }
+    public void setEstadoSolicitud(EstadoSolicitud estadoSolicitud) { this.estadoSolicitud = estadoSolicitud; }
 }

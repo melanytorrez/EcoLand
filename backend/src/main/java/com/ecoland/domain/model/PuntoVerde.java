@@ -4,6 +4,7 @@ import java.util.List;
 
 public class PuntoVerde {
     private Long id;
+    private Long creatorId;
     private String nombre;
     private String direccion;
     private String zona;
@@ -17,6 +18,9 @@ public class PuntoVerde {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
+    public Long getCreatorId() { return creatorId; }
+    public void setCreatorId(Long creatorId) { this.creatorId = creatorId; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

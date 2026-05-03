@@ -12,7 +12,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
+import com.ecoland.domain.model.Usuario;
+import com.ecoland.infrastructure.config.AppConstants;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -23,11 +28,34 @@ public class CampaignService implements CampaignUseCase {
 
     private final CampaignRepositoryPort campaignRepositoryPort;
     private final JpaUsuarioCampaignRepository usuarioCampaignRepository;
+    private final UsuarioRepositoryPort usuarioRepositoryPort;
 
-    public CampaignService(CampaignRepositoryPort campaignRepositoryPort, JpaUsuarioCampaignRepository usuarioCampaignRepository) {
+    public CampaignService(CampaignRepositoryPort campaignRepositoryPort, 
+                           JpaUsuarioCampaignRepository usuarioCampaignRepository,
+                           UsuarioRepositoryPort usuarioRepositoryPort) {
         this.campaignRepositoryPort = campaignRepositoryPort;
         this.usuarioCampaignRepository = usuarioCampaignRepository;
+        this.usuarioRepositoryPort = usuarioRepositoryPort;
         seedData();
+    }
+
+    private Long getCurrentUserId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof String email) {
+            return usuarioRepositoryPort.findByEmail(email)
+                .map(Usuario::getId)
+                .orElse(null);
+        }
+        return null;
+    }
+
+    private boolean isUserAdmin() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            return auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_" + AppConstants.ROLE_ADMIN));
+        }
+        return false;
     }
 
     @Override
@@ -56,6 +84,9 @@ public class CampaignService implements CampaignUseCase {
     public Campaign saveCampaign(Campaign campaign) {
         logger.info("Solicitud para crear nueva campaña con título: {}", campaign.getTitle());
         try {
+            Long currentUserId = getCurrentUserId();
+            campaign.setCreatorId(currentUserId); // Asignar el dueño
+            
             Campaign savedCampaign = campaignRepositoryPort.save(campaign);
             logger.info("Campaña creada exitosamente con id: {}", savedCampaign.getId());
             return savedCampaign;
@@ -70,6 +101,11 @@ public class CampaignService implements CampaignUseCase {
         logger.info("Solicitud para actualizar la campaña con id: {}", id);
         try {
             Campaign existingCampaign = getCampaignById(id);
+
+            Long currentUserId = getCurrentUserId();
+            if (!isUserAdmin() && (existingCampaign.getCreatorId() == null || !existingCampaign.getCreatorId().equals(currentUserId))) {
+                throw new AccessDeniedException("No tienes permiso para editar esta campaña");
+            }
 
             existingCampaign.setImage(campaign.getImage());
             existingCampaign.setTitle(campaign.getTitle());
@@ -131,6 +167,13 @@ public class CampaignService implements CampaignUseCase {
     public void deleteCampaign(Long id) {
         logger.info("Solicitud para eliminar la campaña con id: {}", id);
         try {
+            Campaign existingCampaign = getCampaignById(id);
+            Long currentUserId = getCurrentUserId();
+            
+            if (!isUserAdmin() && (existingCampaign.getCreatorId() == null || !existingCampaign.getCreatorId().equals(currentUserId))) {
+                throw new AccessDeniedException("No tienes permiso para eliminar esta campaña");
+            }
+            
             campaignRepositoryPort.deleteById(id);
             logger.info("Campaña con id: {} eliminada exitosamente", id);
         } catch (Exception e) {
