@@ -10,11 +10,15 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.ecoland.domain.model.Usuario;
 import org.springframework.lang.NonNull;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,16 +57,21 @@ public class JwtFilter extends OncePerRequestFilter {
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 // Verificar que el usuario realmente existe en la base de datos
-                boolean userExists = usuarioRepositoryPort.findByEmail(email).isPresent();
+                Optional<Usuario> usuarioOpt = usuarioRepositoryPort.findByEmail(email);
 
-                if (!userExists) {
+                if (usuarioOpt.isEmpty()) {
                     logger.warn("Intento de acceso con token válido pero usuario inexistente: {}", email);
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     return;
                 }
 
+                Usuario usuario = usuarioOpt.get();
+                List<SimpleGrantedAuthority> authorities = usuario.getRoles().stream()
+                        .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.getNombre()))
+                        .collect(Collectors.toList());
+
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
+                        new UsernamePasswordAuthenticationToken(email, null, authorities);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 logger.info("Token validado exitosamente para el usuario: {}", email);

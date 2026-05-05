@@ -12,6 +12,9 @@ public class CampaignEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "creator_id")
+    private Long creatorId;
+
     private String image;
     @Column(nullable = false)
     private String title;
@@ -49,6 +52,14 @@ public class CampaignEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getImage() {

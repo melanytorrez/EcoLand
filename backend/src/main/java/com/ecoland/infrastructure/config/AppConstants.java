@@ -22,6 +22,7 @@ public final class AppConstants {
     // --- ROLES DEL SISTEMA ---
     public static final String ROLE_ADMIN = "ADMINISTRADOR";
     public static final String ROLE_USER = "USUARIO";
+    public static final String ROLE_LEADER = "LIDER";
 
     // --- MENSAJES DE ERROR COMUNES ---
     public static final String MSG_USER_NOT_FOUND = "Usuario no encontrado";

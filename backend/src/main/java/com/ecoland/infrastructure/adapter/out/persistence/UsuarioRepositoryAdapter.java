@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.Optional;
+import java.util.List;
 import java.util.stream.Collectors;
+import com.ecoland.domain.model.EstadoSolicitud;
 
 @Component
 public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
@@ -42,6 +44,14 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
         jpaUsuarioRepository.deleteById(id);
     }
 
+    @Override
+    public List<Usuario> findByEstadoSolicitud(EstadoSolicitud estadoSolicitud) {
+        return jpaUsuarioRepository.findByEstadoSolicitud(estadoSolicitud)
+            .stream()
+            .map(this::toDomain)
+            .collect(Collectors.toList());
+    }
+
     private Usuario toDomain(UsuarioEntity entity) {
         var roles = entity.getRoles() == null ? Collections.<Rol>emptySet() :
             entity.getRoles().stream()
@@ -53,7 +63,8 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
             entity.getNombre(),
             entity.getEmail(),
             entity.getPassword(),
-            roles
+            roles,
+            entity.getEstadoSolicitud()
         );
     }
 
@@ -68,6 +79,7 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
                 .map(r -> new RolEntity(r.getId(), r.getNombre()))
                 .collect(Collectors.toSet()));
         }
+        entity.setEstadoSolicitud(usuario.getEstadoSolicitud());
         return entity;
     }
 }

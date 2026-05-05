@@ -39,4 +39,17 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(usuarioUseCase.getParticipacionesCompletas(authentication.getName()));
     }
+
+    @PostMapping("/me/request-leader")
+    public ResponseEntity<Void> requestLeader(Authentication authentication) {
+        if (authentication == null || authentication.getName() == null) {
+            return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).build();
+        }
+        try {
+            usuarioUseCase.requestLeaderStatus(authentication.getName());
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
