@@ -4,7 +4,7 @@
       <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ 'admin_page.campaign_management.title' | translate }}</h1>
       <p class="text-gray-600 text-lg">{{ 'admin_page.campaign_management.subtitle' | translate }}</p>
     </div>
-    <button
+    <button *ngIf="authService.normalizeRole(currentUser?.role) === 'lider'"
       (click)="openModal()"
       class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold hover:shadow-xl hover:shadow-[#4CAF50]/30 transition-all"
     >
@@ -88,14 +88,14 @@
             </td>
             <td class="px-6 py-4">
               <div class="flex items-center gap-2">
-                <button
+                <button *ngIf="canEdit(campaign)"
                   (click)="openModal(campaign)"
                   class="p-2 text-[#4CAF50] hover:bg-[#E8F5E9] rounded-xl transition-colors"
                   [title]="'admin_page.campaign_management.table.edit' | translate"
                 >
                   <lucide-icon name="edit" class="w-4 h-4"></lucide-icon>
                 </button>
-                <button
+                <button *ngIf="canDelete(campaign)"
                   (click)="handleDelete(campaign.id)"
                   class="p-2 text-red-600 hover:bg-red-50 rounded-xl transition-colors"
                   [title]="'admin_page.campaign_management.table.delete' | translate"

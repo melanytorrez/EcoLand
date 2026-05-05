@@ -4,6 +4,7 @@ import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
 import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,9 @@ class CampaignServiceTest {
     @Mock
     private JpaUsuarioCampaignRepository usuarioCampaignRepository;
 
+    @Mock
+    private UsuarioRepositoryPort usuarioRepositoryPort;
+
     private CampaignService campaignService;
     private Campaign campaign;
 
@@ -33,7 +37,7 @@ class CampaignServiceTest {
     void setUp() {
        when(campaignRepositoryPort.findAll()).thenReturn(List.of(new Campaign()));
 
-        campaignService = new CampaignService(campaignRepositoryPort, usuarioCampaignRepository);
+        campaignService = new CampaignService(campaignRepositoryPort, usuarioCampaignRepository, usuarioRepositoryPort);
 
         clearInvocations(campaignRepositoryPort);
 

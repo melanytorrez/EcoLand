@@ -9,6 +9,8 @@ export interface GreenPoint {
   tiposMaterial?: string[];
   latitud?: number;
   longitud?: number;
+  creatorId?: number;
+  isApproved?: boolean;
 }
 
 export interface GreenPointSchedule {

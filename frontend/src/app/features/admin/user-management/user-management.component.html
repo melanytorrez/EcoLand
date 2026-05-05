@@ -1,0 +1,97 @@
+<div class="p-8 max-w-7xl mx-auto">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">{{ 'admin_users.title' | translate }}</h1>
+    <p class="text-gray-600">{{ 'admin_users.subtitle' | translate }}</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="flex border-b border-gray-200 mb-8">
+    <button (click)="activeTab = 'requests'"
+      [class.border-green-600]="activeTab === 'requests'"
+      [class.text-green-600]="activeTab === 'requests'"
+      class="px-6 py-3 border-b-2 font-semibold text-gray-500 hover:text-gray-700 transition-colors">
+      {{ 'admin_users.tabs.requests' | translate }} ({{ pendingRequests.length }})
+    </button>
+    <button (click)="activeTab = 'users'"
+      [class.border-green-600]="activeTab === 'users'"
+      [class.text-green-600]="activeTab === 'users'"
+      class="px-6 py-3 border-b-2 font-semibold text-gray-500 hover:text-gray-700 transition-colors">
+      {{ 'admin_users.tabs.all_users' | translate }}
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="flex justify-center py-12">
+    <lucide-icon name="loader" class="w-8 h-8 animate-spin text-green-600"></lucide-icon>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <!-- Pending Requests Table -->
+    <div *ngIf="activeTab === 'requests'" class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+      <table class="w-full text-left">
+        <thead class="bg-gray-50 border-b border-gray-100 text-gray-600 uppercase text-sm font-semibold">
+          <tr>
+            <th class="px-6 py-4">{{ 'admin_users.table.name' | translate }}</th>
+            <th class="px-6 py-4">{{ 'admin_users.table.email' | translate }}</th>
+            <th class="px-6 py-4">{{ 'admin_users.table.status' | translate }}</th>
+            <th class="px-6 py-4 text-right">{{ 'admin_users.table.actions' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr *ngFor="let req of pendingRequests" class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4 font-medium text-gray-900">{{ req.nombre }}</td>
+            <td class="px-6 py-4 text-gray-600">{{ req.email }}</td>
+            <td class="px-6 py-4">
+              <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold uppercase">
+                {{ req.promotionStatus }}
+              </span>
+            </td>
+            <td class="px-6 py-4 text-right space-x-2">
+              <button (click)="approveRequest(req.id)"
+                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-semibold transition-colors">
+                {{ 'admin_users.actions.approve' | translate }}
+              </button>
+              <button (click)="rejectRequest(req.id)"
+                class="px-4 py-2 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg text-sm font-semibold transition-colors">
+                {{ 'admin_users.actions.reject' | translate }}
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="pendingRequests.length === 0">
+            <td colspan="4" class="px-6 py-12 text-center text-gray-500">
+              <lucide-icon name="user-check" class="w-12 h-12 mx-auto mb-4 opacity-20"></lucide-icon>
+              {{ 'admin_users.messages.no_requests' | translate }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- All Users Table -->
+    <div *ngIf="activeTab === 'users'" class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+      <table class="w-full text-left">
+        <thead class="bg-gray-50 border-b border-gray-100 text-gray-600 uppercase text-sm font-semibold">
+          <tr>
+            <th class="px-6 py-4">{{ 'admin_users.table.name' | translate }}</th>
+            <th class="px-6 py-4">{{ 'admin_users.table.email' | translate }}</th>
+            <th class="px-6 py-4">{{ 'admin_users.table.role' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr *ngFor="let user of allUsers" class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4 font-medium text-gray-900">{{ user.nombre }}</td>
+            <td class="px-6 py-4 text-gray-600">{{ user.email }}</td>
+            <td class="px-6 py-4">
+              <span [ngClass]="{
+                'bg-purple-100 text-purple-700': user.role === 'ADMINISTRADOR',
+                'bg-blue-100 text-blue-700': user.role === 'LIDER',
+                'bg-gray-100 text-gray-700': user.role === 'USUARIO'
+              }" class="px-3 py-1 rounded-full text-xs font-bold uppercase">
+                {{ user.role }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

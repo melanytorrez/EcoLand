@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
 import { Campaign } from '../../core/models/campaign.model';
+import { User } from '../../core/models/user.model';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize } from 'rxjs/operators';
@@ -23,13 +24,25 @@ interface Badge {
   standalone: false
 })
 export class ProfileComponent implements OnInit {
-  user: any = null;
+  user: User | any = null;
   participations: Campaign[] = [];
   isLoading = true;
   
   reforestacionCount = 0;
   reciclajeCount = 0;
   badges: Badge[] = [];
+  
+  showPromotionModal = false;
+  isSubmitting = false;
+  promotionForm = {
+    motivation: '',
+    plans: '',
+    experience: '',
+    commitment: '',
+    contact: '',
+    zone: '',
+    terms: false
+  };
 
   // Pie Chart
   public pieChartOptions: ChartConfiguration['options'] = {
@@ -86,6 +99,16 @@ export class ProfileComponent implements OnInit {
     }
     this.user = this.authService.getUser();
     
+    // Fetch full profile to get promotion status and actual role from DB
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        console.log('User Profile loaded:', profile);
+        this.user = { ...this.user, ...profile };
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error fetching full profile', err)
+    });
+
     this.translate.onLangChange.subscribe(() => {
       this.updateChartLabels();
       this.cdr.detectChanges();
@@ -107,6 +130,45 @@ export class ProfileComponent implements OnInit {
           this.cdr.detectChanges();
         }
       });
+  }
+
+  openPromotionModal(): void {
+    if (this.user.promotionStatus === 'PENDING') return;
+    this.showPromotionModal = true;
+    this.cdr.detectChanges();
+  }
+
+  closePromotionModal(): void {
+    this.showPromotionModal = false;
+    this.cdr.detectChanges();
+  }
+
+  submitPromotion(): void {
+    if (!this.promotionForm.terms || !this.promotionForm.motivation || !this.promotionForm.plans) {
+      alert(this.translate.instant('profile.promotion.modal.validation_error'));
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.userService.requestLeaderStatus(this.promotionForm).subscribe({
+      next: () => {
+        this.user.promotionStatus = 'PENDING';
+        this.showPromotionModal = false;
+        this.isSubmitting = false;
+        alert(this.translate.instant('profile.promotion.modal.success_message'));
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error requesting promotion', err);
+        this.isSubmitting = false;
+        alert(this.translate.instant('profile.promotion.modal.error_message'));
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  get normalizedRole(): string {
+    return this.authService.normalizeRole(this.user?.role);
   }
 
   private updateChartLabels(): void {

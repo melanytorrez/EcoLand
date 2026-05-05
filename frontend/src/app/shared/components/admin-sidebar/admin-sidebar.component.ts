@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AdminSidebarComponent {
   navItems = [
-    { path: '/admin/campanas', label: 'Campañas', icon: 'tree-deciduous' },
+    { path: '/admin/campanas', label: 'admin_sidebar.nav.reforestation', icon: 'tree-deciduous' },
+    { path: '/admin/usuarios', label: 'admin_sidebar.nav.users', icon: 'users' },
     { path: '/admin/feature-toggles', label: 'Feature Toggles', icon: 'toggle-right' },
   ];
 

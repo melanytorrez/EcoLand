@@ -35,13 +35,13 @@
       "title": "Crear cuenta",
       "subtitle": "Únete a la comunidad EcoLand",
       "inputs": {
-        "full_name": { 
-          "label": "Nombre completo", 
-          "placeholder": "Juan Pérez" 
+        "full_name": {
+          "label": "Nombre completo",
+          "placeholder": "Juan Pérez"
         },
-        "confirm_password": { 
-          "label": "Confirmar contraseña", 
-          "placeholder": "Repite tu contraseña" 
+        "confirm_password": {
+          "label": "Confirmar contraseña",
+          "placeholder": "Repite tu contraseña"
         }
       },
       "submit_button": "Crear cuenta",
@@ -456,7 +456,8 @@
       "home": "Inicio",
       "reforestation": "Reforestación",
       "recycling": "Reciclaje",
-      "stats": "Estadísticas"
+      "stats": "Estadísticas",
+      "my_publications": "Mis Publicaciones"
     },
     "buttons": {
       "admin_panel": "Panel Admin",
@@ -480,7 +481,15 @@
     "user_info": {
       "total_participations": "{{count}} participaciones totales",
       "role_user": "Usuario",
+      "role_lider": "Líder",
       "role_admin": "Administrador"
+    },
+    "actions": {
+      "control_table": "Tabla de Control",
+      "request_leader": "Solicitar ser Líder"
+    },
+    "promotion": {
+      "pending": "Solicitud de líder pendiente"
     },
     "stats": {
       "reforestation": "Actividades de Reforestación",
@@ -564,9 +573,9 @@
         "optional": "opcional"
       },
       "status_options": {
-          "scheduled": "Programada",
-          "active": "Activa",
-          "finished": "Finalizada"
+        "scheduled": "Programada",
+        "active": "Activa",
+        "finished": "Finalizada"
       },
       "placeholders": {
         "name": "Ej: Reforestación en el Parque Tunari",
@@ -610,5 +619,31 @@
     "cancel": "Cancelar",
     "save": "Guardar",
     "delete": "Eliminar"
+  },
+  "admin_users": {
+    "title": "Gestión de Usuarios",
+    "subtitle": "Administra los roles y solicitudes de promoción de la plataforma",
+    "tabs": {
+      "requests": "Solicitudes Pendientes",
+      "all_users": "Todos los Usuarios"
+    },
+    "table": {
+      "name": "Nombre",
+      "email": "Email",
+      "role": "Rol Actual",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "actions": {
+      "approve": "Aprobar",
+      "reject": "Rechazar",
+      "revoke": "Revocar Líder"
+    },
+    "messages": {
+      "no_requests": "No hay solicitudes pendientes en este momento.",
+      "approve_success": "Usuario promovido a Líder exitosamente.",
+      "reject_success": "Solicitud rechazada.",
+      "error": "Ocurrió un error al procesar la solicitud."
+    }
   }
 }
