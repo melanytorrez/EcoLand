@@ -2040,3 +2040,165 @@ This generated password is for development use only. Your security configuration
 2026-05-10 18:37:26 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
 2026-05-10 18:37:26 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.getPendingLeaderRequests() | Tiempo de ejecución: 29ms
 2026-05-10 18:37:26 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 18:41:03 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features
+2026-05-10 18:41:03 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-05-10 18:41:03 [http-nio-8082-exec-10] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:41:03 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/features
+2026-05-10 18:41:03 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.getAllFeatures() con argumentos: []
+2026-05-10 18:41:03 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.getAllFeatures() | Tiempo de ejecución: 151ms
+2026-05-10 18:41:04 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me/participations
+2026-05-10 18:41:04 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me
+2026-05-10 18:41:04 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
+2026-05-10 18:41:04 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me
+2026-05-10 18:41:04 [http-nio-8082-exec-8] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:41:04 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me
+2026-05-10 18:41:04 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:41:04 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
+2026-05-10 18:41:04 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=carladianavgonzales2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_Usuario]]]
+2026-05-10 18:41:04 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 30ms
+2026-05-10 18:41:04 [http-nio-8082-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "me"]
+2026-05-10 18:41:04 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 18:41:04 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 18:41:04 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 18:43:23 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features
+2026-05-10 18:43:23 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/features
+2026-05-10 18:43:23 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-05-10 18:43:23 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-05-10 18:43:23 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/features
+2026-05-10 18:43:24 [http-nio-8082-exec-10] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:43:24 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:43:24 [http-nio-8082-exec-5] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 18:43:24 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/features
+2026-05-10 18:43:24 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/features
+2026-05-10 18:43:24 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/features
+2026-05-10 18:43:24 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.getAllFeatures() con argumentos: []
+2026-05-10 18:43:24 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.getAllFeatures() con argumentos: []
+2026-05-10 18:43:24 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: FeatureToggleController.getAllFeatures() con argumentos: []
+2026-05-10 18:43:24 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.getAllFeatures() | Tiempo de ejecución: 120ms
+2026-05-10 18:43:24 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.getAllFeatures() | Tiempo de ejecución: 121ms
+2026-05-10 18:43:24 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: FeatureToggleController.getAllFeatures() | Tiempo de ejecución: 121ms
+2026-05-10 18:43:25 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me/participations
+2026-05-10 18:43:25 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me
+2026-05-10 18:43:25 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me
+2026-05-10 18:43:25 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
+2026-05-10 18:43:25 [http-nio-8082-exec-8] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:43:25 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:43:25 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
+2026-05-10 18:43:25 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me
+2026-05-10 18:43:25 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=carladianavgonzales2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_Usuario]]]
+2026-05-10 18:43:25 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 45ms
+2026-05-10 18:43:25 [http-nio-8082-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "me"]
+2026-05-10 18:43:25 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 18:43:25 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 18:43:25 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 18:43:25 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me
+2026-05-10 18:43:25 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me
+2026-05-10 18:43:25 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/usuarios/me/participations
+2026-05-10 18:43:25 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/usuarios/me/participations
+2026-05-10 18:43:25 [http-nio-8082-exec-2] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:43:25 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me
+2026-05-10 18:43:26 [http-nio-8082-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "me"]
+2026-05-10 18:43:26 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 18:43:26 [http-nio-8082-exec-5] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: carladianavgonzales2@gmail.com
+2026-05-10 18:43:26 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/usuarios/me/participations
+2026-05-10 18:43:26 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 18:43:26 [http-nio-8082-exec-5] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: UsuarioController.getMyParticipations() con argumentos: [UsernamePasswordAuthenticationToken [Principal=carladianavgonzales2@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_Usuario]]]
+2026-05-10 18:43:26 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 18:43:26 [http-nio-8082-exec-5] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: UsuarioController.getMyParticipations() | Tiempo de ejecución: 10ms
+2026-05-10 18:43:29 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/leader-requests
+2026-05-10 18:43:29 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/users
+2026-05-10 18:43:29 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 18:43:29 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/users
+2026-05-10 18:43:29 [http-nio-8082-exec-10] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 18:43:29 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/leader-requests
+2026-05-10 18:43:29 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.getPendingLeaderRequests() con argumentos: []
+2026-05-10 18:43:29 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 18:43:29 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.getPendingLeaderRequests() | Tiempo de ejecución: 10ms
+2026-05-10 18:43:29 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 18:43:29 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:01:15 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/admin/leader-requests/13/approve
+2026-05-10 19:01:15 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/admin/leader-requests/13/approve
+2026-05-10 19:01:15 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:01:15 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/admin/leader-requests/13/approve
+2026-05-10 19:01:15 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.approveLeaderRequest() con argumentos: [13]
+2026-05-10 19:01:15 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.approveLeaderRequest() | Tiempo de ejecución: 172ms
+2026-05-10 19:01:15 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/admin/leader-requests
+2026-05-10 19:01:15 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/admin/users
+2026-05-10 19:01:15 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/leader-requests
+2026-05-10 19:01:15 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/users
+2026-05-10 19:01:15 [http-nio-8082-exec-4] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:01:15 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/leader-requests
+2026-05-10 19:01:15 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.getPendingLeaderRequests() con argumentos: []
+2026-05-10 19:01:15 [http-nio-8082-exec-2] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:01:15 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/users
+2026-05-10 19:01:15 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.getPendingLeaderRequests() | Tiempo de ejecución: 4ms
+2026-05-10 19:01:15 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 19:01:15 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 19:01:15 [http-nio-8082-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:01:19 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/admin/leader-requests/13/approve
+2026-05-10 19:01:19 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:01:19 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/admin/leader-requests/13/approve
+2026-05-10 19:01:19 [http-nio-8082-exec-3] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.approveLeaderRequest() con argumentos: [13]
+2026-05-10 19:01:19 [http-nio-8082-exec-3] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.approveLeaderRequest() | Tiempo de ejecución: 7ms
+2026-05-10 19:01:19 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/leader-requests
+2026-05-10 19:01:19 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/users
+2026-05-10 19:01:19 [http-nio-8082-exec-9] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:01:19 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/users
+2026-05-10 19:01:19 [http-nio-8082-exec-10] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:01:19 [http-nio-8082-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/leader-requests
+2026-05-10 19:01:19 [http-nio-8082-exec-10] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.getPendingLeaderRequests() con argumentos: []
+2026-05-10 19:01:19 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 19:01:19 [http-nio-8082-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 19:01:19 [http-nio-8082-exec-10] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.getPendingLeaderRequests() | Tiempo de ejecución: 3ms
+2026-05-10 19:01:19 [http-nio-8082-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:02:35 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-05-10 19:02:35 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:02:35 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-05-10 19:02:35 [http-nio-8082-exec-1] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-05-10 19:02:35 [http-nio-8082-exec-1] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-05-10 19:02:36 [http-nio-8082-exec-1] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 201ms
+2026-05-10 19:02:38 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/leader-requests
+2026-05-10 19:02:38 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/users
+2026-05-10 19:02:38 [http-nio-8082-exec-5] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:02:38 [http-nio-8082-exec-7] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:02:38 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/users
+2026-05-10 19:02:38 [http-nio-8082-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/leader-requests
+2026-05-10 19:02:38 [http-nio-8082-exec-7] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.getPendingLeaderRequests() con argumentos: []
+2026-05-10 19:02:38 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 19:02:38 [http-nio-8082-exec-7] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.getPendingLeaderRequests() | Tiempo de ejecución: 3ms
+2026-05-10 19:02:38 [http-nio-8082-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 19:02:38 [http-nio-8082-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:02:43 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-05-10 19:02:43 [http-nio-8082-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:02:43 [http-nio-8082-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-05-10 19:02:43 [http-nio-8082-exec-4] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-05-10 19:02:43 [http-nio-8082-exec-4] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-05-10 19:02:43 [http-nio-8082-exec-4] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 131ms
+2026-05-10 19:02:52 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/leader-requests
+2026-05-10 19:02:52 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/users
+2026-05-10 19:02:52 [http-nio-8082-exec-2] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:02:52 [http-nio-8082-exec-3] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:02:52 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/users
+2026-05-10 19:02:52 [http-nio-8082-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/leader-requests
+2026-05-10 19:02:52 [http-nio-8082-exec-2] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.getPendingLeaderRequests() con argumentos: []
+2026-05-10 19:02:52 [http-nio-8082-exec-2] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.getPendingLeaderRequests() | Tiempo de ejecución: 5ms
+2026-05-10 19:02:52 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 19:02:52 [http-nio-8082-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 19:02:52 [http-nio-8082-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:05:37 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/campaigns
+2026-05-10 19:05:37 [http-nio-8082-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-05-10 19:05:37 [http-nio-8082-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/campaigns
+2026-05-10 19:05:37 [http-nio-8082-exec-8] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: CampaignController.getAll() con argumentos: [null]
+2026-05-10 19:05:37 [http-nio-8082-exec-8] INFO  c.e.a.service.CampaignService - Solicitud para obtener todas las campañas
+2026-05-10 19:05:37 [http-nio-8082-exec-8] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: CampaignController.getAll() | Tiempo de ejecución: 79ms
+2026-05-10 19:05:38 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/leader-requests
+2026-05-10 19:05:38 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/admin/users
+2026-05-10 19:05:38 [http-nio-8082-exec-1] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:05:38 [http-nio-8082-exec-6] INFO  c.e.i.security.JwtFilter - Token validado exitosamente para el usuario: admin@ecoland.com
+2026-05-10 19:05:38 [http-nio-8082-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/leader-requests
+2026-05-10 19:05:38 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/admin/users
+2026-05-10 19:05:38 [http-nio-8082-exec-6] DEBUG c.e.i.aspect.LoggingAspect - >>> Entrando al método: AdminController.getPendingLeaderRequests() con argumentos: []
+2026-05-10 19:05:38 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-05-10 19:05:38 [http-nio-8082-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2026-05-10 19:05:38 [http-nio-8082-exec-6] INFO  c.e.i.aspect.LoggingAspect - <<< Saliendo del método: AdminController.getPendingLeaderRequests() | Tiempo de ejecución: 4ms
+2026-05-10 19:05:38 [http-nio-8082-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext

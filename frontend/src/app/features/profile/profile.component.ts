@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   showPromotionModal = false;
   isSubmitting = false;
   showValidationErrors = false;
-  showSuccessModal = true;
+  showSuccessModal = false;
   promotionForm = {
     motivation: '',
     plans: '',
