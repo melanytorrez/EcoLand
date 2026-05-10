@@ -2,8 +2,12 @@ package com.ecoland.infrastructure.adapter.in.web;
 
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.in.CampaignUseCase;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import com.ecoland.infrastructure.security.JwtService;
+import com.ecoland.infrastructure.security.FeatureToggleInterceptor;
+import com.ecoland.application.service.FeatureToggleService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -34,8 +38,22 @@ class CampaignControllerTest {
     @MockBean
     private JwtService jwtService;
 
+    @MockBean
+    private UsuarioRepositoryPort usuarioRepositoryPort;
+
+    @MockBean
+    private FeatureToggleInterceptor featureToggleInterceptor;
+
+    @MockBean
+    private FeatureToggleService featureToggleService;
+
     @Autowired
     private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        when(featureToggleInterceptor.preHandle(any(), any(), any())).thenReturn(true);
+    }
 
     @Test
     void testGetAll_Success() throws Exception {

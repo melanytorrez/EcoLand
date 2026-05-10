@@ -2,6 +2,7 @@ package com.ecoland.application.service;
 
 import com.ecoland.domain.model.PuntoVerde;
 import com.ecoland.domain.port.out.PuntoVerdeRepositoryPort;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,6 +12,11 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -21,7 +27,9 @@ class PuntoVerdeServiceTest {
     @Mock
     private PuntoVerdeRepositoryPort puntoVerdeRepositoryPort;
 
-    @InjectMocks
+    @Mock
+    private UsuarioRepositoryPort usuarioRepositoryPort;
+
     private PuntoVerdeService puntoVerdeService;
 
     private PuntoVerde puntoTest;
@@ -29,6 +37,15 @@ class PuntoVerdeServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        puntoVerdeService = new PuntoVerdeService(puntoVerdeRepositoryPort, usuarioRepositoryPort);
+
+        // Mock Security Context for Admin
+        SecurityContext securityContext = mock(SecurityContext.class);
+        Authentication authentication = mock(Authentication.class);
+        lenient().doReturn(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMINISTRADOR")))
+            .when(authentication).getAuthorities();
+        lenient().when(securityContext.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.setContext(securityContext);
 
         puntoTest = new PuntoVerde();
         puntoTest.setId(1L);

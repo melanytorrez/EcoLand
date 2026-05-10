@@ -66,9 +66,11 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
 
                 Usuario usuario = usuarioOpt.get();
-                List<SimpleGrantedAuthority> authorities = usuario.getRoles().stream()
-                        .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.getNombre()))
-                        .collect(Collectors.toList());
+                List<SimpleGrantedAuthority> authorities = usuario.getRoles() != null ? 
+                        usuario.getRoles().stream()
+                            .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.getNombre()))
+                            .collect(Collectors.toList()) : 
+                        Collections.emptyList();
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(email, null, authorities);
