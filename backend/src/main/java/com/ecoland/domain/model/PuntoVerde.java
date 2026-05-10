@@ -13,6 +13,7 @@ public class PuntoVerde {
     private List<String> tiposMaterial;
     private Double latitud;
     private Double longitud;
+    private String imagenUrl;
 
     public PuntoVerde() {}
 
@@ -54,5 +55,8 @@ public class PuntoVerde {
 
     public Double getLongitud() { return longitud; }
     public void setLongitud(Double longitud) { this.longitud = longitud; }
+
+    public String getImagenUrl() { return imagenUrl; }
+    public void setImagenUrl(String imagenUrl) { this.imagenUrl = imagenUrl; }
 
 }

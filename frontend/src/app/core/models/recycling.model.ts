@@ -9,6 +9,7 @@ export interface GreenPoint {
   tiposMaterial?: string[];
   latitud?: number;
   longitud?: number;
+  imagenUrl?: string;
 }
 
 export interface GreenPointSchedule {
