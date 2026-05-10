@@ -49,24 +49,24 @@
         "login_question": "¿Ya tienes una cuenta?",
         "login_link": "Inicia sesión aquí"
       },
-      "validation": {
-        "required": "El campo es obligatorio.",
-        "required_email": "El correo es obligatorio.",
-        "required_password": "La contraseña es obligatoria.",
-        "invalid_email": "Formato de correo inválido",
-        "missing_at": "Falta el símbolo @ en el correo.",
-        "missing_com": "El correo debe terminar en .com.",
-        "password_mismatch": "Las contraseñas no coinciden.",
-        "password_rules": {
-          "min_length": "Mínimo 8 caracteres.",
-          "upper": "Falta una letra mayúscula.",
-          "lower": "Falta una letra minúscula.",
-          "number": "Falta un número.",
-          "special": "Falta un carácter especial."
-        }
-      },
       "messages": {
         "generic_error": "Error al registrar. Por favor, inténtelo de nuevo."
+      }
+    },
+    "validation": {
+      "required": "El campo es obligatorio.",
+      "required_email": "El correo es obligatorio.",
+      "required_password": "La contraseña es obligatoria.",
+      "invalid_email": "Formato de correo inválido",
+      "missing_at": "Falta el símbolo @ en el correo.",
+      "missing_com": "El correo debe terminar en .com.",
+      "password_mismatch": "Las contraseñas no coinciden.",
+      "password_rules": {
+        "min_length": "Mínimo 8 caracteres.",
+        "upper": "Falta una letra mayúscula.",
+        "lower": "Falta una letra minúscula.",
+        "number": "Falta un número.",
+        "special": "Falta un carácter especial."
       }
     }
   },
