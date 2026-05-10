@@ -87,7 +87,7 @@ export class StatisticsComponent implements OnInit {
         cornerRadius: 16,
         displayColors: true,
         callbacks: {
-          label: (context) => `${context.label}: ${context.parsed}%`
+          label: (context) => `${context.label}: ${context.parsed} kg`
         }
       }
     }
@@ -328,7 +328,7 @@ export class StatisticsComponent implements OnInit {
       datasets: [
         {
           ...this.residueChartData.datasets[0],
-          data: data.residueDistribution.map(r => r.percentage)
+          data: data.residueDistribution.map(r => r.amount)
         }
       ]
     };

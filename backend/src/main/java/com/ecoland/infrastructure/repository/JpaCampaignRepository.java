@@ -23,4 +23,6 @@ public interface JpaCampaignRepository extends JpaRepository<CampaignEntity, Lon
 
     @Query("SELECT COALESCE(SUM(c.participants), 0) FROM CampaignEntity c WHERE LOWER(c.status) IN :statuses")
     Long sumParticipantsByStatusesIgnoreCase(@Param("statuses") List<String> statuses);
+
+    List<CampaignEntity> findByStatusInIgnoreCase(List<String> statuses);
 }
