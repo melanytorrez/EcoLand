@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UserManagementComponent } from './user-management.component';
-import { LucideAngularModule, Loader, UserCheck, Settings, UserPlus, Clock } from 'lucide-angular';
+import { LucideAngularModule, Loader, UserCheck, Settings, UserPlus, Clock, Eye, CheckCircle, XCircle, Calendar, MapPin, Briefcase, FileText, Activity } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    LucideAngularModule.pick({ Loader, UserCheck, Settings, UserPlus, Clock }),
+    LucideAngularModule.pick({ Loader, UserCheck, Settings, UserPlus, Clock, Eye, CheckCircle, XCircle, Calendar, MapPin, Briefcase, FileText, Activity }),
     TranslateModule
   ]
 })

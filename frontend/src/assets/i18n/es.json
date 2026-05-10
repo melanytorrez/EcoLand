@@ -510,6 +510,7 @@
         "zone_placeholder": "Ej: Zona Norte, Cala Cala...",
         "organization_label": "¿Perteneces a algún centro u organización?",
         "organization_placeholder": "Ej: UCB, Grupo Scout, etc. (Opcional)",
+        "required_field": "Este campo es obligatorio",
         "terms": "Acepto que todo el contenido que cree (campañas, puntos verdes o rutas) pasará por un proceso de revisión y aprobación por parte del Administrador central antes de ser público.",
         "cancel": "Cancelar",
         "submit": "Enviar Solicitud",

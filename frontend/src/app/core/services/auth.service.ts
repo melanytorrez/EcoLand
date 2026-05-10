@@ -41,9 +41,16 @@ export class AuthService {
         id: response.id,
         nombre: response.nombre,
         email: response.email,
-        role: response.role
+        role: response.role,
+        promotionStatus: response.promotionStatus || response.estadoSolicitud
       }));
     }
+  }
+
+  updateUser(user: any): void {
+    const currentUser = this.getUser() || {};
+    const updatedUser = { ...currentUser, ...user };
+    localStorage.setItem(this.userKey, JSON.stringify(updatedUser));
   }
 
   normalizeRole(role: string | undefined | null): 'admin' | 'lider' | 'usuario' {

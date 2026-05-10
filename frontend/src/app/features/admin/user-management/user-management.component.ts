@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AdminService } from '../../../core/services/admin.service';
 import { User } from '../../../core/models/user.model';
 import { finalize } from 'rxjs/operators';
@@ -13,8 +13,13 @@ export class UserManagementComponent implements OnInit {
   allUsers: User[] = [];
   isLoading = true;
   activeTab: 'requests' | 'users' = 'requests';
+  selectedUser: User | null = null;
+  showDetailsModal = false;
 
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -23,14 +28,29 @@ export class UserManagementComponent implements OnInit {
   loadData(): void {
     this.isLoading = true;
     this.adminService.getPendingLeaderRequests()
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(finalize(() => {
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      }))
       .subscribe({
-        next: (requests) => this.pendingRequests = requests,
+        next: (requests: any[]) => {
+          this.pendingRequests = requests.map(r => ({
+            ...r,
+            promotionStatus: r.estadoSolicitud || r.promotionStatus
+          }));
+          this.cdr.detectChanges();
+        },
         error: (err) => console.error('Error loading requests', err)
       });
 
     this.adminService.getAllUsers().subscribe({
-      next: (users) => this.allUsers = users,
+      next: (users: any[]) => {
+        this.allUsers = users.map(u => ({
+          ...u,
+          promotionStatus: u.estadoSolicitud || u.promotionStatus
+        }));
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error('Error loading users', err)
     });
   }
@@ -53,5 +73,17 @@ export class UserManagementComponent implements OnInit {
       },
       error: (err) => console.error('Error rejecting request', err)
     });
+  }
+
+  viewDetails(user: User): void {
+    this.selectedUser = user;
+    this.showDetailsModal = true;
+    this.cdr.detectChanges();
+  }
+
+  closeDetails(): void {
+    this.selectedUser = null;
+    this.showDetailsModal = false;
+    this.cdr.detectChanges();
   }
 }

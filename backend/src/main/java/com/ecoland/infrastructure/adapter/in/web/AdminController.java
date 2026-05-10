@@ -41,4 +41,9 @@ public class AdminController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<Usuario>> getAllUsers() {
+        return ResponseEntity.ok(usuarioUseCase.getAllUsuarios());
+    }
 }
