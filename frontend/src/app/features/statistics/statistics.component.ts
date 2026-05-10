@@ -27,7 +27,7 @@ export class StatisticsComponent implements OnInit {
 
   impactCards = [
     { icon: 'tree-deciduous', label: 'Árboles plantados', value: '15,432', detail: 'Equivalente a 185 hectáreas de bosque' },
-    { icon: 'recycle', label: 'Residuos reciclados', value: '328 ton', detail: 'Reducción de 520 toneladas de CO₂' },
+    { icon: 'recycle', label: 'Residuos reciclados', value: '0 ton', detail: 'Reducción de 520 toneladas de CO₂' },
     { icon: 'droplets', label: 'Agua ahorrada', value: '2.4M L', detail: 'Gracias al reciclaje de papel y plástico' },
   ];
 
@@ -296,7 +296,7 @@ export class StatisticsComponent implements OnInit {
     this.impactCards[0].detail = this.translate.instant('stats.summary.trees.equivalent_dynamic', { val: (this.data.forestAreaHectares).toFixed(0) });
     
     this.impactCards[1].label = this.translate.instant('stats.summary.recycling.label');
-    this.impactCards[1].value = '328 ton'; // If you ever make this dynamic, it goes here
+    this.impactCards[1].value = (this.data.mitigatedCo2Kg / 1000).toLocaleString(undefined, { maximumFractionDigits: 0 }) + ' ton';
     this.impactCards[1].detail = this.translate.instant('stats.summary.recycling.equivalent_dynamic', { val: (this.data.mitigatedCo2Kg / 1000).toFixed(0) });
     
     this.impactCards[2].label = this.translate.instant('stats.summary.water.label');
