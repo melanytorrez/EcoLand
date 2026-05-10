@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
     commitment: '',
     contact: '',
     zone: '',
+    organization: '',
     terms: false
   };
 

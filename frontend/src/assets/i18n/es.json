@@ -489,7 +489,35 @@
       "request_leader": "Solicitar ser Líder"
     },
     "promotion": {
-      "pending": "Solicitud de líder pendiente"
+      "pending": "Solicitud de líder pendiente",
+      "modal": {
+        "title": "Solicitar Rol de Líder",
+        "description": "Como líder podrás crear y gestionar campañas de reforestación, puntos verdes y rutas de reciclaje. Tu solicitud será revisada por un administrador.",
+        "section_motivation": "1. Motivación y Visión",
+        "motivation_label": "¿Cuál es tu principal objetivo al convertirte en Líder de EcoLand?",
+        "motivation_placeholder": "Describe tus objetivos...",
+        "plans_label": "¿Qué tipo de campañas o puntos verdes tienes planeado crear a corto plazo?",
+        "plans_placeholder": "Ej: Campañas de reforestación en la zona sur...",
+        "section_experience": "2. Experiencia y Compromiso",
+        "experience_label": "¿Has organizado previamente eventos de voluntariado o actividades ecológicas?",
+        "experience_placeholder": "Cuéntanos sobre tu experiencia...",
+        "commitment_label": "¿Cuánto tiempo semanal podrías dedicar a la moderación y gestión?",
+        "commitment_placeholder": "Ej: 5 horas a la semana...",
+        "section_contact": "3. Validación de Identidad y Contacto",
+        "contact_label": "Número de WhatsApp o Redes Sociales (Opcional)",
+        "contact_placeholder": "+591 o enlace a tu perfil",
+        "zone_label": "Ubicación de interés (Zona/Barrio en Cbba)",
+        "zone_placeholder": "Ej: Zona Norte, Cala Cala...",
+        "organization_label": "¿Perteneces a algún centro u organización?",
+        "organization_placeholder": "Ej: UCB, Grupo Scout, etc. (Opcional)",
+        "terms": "Acepto que todo el contenido que cree (campañas, puntos verdes o rutas) pasará por un proceso de revisión y aprobación por parte del Administrador central antes de ser público.",
+        "cancel": "Cancelar",
+        "submit": "Enviar Solicitud",
+        "submitting": "Enviando...",
+        "validation_error": "Por favor, completa los campos obligatorios y acepta los términos.",
+        "success_message": "Solicitud enviada correctamente. Un administrador la revisará pronto.",
+        "error_message": "Ocurrió un error al enviar la solicitud. Intenta nuevamente."
+      }
     },
     "stats": {
       "reforestation": "Actividades de Reforestación",
