@@ -2,7 +2,11 @@ package com.ecoland.infrastructure.adapter.in.web;
 
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.UsuarioUseCase;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import com.ecoland.infrastructure.security.JwtService;
+import com.ecoland.infrastructure.security.FeatureToggleInterceptor;
+import com.ecoland.application.service.FeatureToggleService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -29,6 +33,20 @@ class UsuarioControllerTest {
 
     @MockBean
     private JwtService jwtService;
+
+    @MockBean
+    private UsuarioRepositoryPort usuarioRepositoryPort;
+
+    @MockBean
+    private FeatureToggleInterceptor featureToggleInterceptor;
+
+    @MockBean
+    private FeatureToggleService featureToggleService;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        when(featureToggleInterceptor.preHandle(any(), any(), any())).thenReturn(true);
+    }
 
     @Test
     void testGetUsuario_Success() throws Exception {

@@ -28,6 +28,16 @@ export interface CollectionRoute {
   vehicle: string;
 }
 
+export interface RutaReciclaje {
+  id: number;
+  zona: string;
+  diaSemana: string;
+  horario: string;
+  vehiculoAsignado: string;
+  descripcion: string;
+  coordenadas: string[];
+}
+
 export interface EnvironmentalImpact {
   recycled: string;
   trees: string;
