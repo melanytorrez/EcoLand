@@ -52,13 +52,21 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
             .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Usuario> findAll() {
+        return jpaUsuarioRepository.findAll()
+            .stream()
+            .map(this::toDomain)
+            .collect(Collectors.toList());
+    }
+
     private Usuario toDomain(UsuarioEntity entity) {
         var roles = entity.getRoles() == null ? Collections.<Rol>emptySet() :
             entity.getRoles().stream()
                 .map(r -> new Rol(r.getId(), r.getNombre()))
                 .collect(Collectors.toSet());
 
-        return new Usuario(
+        Usuario usuario = new Usuario(
             entity.getId(),
             entity.getNombre(),
             entity.getEmail(),
@@ -66,6 +74,15 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
             roles,
             entity.getEstadoSolicitud()
         );
+        usuario.setMotivation(entity.getMotivation());
+        usuario.setPlans(entity.getPlans());
+        usuario.setExperience(entity.getExperience());
+        usuario.setCommitment(entity.getCommitment());
+        usuario.setContact(entity.getContact());
+        usuario.setZone(entity.getZone());
+        usuario.setOrganization(entity.getOrganization());
+        usuario.setFechaSolicitud(entity.getFechaSolicitud());
+        return usuario;
     }
 
     private UsuarioEntity toEntity(Usuario usuario) {
@@ -80,6 +97,14 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
                 .collect(Collectors.toSet()));
         }
         entity.setEstadoSolicitud(usuario.getEstadoSolicitud());
+        entity.setMotivation(usuario.getMotivation());
+        entity.setPlans(usuario.getPlans());
+        entity.setExperience(usuario.getExperience());
+        entity.setCommitment(usuario.getCommitment());
+        entity.setContact(usuario.getContact());
+        entity.setZone(usuario.getZone());
+        entity.setOrganization(usuario.getOrganization());
+        entity.setFechaSolicitud(usuario.getFechaSolicitud());
         return entity;
     }
 }

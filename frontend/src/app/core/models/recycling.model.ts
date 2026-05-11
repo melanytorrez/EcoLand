@@ -9,6 +9,8 @@ export interface GreenPoint {
   tiposMaterial?: string[];
   latitud?: number;
   longitud?: number;
+  creatorId?: number;
+  isApproved?: boolean;
   imagenUrl?: string;
 }
 
@@ -25,6 +27,16 @@ export interface CollectionRoute {
   time: string;
   zone: string;
   vehicle: string;
+}
+
+export interface RutaReciclaje {
+  id: number;
+  zona: string;
+  diaSemana: string;
+  horario: string;
+  vehiculoAsignado: string;
+  descripcion: string;
+  coordenadas: string[];
 }
 
 export interface EnvironmentalImpact {

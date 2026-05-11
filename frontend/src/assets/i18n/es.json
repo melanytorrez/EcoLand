@@ -35,13 +35,13 @@
       "title": "Crear cuenta",
       "subtitle": "Únete a la comunidad EcoLand",
       "inputs": {
-        "full_name": { 
-          "label": "Nombre completo", 
-          "placeholder": "Juan Pérez" 
+        "full_name": {
+          "label": "Nombre completo",
+          "placeholder": "Juan Pérez"
         },
-        "confirm_password": { 
-          "label": "Confirmar contraseña", 
-          "placeholder": "Repite tu contraseña" 
+        "confirm_password": {
+          "label": "Confirmar contraseña",
+          "placeholder": "Repite tu contraseña"
         }
       },
       "submit_button": "Crear cuenta",
@@ -49,24 +49,24 @@
         "login_question": "¿Ya tienes una cuenta?",
         "login_link": "Inicia sesión aquí"
       },
-      "validation": {
-        "required": "El campo es obligatorio.",
-        "required_email": "El correo es obligatorio.",
-        "required_password": "La contraseña es obligatoria.",
-        "invalid_email": "Formato de correo inválido",
-        "missing_at": "Falta el símbolo @ en el correo.",
-        "missing_com": "El correo debe terminar en .com.",
-        "password_mismatch": "Las contraseñas no coinciden.",
-        "password_rules": {
-          "min_length": "Mínimo 8 caracteres.",
-          "upper": "Falta una letra mayúscula.",
-          "lower": "Falta una letra minúscula.",
-          "number": "Falta un número.",
-          "special": "Falta un carácter especial."
-        }
-      },
       "messages": {
         "generic_error": "Error al registrar. Por favor, inténtelo de nuevo."
+      }
+    },
+    "validation": {
+      "required": "El campo es obligatorio.",
+      "required_email": "El correo es obligatorio.",
+      "required_password": "La contraseña es obligatoria.",
+      "invalid_email": "Formato de correo inválido",
+      "missing_at": "Falta el símbolo @ en el correo.",
+      "missing_com": "El correo debe terminar en .com.",
+      "password_mismatch": "Las contraseñas no coinciden.",
+      "password_rules": {
+        "min_length": "Mínimo 8 caracteres.",
+        "upper": "Falta una letra mayúscula.",
+        "lower": "Falta una letra minúscula.",
+        "number": "Falta un número.",
+        "special": "Falta un carácter especial."
       }
     }
   },
@@ -456,7 +456,8 @@
       "home": "Inicio",
       "reforestation": "Reforestación",
       "recycling": "Reciclaje",
-      "stats": "Estadísticas"
+      "stats": "Estadísticas",
+      "my_publications": "Mis Publicaciones"
     },
     "buttons": {
       "admin_panel": "Panel Admin",
@@ -480,7 +481,44 @@
     "user_info": {
       "total_participations": "{{count}} participaciones totales",
       "role_user": "Usuario",
+      "role_lider": "Líder",
       "role_admin": "Administrador"
+    },
+    "actions": {
+      "control_table": "Tabla de Control",
+      "request_leader": "Solicitar ser Líder"
+    },
+    "promotion": {
+      "pending": "Solicitud de líder pendiente",
+      "modal": {
+        "title": "Solicitar Rol de Líder",
+        "description": "Como líder podrás crear y gestionar campañas de reforestación, puntos verdes y rutas de reciclaje. Tu solicitud será revisada por un administrador.",
+        "section_motivation": "1. Motivación y Visión",
+        "motivation_label": "¿Cuál es tu principal objetivo al convertirte en Líder de EcoLand?",
+        "motivation_placeholder": "Describe tus objetivos...",
+        "plans_label": "¿Qué tipo de campañas o puntos verdes tienes planeado crear a corto plazo?",
+        "plans_placeholder": "Ej: Campañas de reforestación en la zona sur...",
+        "section_experience": "2. Experiencia y Compromiso",
+        "experience_label": "¿Has organizado previamente eventos de voluntariado o actividades ecológicas?",
+        "experience_placeholder": "Cuéntanos sobre tu experiencia...",
+        "commitment_label": "¿Cuánto tiempo semanal podrías dedicar a la moderación y gestión?",
+        "commitment_placeholder": "Ej: 5 horas a la semana...",
+        "section_contact": "3. Validación de Identidad y Contacto",
+        "contact_label": "Número de WhatsApp o Redes Sociales (Opcional)",
+        "contact_placeholder": "+591 o enlace a tu perfil",
+        "zone_label": "Ubicación de interés (Zona/Barrio en Cbba)",
+        "zone_placeholder": "Ej: Zona Norte, Cala Cala...",
+        "organization_label": "¿Perteneces a algún centro u organización?",
+        "organization_placeholder": "Ej: UCB, Grupo Scout, etc. (Opcional)",
+        "required_field": "Este campo es obligatorio",
+        "terms": "Acepto que todo el contenido que cree (campañas, puntos verdes o rutas) pasará por un proceso de revisión y aprobación por parte del Administrador central antes de ser público.",
+        "cancel": "Cancelar",
+        "submit": "Enviar Solicitud",
+        "submitting": "Enviando...",
+        "validation_error": "Por favor, completa los campos obligatorios y acepta los términos.",
+        "success_message": "Solicitud enviada correctamente. Un administrador la revisará pronto.",
+        "error_message": "Ocurrió un error al enviar la solicitud. Intenta nuevamente."
+      }
     },
     "stats": {
       "reforestation": "Actividades de Reforestación",
@@ -564,9 +602,9 @@
         "optional": "opcional"
       },
       "status_options": {
-          "scheduled": "Programada",
-          "active": "Activa",
-          "finished": "Finalizada"
+        "scheduled": "Programada",
+        "active": "Activa",
+        "finished": "Finalizada"
       },
       "placeholders": {
         "name": "Ej: Reforestación en el Parque Tunari",
@@ -610,5 +648,31 @@
     "cancel": "Cancelar",
     "save": "Guardar",
     "delete": "Eliminar"
+  },
+  "admin_users": {
+    "title": "Gestión de Usuarios",
+    "subtitle": "Administra los roles y solicitudes de promoción de la plataforma",
+    "tabs": {
+      "requests": "Solicitudes Pendientes",
+      "all_users": "Todos los Usuarios"
+    },
+    "table": {
+      "name": "Nombre",
+      "email": "Email",
+      "role": "Rol Actual",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "actions": {
+      "approve": "Aprobar",
+      "reject": "Rechazar",
+      "revoke": "Revocar Líder"
+    },
+    "messages": {
+      "no_requests": "No hay solicitudes pendientes en este momento.",
+      "approve_success": "Usuario promovido a Líder exitosamente.",
+      "reject_success": "Solicitud rechazada.",
+      "error": "Ocurrió un error al procesar la solicitud."
+    }
   }
 }

@@ -41,7 +41,7 @@ export class CampaignFormComponent implements OnInit {
 
   constructor(
     private campaignService: CampaignService,
-    private authService: AuthService,
+    public authService: AuthService,
     private translate: TranslateService,
     private cdr: ChangeDetectorRef
   ) {}
@@ -62,8 +62,46 @@ export class CampaignFormComponent implements OnInit {
     });
   }
 
+  get currentUser(): any {
+    return this.authService.getUser();
+  }
+
+  canEdit(campaign: Campaign): boolean {
+    const user = this.currentUser;
+    if (!user) return false;
+    const role = this.authService.normalizeRole(user.role);
+    // Admin only moderates (deletes), doesn't edit content created by leaders
+    if (role === 'admin') return false; 
+    if (role === 'lider') {
+      return campaign.creatorId === user.id;
+    }
+    return false;
+  }
+
+  canDelete(campaign: Campaign): boolean {
+    const user = this.currentUser;
+    if (!user) return false;
+    const role = this.authService.normalizeRole(user.role);
+    if (role === 'admin') return true; // Global moderation
+    if (role === 'lider') {
+      return campaign.creatorId === user.id;
+    }
+    return false;
+  }
+
   get filteredCampaigns(): Campaign[] {
-    return this.campaigns.filter(
+    const user = this.currentUser;
+    const role = this.authService.normalizeRole(user?.role);
+    
+    let list = this.campaigns;
+    
+    // If Leader, maybe they should only see theirs? 
+    // The prompt says "No tiene acceso a la edición de campañas creadas por otros Líderes"
+    // but doesn't explicitly say they shouldn't SEE them. 
+    // However, usually "My Publications" implies seeing only theirs.
+    // I'll keep it simple: filter by search term first.
+    
+    return list.filter(
       (campaign) =>
         campaign.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         campaign.location.toLowerCase().includes(this.searchTerm.toLowerCase())

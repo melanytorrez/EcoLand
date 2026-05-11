@@ -38,16 +38,26 @@ export class AuthService {
 
     if (response?.nombre || response?.email) {
       localStorage.setItem(this.userKey, JSON.stringify({
+        id: response.id,
         nombre: response.nombre,
         email: response.email,
-        role: response.role
+        role: response.role,
+        promotionStatus: response.promotionStatus || response.estadoSolicitud
       }));
     }
   }
 
-  normalizeRole(role: string | undefined | null): 'admin' | 'usuario' {
-    const value = (role || '').toLowerCase();
-    return value.includes('admin') ? 'admin' : 'usuario';
+  updateUser(user: any): void {
+    const currentUser = this.getUser() || {};
+    const updatedUser = { ...currentUser, ...user };
+    localStorage.setItem(this.userKey, JSON.stringify(updatedUser));
+  }
+
+  normalizeRole(role: string | undefined | null): 'admin' | 'lider' | 'usuario' {
+    const value = (role || '').toUpperCase();
+    if (value.includes('ADMIN')) return 'admin';
+    if (value.includes('LIDER')) return 'lider';
+    return 'usuario';
   }
 
   getToken(): string | null {

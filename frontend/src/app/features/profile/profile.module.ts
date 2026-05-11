@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
-import { LucideAngularModule, User, Award, Calendar, TrendingUp, TreePine, Trash2 } from 'lucide-angular';
+import { LucideAngularModule, User, Award, Calendar, TrendingUp, TreePine, Trash2, Send, Settings, UserPlus, Clock, X, Loader, AlertCircle, CheckCircle } from 'lucide-angular';
 import { BaseChartDirective } from 'ng2-charts';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ProfileRoutingModule,
     BaseChartDirective,
     TranslateModule,
-    LucideAngularModule.pick({ User, Award, Calendar, TrendingUp, TreePine, Trash2 })
+    FormsModule,
+    LucideAngularModule.pick({ User, Award, Calendar, TrendingUp, TreePine, Trash2, Send, Settings, UserPlus, Clock, X, Loader, AlertCircle, CheckCircle })
   ]
 })
 export class ProfileModule { }

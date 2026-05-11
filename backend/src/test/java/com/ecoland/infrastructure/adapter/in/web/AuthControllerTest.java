@@ -5,7 +5,10 @@ import com.ecoland.application.dto.LoginRequest;
 import com.ecoland.application.dto.RegisterRequest;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import com.ecoland.infrastructure.security.JwtService;
+import com.ecoland.infrastructure.security.FeatureToggleInterceptor;
+import com.ecoland.application.service.FeatureToggleService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,15 @@ class AuthControllerTest {
 
     @MockBean
     private JwtService jwtService;
+
+    @MockBean
+    private UsuarioRepositoryPort usuarioRepositoryPort;
+
+    @MockBean
+    private FeatureToggleInterceptor featureToggleInterceptor;
+
+    @MockBean
+    private FeatureToggleService featureToggleService;
 
     @Autowired
     private ObjectMapper objectMapper;

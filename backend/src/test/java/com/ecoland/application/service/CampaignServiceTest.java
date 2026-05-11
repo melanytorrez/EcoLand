@@ -2,8 +2,10 @@ package com.ecoland.application.service;
 
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
 import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +15,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -26,14 +33,24 @@ class CampaignServiceTest {
     @Mock
     private JpaUsuarioCampaignRepository usuarioCampaignRepository;
 
+    @Mock
+    private UsuarioRepositoryPort usuarioRepositoryPort;
+
     private CampaignService campaignService;
     private Campaign campaign;
 
     @BeforeEach
     void setUp() {
-       when(campaignRepositoryPort.findAll()).thenReturn(List.of(new Campaign()));
-
-        campaignService = new CampaignService(campaignRepositoryPort, usuarioCampaignRepository);
+        when(campaignRepositoryPort.findAll()).thenReturn(List.of(new Campaign()));
+        campaignService = new CampaignService(campaignRepositoryPort, usuarioCampaignRepository, usuarioRepositoryPort);
+        
+        // Mock Security Context for Admin
+        SecurityContext securityContext = mock(SecurityContext.class);
+        Authentication authentication = mock(Authentication.class);
+        lenient().doReturn(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMINISTRADOR")))
+            .when(authentication).getAuthorities();
+        lenient().when(securityContext.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.setContext(securityContext);
 
         clearInvocations(campaignRepositoryPort);
 
@@ -141,6 +158,7 @@ class CampaignServiceTest {
 
     @Test
     void deleteCampaign_Success() {
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
         doNothing().when(campaignRepositoryPort).deleteById(1L);
 
         assertDoesNotThrow(() -> campaignService.deleteCampaign(1L));
@@ -149,6 +167,7 @@ class CampaignServiceTest {
 
     @Test
     void deleteCampaign_Error_ShouldThrowException() {
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
         doThrow(new RuntimeException("Delete Error")).when(campaignRepositoryPort).deleteById(1L);
 
         assertThrows(RuntimeException.class, () -> campaignService.deleteCampaign(1L));

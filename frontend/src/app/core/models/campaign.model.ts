@@ -14,4 +14,6 @@ export interface Campaign {
   description?: string;
   requirements?: string[];
   category?: 'REFORESTATION' | 'RECYCLING';
+  creatorId?: number;
+  isApproved?: boolean;
 }

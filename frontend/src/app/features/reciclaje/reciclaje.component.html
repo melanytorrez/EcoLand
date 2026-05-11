@@ -41,6 +41,10 @@
           <div style="width:16px;height:16px;background:#3B82F6;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.2);"></div>
           <span class="text-sm font-medium text-gray-700">{{ 'recycling.map.legend.recyclers' | translate }}</span>
         </div>
+        <div class="flex items-center gap-2">
+          <div style="width:16px;height:4px;background:#1565C0;border-radius:2px;"></div>
+          <span class="text-sm font-medium text-gray-700">Rutas de recolección</span>
+        </div>
       </div>
     </div>
   </section>
@@ -71,43 +75,46 @@
             </div>
 
             <ng-container *ngIf="!loadingPoints && !pointsError">
-              <div *ngIf="nearbyPoints.length; else emptyPoints" class="space-y-4">
-                <div *ngFor="let point of nearbyPoints" class="p-4 bg-[#E8F5E9] rounded-2xl">
-                  <div class="flex justify-between items-start gap-4 mb-3">
-                    <div>
-                      <p class="font-semibold text-gray-900 text-sm">{{ point.nombre }}</p>
-                      <p class="text-xs text-gray-600 mt-1">{{ point.direccion }}</p>
+              <!-- Scrollable container for points -->
+              <div class="scroll-container custom-scrollbar space-y-4">
+                <div *ngIf="nearbyPoints.length; else emptyPoints" class="space-y-4">
+                  <div *ngFor="let point of nearbyPoints" class="p-4 bg-[#E8F5E9] rounded-2xl border border-transparent hover:border-[#A5D6A7] transition-all">
+                    <div class="flex justify-between items-start gap-4 mb-3">
+                      <div>
+                        <p class="font-semibold text-gray-900 text-sm">{{ point.nombre }}</p>
+                        <p class="text-xs text-gray-600 mt-1">{{ point.direccion }}</p>
+                      </div>
+                      <span
+                        class="text-xs px-2 py-1 rounded-full shrink-0"
+                        [ngClass]="getPointStatus(point) === 'Abierto' ? 'bg-[#4CAF50] text-white' : 'bg-gray-300 text-gray-700'"
+                      >
+                        {{ (getPointStatus(point) === 'Abierto' ? 'recycling.points_card.status_open' : 'recycling.points_card.status_closed') | translate }}
+                      </span>
                     </div>
-                    <span
-                      class="text-xs px-2 py-1 rounded-full shrink-0"
-                      [ngClass]="getPointStatus(point) === 'Abierto' ? 'bg-[#4CAF50] text-white' : 'bg-gray-300 text-gray-700'"
-                    >
-                      {{ (getPointStatus(point) === 'Abierto' ? 'recycling.points_card.status_open' : 'recycling.points_card.status_closed') | translate }}
-                    </span>
-                  </div>
 
-                  <div class="flex flex-wrap items-center gap-2 text-xs text-gray-600 mb-3">
-                    <div class="flex items-center gap-2">
-                      <lucide-icon name="navigation" class="w-3 h-3"></lucide-icon>
-                      <span>{{ point.zona }}</span>
+                    <div class="flex flex-wrap items-center gap-2 text-xs text-gray-600 mb-3">
+                      <div class="flex items-center gap-2">
+                        <lucide-icon name="navigation" class="w-3 h-3"></lucide-icon>
+                        <span>{{ point.zona }}</span>
+                      </div>
+                      <span>•</span>
+                      <span>{{ getPointHours(point) }}</span>
                     </div>
-                    <span>•</span>
-                    <span>{{ getPointHours(point) }}</span>
-                  </div>
 
-                  <div *ngIf="point.tiposMaterial?.length" class="flex flex-wrap gap-2">
-                    <span *ngFor="let material of point.tiposMaterial" class="text-[11px] px-2 py-1 rounded-full bg-white text-[#2E7D32] border border-[#A5D6A7]">
-                      {{ material }}
-                    </span>
+                    <div *ngIf="point.tiposMaterial?.length" class="flex flex-wrap gap-2">
+                      <span *ngFor="let material of point.tiposMaterial" class="text-[11px] px-2 py-1 rounded-full bg-white text-[#2E7D32] border border-[#A5D6A7]">
+                        {{ material }}
+                      </span>
+                    </div>
                   </div>
                 </div>
+
+                <ng-template #emptyPoints>
+                  <div class="p-6 bg-[#E8F5E9] rounded-2xl text-sm text-gray-700">
+                    {{ 'recycling.points_card.empty' | translate }}
+                  </div>
+                </ng-template>
               </div>
-
-              <ng-template #emptyPoints>
-                <div class="p-6 bg-[#E8F5E9] rounded-2xl text-sm text-gray-700">
-                  {{ 'recycling.points_card.empty' | translate }}
-                </div>
-              </ng-template>
             </ng-container>
           </div>
 
@@ -116,8 +123,8 @@
           </button>
         </div>
 
-        <!-- Next Route Card -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100" *ngIf="showNextRoute && nextCollection">
+        <!-- Recycling Routes List Card -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100" *ngIf="showNextRoute">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg">
               <lucide-icon name="truck" class="w-7 h-7 text-white"></lucide-icon>
@@ -128,26 +135,36 @@
             </div>
           </div>
 
-          <div class="space-y-4 mb-6">
-            <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-              <span class="text-sm text-gray-600">{{ 'recycling.route_card.label_day' | translate }}</span>
-              <span class="font-semibold text-gray-900">{{ nextCollection.day }}</span>
+          <div class="space-y-4 mb-6 scroll-container custom-scrollbar">
+            <div *ngIf="!rutas || rutas.length === 0" class="p-6 bg-gray-50 rounded-2xl text-sm text-gray-500 text-center">
+              No hay rutas disponibles por ahora.
             </div>
-            <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-              <span class="text-sm text-gray-600">{{ 'recycling.route_card.label_date' | translate }}</span>
-              <span class="font-semibold text-gray-900">{{ nextCollection.date }}</span>
-            </div>
-            <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-              <span class="text-sm text-gray-600">{{ 'recycling.route_card.label_time' | translate }}</span>
-              <span class="font-semibold text-[#2E7D32]">{{ nextCollection.time }}</span>
-            </div>
-            <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-              <span class="text-sm text-gray-600">{{ 'recycling.route_card.label_zone' | translate }}</span>
-              <span class="font-semibold text-gray-900">{{ nextCollection.zone }}</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600">{{ 'recycling.route_card.label_vehicle' | translate }}</span>
-              <span class="font-semibold text-gray-900">{{ nextCollection.vehicle }}</span>
+
+            <div *ngFor="let ruta of rutas; let i = index" 
+                 class="p-4 rounded-2xl border-l-4 transition-all hover:bg-gray-50 border border-gray-100 shadow-sm"
+                 [style.border-left-color]="ROUTE_COLORS[i % ROUTE_COLORS.length]"
+                 [style.background-color]="ROUTE_COLORS[i % ROUTE_COLORS.length] + '05'">
+              <div class="flex justify-between items-start mb-2">
+                <span class="font-bold text-gray-900 text-sm">{{ ruta.zona }}</span>
+                <span class="text-[9px] uppercase font-bold px-1.5 py-0.5 bg-white rounded border text-blue-600 border-blue-100">
+                  ACTIVA
+                </span>
+              </div>
+              
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2 text-xs text-gray-600">
+                  <lucide-icon name="calendar" class="w-3 h-3 text-blue-500"></lucide-icon>
+                  <span class="font-medium text-gray-700">{{ ruta.diaSemana }}</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-gray-600">
+                  <lucide-icon name="clock" class="w-3 h-3 text-green-600"></lucide-icon>
+                  <span class="font-bold text-[#2E7D32]">{{ ruta.horario }}</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-gray-500 italic mt-1">
+                  <lucide-icon name="truck" class="w-3 h-3"></lucide-icon>
+                  <span>{{ ruta.vehiculoAsignado }}</span>
+                </div>
+              </div>
             </div>
           </div>
 

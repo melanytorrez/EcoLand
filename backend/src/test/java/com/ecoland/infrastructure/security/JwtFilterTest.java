@@ -59,7 +59,10 @@ class JwtFilterTest {
         when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
         when(jwtService.isTokenValid(token)).thenReturn(true);
         when(jwtService.extractEmail(token)).thenReturn(email);
-        when(usuarioRepositoryPort.findByEmail(email)).thenReturn(Optional.of(new Usuario()));
+        Usuario user = new Usuario();
+        user.setEmail(email);
+        user.setRoles(new java.util.HashSet<>());
+        when(usuarioRepositoryPort.findByEmail(email)).thenReturn(Optional.of(user));
 
 
         // Act

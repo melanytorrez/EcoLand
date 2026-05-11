@@ -5,6 +5,7 @@ import com.ecoland.domain.exception.EmailAlreadyExistsException;
 import com.ecoland.domain.model.AuditoriaLog;
 import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
+import com.ecoland.domain.model.EstadoSolicitud;
 import com.ecoland.domain.port.out.AuditoriaRepositoryPort;
 import com.ecoland.domain.port.out.RolRepositoryPort;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
@@ -94,7 +95,7 @@ class AuthServiceTest {
     @Test
     void testRegister_Success() {
         // Arrange
-        Usuario nuevoUsuario = new Usuario(null, "Nuevo", "nuevo@eco.com", "pass", null);
+        Usuario nuevoUsuario = new Usuario(null, "Nuevo", "nuevo@eco.com", "pass", null, EstadoSolicitud.NONE);
         Rol rolPersistido = new Rol(1L, "Usuario");
 
         when(usuarioRepositoryPort.findByEmail(anyString())).thenReturn(Optional.empty());
