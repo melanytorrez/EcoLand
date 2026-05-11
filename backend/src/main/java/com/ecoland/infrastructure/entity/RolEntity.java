@@ -3,7 +3,7 @@ package com.ecoland.infrastructure.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "roles_app")
+@Table(name = "roles")
 public class RolEntity {
 
     @Id
