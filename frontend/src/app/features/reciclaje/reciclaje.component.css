@@ -10,3 +10,38 @@
   width: 100%;
   border-radius: 24px;
 }
+
+/* Container for scrollable lists */
+.scroll-container {
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  padding-right: 10px;
+}
+
+/* Custom scrollbar for cards */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #A5D6A7 transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-edge {
+  background: #E8F5E9;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #A5D6A7;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #2E7D32;
+}

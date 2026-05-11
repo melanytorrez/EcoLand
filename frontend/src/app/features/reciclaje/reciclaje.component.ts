@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { RecyclingService } from '../../core/services/recycling.service';
-import { GreenPoint, CollectionRoute, EnvironmentalImpact } from '../../core/models/recycling.model';
+import { GreenPoint, CollectionRoute, EnvironmentalImpact, RutaReciclaje } from '../../core/models/recycling.model';
 import * as L from 'leaflet';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,6 +14,7 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
   nearbyPoints: GreenPoint[] = [];
   nextCollection: CollectionRoute | undefined;
   impact: EnvironmentalImpact | undefined;
+  rutas: RutaReciclaje[] = [];
   loadingPoints = false;
   pointsError = '';
   showInteractiveMap = true;
@@ -22,11 +23,15 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private map!: L.Map;
   private markers: L.Marker[] = [];
+  private routePolylines: L.Polyline[] = [];
   private userMarker?: L.Marker;
 
   // Cochabamba center coordinates
   private readonly CBBA_LAT = -17.3935;
   private readonly CBBA_LNG = -66.1570;
+
+  // Route colors for visual distinction (public for template access)
+  public readonly ROUTE_COLORS = ['#1565C0', '#E65100', '#6A1B9A', '#00838F', '#AD1457'];
 
   constructor(
     private recyclingService: RecyclingService,
@@ -52,6 +57,20 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.pointsError = this.translate.instant('recycling.points_card.error');
         this.loadingPoints = false;
         this.cdr.detectChanges();
+      }
+    });
+
+    // Load rutas from the backend API
+    this.recyclingService.getRutas().subscribe({
+      next: rutas => {
+        this.rutas = rutas;
+        if (this.map) {
+          this.drawRoutesOnMap();
+        }
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.rutas = [];
       }
     });
 
@@ -150,6 +169,10 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.nearbyPoints.length > 0) {
       this.addMarkersToMap();
     }
+
+    if (this.rutas.length > 0) {
+      this.drawRoutesOnMap();
+    }
   }
 
   private addMarkersToMap(): void {
@@ -221,6 +244,62 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  private drawRoutesOnMap(): void {
+    // Remove existing polylines
+    this.routePolylines.forEach(p => p.remove());
+    this.routePolylines = [];
+
+    this.rutas.forEach((ruta, index) => {
+      if (!ruta.coordenadas || ruta.coordenadas.length < 2) return;
+
+      // Parse "lat,lng" strings into LatLng tuples
+      const waypoints: [number, number][] = ruta.coordenadas
+        .map(coord => {
+          const parts = coord.split(',');
+          if (parts.length === 2) {
+            const lat = parseFloat(parts[0].trim());
+            const lng = parseFloat(parts[1].trim());
+            if (!isNaN(lat) && !isNaN(lng)) {
+              return [lat, lng] as [number, number];
+            }
+          }
+          return null;
+        })
+        .filter((c): c is [number, number] => c !== null);
+
+      if (waypoints.length < 2) return;
+
+      const color = this.ROUTE_COLORS[index % this.ROUTE_COLORS.length];
+
+      // Fetch the real path from OSRM
+      this.recyclingService.getRoutePath(waypoints).subscribe({
+        next: (detailedPath) => {
+          const polyline = L.polyline(detailedPath, {
+            color: color,
+            weight: 6,
+            opacity: 0.9,
+            dashArray: '10, 8'
+          }).addTo(this.map);
+
+          const popupContent = `
+            <div style="min-width:220px;font-family:system-ui,-apple-system,sans-serif;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <div style="width:12px;height:12px;background:${color};border-radius:3px;"></div>
+                <h3 style="margin:0;font-size:14px;font-weight:700;color:#1a1a1a;">${ruta.zona}</h3>
+              </div>
+              <p style="margin:0 0 4px;font-size:12px;color:#666;">📅 ${ruta.diaSemana}</p>
+              <p style="margin:0 0 4px;font-size:12px;color:#666;">🕐 ${ruta.horario}</p>
+              <p style="margin:0 0 4px;font-size:12px;color:#666;">🚛 ${ruta.vehiculoAsignado}</p>
+              <p style="margin:0;font-size:11px;color:#888;margin-top:6px;">${ruta.descripcion}</p>
+            </div>
+          `;
+          polyline.bindPopup(popupContent);
+          this.routePolylines.push(polyline);
+        }
+      });
+    });
+  }
+
   getPointStatus(point: GreenPoint): 'Abierto' | 'Cerrado' {
     return point.activo ? 'Abierto' : 'Cerrado';
   }
@@ -233,4 +312,4 @@ export class ReciclajeComponent implements OnInit, AfterViewInit, OnDestroy {
     const horario = point.horarios[0];
     return `${horario.diaSemana} ${horario.horaApertura} - ${horario.horaCierre}`;
   }
-}
+}

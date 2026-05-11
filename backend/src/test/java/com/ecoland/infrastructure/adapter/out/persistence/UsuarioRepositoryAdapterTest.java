@@ -2,6 +2,7 @@ package com.ecoland.infrastructure.adapter.out.persistence;
 
 import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
+import com.ecoland.domain.model.EstadoSolicitud;
 import com.ecoland.infrastructure.entity.RolEntity;
 import com.ecoland.infrastructure.entity.UsuarioEntity;
 import com.ecoland.infrastructure.repository.JpaUsuarioRepository;
@@ -46,7 +47,7 @@ class UsuarioRepositoryAdapterTest {
         Set<RolEntity> rolesEntity = new HashSet<>();
         rolesEntity.add(rolEntity);
 
-        usuarioDomain = new Usuario(1L, "Test User", "test@ecoland.com", "password123", rolesDomain);
+        usuarioDomain = new Usuario(1L, "Test User", "test@ecoland.com", "password123", rolesDomain, EstadoSolicitud.NONE);
 
         usuarioEntity = new UsuarioEntity();
         usuarioEntity.setId(1L);
