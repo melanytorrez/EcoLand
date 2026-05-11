@@ -4,19 +4,13 @@ import { RecyclingService } from '../../../../core/services/recycling.service';
 import { GreenPoint } from '../../../../core/models/recycling.model';
 
 export const MATERIAL_ICONS: Record<string, string> = {
-  'Vidrio':       '🫙',
-  'Plástico':     '♻️',
-  'Papel':        '📄',
-  'Cartón':       '📦',
-  'Metal':        '🔩',
+  'Vidrio': '🥃',
+  'Plástico': '🧴',
+  'Papel': '📄',
+  'Metal': '🔩',
   'Electrónicos': '💻',
-  'Orgánico':     '🌱',
-  'Textil':       '👕',
-  'Aceite':       '🛢️',
-  'Baterías':     '🔋',
+  'Orgánicos': '🌿',
 };
-
-export const ALL_MATERIALS = Object.keys(MATERIAL_ICONS);
 
 @Component({
   selector: 'app-catalogo',
@@ -28,11 +22,11 @@ export class CatalogoComponent implements OnInit {
   allPoints: GreenPoint[] = [];
   filteredPoints: GreenPoint[] = [];
   searchTerm = '';
-  selectedMaterials: string[] = [];
+  selectedMaterial: string | null = null;
   isLoading = true;
   error: string | null = null;
 
-  readonly allMaterials = ALL_MATERIALS;
+  readonly materials = ['Vidrio', 'Plástico', 'Papel', 'Metal', 'Electrónicos', 'Orgánicos'];
   readonly materialIcons = MATERIAL_ICONS;
 
   constructor(
@@ -63,18 +57,9 @@ export class CatalogoComponent implements OnInit {
     });
   }
 
-  toggleMaterial(material: string): void {
-    const idx = this.selectedMaterials.indexOf(material);
-    if (idx >= 0) {
-      this.selectedMaterials.splice(idx, 1);
-    } else {
-      this.selectedMaterials.push(material);
-    }
+  setSelectedMaterial(material: string | null): void {
+    this.selectedMaterial = material;
     this.applyFilters();
-  }
-
-  isMaterialSelected(material: string): boolean {
-    return this.selectedMaterials.includes(material);
   }
 
   applyFilters(): void {
@@ -89,35 +74,27 @@ export class CatalogoComponent implements OnInit {
       );
     }
 
-    if (this.selectedMaterials.length > 0) {
+    if (this.selectedMaterial) {
       result = result.filter(p =>
-        this.selectedMaterials.every(mat =>
-          (p.tiposMaterial || []).includes(mat)
-        )
+        (p.tiposMaterial || []).includes(this.selectedMaterial!)
       );
     }
 
     this.filteredPoints = result;
   }
 
-  clearFilters(): void {
-    this.searchTerm = '';
-    this.selectedMaterials = [];
-    this.applyFilters();
+  getMaterialIcon(material: string): string {
+    return this.materialIcons[material] || '♻️';
   }
 
-  getPointStatus(point: GreenPoint): 'Abierto' | 'Cerrado' {
+  getPointStatus(point: GreenPoint): string {
     return point.activo ? 'Abierto' : 'Cerrado';
   }
 
-  getHorarioHoy(point: GreenPoint): string {
+  getHorarioDisplay(point: GreenPoint): string {
     if (!point.horarios?.length) return 'Horario no disponible';
-    const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-    const hoy = dias[new Date().getDay()];
-    const horario = point.horarios.find(h =>
-      h.diaSemana?.startsWith(hoy) || h.diaSemana?.toLowerCase().includes(hoy.toLowerCase())
-    ) || point.horarios[0];
-    return `${horario.diaSemana} ${horario.horaApertura} - ${horario.horaCierre}`;
+    const first = point.horarios[0];
+    return `${first.diaSemana} ${first.horaApertura} - ${first.horaCierre}`;
   }
 
   verDetalle(id: number): void {

@@ -49,6 +49,12 @@ const routes: Routes = [
     data: { feature: 'reciclaje' }
   },
   {
+    path: 'reciclaje/puntos',
+    loadChildren: () => import('./features/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesModule),
+    canActivate: [FeatureFlagGuard],
+    data: { feature: 'reciclaje' }
+  },
+  {
     path: 'estadisticas',
     loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule),
     canActivate: [FeatureFlagGuard],
