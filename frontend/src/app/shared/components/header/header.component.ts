@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
     { path: '/reforestacion', label: 'header.nav.reforestation', feature: 'reforestacion' },
     { path: '/reciclaje',     label: 'header.nav.recycling',     feature: 'reciclaje' },
     { path: '/estadisticas',  label: 'header.nav.stats',         feature: 'estadisticas' },
+    { path: '/admin/campanas', label: 'header.nav.my_publications', feature: 'reforestacion', role: 'lider' },
   ];
 
   constructor(
@@ -71,9 +72,11 @@ export class HeaderComponent implements OnInit {
   }
 
   get navItems() {
-    return this.allNavItems.filter(item =>
-      !item.feature || this.featureFlagService.isFeatureEnabled(item.feature as keyof FeatureFlags)
-    );
+    return this.allNavItems.filter(item => {
+      const featureEnabled = !item.feature || this.featureFlagService.isFeatureEnabled(item.feature as keyof FeatureFlags);
+      const roleMatch = !(item as any).role || this.authService.normalizeRole(this.user?.role) === (item as any).role;
+      return featureEnabled && roleMatch;
+    });
   }
 
   get isAuthenticated(): boolean {
@@ -86,7 +89,12 @@ export class HeaderComponent implements OnInit {
 
   get isAdmin(): boolean {
     const u = this.user;
-    return u && (u.role === 'Admin' || u.role === 'Administrador');
+    return u && this.authService.normalizeRole(u.role) === 'admin';
+  }
+
+  get isLeader(): boolean {
+    const u = this.user;
+    return u && this.authService.normalizeRole(u.role) === 'lider';
   }
 
   logout() {

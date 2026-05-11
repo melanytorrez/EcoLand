@@ -70,12 +70,20 @@ public class UsuarioService implements UsuarioUseCase {
     }
 
     @Override
-    public void requestLeaderStatus(String email) {
+    public void requestLeaderStatus(String email, Usuario promotionData) {
         Usuario usuario = usuarioRepositoryPort.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException(AppConstants.MSG_USER_NOT_FOUND));
         
         if (usuario.getEstadoSolicitud() == EstadoSolicitud.NONE || usuario.getEstadoSolicitud() == EstadoSolicitud.REJECTED) {
             usuario.setEstadoSolicitud(EstadoSolicitud.PENDING);
+            usuario.setMotivation(promotionData.getMotivation());
+            usuario.setPlans(promotionData.getPlans());
+            usuario.setExperience(promotionData.getExperience());
+            usuario.setCommitment(promotionData.getCommitment());
+            usuario.setContact(promotionData.getContact());
+            usuario.setZone(promotionData.getZone());
+            usuario.setOrganization(promotionData.getOrganization());
+            usuario.setFechaSolicitud(java.time.LocalDateTime.now());
             usuarioRepositoryPort.save(usuario);
         }
     }
@@ -110,5 +118,10 @@ public class UsuarioService implements UsuarioUseCase {
     @Override
     public List<Usuario> getPendingLeaderRequests() {
         return usuarioRepositoryPort.findByEstadoSolicitud(EstadoSolicitud.PENDING);
+    }
+
+    @Override
+    public List<Usuario> getAllUsuarios() {
+        return usuarioRepositoryPort.findAll();
     }
 }

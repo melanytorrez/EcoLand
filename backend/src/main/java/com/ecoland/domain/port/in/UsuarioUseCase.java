@@ -12,8 +12,9 @@ public interface UsuarioUseCase {
     void deleteUsuario(Long id);
     java.util.List<com.ecoland.domain.model.Campaign> getParticipacionesCompletas(String email);
     
-    void requestLeaderStatus(String email);
+    void requestLeaderStatus(String email, Usuario promotionData);
     void approveLeaderRequest(Long userId);
     void rejectLeaderRequest(Long userId);
     List<Usuario> getPendingLeaderRequests();
+    List<Usuario> getAllUsuarios();
 }

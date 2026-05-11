@@ -49,24 +49,24 @@
         "login_question": "Already have an account?",
         "login_link": "Sign in here"
       },
-      "validation": {
-        "required": "This field is required.",
-        "required_email": "Email is required.",
-        "required_password": "Password is required.",
-        "invalid_email": "Invalid email format",
-        "missing_at": "The @ symbol is missing from the email.",
-        "missing_com": "The email must end in .com.",
-        "password_mismatch": "Passwords do not match.",
-        "password_rules": {
-          "min_length": "Minimum 8 characters.",
-          "upper": "An uppercase letter is missing.",
-          "lower": "A lowercase letter is missing.",
-          "number": "A number is missing.",
-          "special": "A special character is missing."
-        }
-      },
       "messages": {
         "generic_error": "Registration error. Please try again."
+      }
+    },
+    "validation": {
+      "required": "This field is required.",
+      "required_email": "Email is required.",
+      "required_password": "Password is required.",
+      "invalid_email": "Invalid email format",
+      "missing_at": "The @ symbol is missing from the email.",
+      "missing_com": "The email must end in .com.",
+      "password_mismatch": "Passwords do not match.",
+      "password_rules": {
+        "min_length": "Minimum 8 characters.",
+        "upper": "An uppercase letter is missing.",
+        "lower": "A lowercase letter is missing.",
+        "number": "A number is missing.",
+        "special": "A special character is missing."
       }
     }
   },

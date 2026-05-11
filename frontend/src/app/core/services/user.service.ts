@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Campaign } from '../models/campaign.model';
+import { User } from '../models/user.model';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 
@@ -22,5 +23,21 @@ export class UserService {
       Authorization: `Bearer ${token}`
     });
     return this.http.get<Campaign[]>(`${this.apiUrl}/me/participations`, { headers });
+  }
+
+  getProfile(): Observable<User> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<User>(`${this.apiUrl}/me`, { headers });
+  }
+
+  requestLeaderStatus(data?: any): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post(`${this.apiUrl}/me/request-leader`, data || {}, { headers });
   }
 }
