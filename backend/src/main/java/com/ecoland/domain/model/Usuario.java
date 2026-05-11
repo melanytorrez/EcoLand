@@ -9,6 +9,14 @@ public class Usuario {
     private String password;
     private Set<Rol> roles;
     private EstadoSolicitud estadoSolicitud = EstadoSolicitud.NONE;
+    private String motivation;
+    private String plans;
+    private String experience;
+    private String commitment;
+    private String contact;
+    private String zone;
+    private String organization;
+    private java.time.LocalDateTime fechaSolicitud;
 
     public Usuario() {}
 
@@ -38,4 +46,28 @@ public class Usuario {
 
     public EstadoSolicitud getEstadoSolicitud() { return estadoSolicitud; }
     public void setEstadoSolicitud(EstadoSolicitud estadoSolicitud) { this.estadoSolicitud = estadoSolicitud; }
+
+    public String getMotivation() { return motivation; }
+    public void setMotivation(String motivation) { this.motivation = motivation; }
+
+    public String getPlans() { return plans; }
+    public void setPlans(String plans) { this.plans = plans; }
+
+    public String getExperience() { return experience; }
+    public void setExperience(String experience) { this.experience = experience; }
+
+    public String getCommitment() { return commitment; }
+    public void setCommitment(String commitment) { this.commitment = commitment; }
+
+    public String getContact() { return contact; }
+    public void setContact(String contact) { this.contact = contact; }
+
+    public String getZone() { return zone; }
+    public void setZone(String zone) { this.zone = zone; }
+
+    public String getOrganization() { return organization; }
+    public void setOrganization(String organization) { this.organization = organization; }
+
+    public java.time.LocalDateTime getFechaSolicitud() { return fechaSolicitud; }
+    public void setFechaSolicitud(java.time.LocalDateTime fechaSolicitud) { this.fechaSolicitud = fechaSolicitud; }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { FeatureFlagGuard } from './core/guards/feature-flag.guard';
+import { RoleGuard } from './core/guards/role.guard';
 
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 
@@ -68,7 +69,15 @@ const routes: Routes = [
       },
       {
         path: 'feature-toggles',
-        loadChildren: () => import('./features/feature-toggles-admin/feature-toggles-admin-module').then(m => m.FeatureTogglesAdminModule)
+        loadChildren: () => import('./features/feature-toggles-admin/feature-toggles-admin-module').then(m => m.FeatureTogglesAdminModule),
+        canActivate: [RoleGuard],
+        data: { expectedRoles: ['admin'] }
+      },
+      {
+        path: 'usuarios',
+        loadChildren: () => import('./features/admin/user-management/user-management.module').then(m => m.UserManagementModule),
+        canActivate: [RoleGuard],
+        data: { expectedRoles: ['admin'] }
       }
     ]
   },

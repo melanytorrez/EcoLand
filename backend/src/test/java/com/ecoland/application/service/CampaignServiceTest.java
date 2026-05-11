@@ -5,6 +5,7 @@ import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
 import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
+import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
