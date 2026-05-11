@@ -1,0 +1,170 @@
+<div class="min-h-screen bg-gradient-to-b from-white to-[#F1F8F4]">
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="flex items-center justify-center min-h-[60vh]">
+    <div class="text-center">
+      <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-[#2E7D32] mx-auto mb-4"></div>
+      <p class="text-gray-500 font-medium">Cargando punto verde...</p>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error && !isLoading" class="flex items-center justify-center min-h-[60vh]">
+    <div class="text-center">
+      <lucide-icon name="map-pin" class="w-16 h-16 mx-auto text-gray-300 mb-4"></lucide-icon>
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Punto Verde no encontrado</h2>
+      <p class="text-gray-600 mb-6">{{ error }}</p>
+      <button
+        (click)="volverAlCatalogo()"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl hover:shadow-lg transition-all font-semibold"
+      >
+        <lucide-icon name="arrow-left" class="w-4 h-4"></lucide-icon>
+        Volver al catálogo
+      </button>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <ng-container *ngIf="point && !isLoading && !error">
+
+    <!-- Back Button -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-6">
+      <button
+        (click)="volverAlCatalogo()"
+        class="flex items-center gap-2 text-gray-600 hover:text-[#2E7D32] transition-colors"
+      >
+        <lucide-icon name="arrow-left" class="w-5 h-5"></lucide-icon>
+        <span class="font-medium">Volver al catálogo</span>
+      </button>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-8">
+      <div class="relative h-96 rounded-3xl overflow-hidden shadow-2xl">
+        <img
+          [src]="point.imagenUrl || 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080'"
+          [alt]="point.nombre"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-8 left-8 right-8">
+          <div class="flex items-center gap-3 mb-4">
+            <span
+              [class]="'px-4 py-2 rounded-full text-sm font-semibold ' + 
+                (point.activo ? 'bg-green-500 text-white' : 'bg-red-500 text-white')"
+            >
+              {{ point.activo ? 'Abierto' : 'Cerrado' }}
+            </span>
+          </div>
+          <h1 class="text-4xl font-bold text-white mb-2">{{ point.nombre }}</h1>
+          <div class="flex items-center gap-2 text-white/90">
+            <lucide-icon name="map-pin" class="w-5 h-5"></lucide-icon>
+            <span class="text-lg">{{ point.direccion }}, {{ point.zona }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column - Details -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Description -->
+          <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Descripción</h2>
+            <p class="text-gray-600 leading-relaxed">
+              Centro de reciclaje ubicado en {{ point.zona }}, Cochabamba. 
+              Contamos con personal capacitado para orientarte sobre la correcta separación de residuos 
+              y aceptamos una amplia variedad de materiales reciclables.
+            </p>
+          </div>
+
+          <!-- Accepted Materials -->
+          <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Materiales Aceptados</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" *ngIf="point.tiposMaterial?.length; else noMaterials">
+              <div
+                *ngFor="let material of point.tiposMaterial"
+                class="flex items-center gap-3 p-4 bg-[#E8F5E9] rounded-2xl"
+              >
+                <span class="text-3xl">{{ materialIcons[material] || '♻️' }}</span>
+                <span class="font-semibold text-[#2E7D32]">{{ material }}</span>
+              </div>
+            </div>
+            <ng-template #noMaterials>
+              <p class="text-gray-400 italic">No se especificaron materiales aceptados.</p>
+            </ng-template>
+          </div>
+        </div>
+
+        <!-- Right Column - Info Card -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-2xl border-2 border-gray-200 p-6 shadow-lg sticky top-24 space-y-6">
+            <!-- Schedule -->
+            <div>
+              <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <lucide-icon name="clock" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
+                Horarios de Atención
+              </h3>
+              <div *ngIf="point.horarios?.length; else noSchedule" class="space-y-2">
+                <div *ngFor="let horario of point.horarios" class="flex justify-between text-sm">
+                  <span class="font-medium text-gray-700">{{ horario.diaSemana }}</span>
+                  <span class="text-gray-600">{{ horario.horaApertura }} - {{ horario.horaCierre }}</span>
+                </div>
+              </div>
+              <ng-template #noSchedule>
+                <p class="text-sm text-gray-400 italic">Horarios no disponibles</p>
+              </ng-template>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t-2 border-gray-200"></div>
+
+            <!-- Contact -->
+            <div>
+              <h3 class="text-lg font-bold text-gray-800 mb-4">Contacto</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 text-sm text-gray-600">
+                  <lucide-icon name="phone" class="w-4 h-4 text-[#2E7D32]"></lucide-icon>
+                  <span>+591 4 4251234</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm text-gray-600">
+                  <lucide-icon name="mail" class="w-4 h-4 text-[#2E7D32]"></lucide-icon>
+                  <span>contacto&#64;ecoland.bo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t-2 border-gray-200"></div>
+
+            <!-- Location -->
+            <div>
+              <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <lucide-icon name="map-pin" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
+                Ubicación
+              </h3>
+              <div *ngIf="point.latitud && point.longitud" class="space-y-2 text-sm text-gray-600 mb-4">
+                <p>Latitud: {{ point.latitud }}</p>
+                <p>Longitud: {{ point.longitud }}</p>
+              </div>
+
+              <!-- Map -->
+              <div id="punto-map" class="rounded-2xl h-48 mb-4 bg-gray-200"></div>
+
+              <!-- Directions Button -->
+              <button
+                (click)="abrirEnMaps()"
+                class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl hover:shadow-lg transition-all font-semibold"
+              >
+                <lucide-icon name="navigation" class="w-4 h-4"></lucide-icon>
+                Cómo llegar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

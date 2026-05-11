@@ -49,6 +49,12 @@ const routes: Routes = [
     data: { feature: 'reciclaje' }
   },
   {
+    path: 'reciclaje/puntos',
+    loadChildren: () => import('./features/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesModule),
+    canActivate: [FeatureFlagGuard],
+    data: { feature: 'reciclaje' }
+  },
+  {
     path: 'estadisticas',
     loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule),
     canActivate: [FeatureFlagGuard],
@@ -66,6 +72,10 @@ const routes: Routes = [
       {
         path: 'campanas',
         loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
+      },
+      {
+        path: 'puntos-verdes',
+        loadChildren: () => import('./features/admin/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesAdminModule)
       },
       {
         path: 'feature-toggles',

@@ -21,21 +21,48 @@ export class RecyclingService {
 
   constructor(private http: HttpClient) {}
 
+  private mapPoint(p: any): GreenPoint {
+    return {
+      id: p.id,
+      nombre: p.nombre,
+      direccion: p.direccion,
+      zona: p.zona || 'Cerca de ti',
+      estado: p.estado,
+      activo: p.estado === 'ACTIVO' || p.estado === 'Abierto' || p.estado === 'abierto' || p.estado === 'activo',
+      horarios: p.horarios,
+      tiposMaterial: p.tiposMaterial,
+      latitud: p.latitud,
+      longitud: p.longitud,
+      imagenUrl: p.imagenUrl
+    } as GreenPoint;
+  }
+
   getPuntosVerdes(): Observable<GreenPoint[]> {
     return this.http.get<any[]>(this.apiUrl).pipe(
-      map(puntos => puntos.map(p => ({
-        id: p.id,
-        nombre: p.nombre,
-        direccion: p.direccion,
-        zona: p.zona || 'Cerca de ti',
-        estado: p.estado,
-        activo: p.estado === 'ACTIVO' || p.estado === 'Abierto',
-        horarios: p.horarios,
-        tiposMaterial: p.tiposMaterial,
-        latitud: p.latitud,
-        longitud: p.longitud
-      } as GreenPoint)))
+      map(puntos => puntos.map(p => this.mapPoint(p)))
     );
+  }
+
+  getPuntoVerdeById(id: number): Observable<GreenPoint> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+      map(p => this.mapPoint(p))
+    );
+  }
+
+  createPuntoVerde(data: Partial<GreenPoint>): Observable<GreenPoint> {
+    return this.http.post<any>(this.apiUrl, data).pipe(
+      map(p => this.mapPoint(p))
+    );
+  }
+
+  updatePuntoVerde(id: number, data: Partial<GreenPoint>): Observable<GreenPoint> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, data).pipe(
+      map(p => this.mapPoint(p))
+    );
+  }
+
+  deletePuntoVerde(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
   getNearbyPoints(): Observable<GreenPoint[]> {

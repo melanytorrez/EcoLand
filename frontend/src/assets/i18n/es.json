@@ -280,7 +280,16 @@
       "btn_view_all": "Ver todos los puntos",
       "status_open": "Abierto",
       "status_closed": "Cerrado",
-      "hours_unavailable": "Horario no disponible"
+      "hours_unavailable": "Horario no disponible",
+      "materials_accepted": "MATERIALES ACEPTADOS",
+      "materials": {
+        "glass": "Vidrio",
+        "plastic": "Plástico",
+        "paper": "Papel",
+        "metal": "Metal",
+        "electronics": "Electrónicos",
+        "organics": "Orgánicos"
+      }
     },
     "route_card": {
       "title": "Próxima Ruta",
@@ -422,6 +431,7 @@
     "nav": {
       "dashboard": "Panel de Control",
       "reforestation": "Reforestación",
+      "green_points": "Puntos Verdes",
       "recycling": "Reciclaje",
       "users": "Usuarios",
       "reports": "Reportes",

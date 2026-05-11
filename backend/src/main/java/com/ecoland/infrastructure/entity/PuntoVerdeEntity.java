@@ -37,6 +37,9 @@ public class PuntoVerdeEntity {
     private Double latitud;
     private Double longitud;
 
+    @Column(name = "imagen_url")
+    private String imagenUrl;
+
     public PuntoVerdeEntity() {
     }
 
@@ -118,6 +121,14 @@ public class PuntoVerdeEntity {
 
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 
 }

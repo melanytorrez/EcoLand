@@ -57,6 +57,7 @@ public class PuntoVerdeRepositoryAdapter implements PuntoVerdeRepositoryPort {
         p.setTiposMaterial(e.getTiposMaterial());
         p.setLatitud(e.getLatitud());
         p.setLongitud(e.getLongitud());
+        p.setImagenUrl(e.getImagenUrl());
 
         if (e.getHorarios() != null) {
             p.setHorarios(e.getHorarios().stream()
@@ -86,6 +87,7 @@ public class PuntoVerdeRepositoryAdapter implements PuntoVerdeRepositoryPort {
         e.setTiposMaterial(p.getTiposMaterial());
         e.setLatitud(p.getLatitud());
         e.setLongitud(p.getLongitud());
+        e.setImagenUrl(p.getImagenUrl());
 
         if (p.getHorarios() != null) {
             List<PuntoVerdeHorarioEntity> horariosEntity = p.getHorarios().stream()

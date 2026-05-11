@@ -1,0 +1,193 @@
+<div class="p-8 bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Gestión de Puntos Verdes</h1>
+      <p class="text-gray-600 text-lg">Administra los centros de reciclaje</p>
+    </div>
+    <button
+      (click)="openModal()"
+      class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold hover:shadow-xl hover:shadow-[#4CAF50]/30 transition-all"
+    >
+      <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
+      Nuevo Punto Verde
+    </button>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="mb-6">
+    <div class="relative">
+      <lucide-icon name="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></lucide-icon>
+      <input
+        type="text"
+        placeholder="Buscar por nombre o zona..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchChange()"
+        class="w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50] transition-all"
+      />
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="flex justify-center items-center py-20">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2E7D32]"></div>
+  </div>
+
+  <!-- Table -->
+  <div *ngIf="!isLoading" class="bg-white rounded-3xl shadow-lg border-2 border-gray-200 overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-gradient-to-r from-[#E8F5E9] to-[#C8E6C9]">
+          <tr>
+            <th class="px-6 py-4 text-left font-semibold text-gray-900">Nombre</th>
+            <th class="px-6 py-4 text-left font-semibold text-gray-900">Dirección</th>
+            <th class="px-6 py-4 text-left font-semibold text-gray-900">Zona</th>
+            <th class="px-6 py-4 text-left font-semibold text-gray-900">Estado</th>
+            <th class="px-6 py-4 text-left font-semibold text-gray-900">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr *ngFor="let point of filteredPoints" class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <lucide-icon name="map-pin" class="w-6 h-6 text-white"></lucide-icon>
+                </div>
+                <span class="font-semibold text-gray-900">{{ point.nombre }}</span>
+              </div>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-600">{{ point.direccion }}</td>
+            <td class="px-6 py-4">
+              <span class="px-3 py-1.5 bg-[#E8F5E9] text-[#2E7D32] text-sm font-semibold rounded-full">
+                {{ point.zona }}
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <span
+                class="px-3 py-1.5 text-sm font-semibold rounded-full"
+                [ngClass]="point.activo ? 'bg-[#4CAF50] text-white' : 'bg-gray-100 text-gray-600'"
+              >
+                {{ point.estado }}
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <button 
+                  (click)="openModal(point)"
+                  class="p-2 text-[#4CAF50] hover:bg-[#E8F5E9] rounded-xl transition-colors"
+                >
+                  <lucide-icon name="edit" class="w-4 h-4"></lucide-icon>
+                </button>
+                <button
+                  (click)="handleDelete(point.id)"
+                  class="p-2 text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+                >
+                  <lucide-icon name="trash-2" class="w-4 h-4"></lucide-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <!-- Empty State -->
+          <tr *ngIf="filteredPoints.length === 0">
+            <td colspan="5" class="px-6 py-10 text-center text-gray-500">
+              No se encontraron puntos verdes que coincidan con la búsqueda.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-3xl p-8 max-w-2xl w-full shadow-2xl animate-in fade-in zoom-in duration-200">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">
+          {{ isEditing ? 'Editar Punto Verde' : 'Nuevo Punto Verde' }}
+        </h2>
+        <button (click)="closeModal()" class="text-gray-400 hover:text-gray-600">
+          <lucide-icon name="x" class="w-6 h-6"></lucide-icon>
+        </button>
+      </div>
+
+      <form (submit)="$event.preventDefault(); savePoint()" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Nombre</label>
+            <input
+              type="text"
+              [(ngModel)]="selectedPoint.nombre"
+              name="nombre"
+              placeholder="Ej: Punto Verde Plaza Colón"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#4CAF50] transition-all"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Zona</label>
+            <input
+              type="text"
+              [(ngModel)]="selectedPoint.zona"
+              name="zona"
+              placeholder="Ej: Norte, Centro, Sur"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#4CAF50] transition-all"
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Dirección</label>
+          <input
+            type="text"
+            [(ngModel)]="selectedPoint.direccion"
+            name="direccion"
+            placeholder="Ej: Av. Heroínas esq. Plaza Colón"
+            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#4CAF50] transition-all"
+            required
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Estado</label>
+            <select
+              [(ngModel)]="selectedPoint.estado"
+              name="estado"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#4CAF50] transition-all"
+            >
+              <option value="ACTIVO">Activo</option>
+              <option value="INACTIVO">Inactivo</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">URL Imagen (Opcional)</label>
+            <input
+              type="text"
+              [(ngModel)]="selectedPoint.imagenUrl"
+              name="imagenUrl"
+              placeholder="https://ejemplo.com/imagen.jpg"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#4CAF50] transition-all"
+            />
+          </div>
+        </div>
+
+        <div class="flex gap-4 mt-8">
+          <button
+            type="button"
+            (click)="closeModal()"
+            class="flex-1 px-6 py-3 border-2 border-gray-200 text-gray-600 rounded-2xl font-semibold hover:bg-gray-50 transition-all"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="flex-1 px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold hover:shadow-lg transition-all"
+          >
+            {{ isEditing ? 'Guardar Cambios' : 'Crear Punto' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

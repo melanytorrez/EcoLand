@@ -3,23 +3,24 @@ package com.ecoland.application.service;
 import com.ecoland.domain.model.PuntoVerde;
 import com.ecoland.domain.port.out.PuntoVerdeRepositoryPort;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 class PuntoVerdeServiceTest {
@@ -43,7 +44,7 @@ class PuntoVerdeServiceTest {
         SecurityContext securityContext = mock(SecurityContext.class);
         Authentication authentication = mock(Authentication.class);
         lenient().doReturn(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMINISTRADOR")))
-            .when(authentication).getAuthorities();
+                .when(authentication).getAuthorities();
         lenient().when(securityContext.getAuthentication()).thenReturn(authentication);
         SecurityContextHolder.setContext(securityContext);
 
@@ -87,9 +88,8 @@ class PuntoVerdeServiceTest {
         when(puntoVerdeRepositoryPort.findById(anyLong())).thenReturn(Optional.empty());
 
         // Act & Assert
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                puntoVerdeService.getPuntoVerdeById(99L)
-        );
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> puntoVerdeService.getPuntoVerdeById(99L));
         assertEquals("Punto Verde no encontrado", exception.getMessage());
     }
 
@@ -134,5 +134,56 @@ class PuntoVerdeServiceTest {
 
         // Assert
         verify(puntoVerdeRepositoryPort, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void testUpdatePuntoVerde_NotFound() {
+        // Arrange
+        when(puntoVerdeRepositoryPort.findById(anyLong())).thenReturn(Optional.empty());
+
+        // Act & Assert
+        RuntimeException ex = assertThrows(RuntimeException.class,
+                () -> puntoVerdeService.updatePuntoVerde(99L, new PuntoVerde()));
+        assertEquals("Punto Verde no encontrado", ex.getMessage());
+    }
+
+    @Test
+    void testDeletePuntoVerde_NotFound() {
+        // Arrange
+        when(puntoVerdeRepositoryPort.findById(anyLong())).thenReturn(Optional.empty());
+
+        // Act & Assert
+        RuntimeException ex = assertThrows(RuntimeException.class, () -> puntoVerdeService.deletePuntoVerde(99L));
+        assertEquals("Punto Verde no encontrado", ex.getMessage());
+    }
+
+    @Test
+    void testIsActivo_VariousStates() {
+        PuntoVerde p = new PuntoVerde();
+
+        p.setEstado("abierto");
+        assertTrue(p.isActivo());
+
+        p.setEstado("ACTIVO");
+        assertTrue(p.isActivo());
+
+        p.setEstado("cerrado");
+        assertFalse(p.isActivo());
+
+        p.setEstado(null);
+        assertFalse(p.isActivo());
+    }
+
+    @Test
+    void testGetAllPuntosVerdes_Empty() {
+        // Arrange
+        when(puntoVerdeRepositoryPort.findAll()).thenReturn(List.of());
+
+        // Act
+        List<PuntoVerde> result = puntoVerdeService.getAllPuntosVerdes();
+
+        // Assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 }

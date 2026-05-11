@@ -11,6 +11,7 @@ export interface GreenPoint {
   longitud?: number;
   creatorId?: number;
   isApproved?: boolean;
+  imagenUrl?: string;
 }
 
 export interface GreenPointSchedule {
