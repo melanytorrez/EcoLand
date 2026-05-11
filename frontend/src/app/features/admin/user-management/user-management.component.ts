@@ -6,7 +6,46 @@ import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
-  standalone: false
+  standalone: false,
+  styles: [`
+    .btn-approve {
+      background-color: #18971eff !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .btn-approve:hover {
+      background-color: #1B5E20 !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 20px -5px rgba(46, 125, 50, 0.4) !important;
+    }
+    .btn-approve:active {
+      transform: scale(0.95) !important;
+    }
+    .btn-reject {
+      background-color: #C62828 !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .btn-reject:hover {
+      background-color: #B71C1C !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 20px -5px rgba(198, 40, 40, 0.4) !important;
+    }
+    .btn-reject:active {
+      transform: scale(0.95) !important;
+    }
+    .btn-view {
+      background-color: #eff6ff !important;
+      color: #1d4ed8 !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .btn-view:hover {
+      background-color: #dbeafe !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 20px -5px rgba(29, 78, 216, 0.2) !important;
+    }
+    .btn-view:active {
+      transform: scale(0.95) !important;
+    }
+  `]
 })
 export class UserManagementComponent implements OnInit {
   pendingRequests: User[] = [];
@@ -19,7 +58,7 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
