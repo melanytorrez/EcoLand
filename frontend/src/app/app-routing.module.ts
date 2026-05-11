@@ -68,6 +68,10 @@ const routes: Routes = [
         loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
       },
       {
+        path: 'puntos-verdes',
+        loadChildren: () => import('./features/admin/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesAdminModule)
+      },
+      {
         path: 'feature-toggles',
         loadChildren: () => import('./features/feature-toggles-admin/feature-toggles-admin-module').then(m => m.FeatureTogglesAdminModule),
         canActivate: [RoleGuard],
