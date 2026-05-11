@@ -23,7 +23,7 @@ export interface MonthlyData {
 
 export interface ResidueData {
   type: string;
-  percentage: number;
+  amount: number;
 }
 
 export interface ZoneActivity {
