@@ -49,8 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.com$/i)]],
-      password: ['', Validators.required],
-      role: ['Usuario']
+      password: ['', Validators.required]
     });
 
     this.redirectTo = this.route.snapshot.queryParamMap.get('redirectTo') || '';
@@ -103,24 +102,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.error = '';
 
-    const { email, password, role } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
     this.authService.login({ email, password }).subscribe({
       next: (response: any) => {
         this.authService.setSession(response);
 
-        const selectedRole = role === 'Administrador' ? 'admin' : 'usuario';
         const actualRole = this.authService.normalizeRole(response?.role);
-
-        if (selectedRole !== actualRole) {
-          this.authService.logout();
-          this.error = selectedRole === 'admin'
-            ? this.translate.instant('auth.login.errors.no_admin_permissions')
-            : this.translate.instant('auth.login.errors.admin_account_required');
-          this.isLoading = false;
-          this.cdr.detectChanges();
-          return;
-        }
 
         if (actualRole === 'admin') {
           this.router.navigate(['/admin']);
@@ -142,7 +130,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.error = '';
 
-    const role = this.loginForm.get('role')?.value;
 
     this.authService.loginWithGoogle(idToken).subscribe({
       next: (response: any) => {

@@ -30,22 +30,22 @@
       <div>
         <h3 class="font-semibold text-lg mb-4">{{ 'footer.columns.platform.title' | translate }}</h3>
         <ul class="space-y-3">
-          <li>
+          <li *ngIf="isFeatureEnabled('reforestacion')">
             <a routerLink="/reforestacion" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
               {{ 'footer.columns.platform.reforestation' | translate }}
             </a>
           </li>
-          <li>
+          <li *ngIf="isFeatureEnabled('reciclaje')">
             <a routerLink="/reciclaje" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
               {{ 'footer.columns.platform.recycling' | translate }}
             </a>
           </li>
-          <li>
+          <li *ngIf="isFeatureEnabled('estadisticas')">
             <a routerLink="/estadisticas" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
               {{ 'footer.columns.platform.stats' | translate }}
             </a>
           </li>
-          <li>
+          <li *ngIf="isAdmin">
             <a routerLink="/admin" class="text-[#A5D6A7] hover:text-white transition-colors text-sm">
               {{ 'footer.columns.platform.admin' | translate }}
             </a>
