@@ -51,6 +51,10 @@
       },
       "messages": {
         "generic_error": "Error al registrar. Por favor, inténtelo de nuevo."
+      },
+      "validation": {
+        "required": "Por favor, completa todos los campos obligatorios.",
+        "password_mismatch": "Las contraseñas no coinciden."
       }
     },
     "validation": {
