@@ -107,6 +107,33 @@ EcoLand/
 └── README.md
 ```
 
+Backend (Java/Spring Boot)
+Desde la carpeta backend/:
+
+
+# Correr todos los tests
+mvn test
+
+# Correr un test específico
+mvn test -Dtest=FeatureToggleServiceTest
+
+# Ver reporte de cobertura (JaCoCo) — genera HTML en target/site/jacoco/
+mvn verify
+El reporte de cobertura queda en backend/target/site/jacoco/index.html.
+
+Frontend (Angular/Jasmine)
+Desde la carpeta frontend/:
+
+# Correr todos los tests (abre navegador Chrome)
+npm test
+
+# Correr un archivo específico
+npx ng test --include="**/admin.service.spec.ts" --watch=false
+
+# Ver cobertura
+npx ng test --code-coverage --watch=false
+El reporte de cobertura queda en frontend/coverage/index.html.
+
 
 *EcoLand es un proyecto académico desarrollado para el Taller de Sistemas de Información.*
 
