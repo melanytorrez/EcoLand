@@ -1,17 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { HeaderComponent } from './header.component';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService, UserSession } from '../../../core/services/auth.service';
 import { FeatureFlagService } from '../../../core/services/feature-flag.service';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-
-@Pipe({ name: 'translate', standalone: false })
-class FakeTranslatePipe implements PipeTransform {
-  transform(value: string): string { return value; }
-}
 
 class RouterStub {
   url = '/';
@@ -19,43 +13,42 @@ class RouterStub {
   navigate = jasmine.createSpy('navigate');
 }
 
-class TranslateServiceStub {
-  currentLang = 'es';
-  onLangChange = new Subject<any>();
-  use = jasmine.createSpy('use');
+class AuthServiceStub {
+  private readonly userSubject = new BehaviorSubject<UserSession | null>(null);
+  user$ = this.userSubject.asObservable();
+  logout = jasmine.createSpy('logout').and.callFake(() => this.userSubject.next(null));
+
+  setUser(user: UserSession | null): void {
+    this.userSubject.next(user);
+  }
 }
 
 class FeatureFlagServiceStub {
-  features$ = new BehaviorSubject<any>({});
-  isFeatureEnabled(): boolean { return true; }
+  isFeatureEnabled(): boolean {
+    return true;
+  }
 }
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let authService: AuthServiceStub;
   let router: RouterStub;
 
   beforeEach(async () => {
-    authServiceSpy = jasmine.createSpyObj('AuthService', [
-      'getUser', 'isAuthenticated', 'logout', 'normalizeRole'
-    ]);
-    authServiceSpy.getUser.and.returnValue(null);
-    authServiceSpy.isAuthenticated.and.returnValue(false);
-    authServiceSpy.normalizeRole.and.returnValue('usuario');
-
+    authService = new AuthServiceStub();
     router = new RouterStub();
 
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent, FakeTranslatePipe],
+      declarations: [HeaderComponent],
       providers: [
-        { provide: AuthService, useValue: authServiceSpy },
+        { provide: AuthService, useValue: authService },
         { provide: FeatureFlagService, useClass: FeatureFlagServiceStub },
-        { provide: Router, useValue: router },
-        { provide: TranslateService, useClass: TranslateServiceStub }
+        { provide: Router, useValue: router }
       ],
       schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -66,59 +59,49 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return false for isAuthenticated when no user is logged in', () => {
-    authServiceSpy.isAuthenticated.and.returnValue(false);
-    expect(component.isAuthenticated).toBeFalse();
+  it('should show login/register when user is not authenticated', () => {
+    authService.setUser(null);
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Iniciar sesi\u00f3n');
+    expect(text).toContain('Registrarse');
+    expect(text).not.toContain('Salir');
   });
 
-  it('should return true for isAuthenticated when user is logged in', () => {
-    authServiceSpy.isAuthenticated.and.returnValue(true);
-    expect(component.isAuthenticated).toBeTrue();
+  it('should show user name and logout when user is authenticated', () => {
+    authService.setUser({ fullName: 'Ana Perez', email: 'ana@mail.com', role: 'Usuario' });
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Ana Perez');
+    expect(text).toContain('Salir');
+    expect(text).not.toContain('Registrarse');
   });
 
-  it('should return null for user when no session exists', () => {
-    authServiceSpy.getUser.and.returnValue(null);
-    expect(component.user).toBeNull();
+  it('should show admin view button when authenticated user is admin', () => {
+    authService.setUser({ fullName: 'Admin', email: 'admin@mail.com', role: 'Administrador' });
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Vista Administrador');
   });
 
-  it('should return user data when a session exists', () => {
-    const mockUser = { id: 1, nombre: 'Ana Verde', email: 'ana@eco.com', role: 'Usuario' };
-    authServiceSpy.getUser.and.returnValue(mockUser);
-    expect(component.user).toEqual(mockUser);
-  });
+  it('should logout and navigate to home when clicking logout', () => {
+    authService.setUser({ fullName: 'Ana Perez', email: 'ana@mail.com', role: 'Usuario' });
+    fixture.detectChanges();
 
-  it('should identify admin user correctly', () => {
-    authServiceSpy.getUser.and.returnValue({ nombre: 'Admin', role: 'ADMINISTRADOR' });
-    authServiceSpy.normalizeRole.and.returnValue('admin');
-    expect(component.isAdmin).toBeTrue();
-  });
+    const buttons = fixture.nativeElement.querySelectorAll('button');
+    const logoutButton = Array.from(buttons).find((btn: any) =>
+      (btn as HTMLButtonElement).textContent?.includes('Salir')
+    ) as HTMLButtonElement;
 
-  it('should return false for isAdmin when user is not admin', () => {
-    authServiceSpy.getUser.and.returnValue({ nombre: 'User', role: 'Usuario' });
-    authServiceSpy.normalizeRole.and.returnValue('usuario');
-    expect(component.isAdmin).toBeFalse();
-  });
+    expect(logoutButton).toBeTruthy();
 
-  it('should identify lider user correctly', () => {
-    authServiceSpy.getUser.and.returnValue({ nombre: 'Líder', role: 'LIDER' });
-    authServiceSpy.normalizeRole.and.returnValue('lider');
-    expect(component.isLeader).toBeTrue();
-  });
+    logoutButton.click();
+    fixture.detectChanges();
 
-  it('should call logout and navigate to / when confirmLogout is called', () => {
-    component.confirmLogout();
-    expect(authServiceSpy.logout).toHaveBeenCalled();
+    expect(authService.logout).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/']);
-  });
-
-  it('should set showLogoutModal to true when logout is called', () => {
-    component.logout();
-    expect(component.showLogoutModal).toBeTrue();
-  });
-
-  it('should set showLogoutModal to false when cancelLogout is called', () => {
-    component.logout();
-    component.cancelLogout();
-    expect(component.showLogoutModal).toBeFalse();
   });
 });
