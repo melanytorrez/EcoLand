@@ -5,6 +5,7 @@ import { FeatureFlagService } from '../../../core/services/feature-flag.service'
 import { FeatureFlags } from '../../../core/config/feature-flags.config';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SUPPORTED_LANGUAGES } from '../../../core/config/languages.config';
 
 @Component({
   selector: 'app-header',
@@ -18,12 +19,7 @@ export class HeaderComponent implements OnInit {
   showLogoutModal = false;
   langOpen = false;
 
-  languages = [
-    { code: 'es', label: 'Español',   flag: '🇧🇴' },
-    { code: 'en', label: 'English',   flag: '🇬🇧' },
-    { code: 'pt', label: 'Português', flag: '🇧🇷' },
-    { code: 'fr', label: 'Français',  flag: '🇫🇷' },
-  ];
+  languages = SUPPORTED_LANGUAGES;
 
   allNavItems = [
     { path: '/',              label: 'header.nav.home',          feature: 'inicio' },
@@ -112,7 +108,12 @@ export class HeaderComponent implements OnInit {
   }
 
   switchLanguage(lang: string) {
+    if (!this.languages.some(language => language.code === lang)) {
+      return;
+    }
+
     this.currentLang = lang;
+    document.documentElement.lang = lang;
     this.translate.use(lang);
     localStorage.setItem('ecoland_lang', lang);
     this.langOpen = false;

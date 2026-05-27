@@ -42,7 +42,7 @@ export class ReforestacionComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        this.error = this.translate.instant('reforestacion.messages.load_error');
+        this.error = this.translate.instant('reforestation.messages.load_error');
         this.isLoading = false;
         this.cdr.detectChanges();
         console.error('Error loading campaigns:', err);
@@ -77,7 +77,7 @@ export class ReforestacionComponent implements OnInit {
     this.router.navigate(['/login'], {
       queryParams: {
         redirectTo: `/reforestacion/${campaignId}`,
-        message: this.translate.instant('reforestacion.messages.login_required')
+        message: this.translate.instant('reforestation.messages.login_required')
       }
     });
   }
