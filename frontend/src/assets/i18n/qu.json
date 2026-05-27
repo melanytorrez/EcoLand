@@ -1,0 +1,692 @@
+{
+  "auth": {
+    "login": {
+      "title": "Yaykuy",
+      "subtitle": "EcoLandman kutimuy, allin hamusqa kachkanki",
+      "inputs": {
+        "email": {
+          "label": "Elektroniku qillqa",
+          "placeholder": "qan@email.com"
+        },
+        "password": {
+          "label": "Pakasqa rimay",
+          "placeholder": "••••••••"
+        },
+        "role": {
+          "label": "Apaykachaqpa rikch'aynin",
+          "user": "Apaykachaq",
+          "admin": "Kamachiq"
+        }
+      },
+      "submit_button": "Yaykuy",
+      "loading": "K'askachkan...",
+      "footer": {
+        "register_question": "¿Manachu yupayniyuq kanki?",
+        "register_link": "Kaypi qillqakuy",
+        "back_home": "← Qallariyman kutiy"
+      },
+      "errors": {
+        "no_admin_permissions": "Yupayniykiqa mana kamachiqpa saqillayninkunatachu hap'in.",
+        "admin_account_required": "Yupayniykiqa kamachiqpata. Kamachiq yaykuyta akllay.",
+        "invalid_credentials": "Pakasqa rimay icha elektroniku qillqa pantasqa, wakmanta kallpachakuy."
+      }
+    },
+    "register": {
+      "title": "Yupayta kamay",
+      "subtitle": "EcoLand aylluman hukllakuy",
+      "inputs": {
+        "full_name": {
+          "label": "Hunt'a suti",
+          "placeholder": "Juan Pérez"
+        },
+        "confirm_password": {
+          "label": "Pakasqa rimayta takyachiy",
+          "placeholder": "Pakasqa rimayniykita wakmanta qillqay"
+        }
+      },
+      "submit_button": "Yupayta kamay",
+      "footer": {
+        "login_question": "¿Ñachu yupayniyuq kanki?",
+        "login_link": "Kaypi yaykuy"
+      },
+      "messages": {
+        "generic_error": "Qillqakuypi pantay. Ama hina kaspa, wakmanta kallpachakuy."
+      },
+      "validation": {
+        "required": "Ama hina kaspa, tukuy mañakusqa pampakunata hunt'achiy.",
+        "password_mismatch": "Pakasqa rimaykunaqa mana kikinchu."
+      }
+    },
+    "validation": {
+      "required": "Kay pampaqa mañakusqa.",
+      "required_email": "Elektroniku qillqa mañakusqa.",
+      "required_password": "Pakasqa rimay mañakusqa.",
+      "invalid_email": "Elektroniku qillqap rikch'aynin mana allinchu",
+      "missing_at": "Elektroniku qillqapi @ unanchay pisichkan.",
+      "missing_com": "Elektroniku qillqa .com nisqapi tukukunan tiyan.",
+      "password_mismatch": "Pakasqa rimaykunaqa mana kikinchu.",
+      "password_rules": {
+        "min_length": "Aswan pisi 8 sanampakuna.",
+        "upper": "Hatun qillqa pisichkan.",
+        "lower": "Uchuy qillqa pisichkan.",
+        "number": "Yupay pisichkan.",
+        "special": "Sapaq sanampa pisichkan."
+      }
+    }
+  },
+  "navigation": {
+    "home": "Qallariy",
+    "reforestation": "Yurakunata musuqmanta tarpuy",
+    "campaigns": "Musuqmanta apaykachay kampañakuna",
+    "recycling": "Musuqmanta apaykachay",
+    "stats": "Yupay yachaykuna",
+    "admin": "Kamachiq panel",
+    "logout": "Lluqsiy"
+  },
+  "campaign_detail": {
+    "sections": {
+      "description": "Willay",
+      "requirements": "Mañakusqakuna",
+      "organizer_info": "Kamachiq runamanta willay",
+      "contact": "Tupaq:"
+    },
+    "sidebar": {
+      "date_label": "P'unchay",
+      "time_label": "Pacha",
+      "location_label": "Maypi kasqan",
+      "spots_label": "Kachkanraq yaykunapaq",
+      "spots_available_of": "{{available}} kay {{total}}manta",
+      "cta_button": "Munani yanapaq kankuyta",
+      "cta_loading": "Qillqachkan...",
+      "cta_already_registered": "Ña qillqasqa kachkanki",
+      "cta_no_spots": "Mana cupokuna kanchu",
+      "back_link": "Huk kampañakunata qhaway"
+    },
+    "messages": {
+      "invalid_campaign": "Mana allin kampaña.",
+      "load_error": "Mana atikunchu kampañap sut'inchasqa willayninta apamuyta.",
+      "login_required": "Yurakunata musuqmanta tarpuy kampañapi yanapanapaq ñawpaqta yaykunayki tiyan.",
+      "no_session": "Mana ruwachkaq sesión tarisqachu.",
+      "participation_success": "Yanapakuyniyki allinta qillqasqa.",
+      "participation_error": "Mana atikunchu yanapakuyniykita tukuchiyta. Wakmanta kallpachakuy.",
+      "already_registered_info": "Ña kay kampañapi qillqasqa kachkanki.",
+      "loading": "Kampaña k'askachkan...",
+      "participation_error_late": "Qillqakuyta munaspa pantay. Qhipaman wakmanta kallpachakuy."
+    },
+    "states": {
+      "loading": "Kampaña k'askachkan...",
+      "error_back": "Kampañakunaman kutiy"
+    }
+  },
+  "campaign_admin": {
+    "header": {
+      "title": "Kampañakunap kamachikuynin",
+      "subtitle": "Yurakunata musuqmanta tarpuy kampañakunata kamachiy",
+      "btn_new": "Musuq kampaña"
+    },
+    "search": {
+      "placeholder": "Sutiman icha maypi kasqanman hina mask'ay..."
+    },
+    "table": {
+      "col_campaign": "Kampaña",
+      "col_date": "P'unchay",
+      "col_location": "Maypi kasqan",
+      "col_participants": "Yanapaqkuna",
+      "col_organizer": "Kamachiq runa",
+      "col_status": "Imayna kasqan",
+      "col_actions": "Ruraykuna",
+      "tooltip_edit": "Allichay",
+      "tooltip_delete": "Qichuy"
+    },
+    "modal": {
+      "title_new": "Musuq kampaña",
+      "title_edit": "Kampañata allichay",
+      "subtitle_new": "Kampañata kamarinapaq tukuy pampakunata hunt'achiy",
+      "subtitle_edit": "Kampañata musuqchanapaq tukuy pampakunata hunt'achiy",
+      "btn_cancel": "Saqiy",
+      "btn_save_new": "✓ Kampañata kamay",
+      "btn_save_edit": "✓ Tikraykunata waqaychay"
+    },
+    "form": {
+      "labels": {
+        "title": "Kampañap sutin *",
+        "date": "Kampañap p'unchaynin *",
+        "spots": "Kachkanraq yaykunapaq *",
+        "location": "Maypi kasqan *",
+        "status": "Kampañap imayna kasqan",
+        "organizer": "Kamachiq runa *",
+        "description": "Kampañap willaynin *",
+        "image_url": "Wankip URLnin",
+        "optional": "(munaspa)"
+      },
+      "placeholders": {
+        "title": "Kayhina: Parque Tunari 2026pi yurakunata tarpuy",
+        "spots": "Kayhina: 50",
+        "location": "Kayhina: Parque Nacional Tunari",
+        "organizer": "Kayhina: Cochabamba Alcaldía",
+        "description": "Kampañap munayninkunata, ruraykunata, chaniyuq willaykunata ima qillqay...",
+        "image_url": "https://ejemplo.com/imagen.jpg"
+      },
+      "status_options": {
+        "scheduled": "P'unchaychasqa",
+        "active": "Ruwachkan",
+        "finished": "Tukusqa"
+      }
+    }
+  },
+  "campaign_detail_user": {
+    "sections": {
+      "description": "Willay",
+      "requirements": "Mañakusqakuna",
+      "organizer_info": "Kamachiq runamanta willay",
+      "contact": "Tupaq:"
+    },
+    "sidebar": {
+      "date_label": "P'unchay",
+      "time_label": "Pacha",
+      "location_label": "Maypi kasqan",
+      "spots_label": "Qillqasqa yanapaqkuna",
+      "spots_available_of": "{{current}} kay {{total}}manta",
+      "cta_button": "Munani yanapaq kankuyta",
+      "cta_no_spots": "Mana cupokuna kanchu",
+      "cta_processing": "Ruwachkan...",
+      "cta_already_registered": "✓ Ña qillqasqa kachkanki",
+      "back_link": "Huk kampañakunata qhaway"
+    },
+    "messages": {
+      "already_registered_info": "Ña kay kampañapi qillqasqa kachkanki",
+      "loading": "Kampaña k'askachkan..."
+    }
+  },
+  "recycling_campaigns": {
+    "hero": {
+      "badge": "♻️ Musuqmanta apaykachay kampañakuna",
+      "title": "Ñuqaykup kampañakunaman hukllakuy",
+      "description": "Ayllupi musuqmanta apaykachay atipanakunapi yanapakuy, hinallataq tukuy runap pachamamanchispaq metasninman chayanapaq yanapay."
+    },
+    "filters": {
+      "search_placeholder": "Kampañata sutiman icha q'upa rikch'ayninman hina mask'ay...",
+      "filter_button": "Ch'ullanchay"
+    },
+    "card": {
+      "meta_label": "Meta:",
+      "progress_label": "Huñuy puririynin",
+      "progress_of": "kaymanta",
+      "participants_count": "{{count}} yanapaqkuna",
+      "cta_button": "Yanapakuy"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "🌱 Aswan q'umir Cochabamba",
+      "title": "Hukllapi aswan q'umir Cochabambata ruwasun",
+      "description": "Yurakunata musuqmanta tarpuy kampañakunapi yanapakuy, llaqtaykipi musuqmanta apaykachayta ima allinchay.",
+      "btn_campaigns": "Kampañakunata qhaway",
+      "btn_recycling": "Musuqmanta apaykachayta mask'ay"
+    },
+    "reforestation": {
+      "badge": "🌳 Yurakunata musuqmanta tarpuy",
+      "title": "Ruwachkaq yurakunata musuqmanta tarpuy kampañakuna",
+      "description": "Ñuqaykup kampañakunaman hukllakuy, Cochabambapi yurakunata tarpunapaq yanapay",
+      "spots": "{{count}} cupokuna",
+      "btn_participate": "Yanapakuy",
+      "btn_view_all": "Tukuy kampañakunata qhaway"
+    },
+    "recycling_promo": {
+      "badge": "♻️ Yuyayniyuq musuqmanta apaykachay",
+      "title": "Q'umir puntoskunata, huñuy ñankunata ima riqsiy",
+      "description": "Aswan qaylla reciclaje chawpikunata tariy, camiónkunap ñankunata riqsiy, ch'uya Cochabambapaq yanapay.",
+      "btn_explore": "Reciclaje sistemata mask'ay",
+      "btn_campaigns": "Reciclaje kampañakunata qhaway"
+    },
+    "stats": {
+      "activeCampaigns": "Ruwachkaq kampañakuna",
+      "totalParticipants": "Tukuy yanapaqkuna",
+      "totalCampaigns": "Tukuy kampañakuna"
+    },
+    "campaigns_section": {
+      "title": "Qhipa kampañakuna",
+      "view_all": "Tukuyta qhaway"
+    }
+  },
+  "recycling": {
+    "hero": {
+      "badge": "♻️ Reciclaje sistema",
+      "title": "Yuyayniyuqta musuqmanta apaykachay",
+      "description": "Q'umir puntoskunata tariy, huñuy ñankunata riqsiy, Cochabambapi reciclador runakunap puriyninta qatipay."
+    },
+    "map": {
+      "title": "Kawsayniyuq mapa",
+      "subtitle": "Q'umir puntoskunata, camión ñankunata, reciclador runakunap puriyninta ima mask'ay",
+      "legend": {
+        "title": "Unanchaykuna",
+        "points": "Q'umir puntoskuna",
+        "routes": "Q'upa ñankuna",
+        "recyclers": "Reciclador runakuna"
+      },
+      "markers": {
+        "green_point": "Q'umir punto • Kichasqa",
+        "truck_active": "Camión llamk'achkan",
+        "recycler_active": "Reciclador runa llamk'achkan",
+        "your_location": "📍 Maypi kachkanki"
+      },
+      "popup": {
+        "open": "Kichasqa",
+        "closed": "Wisq'asqa"
+      }
+    },
+    "points_card": {
+      "title": "Q'umir puntoskuna",
+      "subtitle": "Qanman qaylla",
+      "loading": "Q'umir puntoskuna k'askachkan...",
+      "empty": "Kunanqa mana q'umir puntoskuna kanchu.",
+      "error": "Mana atikunchu q'umir puntoskunata apamuyta. Qhipaman wakmanta kallpachakuy.",
+      "btn_view_all": "Tukuy puntoskunata qhaway",
+      "status_open": "Kichasqa",
+      "status_closed": "Wisq'asqa",
+      "hours_unavailable": "Pacha mana willasqachu",
+      "materials_accepted": "CHASKISQA MATERIALKUNA",
+      "materials": {
+        "glass": "Qhispi",
+        "plastic": "Plastiku",
+        "paper": "Raphi",
+        "metal": "Metal",
+        "electronics": "Elektroniku aparatokuna",
+        "organics": "Kawsaymanta q'upakuna"
+      }
+    },
+    "route_card": {
+      "title": "Qatiq ñan",
+      "subtitle": "Q'upa huñuy",
+      "label_day": "P'unchay:",
+      "label_date": "Fecha:",
+      "label_time": "Pacha:",
+      "label_zone": "Suyu:",
+      "label_vehicle": "Antawa:",
+      "btn_view_all": "Tukuy ñankunata qhaway"
+    },
+    "impact_card": {
+      "title": "Qanpa ruwasqayki",
+      "subtitle": "Pachamamapaq ruwasqayki",
+      "recycled": "Tukuy musuqmanta apaykachasqa",
+      "trees": "Qhispichisqa yurakuna",
+      "co2": "Pisiyachisqa CO₂",
+      "ranking": "Qanpa ñiqiyki",
+      "ranking_suffix": "tukuy reciclador runakunamanta",
+      "btn_view_stats": "Hunt'a yupay yachaykunata qhaway"
+    },
+    "messages": {
+      "geolocation_unavailable": "Maypi kasqayki mana tarikun, Cochabamba chawpinta apaykachachkan"
+    }
+  },
+  "recycling_campaign": {
+    "progress": {
+      "title": "Kampañap puririynin",
+      "subtitle": "¡Metaman ancha qayllapiña kachkanchik!",
+      "current_label": "Kunan huñusqa",
+      "goal_info": "{{goal}} kg manta",
+      "participants": "Yanapaqkuna",
+      "to_reach": "Chayanapaq pisi"
+    },
+    "sections": {
+      "description": "Willay",
+      "benefits": "Yanapakuypa allinkuna",
+      "rewards_title": "Saminchaykuna sistema",
+      "rewards_subtitle": "Yanapakuyniykipaq riqsichikuykunata hap'iy",
+      "people_count": "{{count}} runakuna"
+    },
+    "sidebar": {
+      "label_date": "P'unchay",
+      "label_location": "Maypi kasqan",
+      "label_goal": "Huñuy meta",
+      "btn_join": "Kampañaman hukllakuy",
+      "btn_back": "Huk kampañakunata qhaway",
+      "organizer_label": "Kamachiq:"
+    },
+    "loading": "Kampaña k'askachkan..."
+  },
+  "reforestation": {
+    "hero": {
+      "badge": "🌳 Yurakunata musuqmanta tarpuy kampañakuna",
+      "title": "Tikraymanta huknin kay",
+      "description": "Yurakunata musuqmanta tarpuy kampañakunaman hukllakuy, Cochabambap q'umir k'itikunata kutichinapaq yanapay."
+    },
+    "filters": {
+      "placeholder": "Kampañata sutiman icha maypi kasqanman hina mask'ay...",
+      "btn_filter": "Ch'ullanchay"
+    },
+    "states": {
+      "loading": "Sacha ukhupi kampañakunata apamuchkan...",
+      "view_all": "Tukuy kampañakunata qhaway",
+      "error_retry": "Kampañakunata apamuypi pantay. Wakmanta kallpachakuy.",
+      "no_results": "Mask'asqaykiman tupaq kampañakuna mana tarisqachu."
+    },
+    "card": {
+      "progress_label": "Qillqakuy puririynin",
+      "spots_available": "{{available}} cupokuna kachkan {{total}}manta",
+      "organizer_label": "Kamachiq:",
+      "btn_participate": "Yanapakuy"
+    },
+    "messages": {
+      "load_error": "Mana atikunchu kampañakunata apamuyta. Ama hina kaspa, tinkuyniykita qhaway.",
+      "login_required": "Yurakunata musuqmanta tarpuy kampañapi yanapakunapaq ñawpaqta yaykunayki tiyan."
+    }
+  },
+  "stats": {
+    "hero": {
+      "badge": "📊 Pachamama yupay yachaykuna",
+      "title": "Ñuqanchikpa ruwasqanchik yupaykunapi",
+      "description": "Cochabambap aswan q'umir, wiñaypaq hamuq p'unchayninman risqan puririyninta qhaway."
+    },
+    "charts": {
+      "trees": {
+        "title": "Tarpusqa yurakuna",
+        "subtitle": "Killamanta puririynin"
+      },
+      "waste": {
+        "title": "Q'upakunap rak'iynin",
+        "subtitle": "Material rikch'ayninman hina"
+      },
+      "zones": {
+        "title": "Suyukunapi ruray",
+        "subtitle": "Musuqmanta apaykachaywan yurakunata tarpuywan"
+      },
+      "volunteers": {
+        "title": "Yanapaqkunap wiñaynin",
+        "subtitle": "Killamanta yanapakuy"
+      }
+    },
+    "summary": {
+      "title": "Huñusqa pachamama ruwasqa",
+      "subtitle": "Tukuy kallpanchispa ruwasqan",
+      "co2": {
+        "label": "Pisiyachisqa CO2",
+        "subtitle": "kg/wata pisiyachisqa"
+      },
+      "campaigns": {
+        "label": "Tukuchisqa kampañakuna"
+      },
+      "trees": {
+        "label": "Tarpusqa yurakuna",
+        "equivalent": "185 hectáreas sach'aman rikch'aq",
+        "equivalent_dynamic": "{{val}} hectáreas sach'aman rikch'aq"
+      },
+      "recycling": {
+        "label": "Musuqmanta apaykachasqa q'upakuna",
+        "equivalent": "520 toneladas CO₂ pisiyachiy",
+        "equivalent_dynamic": "{{val}} toneladas CO₂ pisiyachiy"
+      },
+      "water": {
+        "label": "Waqaychasqa yaku",
+        "equivalent": "Raphiwan plastikuwan musuqmanta apaykachayrayku",
+        "subtitle": "litros waqaychasqa"
+      }
+    },
+    "datasets": {
+      "trees_planted": "Tarpusqa yurakuna",
+      "kg_recycled": "Musuqmanta apaykachasqa kg",
+      "active_volunteers": "Ruwachkaq yanapaqkuna"
+    }
+  },
+  "admin_sidebar": {
+    "logo": {
+      "subtitle": "Kamachiq panel"
+    },
+    "nav": {
+      "dashboard": "Kamachiy panel",
+      "reforestation": "Yurakunata musuqmanta tarpuy",
+      "green_points": "Q'umir puntoskuna",
+      "recycling": "Musuqmanta apaykachay",
+      "users": "Apaykachaqkuna",
+      "reports": "Willay qillqakuna",
+      "settings": "Churaykuna"
+    },
+    "footer": {
+      "user_view": "Apaykachaqpa qhawaynin"
+    }
+  },
+  "footer": {
+    "description": "Cochabambapi pachamama kamachiyta pusaykachaq plataforma. Hukllapi aswan q'umir, wiñaypaq hamuq p'unchayta ruwanchik.",
+    "columns": {
+      "platform": {
+        "title": "Plataforma",
+        "reforestation": "Yurakunata musuqmanta tarpuy",
+        "recycling": "Musuqmanta apaykachay",
+        "stats": "Yupay yachaykuna",
+        "admin": "Kamachiy"
+      },
+      "support": {
+        "title": "Yanapay",
+        "faq": "Sapa kuti tapukuykuna",
+        "guide": "Apaykachaqpa pusaqnin",
+        "contact": "Tupaq",
+        "terms": "Kamachiykuna churanakuna ima"
+      }
+    },
+    "bottom": "© 2026 EcoLand. Tukuy derechokuna waqaychasqa. Cochabambata aswan q'umir llaqta ruwachkanchik 🌱"
+  },
+  "header": {
+    "nav": {
+      "home": "Qallariy",
+      "reforestation": "Yurakunata musuqmanta tarpuy",
+      "recycling": "Musuqmanta apaykachay",
+      "stats": "Yupay yachaykuna",
+      "my_publications": "Ñuqap willakuy qillqaykuna"
+    },
+    "buttons": {
+      "admin_panel": "Kamachiq panel",
+      "logout": "Lluqsiy",
+      "login": "Yaykuy",
+      "register": "Qillqakuy"
+    },
+    "user_default": "Apaykachaq"
+  },
+  "logout_modal": {
+    "title": "Sesiónmanta lluqsiy",
+    "message": "¿Cheqachu sesiónmanta lluqsiyta munanki?",
+    "confirm": "Chaskiy",
+    "cancel": "Saqiy"
+  },
+  "profile": {
+    "header": {
+      "title": "Yanapaqpa perfilnin",
+      "subtitle": "Pachamamapaq ruwasqaykita, tarisqa atipaykunata ima qhaway"
+    },
+    "user_info": {
+      "total_participations": "{{count}} tukuy yanapakuykuna",
+      "role_user": "Apaykachaq",
+      "role_lider": "Pusaq",
+      "role_admin": "Kamachiq"
+    },
+    "actions": {
+      "control_table": "Kamachiy tabla",
+      "request_leader": "Pusaq kanaypaq mañay"
+    },
+    "promotion": {
+      "pending": "Pusaq mañakuy suyachkan",
+      "modal": {
+        "title": "Pusaq rolta mañay",
+        "description": "Pusaq kaspaqa yurakunata tarpuy kampañakunata, q'umir puntoskunata, reciclaje ñankunata ima kamariyta, kamachiyta atinki. Mañakuyniyki kamachiqwan qhawasqa kanqa.",
+        "section_motivation": "1. Munaywan qhaway",
+        "motivation_label": "¿Ima aswan hatun munayniyki kan EcoLand pusaqman tukuspa?",
+        "motivation_placeholder": "Munayniykikunata qillqay...",
+        "plans_label": "¿Ima rikch'aq kampañakunata icha q'umir puntoskunata qhipa p'unchaykunapi kamariyta yuyachkanki?",
+        "plans_placeholder": "Kayhina: uray suyupi yurakunata tarpuy kampañakuna...",
+        "section_experience": "2. Yachayniykiwan compromiso",
+        "experience_label": "¿Ñawpaqta voluntariado tantanakuykunata icha ecología ruraykunata kamachirqankichu?",
+        "experience_placeholder": "Yachayniykimanta willawayku...",
+        "commitment_label": "¿Sapa semana hayk'a pachata moderaciónman kamachikuyman quwaq?",
+        "commitment_placeholder": "Kayhina: sapa semana 5 pachakuna...",
+        "section_contact": "3. Kikinkay takyachiywan tupaq",
+        "contact_label": "WhatsApp yupay icha redes sociales (munaspa)",
+        "contact_placeholder": "+591 icha perfilniykip t'inkinqa",
+        "zone_label": "Munayniyuq k'iti (Zona/Barrio Cbbapi)",
+        "zone_placeholder": "Kayhina: Zona Norte, Cala Cala...",
+        "organization_label": "¿Ima chawpiman icha wakichikuyman kanki?",
+        "organization_placeholder": "Kayhina: UCB, Grupo Scout, hukkunapas. (Munaspa)",
+        "required_field": "Kay pampaqa mañakusqa",
+        "terms": "Chaskini, tukuy ruwasqay contenido (kampañakuna, q'umir puntoskuna icha ñankuna) ñawpaqta chawpi kamachiqpa qhawayninwan chaskiyninwan público kanqa.",
+        "cancel": "Saqiy",
+        "submit": "Mañakuyta apachiy",
+        "submitting": "Apachichkan...",
+        "validation_error": "Ama hina kaspa, mañakusqa pampakunata hunt'achiy, kamachiykunata ima chaskiy.",
+        "success_message": "Mañakuy allinta apachisqa. Huk kamachiq qhipaman qhawanqa.",
+        "error_message": "Mañakuyta apachispa pantay karqa. Wakmanta kallpachakuy."
+      }
+    },
+    "stats": {
+      "reforestation": "Yurakunata musuqmanta tarpuy ruraykuna",
+      "recycling": "Musuqmanta apaykachay ruraykuna"
+    },
+    "charts": {
+      "distribution_title": "Yanapakuykunap rak'iynin",
+      "distribution_empty": "Manaraq yanapakuykunayki kanchu graficanapaq.",
+      "monthly_title": "{{year}} watapi killamanta ruray"
+    },
+    "badges": {
+      "title": "Ñuqap insigniakunay",
+      "earned": "{{count}} tarisqa",
+      "earned_on": "Tarisqa p'unchay",
+      "empty_title": "Manaraq insigniakunata hap'irqankichu",
+      "empty_subtitle": "¡Insigniakunata hap'inapaq ruraykunapi yanapakuy!",
+      "list": {
+        "ref_1": {
+          "title": "Qallariq tarpuq",
+          "description": "Ñawpaq yurakunata tarpuy p'unchayniykipi yanapakurqanki"
+        },
+        "ref_5": {
+          "title": "Sach'ap waqaychaqnin",
+          "description": "5manta aswan yurakunata tarpuy ruraykunapi yanapakurqanki"
+        },
+        "rec_1": {
+          "title": "Musuqmanta apaykachay qallariq",
+          "description": "Reciclaje ñanniykita qallarirqanki"
+        },
+        "rec_5": {
+          "title": "Reciclaje yachaq",
+          "description": "5 icha aswan p'unchaykunapi reciclaje ruwarqanki"
+        },
+        "gen_10": {
+          "title": "Eco awqaq",
+          "description": "10 pachamama ruraykunata tukuchirqanki"
+        }
+      }
+    }
+  },
+  "admin_page": {
+    "side_bar": {
+      "user_view": "Apaykachaq qhaway",
+      "logo": {
+        "subtitle": "Kampañakunata, apaykachaqkunata, hukkunata ima kamachiy"
+      }
+    },
+    "campaign_management": {
+      "title": "Kampañakunap kamachikuynin",
+      "subtitle": "Kampañanchiskunata allin wakichisqa, allin ruwasqa ima kananpaq yanaparisun",
+      "create_button": "Musuq kampaña",
+      "search": "Kampañakunata sutiman icha maypi kasqanman hina mask'ay...",
+      "table": {
+        "name": "Suti",
+        "location": "Maypi kasqan",
+        "date": "P'unchay",
+        "spots": "Cupokuna",
+        "organizer": "Kamachiq runa",
+        "status": "Imayna kasqan",
+        "actions": "Ruraykuna",
+        "edit": "Allichay",
+        "delete": "Qichuy"
+      },
+      "loading": "Kampañakuna k'askachkan...",
+      "empty": "Mana kampañakuna kanchu qhawachinapaq."
+    },
+    "campaign_form": {
+      "title_create": "Musuq kampañata kamay",
+      "title_edit": "Kampañata allichay",
+      "subtitle_create": "Musuq yurakunata tarpuy kampañata kamarinapaq sut'inchasqa willaykunata hunt'achiy",
+      "subtitle_edit": "Kampañap sut'inchasqa willayninkunata musuqchay",
+      "fields": {
+        "name": "Kampañap sutin",
+        "description": "Kampañap sut'inchasqa willaynin",
+        "date": "Kampañap p'unchaynin",
+        "location": "Kampañap maypi kasqan",
+        "spots": "Kachkaq cupokunap yupaynin",
+        "status": "Kampañap imayna kasqan",
+        "organizer": "Kampañap kamachiqnin",
+        "image_url": "Wankip URLnin",
+        "optional": "munaspa"
+      },
+      "status_options": {
+        "scheduled": "P'unchaychasqa",
+        "active": "Ruwachkan",
+        "finished": "Tukusqa"
+      },
+      "placeholders": {
+        "name": "Kayhina: Parque Tunaripi yurakunata musuqmanta tarpuy",
+        "description": "Kayhina: Ñuqaykuman hukllakuy yurakunata tarpunapaq, Parque Tunari ecosistemata kutichinapaq. Qatiq sábado 500 yurakunata tarpunapaq yanapaqkunata munayku.",
+        "date": "Kampañap p'unchayninta akllay",
+        "location": "Kayhina: Parque Tunari, Cochabamba",
+        "spots": "Kayhina: 50",
+        "organizer": "Kayhina: Fundación EcoLand",
+        "image_url": "Kayhina: https://example.com/imagen-campaña.jpg"
+      },
+      "btn_save_new": "Kampañata kamay",
+      "btn_save_edit": "Tikraykunata waqaychay",
+      "btn_cancel": "Saqiy",
+      "loading_create": "Kampaña kamarikuchkan...",
+      "loading_edit": "Tikraykuna waqaychakuchkan...",
+      "validation": {
+        "name": "Sutiqa mañakusqa",
+        "description": "Willayqa mañakusqa",
+        "date": "P'unchayqa mañakusqa",
+        "location": "Maypi kasqanqa mañakusqa",
+        "spots": "Cupokunaqa 0manta aswan kanan tiyan",
+        "organizer": "Kamachiq runaqa mañakusqa"
+      }
+    },
+    "alert": {
+      "confirm_delete": "¿Cheqachu kay kampañata base de datosmanta wiñaypaq qichuyta munanki?",
+      "admin_login_required": "Pantay: Kamachiq hina yaykunayki tiyan.",
+      "campaign_deleted": "Kampaña allinta qichusqa.",
+      "delete_error": "Base de datosmanta kampañata qichuyta munaspa pantay karqa.",
+      "session_expired": "Pantay: Kamachiqpa sesiónnin tukusqa icha mana allinchu. Ama hina kaspa, wakmanta yaykuy.",
+      "campaign_updated": "¡Kampaña base de datospi allinta musuqchasqa!",
+      "update_error": "Servidorpi kampañata musuqchaspa pantay karqa.",
+      "campaign_created": "¡Kampaña base de datospi allinta waqaychasqa!",
+      "create_error": "Servidorpi kampañata waqaychaspa pantay karqa."
+    }
+  },
+  "shared": {
+    "or_separator": "icha",
+    "loading_generic": "K'askachkan...",
+    "confirm": "Takyachiy",
+    "cancel": "Saqiy",
+    "save": "Waqaychay",
+    "delete": "Qichuy"
+  },
+  "admin_users": {
+    "title": "Apaykachaqkunap kamachikuynin",
+    "subtitle": "Plataformapi rolkunata, promoción mañakuykunata ima kamachiy",
+    "tabs": {
+      "requests": "Suyachkaq mañakuykuna",
+      "all_users": "Tukuy apaykachaqkuna"
+    },
+    "table": {
+      "name": "Suti",
+      "email": "Email",
+      "role": "Kunan rol",
+      "status": "Imayna kasqan",
+      "actions": "Ruraykuna"
+    },
+    "actions": {
+      "approve": "Chaskiy",
+      "reject": "Mana chaskiy",
+      "revoke": "Pusaq kayta qichuy"
+    },
+    "messages": {
+      "no_requests": "Kunanqa mana suyachkaq mañakuykuna kanchu.",
+      "approve_success": "Apaykachaq allinta pusaqman wicharisqa.",
+      "reject_success": "Mañakuy mana chaskisqachu.",
+      "error": "Mañakuyta ruwaspa pantay karqa."
+    }
+  }
+}

@@ -25,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 import { FeatureFlagService } from './core/services/feature-flag.service';
 import { lastValueFrom } from 'rxjs';
+import { DEFAULT_LANGUAGE, resolveLanguage } from './core/config/languages.config';
 
 export function featureToggleInitializerFactory(featureFlagService: FeatureFlagService) {
   return () => lastValueFrom(featureFlagService.loadFeatures());
@@ -34,11 +35,20 @@ export function appInitializerFactory(translate: TranslateService, ngZone: NgZon
   return () => {
     return new Promise((resolve) => {
       ngZone.run(() => {
-        const savedLang = localStorage.getItem('ecoland_lang') || 'es';
-        translate.setDefaultLang('es');
+        const savedLang = resolveLanguage(localStorage.getItem('ecoland_lang'));
+        translate.setDefaultLang(DEFAULT_LANGUAGE);
+        localStorage.setItem('ecoland_lang', savedLang);
+        document.documentElement.lang = savedLang;
         translate.use(savedLang).subscribe({
           next: () => resolve(true),
-          error: () => resolve(true)
+          error: () => {
+            localStorage.setItem('ecoland_lang', DEFAULT_LANGUAGE);
+            document.documentElement.lang = DEFAULT_LANGUAGE;
+            translate.use(DEFAULT_LANGUAGE).subscribe({
+              next: () => resolve(true),
+              error: () => resolve(true)
+            });
+          }
         });
       });
     });
