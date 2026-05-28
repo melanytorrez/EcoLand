@@ -1,103 +1,213 @@
 <div class="p-8 max-w-7xl mx-auto min-h-screen bg-gray-50/30">
+
+  <!-- Header -->
   <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
     <div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">Postulaciones de Voluntariado</h1>
-      <p class="text-lg text-gray-500 mt-2">Revisa, aprueba o rechaza las solicitudes pendientes.</p>
+      <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Postulaciones de voluntariado</h1>
+      <p class="text-lg text-gray-500 mt-2">Administra las solicitudes de los postulantes.</p>
     </div>
-    <div
-      class="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-sm flex items-center gap-2 w-fit shadow-sm">
-      <lucide-icon name="leaf" class="w-4 h-4"></lucide-icon>
-      {{ applications.length }} pendientes
+    <div class="flex items-center gap-3 bg-white p-2 rounded-2xl shadow-sm border border-gray-100">
+      <div class="px-4 py-2 bg-green-50 text-green-700 rounded-xl font-bold text-sm flex items-center gap-2">
+        <lucide-icon name="user-check" class="w-4 h-4"></lucide-icon>
+        {{ pendingCount }} Solicitudes
+      </div>
+      <div class="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl font-bold text-sm flex items-center gap-2">
+        <lucide-icon name="users" class="w-4 h-4"></lucide-icon>
+        {{ totalCount }} Total
+      </div>
+      <div class="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-sm flex items-center gap-2">
+        <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
+        {{ acceptedCount }} Aprobadas
+      </div>
     </div>
   </div>
 
-  <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-24 gap-4">
-    <lucide-icon name="loader-2" class="w-8 h-8 text-emerald-600 animate-spin"></lucide-icon>
-    <p class="text-gray-500">Cargando postulaciones...</p>
+  <!-- Tabs -->
+  <div class="flex items-center gap-2 p-1.5 bg-gray-100/80 rounded-2xl w-fit mb-8 backdrop-blur-sm">
+    <button type="button" (click)="setTab('pending')"
+      [class]="activeTab === 'pending' ? 'bg-white text-green-700 shadow-md' : 'text-gray-500 hover:text-gray-700'"
+      class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
+      <lucide-icon name="clock" class="w-5 h-5"></lucide-icon>
+      Solicitudes Pendientes
+    </button>
+    <button type="button" (click)="setTab('all')"
+      [class]="activeTab === 'all' ? 'bg-white text-blue-700 shadow-md' : 'text-gray-500 hover:text-gray-700'"
+      class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
+      <lucide-icon name="settings" class="w-5 h-5"></lucide-icon>
+      Todas las solicitudes
+    </button>
   </div>
 
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-32 space-y-4">
+    <div class="relative">
+      <div class="w-16 h-16 border-4 border-green-100 border-t-green-600 rounded-full animate-spin"></div>
+      <lucide-icon name="loader-2" class="w-6 h-6 text-green-600 absolute inset-0 m-auto animate-pulse"></lucide-icon>
+    </div>
+    <p class="text-gray-500 font-medium animate-pulse">Cargando postulaciones...</p>
+  </div>
+
+  <!-- Error -->
   <div *ngIf="errorMessage && !isLoading"
     class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 font-medium">
     {{ errorMessage }}
   </div>
 
-  <div *ngIf="!isLoading" class="grid gap-6">
-    <article *ngFor="let application of applications"
-      class="bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden">
-      <div class="p-6 md:p-8 grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
-        <div>
-          <div class="flex items-center gap-3 mb-3 text-emerald-700 font-semibold">
-            <lucide-icon name="badge-info" class="w-4 h-4"></lucide-icon>
-            Solicitud #{{ application.id }}
-          </div>
-          <h2 class="text-2xl font-black text-gray-900">{{ application.fullName }}</h2>
-          <p class="text-gray-500 mt-1">{{ application.usuarioEmail }}</p>
+  <!-- Table -->
+  <div *ngIf="!isLoading" class="animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div class="vol-table-wrapper">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="vol-thead-row">
+              <th class="vol-th">Solicitante</th>
+              <th class="vol-th">Email</th>
+              <th class="vol-th">Estado</th>
+              <th class="vol-th text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let application of visibleApplications" class="vol-body-row group">
+              <!-- Solicitante -->
+              <td class="vol-td">
+                <div class="font-bold text-gray-900 text-sm">{{ application.fullName }}</div>
+                <div class="text-[11px] font-semibold text-gray-400 mt-0.5">ID: #{{ application.id }}</div>
+              </td>
 
-          <div class="mt-6 grid sm:grid-cols-2 gap-4 text-sm">
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Campaña</p>
-              <p class="font-semibold text-gray-800">{{ application.campaignId }}</p>
-            </div>
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Estado</p>
-              <p class="font-semibold text-gray-800">{{ getStatusLabel(application.status) }}</p>
-            </div>
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Edad</p>
-              <p class="font-semibold text-gray-800">{{ application.age }}</p>
-            </div>
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Contacto</p>
-              <p class="font-semibold text-gray-800">{{ application.phone }}</p>
-            </div>
-          </div>
-        </div>
+              <!-- Email -->
+              <td class="vol-td">
+                <span class="text-gray-600 text-sm">{{ application.usuarioEmail }}</span>
+              </td>
 
-        <div class="space-y-4">
-          <div class="rounded-2xl bg-emerald-50/60 border border-emerald-100 p-4">
-            <p class="text-sm font-semibold text-emerald-800 mb-1">Motivación</p>
-            <p class="text-gray-700 text-sm leading-relaxed">{{ application.motivation }}</p>
-          </div>
+              <!-- Estado -->
+              <td class="vol-td">
+                <div class="status-badge" [class.status-pending]="application.status === 'PENDING'"
+                  [class.status-accepted]="application.status === 'ACCEPTED'"
+                  [class.status-rejected]="application.status === 'REJECTED'">
+                  <span class="status-dot" [class.dot-pending]="application.status === 'PENDING'"
+                    [class.dot-accepted]="application.status === 'ACCEPTED'"
+                    [class.dot-rejected]="application.status === 'REJECTED'">
+                  </span>
+                  {{ application.status || 'PENDING' }}
+                </div>
+              </td>
 
-          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-4">
-            <p class="text-sm font-semibold text-gray-700 mb-1">Experiencia</p>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              {{ application.hasEnvironmentalExperience ? (application.experienceDetails || 'Sin detalle') : 'Sin
-              experiencia previa' }}
-            </p>
-          </div>
+              <!-- Acciones -->
+              <td class="vol-td">
+                <div class="flex items-center justify-center gap-2 flex-nowrap">
+                  <button type="button" class="btn-view" (click)="viewDetails(application)">
+                    <lucide-icon name="eye" class="w-3.5 h-3.5"></lucide-icon>
+                    Ver
+                  </button>
+                  <button type="button" class="btn-approve" (click)="approve(application.id!)"
+                    [disabled]="isSaving[application.id!] || application.status !== 'PENDING'">
+                    <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
+                    Aprobar
+                  </button>
+                  <button type="button" class="btn-reject" (click)="reject(application.id!)"
+                    [disabled]="isSaving[application.id!] || application.status !== 'PENDING'">
+                    <lucide-icon name="x-circle" class="w-4 h-4"></lucide-icon>
+                    Rechazar
+                  </button>
+                </div>
+              </td>
+            </tr>
 
-          <label class="block space-y-2">
-            <span class="text-sm font-semibold text-gray-700">Notas de rechazo</span>
-            <textarea [(ngModel)]="rejectionNotes[application.id!]
-              " rows="3"
-              class="w-full rounded-2xl border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4CAF50]/30 focus:border-[#4CAF50]"
-              placeholder="Opcional: agrega una nota para el postulante"></textarea>
-          </label>
-
-          <div class="flex flex-wrap gap-3 pt-2">
-            <button type="button" (click)="approve(application.id!)" [disabled]="isSaving[application.id!]"
-              class="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3 text-white font-semibold shadow-md hover:bg-emerald-700 disabled:opacity-60">
-              <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
-              Aprobar
-            </button>
-            <button type="button" (click)="reject(application.id!)" [disabled]="isSaving[application.id!]"
-              class="inline-flex items-center gap-2 rounded-2xl bg-red-600 px-4 py-3 text-white font-semibold shadow-md hover:bg-red-700 disabled:opacity-60">
-              <lucide-icon name="x-circle" class="w-4 h-4"></lucide-icon>
-              Rechazar
-            </button>
-          </div>
-        </div>
+            <!-- Empty state -->
+            <tr *ngIf="visibleApplications.length === 0">
+              <td colspan="4" class="px-8 py-20 text-center">
+                <div class="max-w-xs mx-auto">
+                  <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <lucide-icon name="user-check" class="w-10 h-10 text-gray-300"></lucide-icon>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Todo en orden</h3>
+                  <p class="text-gray-500">Cuando lleguen nuevas postulaciones aparecerán aquí.</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </article>
-
-    <div *ngIf="applications.length === 0"
-      class="bg-white rounded-[2rem] shadow-lg border border-gray-100 p-12 text-center">
-      <div class="w-16 h-16 mx-auto rounded-full bg-emerald-50 flex items-center justify-center mb-4">
-        <lucide-icon name="leaf" class="w-8 h-8 text-emerald-600"></lucide-icon>
-      </div>
-      <h3 class="text-xl font-bold text-gray-900 mb-2">No hay postulaciones pendientes</h3>
-      <p class="text-gray-500">Cuando lleguen nuevas solicitudes aparecerán aquí.</p>
     </div>
   </div>
+
+  <!-- Detail Modal -->
+  <div *ngIf="selectedApplication"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
+    (click)="closeDetails()">
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-lg w-full relative" (click)="$event.stopPropagation()">
+      <button (click)="closeDetails()"
+        class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition-colors">
+        <lucide-icon name="x" class="w-5 h-5"></lucide-icon>
+      </button>
+
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-600 to-green-400 flex items-center justify-center shadow-md">
+          <lucide-icon name="user" class="w-6 h-6 text-white"></lucide-icon>
+        </div>
+        <div>
+          <h2 class="text-xl font-extrabold text-gray-900">{{ selectedApplication.fullName }}</h2>
+          <p class="text-sm text-gray-400 font-medium">ID: #{{ selectedApplication.id }}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+        <div class="bg-gray-50 rounded-2xl px-4 py-3">
+          <p class="text-gray-400 font-medium mb-1">Email</p>
+          <p class="font-semibold text-gray-800">{{ selectedApplication.usuarioEmail }}</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl px-4 py-3">
+          <p class="text-gray-400 font-medium mb-1">Teléfono</p>
+          <p class="font-semibold text-gray-800">{{ selectedApplication.phone || '—' }}</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl px-4 py-3">
+          <p class="text-gray-400 font-medium mb-1">Edad</p>
+          <p class="font-semibold text-gray-800">{{ selectedApplication.age || '—' }}</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl px-4 py-3">
+          <p class="text-gray-400 font-medium mb-1">Horario</p>
+          <p class="font-semibold text-gray-800">{{ selectedApplication.availabilityHours || '—' }}</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl px-4 py-3 col-span-2">
+          <p class="text-gray-400 font-medium mb-1">Motivación</p>
+          <p class="font-semibold text-gray-800">{{ selectedApplication.motivation || '—' }}</p>
+        </div>
+        <div *ngIf="selectedApplication.experienceDetails" class="bg-gray-50 rounded-2xl px-4 py-3 col-span-2">
+          <p class="text-gray-400 font-medium mb-1">Experiencia previa</p>
+          <p class="font-semibold text-gray-800">{{ selectedApplication.experienceDetails }}</p>
+        </div>
+        <div *ngIf="selectedApplication.adminNotes"
+          class="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 col-span-2">
+          <p class="text-amber-600 font-medium mb-1">Notas del administrador</p>
+          <p class="font-semibold text-amber-900">{{ selectedApplication.adminNotes }}</p>
+        </div>
+      </div>
+
+      <!-- Rejection notes (only visible when PENDING) -->
+      <div *ngIf="selectedApplication.status === 'PENDING'" class="mb-4">
+        <label class="block space-y-2">
+          <span class="text-sm font-semibold text-gray-700">Nota de rechazo <span
+              class="text-gray-400 font-normal">(opcional)</span></span>
+          <textarea [(ngModel)]="rejectionNotes[selectedApplication.id!]" rows="2"
+            class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-200 focus:border-green-400 resize-none"
+            placeholder="Agrega una nota para el postulante..."></textarea>
+        </label>
+      </div>
+
+      <div *ngIf="selectedApplication.status === 'PENDING'" class="flex gap-3">
+        <button type="button" class="btn-approve flex-1 justify-center"
+          (click)="approve(selectedApplication.id!); closeDetails()" [disabled]="isSaving[selectedApplication.id!]">
+          <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
+          Aprobar
+        </button>
+        <button type="button" class="btn-reject flex-1 justify-center"
+          (click)="reject(selectedApplication.id!); closeDetails()" [disabled]="isSaving[selectedApplication.id!]">
+          <lucide-icon name="x-circle" class="w-4 h-4"></lucide-icon>
+          Rechazar
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>

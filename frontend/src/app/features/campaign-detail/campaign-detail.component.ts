@@ -119,6 +119,21 @@ export class CampaignDetailComponent implements OnInit {
     if (!this.campaign) {
       return;
     }
-    this.router.navigate(['/reforestacion', this.campaign.id, 'postular']);
+
+    // If authenticated, try to fetch existing application and pass it via navigation state
+    if (this.authService.isAuthenticated()) {
+      this.volunteerApplicationService.getMyApplication(this.campaign.id).subscribe({
+        next: (application) => {
+          this.router.navigate(['/reforestacion', this.campaign!.id, 'postular'], { state: { campaign: this.campaign, existingApplication: application } });
+        },
+        error: () => {
+          this.router.navigate(['/reforestacion', this.campaign!.id, 'postular'], { state: { campaign: this.campaign } });
+        }
+      });
+      return;
+    }
+
+    // Not authenticated: pass campaign so modal shows immediately
+    this.router.navigate(['/reforestacion', this.campaign.id, 'postular'], { state: { campaign: this.campaign } });
   }
 }
