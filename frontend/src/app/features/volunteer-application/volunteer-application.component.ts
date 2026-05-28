@@ -162,7 +162,6 @@ export class VolunteerApplicationComponent implements OnInit {
         }
       }
     });
-    });
   }
 
   submit(): void {
