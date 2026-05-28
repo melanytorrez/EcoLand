@@ -24,6 +24,7 @@ export class VolunteerApplicationComponent implements OnInit {
   userName = '';
   submitAttempted = false;
   existingApplicationStatus: string | null = null;
+    showSubmittedMessage = false;
   form!: FormGroup;
 
   constructor(
@@ -72,10 +73,14 @@ export class VolunteerApplicationComponent implements OnInit {
           motivation: app.motivation,
           availabilityHours: app.availabilityHours
         });
-        this.form.disable({ emitEvent: false });
-        this.successMessage = this.getExistingApplicationMessage();
-        this.isLoading = false;
-        this.cdr.detectChanges();
+          this.form.disable({ emitEvent: false });
+          // Ensure message displays immediately
+          this.successMessage = this.getExistingApplicationMessage();
+          setTimeout(() => {
+            this.showSubmittedMessage = true;
+            this.isLoading = false;
+            this.cdr.detectChanges();
+          }, 0);
         return;
       }
       // if campaign provided but no existing application, still show campaign immediately
@@ -228,9 +233,12 @@ export class VolunteerApplicationComponent implements OnInit {
   isFieldInvalid(fieldName: string): boolean {
     const control = this.form.get(fieldName);
     return !!control && control.invalid && (control.touched || this.submitAttempted);
-  }
-
-  getFieldError(fieldName: string): string {
+            this.successMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
+            setTimeout(() => {
+              this.showSubmittedMessage = true;
+              this.form.markAsPristine();
+              this.cdr.detectChanges();
+            }, 0);
     const control = this.form.get(fieldName);
     if (!control || !control.errors) {
       return '';
