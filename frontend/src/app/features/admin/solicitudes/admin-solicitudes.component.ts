@@ -11,7 +11,35 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-admin-solicitudes',
   templateUrl: './admin-solicitudes.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, SharedModule]
+  imports: [CommonModule, FormsModule, SharedModule],
+  styles: [`
+    .btn-reject-custom {
+      background-color: #e11d48 !important;
+      color: #ffffff !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .btn-reject-custom:hover {
+      background-color: #be123c !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 10px 15px -3px rgba(225, 29, 72, 0.3) !important;
+    }
+    .btn-reject-custom:active {
+      transform: scale(0.98) !important;
+    }
+    .btn-approve-custom {
+      background-color: #10b981 !important;
+      color: #ffffff !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .btn-approve-custom:hover {
+      background-color: #047857 !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3) !important;
+    }
+    .btn-approve-custom:active {
+      transform: scale(0.98) !important;
+    }
+  `]
 })
 export class AdminSolicitudesComponent implements OnInit {
   campaigns: Campaign[] = [];
