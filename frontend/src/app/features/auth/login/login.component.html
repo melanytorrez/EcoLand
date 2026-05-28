@@ -82,11 +82,19 @@
             </svg>
 
             <input
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               formControlName="password"
               [placeholder]="'auth.login.inputs.password.placeholder' | translate"
-              class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
+              class="w-full pl-12 pr-12 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
+
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none cursor-pointer flex items-center justify-center"
+            >
+              <lucide-icon [name]="showPassword ? 'eye-off' : 'eye'" class="w-5 h-5"></lucide-icon>
+            </button>
           </div>
         </div>
 

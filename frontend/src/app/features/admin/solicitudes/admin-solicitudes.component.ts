@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
   imports: [CommonModule, FormsModule, SharedModule],
   styles: [`
     .btn-reject-custom {
-      background-color: #e11d48 !important;
+      background-color: #c4000aff !important;
       color: #ffffff !important;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
@@ -27,12 +27,12 @@ import { TranslateService } from '@ngx-translate/core';
       transform: scale(0.98) !important;
     }
     .btn-approve-custom {
-      background-color: #10b981 !important;
+      background-color: #03a631ff !important;
       color: #ffffff !important;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
     .btn-approve-custom:hover {
-      background-color: #047857 !important;
+      background-color: #047848ff !important;
       transform: translateY(-1px) !important;
       box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3) !important;
     }
@@ -60,7 +60,7 @@ export class AdminSolicitudesComponent implements OnInit {
     private authService: AuthService,
     private translate: TranslateService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadData();

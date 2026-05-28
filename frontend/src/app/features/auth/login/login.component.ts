@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { LucideAngularModule, Leaf, Mail, Lock, User } from 'lucide-angular';
+import { LucideAngularModule, Leaf, Mail, Lock, User, Eye, EyeOff } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -17,7 +17,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     TranslateModule
   ],
   providers: [
-    { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User }) }
+    { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User, Eye, EyeOff }) }
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -25,6 +25,11 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
+  showPassword = false;
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
   error = '';
   infoMessage = '';
   redirectTo = '';
