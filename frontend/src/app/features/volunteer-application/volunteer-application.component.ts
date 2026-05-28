@@ -22,6 +22,8 @@ export class VolunteerApplicationComponent implements OnInit {
   successMessage: string | null = null;
   errorMessage: string | null = null;
   userName = '';
+  submitAttempted = false;
+  existingApplicationStatus: string | null = null;
   form!: FormGroup;
 
   constructor(
@@ -39,8 +41,8 @@ export class VolunteerApplicationComponent implements OnInit {
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       age: [18, [Validators.required, Validators.min(18)]],
       phone: ['', [Validators.required, Validators.minLength(7)]],
-      availableWeekends: [true, Validators.required],
-      hasEnvironmentalExperience: [false, Validators.required],
+      availableWeekends: [true],
+      hasEnvironmentalExperience: [false],
       experienceDetails: [''],
       motivation: ['', [Validators.required, Validators.minLength(20)]],
       availabilityHours: ['', [Validators.required]]
@@ -69,6 +71,34 @@ export class VolunteerApplicationComponent implements OnInit {
           if (this.userName) {
             this.form.patchValue({ fullName: this.userName });
           }
+
+          if (this.authService.isAuthenticated()) {
+            this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
+              next: (application) => {
+                this.existingApplicationStatus = application.status || 'PENDING';
+                this.form.patchValue({
+                  fullName: application.fullName,
+                  age: application.age,
+                  phone: application.phone,
+                  availableWeekends: application.availableWeekends,
+                  hasEnvironmentalExperience: application.hasEnvironmentalExperience,
+                  experienceDetails: application.experienceDetails || '',
+                  motivation: application.motivation,
+                  availabilityHours: application.availabilityHours
+                });
+                this.form.disable({ emitEvent: false });
+                this.successMessage = this.getExistingApplicationMessage();
+                this.isLoading = false;
+                this.cdr.detectChanges();
+              },
+              error: () => {
+                this.isLoading = false;
+                this.cdr.detectChanges();
+              }
+            });
+            return;
+          }
+
           this.isLoading = false;
           this.cdr.detectChanges();
         },
@@ -82,8 +112,21 @@ export class VolunteerApplicationComponent implements OnInit {
   }
 
   submit(): void {
-    if (!this.campaignId || this.form.invalid) {
+    this.submitAttempted = true;
+
+    if (!this.campaignId) {
+      this.errorMessage = 'No se encontró la campaña seleccionada.';
+      return;
+    }
+
+    if (this.existingApplicationStatus) {
+      this.errorMessage = 'Ya tienes una postulación enviada para esta campaña y no puedes enviar otra.';
+      return;
+    }
+
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.errorMessage = this.getValidationSummary();
       return;
     }
 
@@ -112,6 +155,10 @@ export class VolunteerApplicationComponent implements OnInit {
           this.successMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
           this.form.markAsPristine();
           this.cdr.detectChanges();
+          // Navigate back to campaign detail so CTA updates to 'Solicitud pendiente'
+          setTimeout(() => {
+            this.router.navigate(['/reforestacion', this.campaignId]);
+          }, 400);
         },
         error: (err) => {
           const serverMessage = typeof err?.error?.message === 'string' ? err.error.message : '';
@@ -123,5 +170,77 @@ export class VolunteerApplicationComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/reforestacion', this.campaignId]);
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const control = this.form.get(fieldName);
+    return !!control && control.invalid && (control.touched || this.submitAttempted);
+  }
+
+  getFieldError(fieldName: string): string {
+    const control = this.form.get(fieldName);
+    if (!control || !control.errors) {
+      return '';
+    }
+
+    if (control.errors['required']) {
+      return 'Este campo es obligatorio.';
+    }
+
+    if (control.errors['minlength']) {
+      const requiredLength = control.errors['minlength'].requiredLength;
+      return `Debe tener al menos ${requiredLength} caracteres.`;
+    }
+
+    if (control.errors['min']) {
+      return 'Debes ser mayor de edad para postularte.';
+    }
+
+    return 'Revisa este campo.';
+  }
+
+  private getValidationSummary(): string {
+    const messages: string[] = [];
+    const fields = ['fullName', 'age', 'phone', 'motivation', 'availabilityHours'];
+
+    fields.forEach((field) => {
+      if (this.isFieldInvalid(field)) {
+        const label = field === 'fullName'
+          ? 'Nombre completo'
+          : field === 'age'
+            ? 'Edad'
+            : field === 'phone'
+              ? 'Teléfono'
+              : field === 'motivation'
+                ? 'Motivación'
+                : 'Horario disponible';
+
+        messages.push(`${label}: ${this.getFieldError(field)}`);
+      }
+    });
+
+    return messages.length > 0
+      ? `Corrige lo siguiente antes de enviar: ${messages.join(' · ')}`
+      : 'Completa los campos obligatorios antes de enviar tu postulación.';
+  }
+
+  getExistingApplicationMessage(): string {
+    if (!this.existingApplicationStatus) {
+      return '';
+    }
+
+    if (this.existingApplicationStatus === 'PENDING') {
+      return 'Ya enviaste tu postulación. Su estado actual es: pendiente de revisión.';
+    }
+
+    if (this.existingApplicationStatus === 'ACCEPTED') {
+      return 'Ya enviaste tu postulación y fue aceptada.';
+    }
+
+    if (this.existingApplicationStatus === 'REJECTED') {
+      return 'Ya enviaste tu postulación y fue rechazada.';
+    }
+
+    return 'Ya tienes una postulación registrada para esta campaña.';
   }
 }
