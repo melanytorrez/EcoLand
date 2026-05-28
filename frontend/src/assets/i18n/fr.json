@@ -370,6 +370,7 @@
     "user_info": {
       "total_participations": "{{count}} participations au total",
       "role_user": "Utilisateur",
+      "role_lider": "Leader",
       "role_admin": "Administrateur"
     },
     "stats": {

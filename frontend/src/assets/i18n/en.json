@@ -384,6 +384,8 @@
     "nav": {
       "dashboard": "Dashboard",
       "reforestation": "Reforestation",
+      "volunteer_applications": "Volunteer Applications",
+      "green_points": "Green Points",
       "recycling": "Recycling",
       "campaign_requests": "Campaign Requests",
       "users": "Users",
@@ -443,6 +445,7 @@
     "user_info": {
       "total_participations": "{{count}} total participations",
       "role_user": "User",
+      "role_lider": "Leader",
       "role_admin": "Administrator"
     },
     "stats": {

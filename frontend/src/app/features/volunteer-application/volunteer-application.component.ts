@@ -34,7 +34,7 @@ export class VolunteerApplicationComponent implements OnInit {
     private volunteerApplicationService: VolunteerApplicationService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   private buildForm(): FormGroup {
     return this.fb.group({
@@ -116,6 +116,11 @@ export class VolunteerApplicationComponent implements OnInit {
 
     if (!this.campaignId) {
       this.errorMessage = 'No se encontró la campaña seleccionada.';
+      return;
+    }
+    if (!this.authService.isAuthenticated()) {
+      const currentUrl = this.router.url;
+      this.router.navigate(['/login'], { queryParams: { redirectTo: currentUrl, message: 'Debes iniciar sesión para enviar la postulación' } });
       return;
     }
 

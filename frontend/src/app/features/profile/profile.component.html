@@ -40,12 +40,11 @@
             <h2 class="text-3xl font-bold text-gray-800">{{ user.fullName || user.nombre || user.email }}</h2>
             <p class="text-lg text-gray-600 mt-1">{{ user.email }}</p>
             <div class="flex flex-wrap items-center gap-4 mt-4">
-              <!-- Role Badge -->
               <div class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl shadow-sm border border-[#A5D6A7]">
                 <lucide-icon name="award" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
                 <span class="font-semibold text-[#2E7D32]">
                   {{ (normalizedRole === 'admin' ? 'profile.user_info.role_admin' :
-                  normalizedRole === 'lider' ? 'profile.user_info.role_leader' :
+                  normalizedRole === 'lider' ? 'profile.user_info.role_lider' :
                   'profile.user_info.role_user') | translate }}
                 </span>
               </div>

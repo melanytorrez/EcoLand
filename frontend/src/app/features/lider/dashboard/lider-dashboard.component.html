@@ -105,12 +105,15 @@
             <lucide-icon name="image" class="w-12 h-12 text-gray-300"></lucide-icon>
           </div>
           <!-- Category Badge -->
-          <span class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-xs font-bold text-gray-800 shadow-sm flex items-center gap-1">
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-gray-800 shadow-sm flex items-center gap-1"
+                style="background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.9); border: 1px solid #e8f5e9;">
             <lucide-icon [name]="campaign.category === 'RECYCLING' ? 'recycle' : 'tree-deciduous'" class="w-3.5 h-3.5 text-[#2E7D32]"></lucide-icon>
             {{ campaign.category === 'RECYCLING' ? 'Reciclaje' : 'Reforestación' }}
           </span>
           <!-- Status Badge -->
-          <span [class]="'absolute top-4 right-4 px-3 py-1 text-xs font-bold rounded-full shadow-sm ' + getStatusBadgeClass(campaign.status)">
+          <span [class]="'absolute top-4 right-4 px-3 py-1 text-xs font-bold rounded-full shadow-sm ' + getStatusBadgeClass(campaign.status)"
+                [style.background-color]="campaign.status === 'PENDIENTE' ? '#FEF3C7' : (campaign.status === 'ACTIVA' || campaign.status === 'Activa' ? '#D1FAE5' : (campaign.status === 'RECHAZADA' ? '#FFE4E6' : '#F3F4F6'))"
+                style="box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.9);">
             {{ campaign.status === 'PENDIENTE' ? 'En Revisión' : (campaign.status === 'RECHAZADA' ? 'Rechazada' : campaign.status) }}
           </span>
         </div>
