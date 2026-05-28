@@ -53,4 +53,37 @@ export class CampaignService {
     });
     return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers });
   }
+
+  getMyCampaigns(token: string): Observable<Campaign[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<Campaign[]>(`${this.apiUrl}/me`, { headers });
+  }
+
+  getPendingCampaigns(token: string): Observable<Campaign[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<Campaign[]>(`${this.apiUrl}/pending`, { headers });
+  }
+
+  approveCampaign(id: number, comment: string | undefined, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    let params = new HttpParams();
+    if (comment) {
+      params = params.set('comment', comment);
+    }
+    return this.http.put<any>(`${this.apiUrl}/${id}/approve`, null, { headers, params });
+  }
+
+  rejectCampaign(id: number, comment: string, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const params = new HttpParams().set('comment', comment);
+    return this.http.put<any>(`${this.apiUrl}/${id}/reject`, null, { headers, params });
+  }
 }

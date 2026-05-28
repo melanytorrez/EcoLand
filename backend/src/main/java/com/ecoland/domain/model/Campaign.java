@@ -19,6 +19,7 @@ public class Campaign {
     private String description;
     private List<String> requirements;
     private CampaignCategory category;
+    private String moderationComment;
 
     public Campaign() {}
 
@@ -70,4 +71,7 @@ public class Campaign {
 
     public CampaignCategory getCategory() { return category; }
     public void setCategory(CampaignCategory category) { this.category = category; }
+
+    public String getModerationComment() { return moderationComment; }
+    public void setModerationComment(String moderationComment) { this.moderationComment = moderationComment; }
 }

@@ -4,6 +4,7 @@ import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.in.CampaignUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,18 @@ public class CampaignController {
         return campaignUseCase.getAllCampaigns();
     }
 
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('LIDER')")
+    public List<Campaign> getMyCampaigns() {
+        return campaignUseCase.getMyCampaigns();
+    }
+
+    @GetMapping("/pending")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public List<Campaign> getPendingCampaigns() {
+        return campaignUseCase.getPendingCampaigns();
+    }
+
     @GetMapping("/{id}")
     public Campaign getById(@PathVariable Long id) {
         return campaignUseCase.getCampaignById(id);
@@ -48,16 +61,41 @@ public class CampaignController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'LIDER')")
     public Campaign create(@RequestBody Campaign campaign) {
         return campaignUseCase.saveCampaign(campaign);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'LIDER')")
     public Campaign update(@PathVariable Long id, @RequestBody Campaign campaign) {
         return campaignUseCase.updateCampaign(id, campaign);
     }
 
+    @PutMapping("/{id}/approve")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public ResponseEntity<?> approve(@PathVariable Long id, @RequestParam(required = false) String comment) {
+        try {
+            Campaign approved = campaignUseCase.approveCampaign(id, comment);
+            return ResponseEntity.ok(approved);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}/reject")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public ResponseEntity<?> reject(@PathVariable Long id, @RequestParam(required = false) String comment) {
+        try {
+            Campaign rejected = campaignUseCase.rejectCampaign(id, comment);
+            return ResponseEntity.ok(rejected);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'LIDER')")
     public void delete(@PathVariable Long id) {
         campaignUseCase.deleteCampaign(id);
     }
