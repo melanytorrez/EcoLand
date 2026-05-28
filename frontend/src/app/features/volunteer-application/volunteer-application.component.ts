@@ -78,13 +78,22 @@ export class VolunteerApplicationComponent implements OnInit {
           this.successMessage = this.getExistingApplicationMessage();
           setTimeout(() => {
             this.showSubmittedMessage = true;
-            this.isLoading = false;
+            // leave isLoading false so modal appears
             this.cdr.detectChanges();
           }, 0);
-        return;
+          // don't return: still fetch fresh campaign data in background to ensure all fields populated
       }
       // if campaign provided but no existing application, still show campaign immediately
-      this.isLoading = false;
+        this.isLoading = false;
+        // Fetch latest campaign data in background to populate any missing fields
+        if (this.campaignId) {
+          this.campaignService.getCampaignById(this.campaignId).subscribe({
+            next: (fresh) => {
+              this.campaign = fresh;
+              this.cdr.detectChanges();
+            }, error: () => { /* ignore */ }
+          });
+        }
     }
 
     this.route.paramMap.subscribe(params => {
