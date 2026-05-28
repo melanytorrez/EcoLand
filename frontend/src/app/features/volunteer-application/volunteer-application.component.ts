@@ -206,13 +206,13 @@ export class VolunteerApplicationComponent implements OnInit {
       }))
       .subscribe({
         next: () => {
+          // Immediately reflect submitted state so modal shows 'postulación enviada' without waiting
+          this.existingApplicationStatus = 'PENDING';
+          this.form.disable({ emitEvent: false });
           this.successMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
           this.form.markAsPristine();
           this.cdr.detectChanges();
-          // Navigate back to campaign detail so CTA updates to 'Solicitud pendiente'
-          setTimeout(() => {
-            this.router.navigate(['/reforestacion', this.campaignId]);
-          }, 400);
+          
         },
         error: (err) => {
           const serverMessage = typeof err?.error?.message === 'string' ? err.error.message : '';
