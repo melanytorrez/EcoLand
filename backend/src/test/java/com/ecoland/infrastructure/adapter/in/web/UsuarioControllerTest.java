@@ -84,4 +84,50 @@ class UsuarioControllerTest {
 
         verify(usuarioUseCase, times(1)).deleteUsuario(1L);
     }
+
+    @Test
+    void testUpdateUsuario_Success() throws Exception {
+        // Arrange
+        Usuario existingUser = new Usuario();
+        existingUser.setId(1L);
+        existingUser.setNombre("Eco Old");
+        existingUser.setEmail("user@ecoland.com");
+
+        Usuario updatedUser = new Usuario();
+        updatedUser.setId(1L);
+        updatedUser.setNombre("Eco New");
+        updatedUser.setEmail("user@ecoland.com");
+
+        when(usuarioUseCase.getUsuarioById(1L)).thenReturn(Optional.of(existingUser));
+        when(usuarioUseCase.createUsuario(any(Usuario.class))).thenReturn(updatedUser);
+
+        // Act & Assert
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/api/v1/usuarios")
+                .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                .content("{\"id\": 1, \"nombre\": \"Eco New\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.nombre").value("Eco New"));
+    }
+
+    @Test
+    void testUpdateUsuario_NotFound() throws Exception {
+        // Arrange
+        when(usuarioUseCase.getUsuarioById(99L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/api/v1/usuarios")
+                .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                .content("{\"id\": 99, \"nombre\": \"Non Existent\"}"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testUpdateUsuario_BadRequest() throws Exception {
+        // Act & Assert
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/api/v1/usuarios")
+                .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                .content("{\"nombre\": \"No ID\"}"))
+                .andExpect(status().isBadRequest());
+    }
 }

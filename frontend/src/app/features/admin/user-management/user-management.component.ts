@@ -86,6 +86,9 @@ export class UserManagementComponent implements OnInit {
       next: (users: any[]) => {
         this.allUsers = users.map(u => ({
           ...u,
+          // Backend now returns flat `role` string; also handle legacy `roles` array shape
+          role: u.role ||
+            (u.roles && u.roles.length > 0 ? (u.roles[0].nombre || u.roles[0].name) : 'USUARIO'),
           promotionStatus: u.estadoSolicitud || u.promotionStatus
         }));
         this.cdr.detectChanges();
@@ -114,6 +117,48 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
+  getUserRole(user: any): string {
+    const rawRole = user.role ||
+      (user.roles && user.roles.length > 0 ? (user.roles[0].nombre || user.roles[0].name) : 'USUARIO');
+    
+    const value = (rawRole || '').toUpperCase();
+    if (value.includes('ADMIN')) return 'ADMINISTRADOR';
+    if (value.includes('LIDER') || value.includes('LEADER')) return 'LIDER';
+    return 'USUARIO';
+  }
+
+  editUser(user: User): void {
+    const newName = prompt('Editar nombre de usuario:', user.nombre);
+    if (newName !== null && newName.trim() !== '') {
+      const updatedUser = { ...user, nombre: newName };
+      this.adminService.updateUser(user.id, updatedUser).subscribe({
+        next: () => {
+          alert('Usuario actualizado con éxito.');
+          this.loadData();
+        },
+        error: (err) => {
+          console.error('Error al actualizar usuario', err);
+          alert('Error al actualizar el usuario.');
+        }
+      });
+    }
+  }
+
+  deleteUser(userId: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este usuario de manera permanente?')) {
+      this.adminService.deleteUser(userId).subscribe({
+        next: () => {
+          alert('Usuario eliminado correctamente.');
+          this.loadData();
+        },
+        error: (err) => {
+          console.error('Error al eliminar usuario', err);
+          alert('Error al eliminar el usuario.');
+        }
+      });
+    }
+  }
+
   viewDetails(user: User): void {
     this.selectedUser = user;
     this.showDetailsModal = true;
@@ -126,3 +171,4 @@ export class UserManagementComponent implements OnInit {
     this.cdr.detectChanges();
   }
 }
+

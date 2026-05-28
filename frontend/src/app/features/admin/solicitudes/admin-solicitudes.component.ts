@@ -15,8 +15,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AdminSolicitudesComponent implements OnInit {
   campaigns: Campaign[] = [];
+  allCampaigns: Campaign[] = [];
   searchTerm: string = '';
   loading: boolean = false;
+  activeTab: 'requests' | 'campaigns' = 'requests';
 
   // Modal logic
   showModal: boolean = false;
@@ -33,7 +35,12 @@ export class AdminSolicitudesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(): void {
     this.loadPendingCampaigns();
+    this.loadAllCampaigns();
   }
 
   loadPendingCampaigns(): void {
@@ -54,8 +61,20 @@ export class AdminSolicitudesComponent implements OnInit {
     });
   }
 
+  loadAllCampaigns(): void {
+    this.campaignService.getCampaigns().subscribe({
+      next: (data) => {
+        this.allCampaigns = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error cargando todas las campañas', err);
+      }
+    });
+  }
+
   get filteredCampaigns(): Campaign[] {
-    let list = this.campaigns;
+    let list = this.activeTab === 'requests' ? this.campaigns : this.allCampaigns;
     if (this.searchTerm.trim()) {
       const term = this.searchTerm.toLowerCase();
       list = list.filter(
@@ -102,7 +121,7 @@ export class AdminSolicitudesComponent implements OnInit {
       this.campaignService.approveCampaign(this.selectedCampaign.id, this.comment, token).subscribe({
         next: () => {
           alert('Campaña aprobada y publicada con éxito.');
-          this.loadPendingCampaigns();
+          this.loadData();
           this.closeModal();
         },
         error: (err) => {
@@ -114,7 +133,7 @@ export class AdminSolicitudesComponent implements OnInit {
       this.campaignService.rejectCampaign(this.selectedCampaign.id, this.comment, token).subscribe({
         next: () => {
           alert('Campaña rechazada correctamente.');
-          this.loadPendingCampaigns();
+          this.loadData();
           this.closeModal();
         },
         error: (err) => {
@@ -125,3 +144,4 @@ export class AdminSolicitudesComponent implements OnInit {
     }
   }
 }
+

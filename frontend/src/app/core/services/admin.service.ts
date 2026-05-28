@@ -38,4 +38,21 @@ export class AdminService {
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/users`, { headers: this.getHeaders() });
   }
+
+  updateUser(id: number, user: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`
+    });
+    // Maps to /api/v1/usuarios (which requires login/is own context, but we will call as Admin or add admin endpoint if required)
+    // To remain fully safe, let's map to /api/v1/usuarios/me or generic /api/v1/usuarios if we expose it
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/usuarios`, user, { headers });
+  }
+
+  deleteUser(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`
+    });
+    return this.http.delete<any>(`${environment.apiUrl}/api/v1/usuarios/${id}`, { headers });
+  }
 }
+

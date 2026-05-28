@@ -108,11 +108,16 @@ export class ProfileComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (profile: any) => {
         console.log('User Profile loaded:', profile);
+        // Backend now returns role as flat string; handle both shapes for safety
+        const resolvedRole = profile.role ||
+          (profile.roles && profile.roles.length > 0 ? (profile.roles[0].nombre || profile.roles[0].name) : null) ||
+          this.user?.role;
         // Map backend 'estadoSolicitud' to frontend 'promotionStatus'
-        this.user = { 
-          ...this.user, 
+        this.user = {
+          ...this.user,
           ...profile,
-          promotionStatus: profile.estadoSolicitud || profile.promotionStatus
+          role: resolvedRole,
+          promotionStatus: profile.estadoSolicitud || profile.promotionStatus || this.user?.promotionStatus
         };
         // Update localStorage to persist status on reload
         this.authService.updateUser(this.user);

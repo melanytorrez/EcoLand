@@ -62,8 +62,8 @@
               <tr *ngFor="let req of pendingRequests" class="group hover:bg-green-50/50 transition-all duration-300">
                 <td class="px-6 py-4 text-center">
                   <div class="inline-block text-left">
-                    <div class="font-bold text-gray-900">{{ req.nombre }}</div>
-                    <div class="text-[10px] font-bold text-gray-400">ID: #{{ req.id }}</div>
+                     <div class="font-bold text-gray-900">{{ req.nombre }}</div>
+                     <div class="text-[10px] font-bold text-gray-400">ID: #{{ req.id }}</div>
                   </div>
                 </td>
                 <td class="px-6 py-4 text-center">
@@ -96,8 +96,6 @@
                     </button>
                   </div>
                 </td>
-
-
               </tr>
               <!-- Empty State -->
               <tr *ngIf="pendingRequests.length === 0">
@@ -118,7 +116,6 @@
     </div>
 
     <!-- All Users View -->
-    <!-- All Users View -->
     <div *ngIf="activeTab === 'users'" class="bg-white shadow-xl border border-gray-100"
       style="border-radius: 2.5rem; overflow: hidden;">
       <div class="overflow-x-auto" style="border-radius: 2.5rem;">
@@ -128,6 +125,7 @@
               <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Usuario</th>
               <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Email</th>
               <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Rol Actual</th>
+              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Acciones</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-50">
@@ -136,13 +134,25 @@
               <td class="px-6 py-4 text-center text-gray-600 text-sm">{{ user.email }}</td>
               <td class="px-6 py-4 text-center">
                 <span [ngClass]="{
-                  'bg-purple-100 text-purple-700 ring-purple-200': user.role === 'ADMINISTRADOR',
-                  'bg-emerald-100 text-emerald-700 ring-emerald-200': user.role === 'LIDER',
-                  'bg-blue-100 text-blue-700 ring-blue-200': user.role === 'USUARIO'
+                  'bg-purple-100 text-purple-700 ring-purple-200': getUserRole(user) === 'ADMINISTRADOR',
+                  'bg-emerald-100 text-emerald-700 ring-emerald-200': getUserRole(user) === 'LIDER',
+                  'bg-blue-100 text-blue-700 ring-blue-200': getUserRole(user) === 'USUARIO'
                 }"
                   class="px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest ring-1 ring-inset shadow-sm">
-                  {{ user.role }}
+                  {{ getUserRole(user) }}
                 </span>
+              </td>
+              <td class="px-6 py-4 text-center">
+                <div class="flex items-center justify-center gap-2">
+                  <button (click)="editUser(user)"
+                    class="p-2 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center border border-amber-200/50 shadow-sm">
+                    <lucide-icon name="edit-2" class="w-4 h-4"></lucide-icon>
+                  </button>
+                  <button (click)="deleteUser(user.id)"
+                    class="p-2 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center border border-rose-200/50 shadow-sm">
+                    <lucide-icon name="trash-2" class="w-4 h-4"></lucide-icon>
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -186,8 +196,7 @@
           </div>
           <div>
             <p class="text-xs font-bold text-blue-400 uppercase tracking-tighter">Fecha de Envío</p>
-            <p class="font-bold text-blue-900">{{ (selectedUser.fechaSolicitud | date:'dd/MM/yyyy HH:mm') || 'No
-              disponible' }}</p>
+            <p class="font-bold text-blue-900">{{ (selectedUser.fechaSolicitud | date:'dd/MM/yyyy HH:mm') || 'No disponible' }}</p>
           </div>
         </div>
         <div class="flex items-center gap-3">

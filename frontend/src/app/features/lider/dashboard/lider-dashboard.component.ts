@@ -22,6 +22,7 @@ export interface CampaignFormData {
 @Component({
   selector: 'app-lider-dashboard',
   templateUrl: './lider-dashboard.component.html',
+  styleUrl: './lider-dashboard.component.css',
   standalone: true,
   imports: [CommonModule, FormsModule, SharedModule]
 })
