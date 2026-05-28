@@ -84,9 +84,9 @@
             <button
               type="button"
               (click)="togglePasswordVisibility()"
-              class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none cursor-pointer flex items-center justify-center"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-black hover:text-gray-700 focus:outline-none cursor-pointer flex items-center justify-center"
             >
-              <lucide-icon [name]="showPassword ? 'eye-off' : 'eye'" class="w-5 h-5"></lucide-icon>
+              <lucide-icon [name]="showPassword ? 'eye-off' : 'eye'" class="w-5 h-5 text-black"></lucide-icon>
             </button>
           </div>
           <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" 
@@ -120,9 +120,9 @@
             <button
               type="button"
               (click)="toggleConfirmPasswordVisibility()"
-              class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none cursor-pointer flex items-center justify-center"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-black hover:text-gray-700 focus:outline-none cursor-pointer flex items-center justify-center"
             >
-              <lucide-icon [name]="showConfirmPassword ? 'eye-off' : 'eye'" class="w-5 h-5"></lucide-icon>
+              <lucide-icon [name]="showConfirmPassword ? 'eye-off' : 'eye'" class="w-5 h-5 text-black"></lucide-icon>
             </button>
           </div>
           <div *ngIf="registerForm.hasError('mismatch') && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" 

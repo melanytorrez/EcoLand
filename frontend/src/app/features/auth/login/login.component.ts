@@ -1,10 +1,10 @@
 import { Component, ChangeDetectorRef, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { LucideAngularModule, Leaf, Mail, Lock, User, Eye, EyeOff } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +12,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    LucideAngularModule,
+    SharedModule,
     RouterModule,
     TranslateModule
-  ],
-  providers: [
-    { provide: LucideAngularModule, useValue: LucideAngularModule.pick({ Leaf, Mail, Lock, User, Eye, EyeOff }) }
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -29,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+    this.cdr.detectChanges();
   }
   error = '';
   infoMessage = '';
@@ -63,6 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.renderGoogleButton();
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy(): void {}
@@ -89,10 +88,15 @@ export class LoginComponent implements OnInit, OnDestroy {
           text: 'signin_with',
           width: 350
         });
+        this.cdr.detectChanges();
       }
     } else {
       // Google API not loaded yet, retry after a short delay
-      setTimeout(() => this.renderGoogleButton(), 500);
+      setTimeout(() => {
+        this.ngZone.run(() => {
+          this.renderGoogleButton();
+        });
+      }, 500);
     }
   }
 
