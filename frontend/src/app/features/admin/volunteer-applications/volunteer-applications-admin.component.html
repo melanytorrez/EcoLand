@@ -10,100 +10,119 @@
     </div>
   </div>
 
-  <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-24 gap-4">
-    <lucide-icon name="loader-2" class="w-8 h-8 text-emerald-600 animate-spin"></lucide-icon>
-    <p class="text-gray-500">Cargando postulaciones...</p>
-  </div>
-
-  <div *ngIf="errorMessage && !isLoading" class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 font-medium">
-    {{ errorMessage }}
-  </div>
-
-  <div *ngIf="!isLoading" class="grid gap-6">
-    <article *ngFor="let application of applications" class="bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden">
-      <div class="p-6 md:p-8 grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
+  <div class="min-h-screen bg-slate-50/60 px-6 py-8 md:px-8">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="mb-8 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
         <div>
-          <div class="flex items-center gap-3 mb-3 text-emerald-700 font-semibold">
-            <lucide-icon name="badge-info" class="w-4 h-4"></lucide-icon>
-            Solicitud #{{ application.id }}
-          </div>
-          <h2 class="text-2xl font-black text-gray-900">{{ application.fullName }}</h2>
-          <p class="text-gray-500 mt-1">{{ application.usuarioEmail }}</p>
-
-          <div class="mt-6 grid sm:grid-cols-2 gap-4 text-sm">
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Campaña</p>
-              <p class="font-semibold text-gray-800">{{ application.campaignId }}</p>
-            </div>
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Estado</p>
-              <p class="font-semibold text-gray-800">{{ getStatusLabel(application.status) }}</p>
-            </div>
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Edad</p>
-              <p class="font-semibold text-gray-800">{{ application.age }}</p>
-            </div>
-            <div class="rounded-2xl bg-gray-50 p-4">
-              <p class="text-gray-400 mb-1">Contacto</p>
-              <p class="font-semibold text-gray-800">{{ application.phone }}</p>
-            </div>
-          </div>
+          <h1 class="text-4xl font-medium tracking-tight text-slate-900">Postulaciones de voluntariado</h1>
+          <p class="text-lg text-slate-500 mt-2">Administra las solicitudes de voluntariado de la plataforma</p>
         </div>
 
-        <div class="space-y-4">
-          <div class="rounded-2xl bg-emerald-50/60 border border-emerald-100 p-4">
-            <p class="text-sm font-semibold text-emerald-800 mb-1">Motivación</p>
-            <p class="text-gray-700 text-sm leading-relaxed">{{ application.motivation }}</p>
+        <div class="bg-white rounded-2xl shadow-[0_8px_30px_rgba(15,23,42,0.08)] border border-slate-100 px-4 py-3 flex items-center gap-3 self-start">
+          <div class="px-4 py-2 rounded-xl bg-emerald-50 text-emerald-700 font-semibold flex items-center gap-2">
+            <lucide-icon name="users" class="w-4 h-4"></lucide-icon>
+            {{ pendingCount }} Solicitudes
           </div>
-
-          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-4">
-            <p class="text-sm font-semibold text-gray-700 mb-1">Experiencia</p>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              {{ application.hasEnvironmentalExperience ? (application.experienceDetails || 'Sin detalle') : 'Sin experiencia previa' }}
-            </p>
-          </div>
-
-          <label class="block space-y-2">
-            <span class="text-sm font-semibold text-gray-700">Notas de rechazo</span>
-            <textarea
-              [(ngModel)]="rejectionNotes[application.id!]
-              "
-              rows="3"
-              class="w-full rounded-2xl border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4CAF50]/30 focus:border-[#4CAF50]"
-              placeholder="Opcional: agrega una nota para el postulante"
-            ></textarea>
-          </label>
-
-          <div class="flex flex-wrap gap-3 pt-2">
-            <button
-              type="button"
-              (click)="approve(application.id!)"
-              [disabled]="isSaving[application.id!]"
-              class="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3 text-white font-semibold shadow-md hover:bg-emerald-700 disabled:opacity-60"
-            >
-              <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
-              Aprobar
-            </button>
-            <button
-              type="button"
-              (click)="reject(application.id!)"
-              [disabled]="isSaving[application.id!]"
-              class="inline-flex items-center gap-2 rounded-2xl bg-red-600 px-4 py-3 text-white font-semibold shadow-md hover:bg-red-700 disabled:opacity-60"
-            >
-              <lucide-icon name="x-circle" class="w-4 h-4"></lucide-icon>
-              Rechazar
-            </button>
+          <div class="px-4 py-2 rounded-xl bg-blue-50 text-blue-700 font-semibold flex items-center gap-2">
+            <lucide-icon name="user-round" class="w-4 h-4"></lucide-icon>
+            {{ totalCount }} Voluntarios
           </div>
         </div>
       </div>
-    </article>
 
-    <div *ngIf="applications.length === 0" class="bg-white rounded-[2rem] shadow-lg border border-gray-100 p-12 text-center">
-      <div class="w-16 h-16 mx-auto rounded-full bg-emerald-50 flex items-center justify-center mb-4">
-        <lucide-icon name="leaf" class="w-8 h-8 text-emerald-600"></lucide-icon>
+      <div class="flex flex-wrap items-center gap-4 mb-8">
+        <button type="button" (click)="setTab('pending')" [class.bg-white]="activeTab === 'pending'" [class.text-emerald-700]="activeTab === 'pending'" [class.shadow-sm]="activeTab === 'pending'" class="px-5 py-3 rounded-2xl border border-transparent font-semibold text-slate-500 hover:text-slate-700 transition-all inline-flex items-center gap-3">
+          <lucide-icon name="clock-3" class="w-5 h-5"></lucide-icon>
+          Solicitudes Pendientes
+        </button>
+        <button type="button" (click)="setTab('all')" [class.bg-white]="activeTab === 'all'" [class.text-slate-700]="activeTab === 'all'" [class.shadow-sm]="activeTab === 'all'" class="px-5 py-3 rounded-2xl border border-transparent font-semibold text-slate-500 hover:text-slate-700 transition-all inline-flex items-center gap-3">
+          <lucide-icon name="settings-2" class="w-5 h-5"></lucide-icon>
+          Todas las solicitudes
+        </button>
       </div>
-      <h3 class="text-xl font-bold text-gray-900 mb-2">No hay postulaciones pendientes</h3>
-      <p class="text-gray-500">Cuando lleguen nuevas solicitudes aparecerán aquí.</p>
+
+      <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-24 gap-4">
+        <lucide-icon name="loader-2" class="w-8 h-8 text-emerald-600 animate-spin"></lucide-icon>
+        <p class="text-slate-500">Cargando solicitudes...</p>
+      </div>
+
+      <div *ngIf="errorMessage && !isLoading" class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 font-medium">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="!isLoading" class="bg-white rounded-[2rem] shadow-[0_12px_40px_rgba(15,23,42,0.08)] border border-slate-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[1100px]">
+            <thead class="bg-emerald-100/70 text-slate-900">
+              <tr>
+                <th class="px-6 py-4 text-left font-semibold">Solicitante</th>
+                <th class="px-6 py-4 text-left font-semibold">Email</th>
+                <th class="px-6 py-4 text-left font-semibold">Campaña</th>
+                <th class="px-6 py-4 text-left font-semibold">Estado</th>
+                <th class="px-6 py-4 text-left font-semibold">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let application of visibleApplications" class="border-t border-slate-100 hover:bg-slate-50/80 transition-colors">
+                <td class="px-6 py-5 align-top">
+                  <div class="font-semibold text-slate-900">{{ application.fullName }}</div>
+                  <div class="text-sm text-slate-500">ID: #{{ application.id }}</div>
+                </td>
+                <td class="px-6 py-5 align-top text-slate-600">{{ application.usuarioEmail }}</td>
+                <td class="px-6 py-5 align-top text-slate-600">{{ application.campaignId }}</td>
+                <td class="px-6 py-5 align-top">
+                  <span class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium"
+                    [class.border-amber-200]="application.status === 'PENDING'"
+                    [class.text-amber-700]="application.status === 'PENDING'"
+                    [class.bg-amber-50]="application.status === 'PENDING'"
+                    [class.border-emerald-200]="application.status === 'ACCEPTED'"
+                    [class.text-emerald-700]="application.status === 'ACCEPTED'"
+                    [class.bg-emerald-50]="application.status === 'ACCEPTED'"
+                    [class.border-rose-200]="application.status === 'REJECTED'"
+                    [class.text-rose-700]="application.status === 'REJECTED'"
+                    [class.bg-rose-50]="application.status === 'REJECTED'">
+                    <span class="w-2 h-2 rounded-full"
+                      [class.bg-amber-400]="application.status === 'PENDING'"
+                      [class.bg-emerald-500]="application.status === 'ACCEPTED'"
+                      [class.bg-rose-500]="application.status === 'REJECTED'"></span>
+                    {{ getStatusLabel(application.status) }}
+                  </span>
+                </td>
+                <td class="px-6 py-5 align-top">
+                  <div class="flex flex-wrap gap-3">
+                    <button type="button" class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-3 text-blue-700 font-semibold hover:bg-blue-100">
+                      <lucide-icon name="eye" class="w-4 h-4"></lucide-icon>
+                      Ver
+                    </button>
+                    <button type="button" (click)="approve(application.id!)" [disabled]="isSaving[application.id!]" class="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-white font-semibold shadow-sm hover:bg-emerald-700 disabled:opacity-60">
+                      <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
+                      Aprobar
+                    </button>
+                    <button type="button" (click)="reject(application.id!)" [disabled]="isSaving[application.id!]" class="inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-white font-semibold shadow-sm hover:bg-red-700 disabled:opacity-60">
+                      <lucide-icon name="x-circle" class="w-4 h-4"></lucide-icon>
+                      Rechazar
+                    </button>
+                  </div>
+                  <label class="block mt-4 max-w-[520px] space-y-2">
+                    <span class="text-sm font-semibold text-slate-700">Notas de rechazo</span>
+                    <textarea [(ngModel)]="rejectionNotes[application.id!]" rows="2" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-emerald-400" placeholder="Opcional: agrega una nota para el postulante"></textarea>
+                  </label>
+                </td>
+              </tr>
+
+              <tr *ngIf="visibleApplications.length === 0">
+                <td colspan="5" class="px-6 py-16 text-center">
+                  <div class="w-16 h-16 mx-auto rounded-full bg-emerald-50 flex items-center justify-center mb-4">
+                    <lucide-icon name="leaf" class="w-8 h-8 text-emerald-600"></lucide-icon>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2">No hay solicitudes para mostrar</h3>
+                  <p class="text-slate-500">Cuando lleguen nuevas solicitudes aparecerán aquí.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

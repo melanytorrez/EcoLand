@@ -11,7 +11,9 @@ import { VolunteerApplication, VolunteerApplicationStatus } from '../../../core/
 })
 export class VolunteerApplicationsAdminComponent implements OnInit {
   applications: VolunteerApplication[] = [];
+  allApplications: VolunteerApplication[] = [];
   isLoading = true;
+  activeTab: 'pending' | 'all' = 'pending';
   isSaving: Record<number, boolean> = {};
   rejectionNotes: Record<number, string> = {};
   errorMessage: string | null = null;
@@ -35,6 +37,7 @@ export class VolunteerApplicationsAdminComponent implements OnInit {
       .subscribe({
         next: (applications) => {
           this.applications = applications;
+          this.allApplications = applications;
           this.errorMessage = null;
           this.cdr.detectChanges();
         },
@@ -43,6 +46,22 @@ export class VolunteerApplicationsAdminComponent implements OnInit {
           this.cdr.detectChanges();
         }
       });
+  }
+
+  setTab(tab: 'pending' | 'all'): void {
+    this.activeTab = tab;
+  }
+
+  get visibleApplications(): VolunteerApplication[] {
+    return this.activeTab === 'pending' ? this.applications : this.allApplications;
+  }
+
+  get pendingCount(): number {
+    return this.applications.length;
+  }
+
+  get totalCount(): number {
+    return this.allApplications.length;
   }
 
   approve(applicationId: number): void {
