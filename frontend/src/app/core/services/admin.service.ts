@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 import { User } from '../models/user.model';
+import { VolunteerApplication, VolunteerApplicationStatus } from '../models/volunteer-application.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,30 @@ export class AdminService {
     });
     return this.http.delete<any>(`${environment.apiUrl}/api/v1/usuarios/${id}`, { headers });
   }
-}
 
+  getVolunteerApplicationsByStatus(status: VolunteerApplicationStatus = 'PENDING'): Observable<VolunteerApplication[]> {
+    return this.http.get<VolunteerApplication[]>(`${this.apiUrl}/volunteer-applications`, {
+      headers: this.getHeaders(),
+      params: { status }
+    });
+  }
+
+  approveVolunteerApplication(applicationId: number): Observable<VolunteerApplication> {
+    return this.http.post<VolunteerApplication>(
+      `${this.apiUrl}/volunteer-applications/${applicationId}/approve`,
+      {},
+      { headers: this.getHeaders() }
+    );
+  }
+
+  rejectVolunteerApplication(applicationId: number, adminNotes: string): Observable<VolunteerApplication> {
+    return this.http.post<VolunteerApplication>(
+      `${this.apiUrl}/volunteer-applications/${applicationId}/reject`,
+      {},
+      {
+        headers: this.getHeaders(),
+        params: { adminNotes }
+      }
+    );
+  }
+}

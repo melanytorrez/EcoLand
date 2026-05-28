@@ -25,6 +25,12 @@ const routes: Routes = [
     data: { feature: 'reforestacion' }
   },
   {
+    path: 'reforestacion/:campaignId/postular',
+    loadChildren: () => import('./features/volunteer-application/volunteer-application.module').then(m => m.VolunteerApplicationModule),
+    canActivate: [FeatureFlagGuard],
+    data: { feature: 'reforestacion' }
+  },
+  {
     path: 'reforestacion/:id',
     loadChildren: () => import('./features/campaigns/pages/user/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
     canActivate: [FeatureFlagGuard],
@@ -82,6 +88,10 @@ const routes: Routes = [
       {
         path: 'puntos-verdes',
         loadChildren: () => import('./features/admin/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesAdminModule)
+      },
+      {
+        path: 'volunteer-applications',
+        loadChildren: () => import('./features/admin/volunteer-applications/volunteer-applications-admin.module').then(m => m.VolunteerApplicationsAdminModule)
       },
       {
         path: 'feature-toggles',

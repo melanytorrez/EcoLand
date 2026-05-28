@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CampaignService } from '../../core/services/campaign.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { AuthService } from '../../core/services/auth.service';
+import { VolunteerApplicationService } from '../../core/services/volunteer-application.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -20,11 +21,13 @@ export class CampaignDetailComponent implements OnInit {
   participationLoading: boolean = false;
   participationMessage: string | null = null;
   participationError: string | null = null;
+  hasPendingApplication: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private campaignService: CampaignService,
     private authService: AuthService,
+    private volunteerApplicationService: VolunteerApplicationService,
     private router: Router,
     private translate: TranslateService
   ) {}
@@ -47,6 +50,17 @@ export class CampaignDetailComponent implements OnInit {
         if (this.campaign) {
           this.percentage = Math.round((this.campaign.participants / this.campaign.spots) * 100);
           this.availableSpots = this.campaign.spots - this.campaign.participants;
+          if (this.authService.isAuthenticated()) {
+            // check existing application
+            this.volunteerApplicationService.getMyApplication(this.campaign.id).subscribe({
+              next: (app) => {
+                if (app && app.status) {
+                  this.hasPendingApplication = app.status === 'PENDING' || app.status === 'ACCEPTED';
+                }
+              },
+              error: () => { /* ignore if not found */ }
+            });
+          }
         }
         this.isLoading = false;
       },
@@ -99,5 +113,12 @@ export class CampaignDetailComponent implements OnInit {
         this.participationLoading = false;
       }
     });
+  }
+
+  goToVolunteerApplication(): void {
+    if (!this.campaign) {
+      return;
+    }
+    this.router.navigate(['/reforestacion', this.campaign.id, 'postular']);
   }
 }

@@ -1,8 +1,11 @@
 package com.ecoland.infrastructure.adapter.in.web;
 
+import com.ecoland.application.dto.VolunteerApplicationResponse;
 import com.ecoland.application.dto.UsuarioResponse;
 import com.ecoland.domain.model.Usuario;
+import com.ecoland.domain.model.VolunteerStatus;
 import com.ecoland.domain.port.in.UsuarioUseCase;
+import com.ecoland.domain.port.in.VolunteerApplicationUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +17,11 @@ import java.util.stream.Collectors;
 public class AdminController {
 
     private final UsuarioUseCase usuarioUseCase;
+    private final VolunteerApplicationUseCase volunteerApplicationUseCase;
 
-    public AdminController(UsuarioUseCase usuarioUseCase) {
+    public AdminController(UsuarioUseCase usuarioUseCase, VolunteerApplicationUseCase volunteerApplicationUseCase) {
         this.usuarioUseCase = usuarioUseCase;
+        this.volunteerApplicationUseCase = volunteerApplicationUseCase;
     }
 
     @GetMapping("/leader-requests")
@@ -50,5 +55,30 @@ public class AdminController {
                 .map(UsuarioResponse::fromUsuario)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/volunteer-applications")
+    public ResponseEntity<List<VolunteerApplicationResponse>> getVolunteerApplications(
+            @RequestParam(defaultValue = "PENDING") VolunteerStatus status) {
+        return ResponseEntity.ok(
+                volunteerApplicationUseCase.getApplicationsByStatus(status).stream()
+                        .map(VolunteerApplicationResponse::fromDomain)
+                        .toList()
+        );
+    }
+
+    @PostMapping("/volunteer-applications/{applicationId}/approve")
+    public ResponseEntity<VolunteerApplicationResponse> approveVolunteerApplication(@PathVariable Long applicationId) {
+        return ResponseEntity.ok(
+                VolunteerApplicationResponse.fromDomain(volunteerApplicationUseCase.approveApplication(applicationId))
+        );
+    }
+
+    @PostMapping("/volunteer-applications/{applicationId}/reject")
+    public ResponseEntity<VolunteerApplicationResponse> rejectVolunteerApplication(@PathVariable Long applicationId,
+                                                                                   @RequestParam(required = false, defaultValue = "") String adminNotes) {
+        return ResponseEntity.ok(
+                VolunteerApplicationResponse.fromDomain(volunteerApplicationUseCase.rejectApplication(applicationId, adminNotes))
+        );
     }
 }
