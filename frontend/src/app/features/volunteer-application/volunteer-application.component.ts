@@ -54,6 +54,33 @@ export class VolunteerApplicationComponent implements OnInit {
 
     const currentUser = this.authService.getUser();
     this.userName = currentUser?.nombre || currentUser?.fullName || currentUser?.name || '';
+    // If navigation state provided a campaign (and optionally an existing application), use it immediately
+    const navState: any = history.state || {};
+    if (navState.campaign) {
+      this.campaign = navState.campaign as Campaign;
+      this.campaignId = this.campaign.id;
+      if (navState.existingApplication) {
+        const app = navState.existingApplication as any;
+        this.existingApplicationStatus = app.status || 'PENDING';
+        this.form.patchValue({
+          fullName: app.fullName,
+          age: app.age,
+          phone: app.phone,
+          availableWeekends: app.availableWeekends,
+          hasEnvironmentalExperience: app.hasEnvironmentalExperience,
+          experienceDetails: app.experienceDetails || '',
+          motivation: app.motivation,
+          availabilityHours: app.availabilityHours
+        });
+        this.form.disable({ emitEvent: false });
+        this.successMessage = this.getExistingApplicationMessage();
+        this.isLoading = false;
+        this.cdr.detectChanges();
+        return;
+      }
+      // if campaign provided but no existing application, still show campaign immediately
+      this.isLoading = false;
+    }
 
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('campaignId');
@@ -65,49 +92,76 @@ export class VolunteerApplicationComponent implements OnInit {
         return;
       }
 
-      this.campaignService.getCampaignById(this.campaignId).subscribe({
-        next: (campaign) => {
-          this.campaign = campaign;
-          if (this.userName) {
-            this.form.patchValue({ fullName: this.userName });
-          }
+      // Only fetch campaign if we don't already have it from navigation state
+      if (!this.campaign) {
+        this.campaignService.getCampaignById(this.campaignId).subscribe({
+          next: (campaign) => {
+            this.campaign = campaign;
+            if (this.userName) {
+              this.form.patchValue({ fullName: this.userName });
+            }
 
-          if (this.authService.isAuthenticated()) {
-            this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
-              next: (application) => {
-                this.existingApplicationStatus = application.status || 'PENDING';
-                this.form.patchValue({
-                  fullName: application.fullName,
-                  age: application.age,
-                  phone: application.phone,
-                  availableWeekends: application.availableWeekends,
-                  hasEnvironmentalExperience: application.hasEnvironmentalExperience,
-                  experienceDetails: application.experienceDetails || '',
-                  motivation: application.motivation,
-                  availabilityHours: application.availabilityHours
-                });
-                this.form.disable({ emitEvent: false });
-                this.successMessage = this.getExistingApplicationMessage();
-                this.isLoading = false;
-                this.cdr.detectChanges();
-              },
-              error: () => {
-                this.isLoading = false;
-                this.cdr.detectChanges();
-              }
-            });
-            return;
-          }
+            if (this.authService.isAuthenticated()) {
+              this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
+                next: (application) => {
+                  this.existingApplicationStatus = application.status || 'PENDING';
+                  this.form.patchValue({
+                    fullName: application.fullName,
+                    age: application.age,
+                    phone: application.phone,
+                    availableWeekends: application.availableWeekends,
+                    hasEnvironmentalExperience: application.hasEnvironmentalExperience,
+                    experienceDetails: application.experienceDetails || '',
+                    motivation: application.motivation,
+                    availabilityHours: application.availabilityHours
+                  });
+                  this.form.disable({ emitEvent: false });
+                  this.successMessage = this.getExistingApplicationMessage();
+                  this.isLoading = false;
+                  this.cdr.detectChanges();
+                },
+                error: () => {
+                  this.isLoading = false;
+                  this.cdr.detectChanges();
+                }
+              });
+              return;
+            }
 
-          this.isLoading = false;
-          this.cdr.detectChanges();
-        },
-        error: () => {
-          this.errorMessage = 'No pudimos cargar la campaña.';
-          this.isLoading = false;
-          this.cdr.detectChanges();
+            this.isLoading = false;
+            this.cdr.detectChanges();
+          },
+          error: () => {
+            this.errorMessage = 'No pudimos cargar la campaña.';
+            this.isLoading = false;
+            this.cdr.detectChanges();
+          }
+        });
+      } else {
+        // campaign already present (from navigation state) - still check existing application if authenticated
+        if (this.authService.isAuthenticated() && !this.existingApplicationStatus) {
+          this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
+            next: (application) => {
+              this.existingApplicationStatus = application.status || 'PENDING';
+              this.form.patchValue({
+                fullName: application.fullName,
+                age: application.age,
+                phone: application.phone,
+                availableWeekends: application.availableWeekends,
+                hasEnvironmentalExperience: application.hasEnvironmentalExperience,
+                experienceDetails: application.experienceDetails || '',
+                motivation: application.motivation,
+                availabilityHours: application.availabilityHours
+              });
+              this.form.disable({ emitEvent: false });
+              this.successMessage = this.getExistingApplicationMessage();
+              this.cdr.detectChanges();
+            },
+            error: () => { /* ignore */ }
+          });
         }
-      });
+      }
+    });
     });
   }
 
