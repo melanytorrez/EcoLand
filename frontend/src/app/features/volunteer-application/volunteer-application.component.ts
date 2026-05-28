@@ -24,7 +24,7 @@ export class VolunteerApplicationComponent implements OnInit {
   userName = '';
   submitAttempted = false;
   existingApplicationStatus: string | null = null;
-    showSubmittedMessage = false;
+  showSubmittedMessage = false;
   existingApplicationMessage: string | null = null;
   form!: FormGroup;
 
@@ -37,6 +37,50 @@ export class VolunteerApplicationComponent implements OnInit {
     private authService: AuthService,
     private cdr: ChangeDetectorRef
   ) {}
+
+  ngOnInit(): void {
+    this.form = this.buildForm();
+
+    const currentUser = this.authService.getUser();
+    this.userName = currentUser?.nombre || currentUser?.fullName || currentUser?.name || '';
+
+    const navState: any = history.state || {};
+    if (navState.campaign) {
+      this.campaign = navState.campaign as Campaign;
+      this.campaignId = this.campaign.id;
+
+      if (navState.existingApplication) {
+        this.applyExistingApplication(navState.existingApplication);
+      }
+
+      this.isLoading = false;
+      if (this.campaignId) {
+        this.fetchCampaignInBackground(this.campaignId);
+      }
+    }
+
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('campaignId');
+      const routeCampaignId = idParam ? Number(idParam) : null;
+
+      if (!routeCampaignId) {
+        this.errorMessage = 'No se encontró la campaña seleccionada.';
+        this.isLoading = false;
+        return;
+      }
+
+      this.campaignId = routeCampaignId;
+
+      if (!this.campaign) {
+        this.loadCampaign(routeCampaignId);
+        return;
+      }
+
+      if (this.authService.isAuthenticated() && !this.existingApplicationStatus) {
+        this.loadExistingApplication(routeCampaignId, true);
+      }
+    });
+  }
 
   private buildForm(): FormGroup {
     return this.fb.group({
@@ -51,144 +95,118 @@ export class VolunteerApplicationComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.form = this.buildForm();
+  private loadCampaign(campaignId: number): void {
+    this.campaignService.getCampaignById(campaignId).subscribe({
+      next: (campaign) => {
+        this.campaign = campaign;
+        if (this.userName) {
+          this.form.patchValue({ fullName: this.userName });
+        }
 
-    const currentUser = this.authService.getUser();
-    this.userName = currentUser?.nombre || currentUser?.fullName || currentUser?.name || '';
-    // If navigation state provided a campaign (and optionally an existing application), use it immediately
-    const navState: any = history.state || {};
-    if (navState.campaign) {
-      this.campaign = navState.campaign as Campaign;
-      this.campaignId = this.campaign.id;
-      if (navState.existingApplication) {
-        const app = navState.existingApplication as any;
-        this.existingApplicationStatus = app.status || 'PENDING';
+        if (this.authService.isAuthenticated()) {
+          this.loadExistingApplication(campaignId, true);
+          return;
+        }
+
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.errorMessage = 'No pudimos cargar la campaña.';
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  private fetchCampaignInBackground(campaignId: number): void {
+    this.campaignService.getCampaignById(campaignId).subscribe({
+      next: (freshCampaign) => {
+        this.campaign = freshCampaign;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        // ignore background refresh failures
+      }
+    });
+  }
+
+  private applyExistingApplication(application: any): void {
+    this.existingApplicationStatus = application.status || 'PENDING';
+    this.existingApplicationMessage = this.computeExistingApplicationMessage();
+    this.form.patchValue({
+      fullName: application.fullName,
+      age: application.age,
+      phone: application.phone,
+      availableWeekends: application.availableWeekends,
+      hasEnvironmentalExperience: application.hasEnvironmentalExperience,
+      experienceDetails: application.experienceDetails || '',
+      motivation: application.motivation,
+      availabilityHours: application.availabilityHours
+    });
+    this.form.disable({ emitEvent: false });
+    this.successMessage = this.existingApplicationMessage;
+    this.showSubmittedMessage = true;
+    this.isLoading = false;
+    this.cdr.detectChanges();
+  }
+
+  private loadExistingApplication(campaignId: number, background = false): void {
+    this.volunteerApplicationService.getMyApplication(campaignId).subscribe({
+      next: (application) => {
+        this.existingApplicationStatus = application.status || 'PENDING';
         this.existingApplicationMessage = this.computeExistingApplicationMessage();
         this.form.patchValue({
-          fullName: app.fullName,
-          age: app.age,
-          phone: app.phone,
-          availableWeekends: app.availableWeekends,
-          hasEnvironmentalExperience: app.hasEnvironmentalExperience,
-          experienceDetails: app.experienceDetails || '',
-          motivation: app.motivation,
-          availabilityHours: app.availabilityHours
+          fullName: application.fullName,
+          age: application.age,
+          phone: application.phone,
+          availableWeekends: application.availableWeekends,
+          hasEnvironmentalExperience: application.hasEnvironmentalExperience,
+          experienceDetails: application.experienceDetails || '',
+          motivation: application.motivation,
+          availabilityHours: application.availabilityHours
         });
-          this.form.disable({ emitEvent: false });
-          // Ensure message displays immediately
-          this.successMessage = this.getExistingApplicationMessage();
-          setTimeout(() => {
-            this.showSubmittedMessage = true;
-            // leave isLoading false so modal appears
-            this.cdr.detectChanges();
-          }, 0);
-          // don't return: still fetch fresh campaign data in background to ensure all fields populated
-      }
-      // if campaign provided but no existing application, still show campaign immediately
+        this.form.disable({ emitEvent: false });
+        this.successMessage = this.existingApplicationMessage;
+        this.showSubmittedMessage = true;
         this.isLoading = false;
-        // Fetch latest campaign data in background to populate any missing fields
-        if (this.campaignId) {
-          this.campaignService.getCampaignById(this.campaignId).subscribe({
-            next: (fresh) => {
-              this.campaign = fresh;
-              this.cdr.detectChanges();
-            }, error: () => { /* ignore */ }
-          });
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        if (!background) {
+          this.isLoading = false;
+          this.cdr.detectChanges();
         }
+      }
+    });
+  }
+
+  submit(): void {
+    this.submitAttempted = true;
+
+    if (!this.campaignId) {
+      this.errorMessage = 'No se encontró la campaña seleccionada.';
+      return;
     }
 
-    this.route.paramMap.subscribe(params => {
-      const idParam = params.get('campaignId');
-      this.campaignId = idParam ? Number(idParam) : null;
+    if (this.existingApplicationStatus) {
+      this.errorMessage = 'Ya tienes una postulación enviada para esta campaña y no puedes enviar otra.';
+      return;
+    }
 
-      if (!this.campaignId) {
-        this.errorMessage = 'No se encontró la campaña seleccionada.';
-        this.isLoading = false;
-        return;
-      }
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.errorMessage = this.getValidationSummary();
+      return;
+    }
 
-      // Only fetch campaign if we don't already have it from navigation state
-      if (!this.campaign) {
-        this.campaignService.getCampaignById(this.campaignId).subscribe({
-          next: (campaign) => {
-            this.campaign = campaign;
-            if (this.userName) {
-              this.form.patchValue({ fullName: this.userName });
-            }
+    this.isSubmitting = true;
+    this.successMessage = null;
+    this.errorMessage = null;
 
-            if (this.authService.isAuthenticated()) {
-              this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
-                next: (application) => {
-                  this.existingApplicationStatus = application.status || 'PENDING';
-                  this.existingApplicationMessage = this.computeExistingApplicationMessage();
-                  this.form.patchValue({
-                    fullName: application.fullName,
-                    age: application.age,
-                    phone: application.phone,
-                    isFieldInvalid(fieldName: string): boolean {
-                      const control = this.form.get(fieldName);
-                      return !!control && control.invalid && (control.touched || this.submitAttempted);
-                    }
-
-                    getFieldError(fieldName: string): string {
-                      const control = this.form.get(fieldName);
-                      if (!control || !control.errors) {
-                        return '';
-                      }
-
-                      if (control.errors['required']) {
-                        return 'Este campo es obligatorio.';
-                      }
-
-                      if (control.errors['minlength']) {
-                        const requiredLength = control.errors['minlength'].requiredLength;
-                        return `Debe tener al menos ${requiredLength} caracteres.`;
-                      }
-
-                      if (control.errors['min']) {
-                        return 'Debes ser mayor de edad para postularte.';
-                      }
-
-                      return 'Revisa este campo.';
-                    }
-
-                    private getValidationSummary(): string {
-                      const messages: string[] = [];
-                      const fields = ['fullName', 'age', 'phone', 'motivation', 'availabilityHours'];
-
-                      fields.forEach((field) => {
-                        if (this.isFieldInvalid(field)) {
-                          const label = field === 'fullName'
-                            ? 'Nombre completo'
-                            : field === 'age'
-                              ? 'Edad'
-                              : field === 'phone'
-                                ? 'Teléfono'
-                                : field === 'motivation'
-                                  ? 'Motivación'
-                                  : 'Horario disponible';
-
-                          messages.push(`${label}: ${this.getFieldError(field)}`);
-                        }
-                      });
-
-                      return messages.length > 0
-                        ? `Corrige lo siguiente antes de enviar: ${messages.join(' · ')}`
-                        : 'Completa los campos obligatorios antes de enviar tu postulación.';
-                    }
-
-                    getExistingApplicationMessage(): string {
-                      return this.existingApplicationMessage || '';
-                    }
-
-                    private computeExistingApplicationMessage(): string {
-                      if (!this.existingApplicationStatus) return '';
-                      if (this.existingApplicationStatus === 'PENDING') return 'Ya enviaste tu postulación. Su estado actual es: pendiente de revisión.';
-                      if (this.existingApplicationStatus === 'ACCEPTED') return 'Ya enviaste tu postulación y fue aceptada.';
-                      if (this.existingApplicationStatus === 'REJECTED') return 'Ya enviaste tu postulación y fue rechazada.';
-                      return 'Ya tienes una postulación registrada para esta campaña.';
-                    }
+    const value = this.form.getRawValue();
+    this.volunteerApplicationService.apply({
+      campaignId: this.campaignId,
       fullName: value.fullName?.trim() || '',
       age: Number(value.age),
       phone: value.phone?.trim() || '',
@@ -204,15 +222,15 @@ export class VolunteerApplicationComponent implements OnInit {
       }))
       .subscribe({
         next: () => {
-          // Immediately reflect submitted state so modal shows 'postulación enviada' without waiting
           this.existingApplicationStatus = 'PENDING';
+          this.existingApplicationMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
           this.form.disable({ emitEvent: false });
-          this.successMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
+          this.successMessage = this.existingApplicationMessage;
+          this.showSubmittedMessage = true;
           this.form.markAsPristine();
           this.cdr.detectChanges();
-          
         },
-        error: (err) => {
+        error: (err: any) => {
           const serverMessage = typeof err?.error?.message === 'string' ? err.error.message : '';
           this.errorMessage = serverMessage || 'No pudimos enviar tu postulación. Revisa los datos e intenta de nuevo.';
           this.cdr.detectChanges();
@@ -227,12 +245,9 @@ export class VolunteerApplicationComponent implements OnInit {
   isFieldInvalid(fieldName: string): boolean {
     const control = this.form.get(fieldName);
     return !!control && control.invalid && (control.touched || this.submitAttempted);
-            this.successMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
-            setTimeout(() => {
-              this.showSubmittedMessage = true;
-              this.form.markAsPristine();
-              this.cdr.detectChanges();
-            }, 0);
+  }
+
+  getFieldError(fieldName: string): string {
     const control = this.form.get(fieldName);
     if (!control || !control.errors) {
       return '';
@@ -280,23 +295,7 @@ export class VolunteerApplicationComponent implements OnInit {
   }
 
   getExistingApplicationMessage(): string {
-    if (!this.existingApplicationStatus) {
-      return '';
-    }
-
-    if (this.existingApplicationStatus === 'PENDING') {
-      return 'Ya enviaste tu postulación. Su estado actual es: pendiente de revisión.';
-    }
-
-    if (this.existingApplicationStatus === 'ACCEPTED') {
-      return 'Ya enviaste tu postulación y fue aceptada.';
-    }
-
-    if (this.existingApplicationStatus === 'REJECTED') {
-      return 'Ya enviaste tu postulación y fue rechazada.';
-    }
-
-    return 'Ya tienes una postulación registrada para esta campaña.';
+    return this.existingApplicationMessage || '';
   }
 
   private computeExistingApplicationMessage(): string {

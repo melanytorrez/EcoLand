@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { forkJoin, finalize } from 'rxjs';
 
 import { AdminService } from '../../../core/services/admin.service';
 import { VolunteerApplication, VolunteerApplicationStatus } from '../../../core/models/volunteer-application.model';
@@ -7,16 +7,20 @@ import { VolunteerApplication, VolunteerApplicationStatus } from '../../../core/
 @Component({
   selector: 'app-volunteer-applications-admin',
   templateUrl: './volunteer-applications-admin.component.html',
+  styleUrls: ['./volunteer-applications-admin.component.css'],
   standalone: false
 })
 export class VolunteerApplicationsAdminComponent implements OnInit {
   applications: VolunteerApplication[] = [];
   allApplications: VolunteerApplication[] = [];
+  acceptedApplications: VolunteerApplication[] = [];
+  rejectedApplications: VolunteerApplication[] = [];
   isLoading = true;
   activeTab: 'pending' | 'all' = 'pending';
   isSaving: Record<number, boolean> = {};
   rejectionNotes: Record<number, string> = {};
   errorMessage: string | null = null;
+  selectedApplication: VolunteerApplication | null = null;
 
   constructor(
     private adminService: AdminService,
@@ -29,15 +33,25 @@ export class VolunteerApplicationsAdminComponent implements OnInit {
 
   loadApplications(): void {
     this.isLoading = true;
-    this.adminService.getVolunteerApplicationsByStatus('PENDING')
+    forkJoin({
+      pending: this.adminService.getVolunteerApplicationsByStatus('PENDING'),
+      accepted: this.adminService.getVolunteerApplicationsByStatus('ACCEPTED'),
+      rejected: this.adminService.getVolunteerApplicationsByStatus('REJECTED')
+    })
       .pipe(finalize(() => {
         this.isLoading = false;
         this.cdr.detectChanges();
       }))
       .subscribe({
-        next: (applications) => {
-          this.applications = applications;
-          this.allApplications = applications;
+        next: ({ pending, accepted, rejected }) => {
+          this.applications = pending;
+          this.acceptedApplications = accepted;
+          this.rejectedApplications = rejected;
+          this.allApplications = [...pending, ...accepted, ...rejected].sort((left, right) => {
+            const leftDate = left.fechaPostulacion ? new Date(left.fechaPostulacion).getTime() : 0;
+            const rightDate = right.fechaPostulacion ? new Date(right.fechaPostulacion).getTime() : 0;
+            return rightDate - leftDate;
+          });
           this.errorMessage = null;
           this.cdr.detectChanges();
         },
@@ -62,6 +76,14 @@ export class VolunteerApplicationsAdminComponent implements OnInit {
 
   get totalCount(): number {
     return this.allApplications.length;
+  }
+
+  get acceptedCount(): number {
+    return this.acceptedApplications.length;
+  }
+
+  get rejectedCount(): number {
+    return this.rejectedApplications.length;
   }
 
   approve(applicationId: number): void {
@@ -107,5 +129,17 @@ export class VolunteerApplicationsAdminComponent implements OnInit {
       case 'REJECTED': return 'Rechazada';
       default: return 'Pendiente';
     }
+  }
+
+  getCampaignLabel(application: VolunteerApplication): string {
+    return `Campaña #${application.campaignId}`;
+  }
+
+  viewDetails(application: VolunteerApplication): void {
+    this.selectedApplication = application;
+  }
+
+  closeDetails(): void {
+    this.selectedApplication = null;
   }
 }
