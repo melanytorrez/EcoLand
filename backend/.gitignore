@@ -8,3 +8,7 @@ boot_log*.txt
 .idea/
 .vscode/
 *.iml
+
+# Ignore local properties with cloud credentials
+**/application-local.properties
+**/application-local.yml

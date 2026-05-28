@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     { path: '/reforestacion', label: 'header.nav.reforestation', feature: 'reforestacion' },
     { path: '/reciclaje',     label: 'header.nav.recycling',     feature: 'reciclaje' },
     { path: '/estadisticas',  label: 'header.nav.stats',         feature: 'estadisticas' },
-    { path: '/admin/campanas', label: 'header.nav.my_publications', feature: 'reforestacion', role: 'lider' },
+    { path: '/lider/campanas', label: 'header.nav.my_publications', feature: 'reforestacion', role: 'lider' },
   ];
 
   constructor(

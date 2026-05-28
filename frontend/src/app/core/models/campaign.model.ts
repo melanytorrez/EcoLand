@@ -16,4 +16,5 @@ export interface Campaign {
   category?: 'REFORESTATION' | 'RECYCLING';
   creatorId?: number;
   isApproved?: boolean;
+  moderationComment?: string;
 }

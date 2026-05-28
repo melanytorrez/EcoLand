@@ -89,6 +89,7 @@ public class UsuarioService implements UsuarioUseCase {
     }
 
     @Override
+    @org.springframework.transaction.annotation.Transactional
     public void approveLeaderRequest(Long userId) {
         Usuario usuario = usuarioRepositoryPort.findById(userId)
                 .orElseThrow(() -> new RuntimeException(AppConstants.MSG_USER_NOT_FOUND));
@@ -98,6 +99,7 @@ public class UsuarioService implements UsuarioUseCase {
             
             Rol roleLeader = rolRepositoryPort.findByNombre(AppConstants.ROLE_LEADER)
                     .orElseThrow(() -> new RuntimeException("Role not found"));
+            usuario.getRoles().clear(); // Limpiamos para evitar duplicados si aplica, o añadimos
             usuario.getRoles().add(roleLeader);
             
             usuarioRepositoryPort.save(usuario);
@@ -105,15 +107,18 @@ public class UsuarioService implements UsuarioUseCase {
     }
 
     @Override
+    @org.springframework.transaction.annotation.Transactional
     public void rejectLeaderRequest(Long userId) {
         Usuario usuario = usuarioRepositoryPort.findById(userId)
                 .orElseThrow(() -> new RuntimeException(AppConstants.MSG_USER_NOT_FOUND));
         
         if (usuario.getEstadoSolicitud() == EstadoSolicitud.PENDING) {
             usuario.setEstadoSolicitud(EstadoSolicitud.REJECTED);
+            // El rol del usuario NO se toca, se mantiene en el rol original (USUARIO)
             usuarioRepositoryPort.save(usuario);
         }
     }
+
 
     @Override
     public List<Usuario> getPendingLeaderRequests() {

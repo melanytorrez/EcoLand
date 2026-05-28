@@ -8,6 +8,8 @@ import com.ecoland.domain.model.CampaignCategory;
 public interface CampaignRepositoryPort {
     List<Campaign> findAll();
     List<Campaign> findByCategory(CampaignCategory category);
+    List<Campaign> findByCreatorId(Long creatorId);
+    List<Campaign> findByStatus(String status);
     Optional<Campaign> findById(Long id);
     Campaign save(Campaign campaign);
     void deleteById(Long id);

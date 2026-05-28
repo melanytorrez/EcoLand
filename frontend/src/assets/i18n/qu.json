@@ -435,8 +435,10 @@
     "nav": {
       "dashboard": "Kamachiy panel",
       "reforestation": "Yurakunata musuqmanta tarpuy",
-      "green_points": "Q'umir puntoskuna",
+      "volunteer_applications": "Yanapakuy Mañakuykuna",
+      "green_points": "Q'umir Puntoskuna",
       "recycling": "Musuqmanta apaykachay",
+      "campaign_requests": "Campaña Solicitudkuna",
       "users": "Apaykachaqkuna",
       "reports": "Willay qillqakuna",
       "settings": "Churaykuna"

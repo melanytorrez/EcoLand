@@ -1,12 +1,15 @@
 package com.ecoland.infrastructure.adapter.in.web;
 
+import com.ecoland.application.dto.UsuarioResponse;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.UsuarioUseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import com.ecoland.domain.model.Campaign;
 
 @RestController
@@ -20,26 +23,42 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getUsuario(@PathVariable Long id) {
+    public ResponseEntity<UsuarioResponse> getUsuario(@PathVariable Long id) {
         return usuarioUseCase.getUsuarioById(id)
-                .map(ResponseEntity::ok)
+                .map(u -> ResponseEntity.ok(UsuarioResponse.fromUsuario(u)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/me")
-    public ResponseEntity<Usuario> getCurrentUser(Authentication authentication) {
+    public ResponseEntity<UsuarioResponse> getCurrentUser(Authentication authentication) {
         if (authentication == null || authentication.getName() == null) {
             return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).build();
         }
         return usuarioUseCase.getUsuarioByEmail(authentication.getName())
-                .map(ResponseEntity::ok)
+                .map(u -> ResponseEntity.ok(UsuarioResponse.fromUsuario(u)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
         usuarioUseCase.deleteUsuario(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public ResponseEntity<UsuarioResponse> updateUsuario(@RequestBody Usuario userDetails) {
+        if (userDetails.getId() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return usuarioUseCase.getUsuarioById(userDetails.getId())
+                .map(existingUser -> {
+                    existingUser.setNombre(userDetails.getNombre());
+                    Usuario updated = usuarioUseCase.createUsuario(existingUser);
+                    return ResponseEntity.ok(UsuarioResponse.fromUsuario(updated));
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/me/participations")

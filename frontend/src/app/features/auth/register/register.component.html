@@ -76,11 +76,18 @@
               <path stroke-width="2" d="M8 11V7a4 4 0 018 0v4"/>
             </svg>
             <input
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               formControlName="password"
               [placeholder]="'auth.login.inputs.password.placeholder' | translate"
-              class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
+              class="w-full pl-12 pr-12 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-black hover:text-gray-700 focus:outline-none cursor-pointer flex items-center justify-center"
+            >
+              <lucide-icon [name]="showPassword ? 'eye-off' : 'eye'" class="w-5 h-5 text-black"></lucide-icon>
+            </button>
           </div>
           <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" 
                class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">
@@ -105,11 +112,18 @@
               <path stroke-width="2" d="M8 11V7a4 4 0 018 0v4"/>
             </svg>
             <input
-              type="password"
+              [type]="showConfirmPassword ? 'text' : 'password'"
               formControlName="confirmPassword"
               [placeholder]="'auth.register.inputs.confirm_password.placeholder' | translate"
-              class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
+              class="w-full pl-12 pr-12 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
             >
+            <button
+              type="button"
+              (click)="toggleConfirmPasswordVisibility()"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-black hover:text-gray-700 focus:outline-none cursor-pointer flex items-center justify-center"
+            >
+              <lucide-icon [name]="showConfirmPassword ? 'eye-off' : 'eye'" class="w-5 h-5 text-black"></lucide-icon>
+            </button>
           </div>
           <div *ngIf="registerForm.hasError('mismatch') && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" 
                class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1">

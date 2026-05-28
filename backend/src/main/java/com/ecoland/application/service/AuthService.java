@@ -11,6 +11,8 @@ import com.ecoland.domain.port.out.AuditoriaRepositoryPort;
 import com.ecoland.domain.port.out.RolRepositoryPort;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 
+import com.ecoland.infrastructure.config.AppConstants;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +64,7 @@ public class AuthService implements AuthUseCase {
 
         registrarAuditoria(usuario.getId(), "LOGIN", "Inicio de sesión exitoso");
 
-        return new AuthResponse(token, usuario.getEmail(), usuario.getNombre(), resolvePrimaryRole(usuario.getRoles()));
+        return new AuthResponse(token, usuario.getEmail(), usuario.getNombre(), resolvePrimaryRole(usuario.getRoles()), usuario.getId());
     }
 
     @Override
@@ -85,7 +87,7 @@ public class AuthService implements AuthUseCase {
 
         registrarAuditoria(guardado.getId(), "REGISTER", "Registro de nuevo usuario");
 
-        return new AuthResponse(token, guardado.getEmail(), guardado.getNombre(), resolvePrimaryRole(guardado.getRoles()));
+        return new AuthResponse(token, guardado.getEmail(), guardado.getNombre(), resolvePrimaryRole(guardado.getRoles()), guardado.getId());
     }
 
     @Override
@@ -126,7 +128,7 @@ public class AuthService implements AuthUseCase {
             }
 
             String token = jwtService.generateToken(usuario.getEmail());
-            return new AuthResponse(token, usuario.getEmail(), usuario.getNombre(), resolvePrimaryRole(usuario.getRoles()));
+            return new AuthResponse(token, usuario.getEmail(), usuario.getNombre(), resolvePrimaryRole(usuario.getRoles()), usuario.getId());
 
         } catch (Exception e) {
             throw new RuntimeException("Error verificando token de Google: " + e.getMessage(), e);
@@ -135,27 +137,35 @@ public class AuthService implements AuthUseCase {
 
     private String resolvePrimaryRole(Set<com.ecoland.domain.model.Rol> roles) {
         if (roles == null || roles.isEmpty()) {
-            return "Usuario";
+            return AppConstants.ROLE_USER;
         }
 
         return roles.stream()
                 .map(com.ecoland.domain.model.Rol::getNombre)
                 .filter(nombre -> nombre != null && !nombre.isBlank())
+                .map(String::trim)
+                .map(String::toUpperCase)
+                .filter(nombre -> nombre.equals(AppConstants.ROLE_ADMIN) || 
+                                  nombre.equals(AppConstants.ROLE_LEADER) || 
+                                  nombre.equals(AppConstants.ROLE_USER))
                 .findFirst()
-                .orElse("Usuario");
+                .orElse(AppConstants.ROLE_USER);
     }
 
     private String normalizeRoleName(String role) {
         if (role == null) {
-            return "Usuario";
+            return AppConstants.ROLE_USER;
         }
 
-        String value = role.trim().toLowerCase();
-        if (value.contains("admin")) {
-            return "Admin";
+        String value = role.trim().toUpperCase();
+        if (value.contains("ADMIN")) {
+            return AppConstants.ROLE_ADMIN;
+        }
+        if (value.contains("LIDER") || value.contains("LEADER")) {
+            return AppConstants.ROLE_LEADER;
         }
 
-        return "Usuario";
+        return AppConstants.ROLE_USER;
     }
 
     private void registrarAuditoria(Long usuarioId, String accion, String detalle) {

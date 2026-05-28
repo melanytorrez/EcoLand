@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface JpaCampaignRepository extends JpaRepository<CampaignEntity, Long> {
     List<CampaignEntity> findByCategory(CampaignCategory category);
+    List<CampaignEntity> findByCreatorId(Long creatorId);
+    List<CampaignEntity> findByStatus(String status);
     Long countByStatus(String status);
 
     @Query("SELECT COALESCE(SUM(c.participants), 0) FROM CampaignEntity c")

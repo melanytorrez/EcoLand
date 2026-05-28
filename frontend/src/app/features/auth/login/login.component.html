@@ -2,7 +2,8 @@
   <div class="w-full max-w-md">
 
     <a routerLink="/" class="flex items-center justify-center gap-3 group w-full mb-8">
-      <div class="w-12 h-12 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+      <div
+        class="w-12 h-12 bg-gradient-to-br from-[#2E7D32] to-[#4CAF50] rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
         <lucide-icon name="leaf" class="w-7 h-7 text-white"></lucide-icon>
       </div>
       <span class="text-2xl font-bold bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] bg-clip-text text-transparent">
@@ -36,27 +37,25 @@
 
           <div class="relative">
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-width="2" d="M4 4h16v16H4z"/>
-              <path stroke-width="2" d="M22 6l-10 7L2 6"/>
+              class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-width="2" d="M4 4h16v16H4z" />
+              <path stroke-width="2" d="M22 6l-10 7L2 6" />
             </svg>
 
-            <input
-              type="email"
-              formControlName="email"
+            <input type="email" formControlName="email"
               [placeholder]="'auth.login.inputs.email.placeholder' | translate"
-              class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
-            >
+              class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]">
           </div>
-          
-          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" 
-               class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1 text-left">
-            
+
+          <div
+            *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)"
+            class="mt-2 p-3 bg-red-100 border-l-4 border-red-600 text-red-700 text-sm font-bold shadow-sm flex flex-col gap-1 text-left">
+
             <span *ngIf="loginForm.get('email')?.errors?.['required']">
               ⚠️ {{ 'auth.validation.required' | translate }}
             </span>
-            
+
             <ng-container *ngIf="!loginForm.get('email')?.errors?.['required']">
               <span *ngIf="!emailRules.hasAt">
                 ⚠️ {{ 'auth.validation.missing_at' | translate }}
@@ -75,18 +74,21 @@
 
           <div class="relative">
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <rect x="5" y="11" width="14" height="10" rx="2" stroke-width="2"/>
-              <path stroke-width="2" d="M8 11V7a4 4 0 018 0v4"/>
+              class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <rect x="5" y="11" width="14" height="10" rx="2" stroke-width="2" />
+              <path stroke-width="2" d="M8 11V7a4 4 0 018 0v4" />
             </svg>
 
-            <input
-              type="password"
-              formControlName="password"
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
               [placeholder]="'auth.login.inputs.password.placeholder' | translate"
-              class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]"
-            >
+              class="w-full pl-12 pr-12 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#4CAF50]">
+
+            <button type="button" (click)="togglePasswordVisibility()"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-black hover:text-gray-700 focus:outline-none cursor-pointer flex items-center justify-center">
+              <lucide-icon [name]="showPassword ? 'eye-off' : 'eye'" class="w-5 h-5 text-black"
+                stile="color: black;"></lucide-icon>
+            </button>
           </div>
         </div>
 
@@ -97,12 +99,9 @@
           </p>
         </div>
 
-        <button
-          type="submit"
-          [disabled]="isLoading"
+        <button type="submit" [disabled]="isLoading"
           class="w-full px-8 py-4 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-semibold text-lg 
-          hover:shadow-2xl hover:shadow-[#4CAF50]/30 hover:scale-105 transition-all duration-300 disabled:opacity-75 disabled:cursor-wait"
-          >
+          hover:shadow-2xl hover:shadow-[#4CAF50]/30 hover:scale-105 transition-all duration-300 disabled:opacity-75 disabled:cursor-wait">
           <span *ngIf="!isLoading">{{ 'auth.login.submit_button' | translate }}</span>
           <span *ngIf="isLoading">{{ 'auth.login.loading' | translate }}</span>
         </button>
@@ -126,16 +125,14 @@
         <div class="text-center">
           <p class="text-gray-600">
             {{ 'auth.login.footer.register_question' | translate }}
-            <a routerLink="/register" 
-            class="text-[#2E7D32] font-semibold hover:text-[#4CAF50] cursor-pointer">
+            <a routerLink="/register" class="text-[#2E7D32] font-semibold hover:text-[#4CAF50] cursor-pointer">
               {{ 'auth.login.footer.register_link' | translate }}
             </a>
           </p>
         </div>
 
         <div class="text-center pt-4">
-          <a routerLink="/" 
-          class="text-sm text-gray-500 hover:text-[#2E7D32] cursor-pointer">
+          <a routerLink="/" class="text-sm text-gray-500 hover:text-[#2E7D32] cursor-pointer">
             {{ 'auth.login.footer.back_home' | translate }}
           </a>
         </div>

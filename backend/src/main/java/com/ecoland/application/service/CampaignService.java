@@ -58,6 +58,15 @@ public class CampaignService implements CampaignUseCase {
         return false;
     }
 
+    private boolean isUserLeader() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            return auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_" + AppConstants.ROLE_LEADER));
+        }
+        return false;
+    }
+
     @Override
     public List<Campaign> getAllCampaigns() {
         logger.info("Solicitud para obtener todas las campañas");
@@ -86,6 +95,10 @@ public class CampaignService implements CampaignUseCase {
         try {
             Long currentUserId = getCurrentUserId();
             campaign.setCreatorId(currentUserId); // Asignar el dueño
+            
+            if (!isUserAdmin()) {
+                campaign.setStatus("PENDIENTE");
+            }
             
             Campaign savedCampaign = campaignRepositoryPort.save(campaign);
             logger.info("Campaña creada exitosamente con id: {}", savedCampaign.getId());
@@ -117,7 +130,12 @@ public class CampaignService implements CampaignUseCase {
             existingCampaign.setParticipants(campaign.getParticipants());
             existingCampaign.setOrganizer(campaign.getOrganizer());
             existingCampaign.setOrganizerContact(campaign.getOrganizerContact());
-            existingCampaign.setStatus(campaign.getStatus());
+            if (!isUserAdmin()) {
+                existingCampaign.setStatus("PENDIENTE");
+                existingCampaign.setModerationComment(null); // Reset comment on edit
+            } else {
+                existingCampaign.setStatus(campaign.getStatus());
+            }
             existingCampaign.setDescription(campaign.getDescription());
             existingCampaign.setRequirements(campaign.getRequirements());
             existingCampaign.setCategory(campaign.getCategory());
@@ -180,6 +198,51 @@ public class CampaignService implements CampaignUseCase {
             logger.error("Error al eliminar la campaña con id {}: {}", id, e.getMessage(), e);
             throw e;
         }
+    }
+
+    @Override
+    public List<Campaign> getCampaignsByCreatorId(Long creatorId) {
+        logger.info("Solicitud para obtener campañas del creador: {}", creatorId);
+        return campaignRepositoryPort.findByCreatorId(creatorId);
+    }
+
+    @Override
+    public List<Campaign> getMyCampaigns() {
+        Long currentUserId = getCurrentUserId();
+        if (currentUserId == null) {
+            throw new AccessDeniedException("No hay una sesión activa o usuario no encontrado");
+        }
+        logger.info("Solicitud para obtener campañas del usuario autenticado: {}", currentUserId);
+        return getCampaignsByCreatorId(currentUserId);
+    }
+
+    @Override
+    public List<Campaign> getPendingCampaigns() {
+        logger.info("Solicitud para obtener campañas pendientes de moderación");
+        return campaignRepositoryPort.findByStatus("PENDIENTE");
+    }
+
+    @Override
+    @Transactional
+    public Campaign approveCampaign(Long id, String comment) {
+        logger.info("Aprobando campaña con id: {}. Comentario: {}", id, comment);
+        Campaign campaign = getCampaignById(id);
+        campaign.setStatus("ACTIVA");
+        campaign.setModerationComment(comment);
+        return campaignRepositoryPort.save(campaign);
+    }
+
+    @Override
+    @Transactional
+    public Campaign rejectCampaign(Long id, String comment) {
+        logger.info("Rechazando campaña con id: {}. Comentario: {}", id, comment);
+        if (comment == null || comment.trim().isEmpty()) {
+            throw new IllegalArgumentException("El comentario es obligatorio para rechazar la campaña");
+        }
+        Campaign campaign = getCampaignById(id);
+        campaign.setStatus("RECHAZADA");
+        campaign.setModerationComment(comment);
+        return campaignRepositoryPort.save(campaign);
     }
 
     private void seedData() {

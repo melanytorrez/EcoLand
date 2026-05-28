@@ -1,0 +1,273 @@
+<div class="dashboard-container">
+  <!-- Top Banner/Header -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 header-section">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div>
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">Panel del Organizador</h1>
+        <p class="text-gray-600 text-lg">Crea, edita y gestiona tus campañas ecológicas.</p>
+      </div>
+      <button (click)="openModal()" class="btn-premium">
+        <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
+        Proponer Nueva Campaña
+      </button>
+    </div>
+
+    <!-- Quick Stats Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
+      <div class="stat-card stat-card-total">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-semibold tracking-wider text-white/80 uppercase">Mis Campañas</p>
+            <p class="text-3xl font-extrabold mt-2">{{ stats.total }}</p>
+          </div>
+          <lucide-icon name="folder" class="w-6 h-6 text-white/90"></lucide-icon>
+        </div>
+      </div>
+      <div class="stat-card stat-card-active">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-semibold tracking-wider text-white/80 uppercase">Aprobadas/Activas</p>
+            <p class="text-3xl font-extrabold mt-2">{{ stats.active }}</p>
+          </div>
+          <lucide-icon name="check-circle" class="w-6 h-6 text-white/90"></lucide-icon>
+        </div>
+      </div>
+      <div class="stat-card stat-card-pending">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-semibold tracking-wider text-white/80 uppercase">En Revisión</p>
+            <p class="text-3xl font-extrabold mt-2">{{ stats.pending }}</p>
+          </div>
+          <lucide-icon name="clock" class="w-6 h-6 text-white/90"></lucide-icon>
+        </div>
+      </div>
+      <div class="stat-card stat-card-rejected">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-semibold tracking-wider text-white/80 uppercase">Rechazadas</p>
+            <p class="text-3xl font-extrabold mt-2">{{ stats.rejected }}</p>
+          </div>
+          <lucide-icon name="alert-triangle" class="w-6 h-6 text-white/90"></lucide-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+    <!-- Filter and Tabs Bar -->
+    <div
+      class="filter-bar p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:text-gray-900 tab-btn">
+      <!-- Tabs -->
+      <div class="flex bg-gray-100 p-1.5 rounded-2xl self-start hover:text-gray-900 tab-btn">
+        <button (click)="activeTab = 'active'"
+          [class]="'tab-btn ' + (activeTab === 'active' ? 'tab-btn-active' : 'hover:text-gray-900')">
+          Campañas Activas y Pendientes
+        </button>
+        <button (click)="activeTab = 'past'"
+          [class]="'tab-btn ' + (activeTab === 'past' ? 'tab-btn-active' : 'hover:text-gray-900')">
+          Campañas Pasadas
+        </button>
+      </div>
+
+      <!-- Search Input -->
+      <div class="relative w-full md:max-w-md">
+        <lucide-icon name="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></lucide-icon>
+        <input type="text" placeholder="Buscar por título o ubicación..." [(ngModel)]="searchTerm"
+          class="search-input" />
+      </div>
+    </div>
+
+    <!-- Campaigns List -->
+    <div *ngIf="filteredCampaigns.length > 0; else emptyState" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      <div *ngFor="let campaign of filteredCampaigns" class="campaign-card">
+        <!-- Card Image Section -->
+        <div class="relative h-48 bg-gray-100 flex-shrink-0">
+          <img *ngIf="campaign.image" [src]="campaign.image" alt="Campaign thumbnail"
+            class="w-full h-full object-cover" />
+          <div *ngIf="!campaign.image"
+            class="w-full h-full bg-gradient-to-br from-[#2E7D32]/10 to-[#4CAF50]/20 flex items-center justify-center">
+            <lucide-icon name="image" class="w-12 h-12 text-gray-300"></lucide-icon>
+          </div>
+          <!-- Category Badge -->
+          <span
+            class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-gray-800 shadow-sm flex items-center gap-1"
+            style="background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.9); border: 1px solid #e8f5e9;">
+            <lucide-icon [name]="campaign.category === 'RECYCLING' ? 'recycle' : 'tree-deciduous'"
+              class="w-3.5 h-3.5 text-[#2E7D32]"></lucide-icon>
+            {{ campaign.category === 'RECYCLING' ? 'Reciclaje' : 'Reforestación' }}
+          </span>
+          <!-- Status Badge -->
+          <span
+            [class]="'absolute top-4 right-4 px-3 py-1 text-xs font-bold rounded-full shadow-sm ' + getStatusBadgeClass(campaign.status)"
+            [style.background-color]="campaign.status === 'PENDIENTE' ? '#FEF3C7' : (campaign.status === 'ACTIVA' || campaign.status === 'Activa' ? '#D1FAE5' : (campaign.status === 'RECHAZADA' ? '#FFE4E6' : '#F3F4F6'))"
+            style="box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.9);">
+            {{ campaign.status === 'PENDIENTE' ? 'En Revisión' : (campaign.status === 'RECHAZADA' ? 'Rechazada' :
+            campaign.status) }}
+          </span>
+        </div>
+
+        <!-- Card Body -->
+        <div class="p-6 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-gray-800 line-clamp-1 mb-2">{{ campaign.title }}</h3>
+
+          <div class="space-y-3 text-gray-600 text-sm flex-1">
+            <div class="flex items-center gap-2">
+              <lucide-icon name="calendar" class="w-4 h-4 text-[#2E7D32] flex-shrink-0"></lucide-icon>
+              <span>{{ campaign.date }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <lucide-icon name="map-pin" class="w-4 h-4 text-[#2E7D32] flex-shrink-0"></lucide-icon>
+              <span class="line-clamp-1">{{ campaign.location }}</span>
+            </div>
+
+            <!-- Spots progress -->
+            <div class="pt-2">
+              <div class="flex justify-between items-center text-xs font-bold mb-1">
+                <span>Cupos cubiertos</span>
+                <span class="text-gray-800">{{ campaign.participants }} / {{ campaign.spots }}</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" [style.width.%]="getPercentage(campaign.participants, campaign.spots)">
+                </div>
+              </div>
+            </div>
+
+            <!-- Rejected Banner inside card -->
+            <div *ngIf="campaign.status === 'RECHAZADA' && campaign.moderationComment"
+              class="p-3 bg-red-50 border border-red-100 rounded-2xl flex items-start gap-2 mt-4">
+              <lucide-icon name="alert-circle" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"></lucide-icon>
+              <div>
+                <p class="text-xs font-extrabold text-red-800">Motivo del Rechazo:</p>
+                <p class="text-xs text-red-700 mt-0.5 italic">"{{ campaign.moderationComment }}"</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="border-t border-gray-100 pt-4 mt-6 flex justify-end gap-2">
+            <button (click)="openModal(campaign)" class="card-btn-edit" title="Editar">
+              <lucide-icon name="edit" class="w-4 h-4"></lucide-icon>
+            </button>
+            <button (click)="handleDelete(campaign.id)" class="card-btn-delete" title="Eliminar">
+              <lucide-icon name="trash-2" class="w-4 h-4"></lucide-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <ng-template #emptyState>
+      <div class="empty-state-card mt-8 animate-fade-in">
+        <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+          <lucide-icon name="tree-pine" class="w-10 h-10 text-gray-400"></lucide-icon>
+        </div>
+        <h3 class="text-xl font-bold text-gray-700">Aún no tienes campañas</h3>
+        <p class="text-gray-500 mt-2 max-w-sm mx-auto">
+          ¿Listo para impactar? Haz clic en "Proponer Nueva Campaña" para enviar tu propuesta a moderación.
+        </p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Modal Form -->
+<div *ngIf="showModal" class="modal-backdrop">
+  <div class="modal-content-box">
+    <!-- Header -->
+    <div class="modal-header">
+      <h2 class="text-2xl font-bold text-gray-800">
+        {{ editingId ? 'Editar Propuesta de Campaña' : 'Proponer Nueva Campaña' }}
+      </h2>
+      <button (click)="closeModal()"
+        class="p-2 text-gray-400 hover:bg-gray-100 rounded-xl transition-all cursor-pointer">
+        <lucide-icon name="x" class="w-6 h-6"></lucide-icon>
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form (ngSubmit)="handleSubmit()" class="modal-body space-y-5">
+      <div class="grid md:grid-cols-2 gap-4">
+        <!-- Title -->
+        <div class="md:col-span-2">
+          <label class="form-label">Título de la campaña *</label>
+          <input type="text" name="title" [(ngModel)]="formData.title"
+            placeholder="Ej: Siembra de plantones en Colcapirhua" class="form-input"
+            [class.form-input-error]="formErrors['title']" />
+          <p *ngIf="formErrors['title']" class="text-red-500 text-xs mt-1">{{ formErrors['title'] }}</p>
+        </div>
+
+        <!-- Category -->
+        <div>
+          <label class="form-label">Categoría *</label>
+          <select name="category" [(ngModel)]="formData.category" class="form-input cursor-pointer">
+            <option value="REFORESTATION">🌳 Reforestación</option>
+            <option value="RECYCLING">♻️ Reciclaje</option>
+          </select>
+        </div>
+
+        <!-- Date -->
+        <div>
+          <label class="form-label">Fecha de la campaña *</label>
+          <input type="date" name="date" [(ngModel)]="formData.date" class="form-input"
+            [class.form-input-error]="formErrors['date']" />
+          <p *ngIf="formErrors['date']" class="text-red-500 text-xs mt-1">{{ formErrors['date'] }}</p>
+        </div>
+
+        <!-- Spots -->
+        <div>
+          <label class="form-label">Cupos disponibles *</label>
+          <input type="number" name="spots" [(ngModel)]="formData.spots" placeholder="Ej: 50" min="1" class="form-input"
+            [class.form-input-error]="formErrors['spots']" />
+          <p *ngIf="formErrors['spots']" class="text-red-500 text-xs mt-1">{{ formErrors['spots'] }}</p>
+        </div>
+
+        <!-- Organizer -->
+        <div>
+          <label class="form-label">Organizador *</label>
+          <input type="text" name="organizer" [(ngModel)]="formData.organizer"
+            placeholder="Ej: Asociación de Jóvenes Verdes" class="form-input"
+            [class.form-input-error]="formErrors['organizer']" />
+          <p *ngIf="formErrors['organizer']" class="text-red-500 text-xs mt-1">{{ formErrors['organizer'] }}</p>
+        </div>
+
+        <!-- Location -->
+        <div class="md:col-span-2">
+          <label class="form-label">Ubicación *</label>
+          <input type="text" name="location" [(ngModel)]="formData.location"
+            placeholder="Ej: Plaza Principal, Cochabamba" class="form-input"
+            [class.form-input-error]="formErrors['location']" />
+          <p *ngIf="formErrors['location']" class="text-red-500 text-xs mt-1">{{ formErrors['location'] }}</p>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="form-label">Descripción detallada *</label>
+        <textarea name="description" [(ngModel)]="formData.description"
+          placeholder="Describe brevemente las actividades..." rows="4" class="form-input resize-none"
+          [class.form-input-error]="formErrors['description']"></textarea>
+        <p *ngIf="formErrors['description']" class="text-red-500 text-xs mt-1">{{ formErrors['description'] }}</p>
+      </div>
+
+      <!-- Image URL -->
+      <div>
+        <label class="form-label">URL de Imagen (Opcional)</label>
+        <input type="url" name="image" [(ngModel)]="formData.image" placeholder="https://ejemplo.com/imagen.jpg"
+          class="form-input" />
+      </div>
+
+      <!-- Form Actions -->
+      <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+        <button type="button" (click)="closeModal()"
+          class="px-5 py-3 border border-gray-200 text-gray-600 rounded-2xl font-bold hover:bg-gray-50 transition-all text-sm cursor-pointer">
+          Cancelar
+        </button>
+        <button type="submit"
+          class="px-5 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl font-bold shadow-md hover:shadow-lg hover:scale-[1.01] transition-all text-sm cursor-pointer">
+          Enviar Propuesta
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

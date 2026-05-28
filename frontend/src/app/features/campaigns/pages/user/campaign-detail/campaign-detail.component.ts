@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { CampaignService } from '../../../../../core/services/campaign.service';
 import { Campaign } from '../../../../../core/models/campaign.model';
+import { AuthService } from '../../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-campaign-detail',
@@ -20,6 +21,7 @@ export class CampaignDetailComponent implements OnInit {
     private campaignService: CampaignService,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,13 @@ export class CampaignDetailComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/reforestacion', this.campaign.id, 'postular']);
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login'], {
+        queryParams: { redirectTo: `/reforestacion/${this.campaign.id}/postular` }
+      });
+      return;
+    }
+
+    this.router.navigate(['/reforestacion', this.campaign.id, 'postular'], { state: { campaign: this.campaign } });
   }
 }

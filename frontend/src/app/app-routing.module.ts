@@ -80,6 +80,12 @@ const routes: Routes = [
         loadChildren: () => import('./features/campaigns/pages/admin/campaign-form/campaign-form.module').then(m => m.CampaignFormModule)
       },
       {
+        path: 'solicitudes',
+        loadComponent: () => import('./features/admin/solicitudes/admin-solicitudes.component').then(m => m.AdminSolicitudesComponent),
+        canActivate: [RoleGuard],
+        data: { expectedRoles: ['admin'] }
+      },
+      {
         path: 'puntos-verdes',
         loadChildren: () => import('./features/admin/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesAdminModule)
       },
@@ -100,6 +106,12 @@ const routes: Routes = [
         data: { expectedRoles: ['admin'] }
       }
     ]
+  },
+  {
+    path: 'lider/campanas',
+    loadComponent: () => import('./features/lider/dashboard/lider-dashboard.component').then(m => m.LiderDashboardComponent),
+    canActivate: [RoleGuard],
+    data: { expectedRoles: ['lider'] }
   },
   {
     path: 'profile',

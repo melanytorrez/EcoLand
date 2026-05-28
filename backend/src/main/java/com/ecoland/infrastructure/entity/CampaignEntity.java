@@ -42,6 +42,9 @@ public class CampaignEntity {
     @Enumerated(EnumType.STRING)
     private CampaignCategory category;
 
+    @Column(name = "moderation_comment", columnDefinition = "TEXT")
+    private String moderationComment;
+
     public CampaignEntity() {
     }
 
@@ -172,5 +175,13 @@ public class CampaignEntity {
 
     public void setCategory(CampaignCategory category) {
         this.category = category;
+    }
+
+    public String getModerationComment() {
+        return moderationComment;
+    }
+
+    public void setModerationComment(String moderationComment) {
+        this.moderationComment = moderationComment;
     }
 }

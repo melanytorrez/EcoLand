@@ -119,6 +119,19 @@ export class CampaignDetailComponent implements OnInit {
     if (!this.campaign) {
       return;
     }
-    this.router.navigate(['/reforestacion', this.campaign.id, 'postular']);
+
+    // Not authenticated: redirect to login with return URL
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login'], {
+        queryParams: { redirectTo: `/reforestacion/${this.campaign.id}/postular` }
+      });
+      return;
+    }
+
+    // Authenticated: navigate immediately — the form loads existing application in background
+    this.router.navigate(
+      ['/reforestacion', this.campaign.id, 'postular'],
+      { state: { campaign: this.campaign } }
+    );
   }
 }

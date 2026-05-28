@@ -35,6 +35,20 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
     }
 
     @Override
+    public List<Campaign> findByCreatorId(Long creatorId) {
+        return repository.findByCreatorId(creatorId).stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Campaign> findByStatus(String status) {
+        return repository.findByStatus(status).stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<Campaign> findById(Long id) {
         return repository.findById(id).map(this::toDomain);
     }
@@ -69,6 +83,7 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
         domain.setDescription(entity.getDescription());
         domain.setRequirements(entity.getRequirements());
         domain.setCategory(entity.getCategory());
+        domain.setModerationComment(entity.getModerationComment());
         return domain;
     }
 
@@ -90,6 +105,7 @@ public class CampaignRepositoryAdapter implements CampaignRepositoryPort {
         entity.setDescription(campaign.getDescription());
         entity.setRequirements(campaign.getRequirements());
         entity.setCategory(campaign.getCategory());
+        entity.setModerationComment(campaign.getModerationComment());
         return entity;
     }
 }

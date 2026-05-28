@@ -1,6 +1,7 @@
 package com.ecoland.infrastructure.adapter.in.web;
 
 import com.ecoland.application.dto.VolunteerApplicationResponse;
+import com.ecoland.application.dto.UsuarioResponse;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.model.VolunteerStatus;
 import com.ecoland.domain.port.in.UsuarioUseCase;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -48,8 +50,11 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<Usuario>> getAllUsers() {
-        return ResponseEntity.ok(usuarioUseCase.getAllUsuarios());
+    public ResponseEntity<List<UsuarioResponse>> getAllUsers() {
+        List<UsuarioResponse> users = usuarioUseCase.getAllUsuarios().stream()
+                .map(UsuarioResponse::fromUsuario)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/volunteer-applications")

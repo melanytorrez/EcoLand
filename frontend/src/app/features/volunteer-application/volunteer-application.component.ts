@@ -24,6 +24,8 @@ export class VolunteerApplicationComponent implements OnInit {
   userName = '';
   submitAttempted = false;
   existingApplicationStatus: string | null = null;
+  showSubmittedMessage = false;
+  existingApplicationMessage: string | null = null;
   form!: FormGroup;
 
   constructor(
@@ -34,7 +36,51 @@ export class VolunteerApplicationComponent implements OnInit {
     private volunteerApplicationService: VolunteerApplicationService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
+
+  ngOnInit(): void {
+    this.form = this.buildForm();
+
+    const currentUser = this.authService.getUser();
+    this.userName = currentUser?.nombre || currentUser?.fullName || currentUser?.name || '';
+
+    const navState: any = history.state || {};
+    if (navState.campaign) {
+      this.campaign = navState.campaign as Campaign;
+      this.campaignId = this.campaign.id;
+
+      if (navState.existingApplication) {
+        this.applyExistingApplication(navState.existingApplication);
+      }
+
+      this.isLoading = false;
+      if (this.campaignId) {
+        this.fetchCampaignInBackground(this.campaignId);
+      }
+    }
+
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('campaignId');
+      const routeCampaignId = idParam ? Number(idParam) : null;
+
+      if (!routeCampaignId) {
+        this.errorMessage = 'No se encontró la campaña seleccionada.';
+        this.isLoading = false;
+        return;
+      }
+
+      this.campaignId = routeCampaignId;
+
+      if (!this.campaign) {
+        this.loadCampaign(routeCampaignId);
+        return;
+      }
+
+      if (this.authService.isAuthenticated() && !this.existingApplicationStatus) {
+        this.loadExistingApplication(routeCampaignId, true);
+      }
+    });
+  }
 
   private buildForm(): FormGroup {
     return this.fb.group({
@@ -49,65 +95,89 @@ export class VolunteerApplicationComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.form = this.buildForm();
+  private loadCampaign(campaignId: number): void {
+    this.campaignService.getCampaignById(campaignId).subscribe({
+      next: (campaign) => {
+        this.campaign = campaign;
+        if (this.userName) {
+          this.form.patchValue({ fullName: this.userName });
+        }
 
-    const currentUser = this.authService.getUser();
-    this.userName = currentUser?.nombre || currentUser?.fullName || currentUser?.name || '';
+        if (this.authService.isAuthenticated()) {
+          this.loadExistingApplication(campaignId, true);
+          return;
+        }
 
-    this.route.paramMap.subscribe(params => {
-      const idParam = params.get('campaignId');
-      this.campaignId = idParam ? Number(idParam) : null;
-
-      if (!this.campaignId) {
-        this.errorMessage = 'No se encontró la campaña seleccionada.';
         this.isLoading = false;
-        return;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.errorMessage = 'No pudimos cargar la campaña.';
+        this.isLoading = false;
+        this.cdr.detectChanges();
       }
+    });
+  }
 
-      this.campaignService.getCampaignById(this.campaignId).subscribe({
-        next: (campaign) => {
-          this.campaign = campaign;
-          if (this.userName) {
-            this.form.patchValue({ fullName: this.userName });
-          }
+  private fetchCampaignInBackground(campaignId: number): void {
+    this.campaignService.getCampaignById(campaignId).subscribe({
+      next: (freshCampaign) => {
+        this.campaign = freshCampaign;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        // ignore background refresh failures
+      }
+    });
+  }
 
-          if (this.authService.isAuthenticated()) {
-            this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
-              next: (application) => {
-                this.existingApplicationStatus = application.status || 'PENDING';
-                this.form.patchValue({
-                  fullName: application.fullName,
-                  age: application.age,
-                  phone: application.phone,
-                  availableWeekends: application.availableWeekends,
-                  hasEnvironmentalExperience: application.hasEnvironmentalExperience,
-                  experienceDetails: application.experienceDetails || '',
-                  motivation: application.motivation,
-                  availabilityHours: application.availabilityHours
-                });
-                this.form.disable({ emitEvent: false });
-                this.successMessage = this.getExistingApplicationMessage();
-                this.isLoading = false;
-                this.cdr.detectChanges();
-              },
-              error: () => {
-                this.isLoading = false;
-                this.cdr.detectChanges();
-              }
-            });
-            return;
-          }
+  private applyExistingApplication(application: any): void {
+    this.existingApplicationStatus = application.status || 'PENDING';
+    this.existingApplicationMessage = this.computeExistingApplicationMessage();
+    this.form.patchValue({
+      fullName: application.fullName,
+      age: application.age,
+      phone: application.phone,
+      availableWeekends: application.availableWeekends,
+      hasEnvironmentalExperience: application.hasEnvironmentalExperience,
+      experienceDetails: application.experienceDetails || '',
+      motivation: application.motivation,
+      availabilityHours: application.availabilityHours
+    });
+    this.form.disable({ emitEvent: false });
+    this.successMessage = this.existingApplicationMessage;
+    this.showSubmittedMessage = true;
+    this.isLoading = false;
+    this.cdr.detectChanges();
+  }
 
-          this.isLoading = false;
-          this.cdr.detectChanges();
-        },
-        error: () => {
-          this.errorMessage = 'No pudimos cargar la campaña.';
+  private loadExistingApplication(campaignId: number, background = false): void {
+    this.volunteerApplicationService.getMyApplication(campaignId).subscribe({
+      next: (application) => {
+        this.existingApplicationStatus = application.status || 'PENDING';
+        this.existingApplicationMessage = this.computeExistingApplicationMessage();
+        this.form.patchValue({
+          fullName: application.fullName,
+          age: application.age,
+          phone: application.phone,
+          availableWeekends: application.availableWeekends,
+          hasEnvironmentalExperience: application.hasEnvironmentalExperience,
+          experienceDetails: application.experienceDetails || '',
+          motivation: application.motivation,
+          availabilityHours: application.availabilityHours
+        });
+        this.form.disable({ emitEvent: false });
+        this.successMessage = this.existingApplicationMessage;
+        this.showSubmittedMessage = true;
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        if (!background) {
           this.isLoading = false;
           this.cdr.detectChanges();
         }
-      });
+      }
     });
   }
 
@@ -116,6 +186,11 @@ export class VolunteerApplicationComponent implements OnInit {
 
     if (!this.campaignId) {
       this.errorMessage = 'No se encontró la campaña seleccionada.';
+      return;
+    }
+    if (!this.authService.isAuthenticated()) {
+      const currentUrl = this.router.url;
+      this.router.navigate(['/login'], { queryParams: { redirectTo: currentUrl, message: 'Debes iniciar sesión para enviar la postulación' } });
       return;
     }
 
@@ -152,15 +227,15 @@ export class VolunteerApplicationComponent implements OnInit {
       }))
       .subscribe({
         next: () => {
-          this.successMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
+          this.existingApplicationStatus = 'PENDING';
+          this.existingApplicationMessage = 'Tu postulación fue enviada correctamente y quedó pendiente de revisión.';
+          this.form.disable({ emitEvent: false });
+          this.successMessage = this.existingApplicationMessage;
+          this.showSubmittedMessage = true;
           this.form.markAsPristine();
           this.cdr.detectChanges();
-          // Navigate back to campaign detail so CTA updates to 'Solicitud pendiente'
-          setTimeout(() => {
-            this.router.navigate(['/reforestacion', this.campaignId]);
-          }, 400);
         },
-        error: (err) => {
+        error: (err: any) => {
           const serverMessage = typeof err?.error?.message === 'string' ? err.error.message : '';
           this.errorMessage = serverMessage || 'No pudimos enviar tu postulación. Revisa los datos e intenta de nuevo.';
           this.cdr.detectChanges();
@@ -225,22 +300,14 @@ export class VolunteerApplicationComponent implements OnInit {
   }
 
   getExistingApplicationMessage(): string {
-    if (!this.existingApplicationStatus) {
-      return '';
-    }
+    return this.existingApplicationMessage || '';
+  }
 
-    if (this.existingApplicationStatus === 'PENDING') {
-      return 'Ya enviaste tu postulación. Su estado actual es: pendiente de revisión.';
-    }
-
-    if (this.existingApplicationStatus === 'ACCEPTED') {
-      return 'Ya enviaste tu postulación y fue aceptada.';
-    }
-
-    if (this.existingApplicationStatus === 'REJECTED') {
-      return 'Ya enviaste tu postulación y fue rechazada.';
-    }
-
+  private computeExistingApplicationMessage(): string {
+    if (!this.existingApplicationStatus) return '';
+    if (this.existingApplicationStatus === 'PENDING') return 'Ya enviaste tu postulación. Su estado actual es: pendiente de revisión.';
+    if (this.existingApplicationStatus === 'ACCEPTED') return 'Ya enviaste tu postulación y fue aceptada.';
+    if (this.existingApplicationStatus === 'REJECTED') return 'Ya enviaste tu postulación y fue rechazada.';
     return 'Ya tienes una postulación registrada para esta campaña.';
   }
 }
