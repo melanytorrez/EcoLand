@@ -25,6 +25,7 @@ export class VolunteerApplicationComponent implements OnInit {
   submitAttempted = false;
   existingApplicationStatus: string | null = null;
     showSubmittedMessage = false;
+  existingApplicationMessage: string | null = null;
   form!: FormGroup;
 
   constructor(
@@ -63,6 +64,7 @@ export class VolunteerApplicationComponent implements OnInit {
       if (navState.existingApplication) {
         const app = navState.existingApplication as any;
         this.existingApplicationStatus = app.status || 'PENDING';
+        this.existingApplicationMessage = this.computeExistingApplicationMessage();
         this.form.patchValue({
           fullName: app.fullName,
           age: app.age,
@@ -119,6 +121,7 @@ export class VolunteerApplicationComponent implements OnInit {
               this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
                 next: (application) => {
                   this.existingApplicationStatus = application.status || 'PENDING';
+                  this.existingApplicationMessage = this.computeExistingApplicationMessage();
                   this.form.patchValue({
                     fullName: application.fullName,
                     age: application.age,
@@ -157,6 +160,7 @@ export class VolunteerApplicationComponent implements OnInit {
           this.volunteerApplicationService.getMyApplication(this.campaignId!).subscribe({
             next: (application) => {
               this.existingApplicationStatus = application.status || 'PENDING';
+              this.existingApplicationMessage = this.computeExistingApplicationMessage();
               this.form.patchValue({
                 fullName: application.fullName,
                 age: application.age,
@@ -311,6 +315,14 @@ export class VolunteerApplicationComponent implements OnInit {
       return 'Ya enviaste tu postulación y fue rechazada.';
     }
 
+    return 'Ya tienes una postulación registrada para esta campaña.';
+  }
+
+  private computeExistingApplicationMessage(): string {
+    if (!this.existingApplicationStatus) return '';
+    if (this.existingApplicationStatus === 'PENDING') return 'Ya enviaste tu postulación. Su estado actual es: pendiente de revisión.';
+    if (this.existingApplicationStatus === 'ACCEPTED') return 'Ya enviaste tu postulación y fue aceptada.';
+    if (this.existingApplicationStatus === 'REJECTED') return 'Ya enviaste tu postulación y fue rechazada.';
     return 'Ya tienes una postulación registrada para esta campaña.';
   }
 }

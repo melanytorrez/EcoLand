@@ -20,7 +20,7 @@
         <div class="grid lg:grid-cols-[1fr_360px] gap-6">
           <div>
             <div *ngIf="showSubmittedMessage || existingApplicationStatus" class="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900 font-medium mb-4">
-              {{ getExistingApplicationMessage() }}
+              {{ existingApplicationMessage || successMessage }}
             </div>
 
             <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
