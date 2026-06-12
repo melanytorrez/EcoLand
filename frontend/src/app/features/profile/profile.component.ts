@@ -4,16 +4,29 @@ import { AuthService } from '../../core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { User } from '../../core/models/user.model';
+import { BadgeType, UserBadgeSummary } from '../../core/models/badge.model';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize } from 'rxjs/operators';
 
 interface Badge {
   id: string;
-  type: 'reforestacion' | 'reciclaje' | 'general';
+  code: string;
+  type: BadgeType;
   title: string;
   description: string;
   earnedDate: string;
+  iconName: string;
+}
+
+interface BadgeProgressView {
+  code: string;
+  type: BadgeType;
+  title: string;
+  description: string;
+  current: number;
+  target: number;
+  percentage: number;
   iconName: string;
 }
 
@@ -33,6 +46,8 @@ export class ProfileComponent implements OnInit {
   reforestacionCount = 0;
   reciclajeCount = 0;
   badges: Badge[] = [];
+  badgeProgress: BadgeProgressView[] = [];
+  private badgeSummary: UserBadgeSummary | null = null;
   
   showPromotionModal = false;
   isSubmitting = false;
@@ -140,10 +155,12 @@ export class ProfileComponent implements OnInit {
         next: (campaigns) => {
           this.participations = campaigns;
           this.calculateStats();
+          this.loadBadgeSummary();
           this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Error fetching participations', err);
+          this.loadBadgeSummary();
           this.cdr.detectChanges();
         }
       });
@@ -222,8 +239,63 @@ export class ProfileComponent implements OnInit {
         ]
       };
       
-      this.generateBadges(); // Refresh badge translations
+      if (this.badgeSummary) {
+        this.applyBadgeSummary(this.badgeSummary);
+      } else {
+        this.generateBadges();
+      }
     }
+  }
+
+  private loadBadgeSummary(): void {
+    this.userService.getMyBadges().subscribe({
+      next: (summary) => {
+        this.badgeSummary = summary;
+        this.applyBadgeSummary(summary);
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error fetching badges', err);
+        this.badgeSummary = null;
+        this.generateBadges();
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  private applyBadgeSummary(summary: UserBadgeSummary): void {
+    this.badges = (summary.earnedBadges || []).map(badge => ({
+      id: String(badge.id ?? badge.code),
+      code: badge.code,
+      type: this.normalizeBadgeType(badge.type),
+      title: this.translate.instant(badge.titleKey),
+      description: this.translate.instant(badge.descriptionKey),
+      earnedDate: badge.earnedAt,
+      iconName: badge.iconName
+    }));
+
+    this.badgeProgress = (summary.progress || [])
+      .filter(progress => !progress.earned)
+      .map(progress => ({
+        code: progress.code,
+        type: this.normalizeBadgeType(progress.type),
+        title: this.translate.instant(progress.titleKey),
+        description: this.translate.instant(progress.descriptionKey),
+        current: progress.current,
+        target: progress.target,
+        percentage: progress.percentage,
+        iconName: progress.iconName
+      }));
+  }
+
+  private normalizeBadgeType(type: string | undefined): BadgeType {
+    if (type === 'reciclaje') {
+      return 'reciclaje';
+    }
+    if (type === 'general') {
+      return 'general';
+    }
+    return 'reforestacion';
   }
 
   private calculateStats(): void {
@@ -275,7 +347,7 @@ export class ProfileComponent implements OnInit {
     
     if (this.reforestacionCount >= 1) {
       newBadges.push({
-        id: 'ref-1', type: 'reforestacion',
+        id: 'ref-1', code: 'ref_1', type: 'reforestacion',
         title: this.translate.instant('profile.badges.list.ref_1.title'),
         description: this.translate.instant('profile.badges.list.ref_1.description'),
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
@@ -283,7 +355,7 @@ export class ProfileComponent implements OnInit {
     }
     if (this.reforestacionCount >= 5) {
       newBadges.push({
-        id: 'ref-5', type: 'reforestacion',
+        id: 'ref-5', code: 'ref_5', type: 'reforestacion',
         title: this.translate.instant('profile.badges.list.ref_5.title'),
         description: this.translate.instant('profile.badges.list.ref_5.description'),
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
@@ -292,24 +364,24 @@ export class ProfileComponent implements OnInit {
 
     if (this.reciclajeCount >= 1) {
       newBadges.push({
-        id: 'rec-1', type: 'reciclaje',
+        id: 'rec-1', code: 'rec_1', type: 'reciclaje',
         title: this.translate.instant('profile.badges.list.rec_1.title'),
         description: this.translate.instant('profile.badges.list.rec_1.description'),
-        earnedDate: new Date().toISOString(), iconName: 'trash-2'
+        earnedDate: new Date().toISOString(), iconName: 'recycle'
       });
     }
     if (this.reciclajeCount >= 5) {
       newBadges.push({
-        id: 'rec-5', type: 'reciclaje',
+        id: 'rec-5', code: 'rec_5', type: 'reciclaje',
         title: this.translate.instant('profile.badges.list.rec_5.title'),
         description: this.translate.instant('profile.badges.list.rec_5.description'),
-        earnedDate: new Date().toISOString(), iconName: 'trash-2'
+        earnedDate: new Date().toISOString(), iconName: 'recycle'
       });
     }
 
     if (this.participations.length >= 10) {
       newBadges.push({
-        id: 'gen-10', type: 'general',
+        id: 'gen-10', code: 'gen_10', type: 'general',
         title: this.translate.instant('profile.badges.list.gen_10.title'),
         description: this.translate.instant('profile.badges.list.gen_10.description'),
         earnedDate: new Date().toISOString(), iconName: 'award'
@@ -317,5 +389,6 @@ export class ProfileComponent implements OnInit {
     }
 
     this.badges = newBadges;
+    this.badgeProgress = [];
   }
 }

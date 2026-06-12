@@ -29,13 +29,16 @@ public class CampaignService implements CampaignUseCase {
     private final CampaignRepositoryPort campaignRepositoryPort;
     private final JpaUsuarioCampaignRepository usuarioCampaignRepository;
     private final UsuarioRepositoryPort usuarioRepositoryPort;
+    private final BadgeService badgeService;
 
     public CampaignService(CampaignRepositoryPort campaignRepositoryPort, 
                            JpaUsuarioCampaignRepository usuarioCampaignRepository,
-                           UsuarioRepositoryPort usuarioRepositoryPort) {
+                           UsuarioRepositoryPort usuarioRepositoryPort,
+                           BadgeService badgeService) {
         this.campaignRepositoryPort = campaignRepositoryPort;
         this.usuarioCampaignRepository = usuarioCampaignRepository;
         this.usuarioRepositoryPort = usuarioRepositoryPort;
+        this.badgeService = badgeService;
         seedData();
     }
 
@@ -171,6 +174,7 @@ public class CampaignService implements CampaignUseCase {
 
             campaign.setParticipants(campaign.getParticipants() + 1);
             Campaign updatedCampaign = campaignRepositoryPort.save(campaign);
+            badgeService.evaluateAndAssignBadges(userEmail);
             logger.info("Usuario {} inscrito exitosamente en la campaña con id: {}. Participantes actuales: {}",
                     userEmail, id, updatedCampaign.getParticipants());
             return updatedCampaign;

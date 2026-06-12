@@ -7,6 +7,8 @@ import com.ecoland.domain.model.VolunteerStatus;
 import com.ecoland.domain.port.in.VolunteerApplicationUseCase;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.domain.port.out.VolunteerApplicationRepositoryPort;
+import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
+import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +23,17 @@ public class VolunteerApplicationService implements VolunteerApplicationUseCase 
 
     private final VolunteerApplicationRepositoryPort volunteerApplicationRepositoryPort;
     private final CampaignRepositoryPort campaignRepositoryPort;
+    private final JpaUsuarioCampaignRepository usuarioCampaignRepository;
+    private final BadgeService badgeService;
 
     public VolunteerApplicationService(VolunteerApplicationRepositoryPort volunteerApplicationRepositoryPort,
-                                       CampaignRepositoryPort campaignRepositoryPort) {
+                                       CampaignRepositoryPort campaignRepositoryPort,
+                                       JpaUsuarioCampaignRepository usuarioCampaignRepository,
+                                       BadgeService badgeService) {
         this.volunteerApplicationRepositoryPort = volunteerApplicationRepositoryPort;
         this.campaignRepositoryPort = campaignRepositoryPort;
+        this.usuarioCampaignRepository = usuarioCampaignRepository;
+        this.badgeService = badgeService;
     }
 
     @Override
@@ -38,6 +46,10 @@ public class VolunteerApplicationService implements VolunteerApplicationUseCase 
 
         if (volunteerApplicationRepositoryPort.existsByEmailAndCampaignId(application.getUsuarioEmail(), application.getCampaignId())) {
             throw new IllegalStateException("Ya existe una postulación para esta campaña");
+        }
+
+        if (usuarioCampaignRepository.existsByUsuarioEmailAndCampaignId(application.getUsuarioEmail(), application.getCampaignId())) {
+            throw new IllegalStateException("Ya estás inscrito en esta campaña");
         }
 
         if (campaign.getParticipants() >= campaign.getSpots()) {
@@ -82,8 +94,22 @@ public class VolunteerApplicationService implements VolunteerApplicationUseCase 
         application.setStatus(VolunteerStatus.ACCEPTED);
         VolunteerApplication savedApplication = volunteerApplicationRepositoryPort.save(application);
 
-        campaign.setParticipants(campaign.getParticipants() + 1);
-        campaignRepositoryPort.save(campaign);
+        boolean alreadyRegistered = usuarioCampaignRepository.existsByUsuarioEmailAndCampaignId(
+                application.getUsuarioEmail(),
+                application.getCampaignId()
+        );
+
+        if (!alreadyRegistered) {
+            usuarioCampaignRepository.save(new UsuarioCampaignEntity(
+                    application.getUsuarioEmail(),
+                    application.getCampaignId(),
+                    LocalDateTime.now().toString()
+            ));
+            campaign.setParticipants(campaign.getParticipants() + 1);
+            campaignRepositoryPort.save(campaign);
+        }
+
+        badgeService.evaluateAndAssignBadges(application.getUsuarioEmail());
 
         return savedApplication;
     }

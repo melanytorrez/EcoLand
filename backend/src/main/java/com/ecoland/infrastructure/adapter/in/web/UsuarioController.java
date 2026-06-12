@@ -1,6 +1,8 @@
 package com.ecoland.infrastructure.adapter.in.web;
 
 import com.ecoland.application.dto.UsuarioResponse;
+import com.ecoland.application.dto.UserBadgeSummaryResponse;
+import com.ecoland.application.service.BadgeService;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.UsuarioUseCase;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,11 @@ import com.ecoland.domain.model.Campaign;
 public class UsuarioController {
 
     private final UsuarioUseCase usuarioUseCase;
+    private final BadgeService badgeService;
 
-    public UsuarioController(UsuarioUseCase usuarioUseCase) {
+    public UsuarioController(UsuarioUseCase usuarioUseCase, BadgeService badgeService) {
         this.usuarioUseCase = usuarioUseCase;
+        this.badgeService = badgeService;
     }
 
     @GetMapping("/{id}")
@@ -67,6 +71,14 @@ public class UsuarioController {
             return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.ok(usuarioUseCase.getParticipacionesCompletas(authentication.getName()));
+    }
+
+    @GetMapping("/me/badges")
+    public ResponseEntity<UserBadgeSummaryResponse> getMyBadges(Authentication authentication) {
+        if (authentication == null || authentication.getName() == null) {
+            return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(badgeService.getBadgeSummary(authentication.getName()));
     }
 
     @PostMapping("/me/request-leader")

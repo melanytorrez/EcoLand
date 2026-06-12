@@ -3,6 +3,7 @@ package com.ecoland.infrastructure.adapter.in.web;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.UsuarioUseCase;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
+import com.ecoland.application.service.BadgeService;
 import com.ecoland.infrastructure.security.JwtService;
 import com.ecoland.infrastructure.security.FeatureToggleInterceptor;
 import com.ecoland.application.service.FeatureToggleService;
@@ -42,6 +43,9 @@ class UsuarioControllerTest {
 
     @MockBean
     private FeatureToggleService featureToggleService;
+
+    @MockBean
+    private BadgeService badgeService;
 
     @BeforeEach
     void setUp() throws Exception {

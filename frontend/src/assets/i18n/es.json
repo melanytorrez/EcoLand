@@ -549,6 +549,8 @@
       "title": "Mis Insignias",
       "earned": "{{count}} obtenidas",
       "earned_on": "Obtenida el",
+      "progress_title": "Progreso hacia próximas insignias",
+      "progress_count": "{{current}} de {{target}}",
       "empty_title": "Aún no has obtenido insignias",
       "empty_subtitle": "¡Participa en actividades para ganar insignias!",
       "list": {
@@ -558,7 +560,7 @@
         },
         "ref_5": {
           "title": "Guardián del Bosque",
-          "description": "Has participado en más de 5 actividades de reforestación"
+          "description": "Has participado en 5 o más actividades de reforestación"
         },
         "rec_1": {
           "title": "Reciclador Novato",

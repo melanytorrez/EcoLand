@@ -161,6 +161,34 @@
               </p>
             </div>
           </ng-template>
+
+          <div *ngIf="badgeProgress.length > 0" class="mt-8 pt-8 border-t border-gray-100">
+            <h4 class="text-xl font-bold text-gray-800 mb-4">{{ 'profile.badges.progress_title' | translate }}</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div *ngFor="let progress of badgeProgress"
+                class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-sm"
+                    [ngClass]="progress.type === 'reciclaje' ? 'bg-gradient-to-br from-[#4CAF50] to-[#A5D6A7]' : 'bg-gradient-to-br from-[#2E7D32] to-[#4CAF50]'">
+                    <lucide-icon [name]="progress.iconName" class="w-6 h-6 text-white"></lucide-icon>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between gap-3">
+                      <h5 class="font-bold text-gray-800">{{ progress.title }}</h5>
+                      <span class="text-sm font-semibold text-[#2E7D32]">
+                        {{ 'profile.badges.progress_count' | translate:{current: progress.current, target: progress.target} }}
+                      </span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">{{ progress.description }}</p>
+                    <div class="h-2 bg-white rounded-full overflow-hidden mt-4">
+                      <div class="h-full bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] rounded-full transition-all"
+                        [style.width.%]="progress.percentage"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
