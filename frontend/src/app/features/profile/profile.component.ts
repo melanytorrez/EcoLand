@@ -9,14 +9,15 @@ import { BadgeType, UserBadgeSummary } from '../../core/models/badge.model';
 import { RecyclingActivity } from '../../core/models/recycling.model';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
-import { finalize } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 
 interface Badge {
   id: string;
   code: string;
   type: BadgeType;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   earnedDate: string;
   iconName: string;
 }
@@ -24,8 +25,8 @@ interface Badge {
 interface BadgeProgressView {
   code: string;
   type: BadgeType;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   current: number;
   target: number;
   percentage: number;
@@ -107,6 +108,10 @@ export class ProfileComponent implements OnInit {
     return new Date().getFullYear();
   }
 
+  get totalActivities(): number {
+    return this.participations.length + this.recyclingActivities.length;
+  }
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -121,55 +126,75 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/auth/login']);
       return;
     }
-    this.user = this.authService.getUser();
-    
-    // Fetch full profile to get promotion status and actual role from DB
-    this.userService.getProfile().subscribe({
-      next: (profile: any) => {
-        console.log('User Profile loaded:', profile);
-        // Backend now returns role as flat string; handle both shapes for safety
-        const resolvedRole = profile.role ||
-          (profile.roles && profile.roles.length > 0 ? (profile.roles[0].nombre || profile.roles[0].name) : null) ||
-          this.user?.role;
-        // Map backend 'estadoSolicitud' to frontend 'promotionStatus'
-        this.user = {
-          ...this.user,
-          ...profile,
-          role: resolvedRole,
-          promotionStatus: profile.estadoSolicitud || profile.promotionStatus || this.user?.promotionStatus
-        };
-        // Update localStorage to persist status on reload
-        this.authService.updateUser(this.user);
-        this.cdr.detectChanges();
-      },
-      error: (err) => console.error('Error fetching full profile', err)
-    });
+    this.user = this.authService.getUser() || {};
 
     this.translate.onLangChange.subscribe(() => {
       this.updateChartLabels();
       this.cdr.detectChanges();
     });
 
-    this.userService.getMyParticipations()
+    this.loadProfileData();
+  }
+
+  private loadProfileData(): void {
+    this.isLoading = true;
+
+    forkJoin({
+      profile: this.userService.getProfile().pipe(catchError(err => {
+        console.error('Error fetching full profile', err);
+        return of(null);
+      })),
+      participations: this.userService.getMyParticipations().pipe(catchError(err => {
+        console.error('Error fetching participations', err);
+        return of([] as Campaign[]);
+      })),
+      recyclingActivities: this.recyclingService.getMyRecyclingActivities().pipe(catchError(err => {
+        console.error('Error fetching recycling activities', err);
+        return of([] as RecyclingActivity[]);
+      })),
+      badgeSummary: this.userService.getMyBadges().pipe(catchError(err => {
+        console.error('Error fetching badges', err);
+        return of(null);
+      }))
+    })
       .pipe(finalize(() => {
         this.isLoading = false;
         this.cdr.detectChanges();
       }))
       .subscribe({
-        next: (campaigns) => {
-          this.participations = campaigns;
+        next: ({ profile, participations, recyclingActivities, badgeSummary }) => {
+          if (profile) {
+            this.applyProfile(profile);
+          }
+
+          this.participations = participations;
+          this.recyclingActivities = recyclingActivities.filter(activity => activity.status === 'APPROVED');
+          this.badgeSummary = badgeSummary;
           this.calculateStats();
-          this.loadRecyclingActivities();
-          this.loadBadgeSummary();
-          this.cdr.detectChanges();
-        },
-        error: (err) => {
-          console.error('Error fetching participations', err);
-          this.loadRecyclingActivities();
-          this.loadBadgeSummary();
+
+          if (this.badgeSummary) {
+            this.applyBadgeSummary(this.badgeSummary);
+          } else {
+            this.generateBadges();
+          }
+
           this.cdr.detectChanges();
         }
       });
+  }
+
+  private applyProfile(profile: any): void {
+    const resolvedRole = profile.role ||
+      (profile.roles && profile.roles.length > 0 ? (profile.roles[0].nombre || profile.roles[0].name) : null) ||
+      this.user?.role;
+
+    this.user = {
+      ...this.user,
+      ...profile,
+      role: resolvedRole,
+      promotionStatus: profile.estadoSolicitud || profile.promotionStatus || this.user?.promotionStatus
+    };
+    this.authService.updateUser(this.user);
   }
 
   openPromotionModal(): void {
@@ -245,11 +270,6 @@ export class ProfileComponent implements OnInit {
         ]
       };
       
-      if (this.badgeSummary) {
-        this.applyBadgeSummary(this.badgeSummary);
-      } else {
-        this.generateBadges();
-      }
     }
   }
 
@@ -290,8 +310,8 @@ export class ProfileComponent implements OnInit {
       id: String(badge.id ?? badge.code),
       code: badge.code,
       type: this.normalizeBadgeType(badge.type),
-      title: this.translate.instant(badge.titleKey),
-      description: this.translate.instant(badge.descriptionKey),
+      titleKey: badge.titleKey,
+      descriptionKey: badge.descriptionKey,
       earnedDate: badge.earnedAt,
       iconName: badge.iconName
     }));
@@ -301,8 +321,8 @@ export class ProfileComponent implements OnInit {
       .map(progress => ({
         code: progress.code,
         type: this.normalizeBadgeType(progress.type),
-        title: this.translate.instant(progress.titleKey),
-        description: this.translate.instant(progress.descriptionKey),
+        titleKey: progress.titleKey,
+        descriptionKey: progress.descriptionKey,
         current: progress.current,
         target: progress.target,
         percentage: progress.percentage,
@@ -380,16 +400,16 @@ export class ProfileComponent implements OnInit {
     if (this.reforestacionCount >= 1) {
       newBadges.push({
         id: 'ref-1', code: 'ref_1', type: 'reforestacion',
-        title: this.translate.instant('profile.badges.list.ref_1.title'),
-        description: this.translate.instant('profile.badges.list.ref_1.description'),
+        titleKey: 'profile.badges.list.ref_1.title',
+        descriptionKey: 'profile.badges.list.ref_1.description',
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
       });
     }
     if (this.reforestacionCount >= 5) {
       newBadges.push({
         id: 'ref-5', code: 'ref_5', type: 'reforestacion',
-        title: this.translate.instant('profile.badges.list.ref_5.title'),
-        description: this.translate.instant('profile.badges.list.ref_5.description'),
+        titleKey: 'profile.badges.list.ref_5.title',
+        descriptionKey: 'profile.badges.list.ref_5.description',
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
       });
     }
@@ -397,16 +417,16 @@ export class ProfileComponent implements OnInit {
     if (this.reciclajeCount >= 1) {
       newBadges.push({
         id: 'rec-1', code: 'rec_1', type: 'reciclaje',
-        title: this.translate.instant('profile.badges.list.rec_1.title'),
-        description: this.translate.instant('profile.badges.list.rec_1.description'),
+        titleKey: 'profile.badges.list.rec_1.title',
+        descriptionKey: 'profile.badges.list.rec_1.description',
         earnedDate: new Date().toISOString(), iconName: 'recycle'
       });
     }
     if (this.reciclajeCount >= 5) {
       newBadges.push({
         id: 'rec-5', code: 'rec_5', type: 'reciclaje',
-        title: this.translate.instant('profile.badges.list.rec_5.title'),
-        description: this.translate.instant('profile.badges.list.rec_5.description'),
+        titleKey: 'profile.badges.list.rec_5.title',
+        descriptionKey: 'profile.badges.list.rec_5.description',
         earnedDate: new Date().toISOString(), iconName: 'recycle'
       });
     }
@@ -414,8 +434,8 @@ export class ProfileComponent implements OnInit {
     if ((this.participations.length + this.recyclingActivities.length) >= 10) {
       newBadges.push({
         id: 'gen-10', code: 'gen_10', type: 'general',
-        title: this.translate.instant('profile.badges.list.gen_10.title'),
-        description: this.translate.instant('profile.badges.list.gen_10.description'),
+        titleKey: 'profile.badges.list.gen_10.title',
+        descriptionKey: 'profile.badges.list.gen_10.description',
         earnedDate: new Date().toISOString(), iconName: 'award'
       });
     }
