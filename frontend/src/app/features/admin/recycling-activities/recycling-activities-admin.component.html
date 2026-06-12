@@ -1,0 +1,134 @@
+<div class="p-8 max-w-7xl mx-auto min-h-screen bg-gray-50/30">
+
+  <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+    <div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Solicitudes de reciclaje</h1>
+      <p class="text-lg text-gray-500 mt-2">Valida las actividades registradas desde los Puntos Verdes.</p>
+    </div>
+    <div class="flex items-center gap-3 bg-white p-2 rounded-2xl shadow-sm border border-gray-100">
+      <div class="px-4 py-2 bg-green-50 text-green-700 rounded-xl font-bold text-sm flex items-center gap-2">
+        <lucide-icon name="clock" class="w-4 h-4"></lucide-icon>
+        {{ pendingCount }} Pendientes
+      </div>
+      <div class="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl font-bold text-sm flex items-center gap-2">
+        <lucide-icon name="recycle" class="w-4 h-4"></lucide-icon>
+        {{ totalCount }} Total
+      </div>
+      <div class="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-sm flex items-center gap-2">
+        <lucide-icon name="check-circle" class="w-4 h-4"></lucide-icon>
+        {{ approvedCount }} Aprobadas
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 p-1.5 bg-gray-100/80 rounded-2xl w-fit mb-8 backdrop-blur-sm">
+    <button type="button" (click)="setTab('pending')"
+      [class]="activeTab === 'pending' ? 'bg-white text-green-700 shadow-md' : 'text-gray-500 hover:text-gray-700'"
+      class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
+      <lucide-icon name="clock" class="w-5 h-5"></lucide-icon>
+      Pendientes
+    </button>
+    <button type="button" (click)="setTab('all')"
+      [class]="activeTab === 'all' ? 'bg-white text-blue-700 shadow-md' : 'text-gray-500 hover:text-gray-700'"
+      class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
+      <lucide-icon name="filter" class="w-5 h-5"></lucide-icon>
+      Todas
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-32 space-y-4">
+    <div class="w-16 h-16 border-4 border-green-100 border-t-green-600 rounded-full animate-spin"></div>
+    <p class="text-gray-500 font-medium animate-pulse">Cargando solicitudes...</p>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading"
+    class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 font-medium">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading" class="grid grid-cols-1 gap-5">
+    <div *ngFor="let activity of visibleActivities"
+      class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 hover:shadow-md transition-shadow">
+      <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
+        <div class="space-y-4">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-green-50 text-green-700 text-xs font-bold">
+              <lucide-icon name="recycle" class="w-4 h-4"></lucide-icon>
+              {{ activity.material }}
+            </span>
+            <span class="inline-flex items-center px-3 py-1 rounded-xl text-xs font-bold"
+              [class.bg-amber-50]="activity.status === 'PENDING'"
+              [class.text-amber-700]="activity.status === 'PENDING'"
+              [class.bg-emerald-50]="activity.status === 'APPROVED'"
+              [class.text-emerald-700]="activity.status === 'APPROVED'"
+              [class.bg-red-50]="activity.status === 'REJECTED'"
+              [class.text-red-700]="activity.status === 'REJECTED'">
+              {{ getStatusLabel(activity.status) }}
+            </span>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-extrabold text-gray-900">{{ activity.puntoVerdeNombre }}</h2>
+            <p class="text-sm text-gray-500 mt-1">{{ activity.usuarioEmail }}</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+            <div class="bg-gray-50 rounded-2xl px-4 py-3">
+              <p class="text-gray-400 font-medium mb-1">Cantidad</p>
+              <p class="font-semibold text-gray-800">{{ activity.cantidad || 'No indicada' }} {{ activity.unidad || '' }}</p>
+            </div>
+            <div class="bg-gray-50 rounded-2xl px-4 py-3">
+              <p class="text-gray-400 font-medium mb-1">Fecha</p>
+              <p class="font-semibold text-gray-800">{{ activity.registeredAt | date:'short' }}</p>
+            </div>
+            <div class="bg-gray-50 rounded-2xl px-4 py-3">
+              <p class="text-gray-400 font-medium mb-1">Punto Verde</p>
+              <p class="font-semibold text-gray-800">#{{ activity.puntoVerdeId }}</p>
+            </div>
+          </div>
+
+          <div *ngIf="activity.comentario" class="bg-gray-50 rounded-2xl px-4 py-3 text-sm">
+            <p class="text-gray-400 font-medium mb-1">Comentario del usuario</p>
+            <p class="font-semibold text-gray-800">{{ activity.comentario }}</p>
+          </div>
+
+          <div *ngIf="activity.adminNotes" class="bg-red-50 border border-red-100 rounded-2xl px-4 py-3 text-sm">
+            <p class="text-red-500 font-medium mb-1">Nota de revision</p>
+            <p class="font-semibold text-red-800">{{ activity.adminNotes }}</p>
+          </div>
+        </div>
+
+        <div class="lg:w-80 space-y-3" *ngIf="activity.status === 'PENDING'">
+          <textarea
+            [(ngModel)]="rejectionNotes[activity.id]"
+            rows="3"
+            class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-200 focus:border-green-400 resize-none"
+            placeholder="Nota para rechazar (opcional)">
+          </textarea>
+          <div class="flex gap-2">
+            <button type="button"
+              (click)="approve(activity.id)"
+              [disabled]="isSaving[activity.id]"
+              class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-green-600 text-white font-bold hover:bg-green-700 disabled:opacity-60">
+              <lucide-icon name="check-circle" class="w-4 h-4"></lucide-icon>
+              Aprobar
+            </button>
+            <button type="button"
+              (click)="reject(activity.id)"
+              [disabled]="isSaving[activity.id]"
+              class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-red-50 text-red-700 font-bold hover:bg-red-100 disabled:opacity-60">
+              <lucide-icon name="x" class="w-4 h-4"></lucide-icon>
+              Rechazar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="visibleActivities.length === 0" class="bg-white rounded-3xl border border-gray-100 shadow-sm p-16 text-center">
+      <lucide-icon name="recycle" class="w-14 h-14 mx-auto text-gray-300 mb-4"></lucide-icon>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">Sin solicitudes por ahora</h3>
+      <p class="text-gray-500">Cuando un usuario registre reciclaje en un Punto Verde, aparecera aqui.</p>
+    </div>
+  </div>
+</div>

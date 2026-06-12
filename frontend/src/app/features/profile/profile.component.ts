@@ -2,9 +2,11 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@an
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
+import { RecyclingService } from '../../core/services/recycling.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { User } from '../../core/models/user.model';
 import { BadgeType, UserBadgeSummary } from '../../core/models/badge.model';
+import { RecyclingActivity } from '../../core/models/recycling.model';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize } from 'rxjs/operators';
@@ -41,6 +43,7 @@ export class ProfileComponent implements OnInit {
   
   user: User | any = null;
   participations: Campaign[] = [];
+  recyclingActivities: RecyclingActivity[] = [];
   isLoading = true;
   
   reforestacionCount = 0;
@@ -107,6 +110,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private recyclingService: RecyclingService,
     private router: Router,
     private cdr: ChangeDetectorRef,
     private translate: TranslateService
@@ -155,11 +159,13 @@ export class ProfileComponent implements OnInit {
         next: (campaigns) => {
           this.participations = campaigns;
           this.calculateStats();
+          this.loadRecyclingActivities();
           this.loadBadgeSummary();
           this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Error fetching participations', err);
+          this.loadRecyclingActivities();
           this.loadBadgeSummary();
           this.cdr.detectChanges();
         }
@@ -263,6 +269,22 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  private loadRecyclingActivities(): void {
+    this.recyclingService.getMyRecyclingActivities().subscribe({
+      next: (activities) => {
+        this.recyclingActivities = activities.filter(activity => activity.status === 'APPROVED');
+        this.calculateStats();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error fetching recycling activities', err);
+        this.recyclingActivities = [];
+        this.calculateStats();
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
   private applyBadgeSummary(summary: UserBadgeSummary): void {
     this.badges = (summary.earnedBadges || []).map(badge => ({
       id: String(badge.id ?? badge.code),
@@ -300,7 +322,7 @@ export class ProfileComponent implements OnInit {
 
   private calculateStats(): void {
     this.reforestacionCount = this.participations.filter(c => c.category === 'REFORESTATION').length;
-    this.reciclajeCount = this.participations.filter(c => c.category === 'RECYCLING').length;
+    this.reciclajeCount = this.participations.filter(c => c.category === 'RECYCLING').length + this.recyclingActivities.length;
 
     this.pieChartData.datasets[0].data = [this.reforestacionCount, this.reciclajeCount];
     
@@ -319,6 +341,16 @@ export class ProfileComponent implements OnInit {
               recData[monthIndex]++;
             }
           }
+        }
+      }
+    });
+
+    this.recyclingActivities.forEach(activity => {
+      if (activity.registeredAt) {
+        const date = new Date(activity.registeredAt);
+        const monthIndex = date.getMonth();
+        if (!Number.isNaN(monthIndex) && monthIndex >= 0 && monthIndex < 12) {
+          recData[monthIndex]++;
         }
       }
     });
@@ -379,7 +411,7 @@ export class ProfileComponent implements OnInit {
       });
     }
 
-    if (this.participations.length >= 10) {
+    if ((this.participations.length + this.recyclingActivities.length) >= 10) {
       newBadges.push({
         id: 'gen-10', code: 'gen_10', type: 'general',
         title: this.translate.instant('profile.badges.list.gen_10.title'),

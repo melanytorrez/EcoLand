@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { GreenPoint, CollectionRoute, EnvironmentalImpact, RutaReciclaje } from '../models/recycling.model';
+import { AuthService } from './auth.service';
+import {
+  GreenPoint,
+  CollectionRoute,
+  EnvironmentalImpact,
+  RecyclingActivity,
+  RecyclingActivityRequest,
+  RutaReciclaje
+} from '../models/recycling.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +19,7 @@ import { GreenPoint, CollectionRoute, EnvironmentalImpact, RutaReciclaje } from 
 export class RecyclingService {
   private readonly apiUrl = `${environment.apiUrl}/api/puntos-verdes`;
   private readonly rutasUrl = `${environment.apiUrl}/api/v1/rutas`;
+  private readonly recyclingActivitiesUrl = `${environment.apiUrl}/api/v1/recycling-activities`;
 
   private impact: EnvironmentalImpact = {
     recycled: '156 kg',
@@ -19,7 +28,16 @@ export class RecyclingService {
     rank: 'Top 15%',
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
+
+  private getAuthHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`
+    });
+  }
 
   private mapPoint(p: any): GreenPoint {
     return {
@@ -63,6 +81,18 @@ export class RecyclingService {
 
   deletePuntoVerde(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  registerRecyclingActivity(request: RecyclingActivityRequest): Observable<RecyclingActivity> {
+    return this.http.post<RecyclingActivity>(this.recyclingActivitiesUrl, request, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  getMyRecyclingActivities(): Observable<RecyclingActivity[]> {
+    return this.http.get<RecyclingActivity[]>(`${this.recyclingActivitiesUrl}/me`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   getNearbyPoints(): Observable<GreenPoint[]> {

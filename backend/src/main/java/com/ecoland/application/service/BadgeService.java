@@ -5,9 +5,11 @@ import com.ecoland.application.dto.UserBadgeResponse;
 import com.ecoland.application.dto.UserBadgeSummaryResponse;
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.model.CampaignCategory;
+import com.ecoland.domain.model.RecyclingActivityStatus;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.infrastructure.entity.UserBadgeEntity;
 import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
+import com.ecoland.infrastructure.repository.JpaRecyclingActivityRepository;
 import com.ecoland.infrastructure.repository.JpaUserBadgeRepository;
 import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -33,13 +35,16 @@ public class BadgeService {
 
     private final JpaUserBadgeRepository userBadgeRepository;
     private final JpaUsuarioCampaignRepository usuarioCampaignRepository;
+    private final JpaRecyclingActivityRepository recyclingActivityRepository;
     private final CampaignRepositoryPort campaignRepositoryPort;
 
     public BadgeService(JpaUserBadgeRepository userBadgeRepository,
                         JpaUsuarioCampaignRepository usuarioCampaignRepository,
+                        JpaRecyclingActivityRepository recyclingActivityRepository,
                         CampaignRepositoryPort campaignRepositoryPort) {
         this.userBadgeRepository = userBadgeRepository;
         this.usuarioCampaignRepository = usuarioCampaignRepository;
+        this.recyclingActivityRepository = recyclingActivityRepository;
         this.campaignRepositoryPort = campaignRepositoryPort;
     }
 
@@ -102,8 +107,12 @@ public class BadgeService {
         int recycling = (int) campaigns.stream()
                 .filter(campaign -> campaign.getCategory() == CampaignCategory.RECYCLING)
                 .count();
+        int approvedRecyclingActivities = (int) recyclingActivityRepository.countByUsuarioEmailAndStatus(
+                usuarioEmail,
+                RecyclingActivityStatus.APPROVED
+        );
 
-        return new BadgeStats(reforestation, recycling, campaigns.size());
+        return new BadgeStats(reforestation, recycling + approvedRecyclingActivities, campaigns.size() + approvedRecyclingActivities);
     }
 
     private UserBadgeResponse toBadgeResponse(UserBadgeEntity entity) {

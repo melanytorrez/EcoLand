@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecyclingService } from '../../../../core/services/recycling.service';
 import { GreenPoint } from '../../../../core/models/recycling.model';
+import { AuthService } from '../../../../core/services/auth.service';
 import * as L from 'leaflet';
 import { MATERIAL_ICONS } from '../catalogo/catalogo.component';
 
@@ -16,6 +17,16 @@ export class DetalleComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoading = true;
   error: string | null = null;
   readonly materialIcons = MATERIAL_ICONS;
+  readonly unitOptions = ['kg', 'bolsas', 'botellas', 'unidades', 'cajas'];
+  recyclingForm = {
+    material: '',
+    cantidad: '',
+    unidad: 'kg',
+    comentario: ''
+  };
+  isSubmittingActivity = false;
+  activitySuccessMessage: string | null = null;
+  activityErrorMessage: string | null = null;
 
   private map?: L.Map;
   private marker?: L.Marker;
@@ -24,6 +35,7 @@ export class DetalleComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private recyclingService: RecyclingService,
+    public authService: AuthService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -38,6 +50,7 @@ export class DetalleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.recyclingService.getPuntoVerdeById(id).subscribe({
       next: (point) => {
         this.point = point;
+        this.recyclingForm.material = point.tiposMaterial?.[0] || '';
         this.isLoading = false;
         this.cdr.detectChanges();
         setTimeout(() => this.initMap(), 200);
@@ -105,6 +118,54 @@ export class DetalleComponent implements OnInit, AfterViewInit, OnDestroy {
       `https://www.google.com/maps/dir/?api=1&destination=${this.point.latitud},${this.point.longitud}`,
       '_blank'
     );
+  }
+
+  registrarReciclaje(): void {
+    this.activitySuccessMessage = null;
+    this.activityErrorMessage = null;
+
+    if (!this.authService.isAuthenticated()) {
+      this.activityErrorMessage = 'Debes iniciar sesion para registrar tu actividad de reciclaje.';
+      return;
+    }
+
+    if (!this.point) {
+      this.activityErrorMessage = 'No se encontro el punto verde seleccionado.';
+      return;
+    }
+
+    if (!this.recyclingForm.material) {
+      this.activityErrorMessage = 'Selecciona el material que reciclaste.';
+      return;
+    }
+
+    this.isSubmittingActivity = true;
+    this.recyclingService.registerRecyclingActivity({
+      puntoVerdeId: this.point.id,
+      material: this.recyclingForm.material,
+      cantidad: this.recyclingForm.cantidad,
+      unidad: this.recyclingForm.unidad,
+      comentario: this.recyclingForm.comentario
+    }).subscribe({
+      next: () => {
+        this.activitySuccessMessage = 'Registro enviado. Un administrador revisara tu actividad para sumar progreso a tus insignias.';
+        this.activityErrorMessage = null;
+        this.recyclingForm = {
+          material: this.point?.tiposMaterial?.[0] || '',
+          cantidad: '',
+          unidad: 'kg',
+          comentario: ''
+        };
+        this.isSubmittingActivity = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.activityErrorMessage = err?.error?.message || 'No pudimos registrar tu actividad. Intentalo nuevamente.';
+        this.activitySuccessMessage = null;
+        this.isSubmittingActivity = false;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   volverAlCatalogo(): void {
