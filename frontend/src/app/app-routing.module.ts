@@ -90,6 +90,12 @@ const routes: Routes = [
         loadChildren: () => import('./features/admin/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesAdminModule)
       },
       {
+        path: 'recycling-activities',
+        loadChildren: () => import('./features/admin/recycling-activities/recycling-activities-admin.module').then(m => m.RecyclingActivitiesAdminModule),
+        canActivate: [RoleGuard],
+        data: { expectedRoles: ['admin'] }
+      },
+      {
         path: 'volunteer-applications',
         loadChildren: () => import('./features/admin/volunteer-applications/volunteer-applications-admin.module').then(m => m.VolunteerApplicationsAdminModule)
       },

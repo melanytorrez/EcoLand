@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Campaign } from '../models/campaign.model';
 import { User } from '../models/user.model';
+import { UserBadgeSummary } from '../models/badge.model';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 
@@ -31,6 +32,14 @@ export class UserService {
       Authorization: `Bearer ${token}`
     });
     return this.http.get<User>(`${this.apiUrl}/me`, { headers });
+  }
+
+  getMyBadges(): Observable<UserBadgeSummary> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<UserBadgeSummary>(`${this.apiUrl}/me/badges`, { headers });
   }
 
   requestLeaderStatus(data?: any): Observable<any> {

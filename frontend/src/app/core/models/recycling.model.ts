@@ -45,3 +45,29 @@ export interface EnvironmentalImpact {
   co2: string;
   rank: string;
 }
+
+export type RecyclingActivityStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+
+export interface RecyclingActivityRequest {
+  puntoVerdeId: number;
+  material: string;
+  cantidad?: string;
+  unidad?: string;
+  comentario?: string;
+}
+
+export interface RecyclingActivity {
+  id: number;
+  usuarioEmail: string;
+  puntoVerdeId: number;
+  puntoVerdeNombre: string;
+  material: string;
+  cantidad?: string;
+  unidad?: string;
+  comentario?: string;
+  status: RecyclingActivityStatus;
+  adminNotes?: string;
+  registeredAt: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
+}

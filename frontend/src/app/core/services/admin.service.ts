@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 import { User } from '../models/user.model';
 import { VolunteerApplication, VolunteerApplicationStatus } from '../models/volunteer-application.model';
+import { RecyclingActivity, RecyclingActivityStatus } from '../models/recycling.model';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,32 @@ export class AdminService {
   rejectVolunteerApplication(applicationId: number, adminNotes: string): Observable<VolunteerApplication> {
     return this.http.post<VolunteerApplication>(
       `${this.apiUrl}/volunteer-applications/${applicationId}/reject`,
+      {},
+      {
+        headers: this.getHeaders(),
+        params: { adminNotes }
+      }
+    );
+  }
+
+  getRecyclingActivitiesByStatus(status: RecyclingActivityStatus = 'PENDING'): Observable<RecyclingActivity[]> {
+    return this.http.get<RecyclingActivity[]>(`${this.apiUrl}/recycling-activities`, {
+      headers: this.getHeaders(),
+      params: { status }
+    });
+  }
+
+  approveRecyclingActivity(activityId: number): Observable<RecyclingActivity> {
+    return this.http.post<RecyclingActivity>(
+      `${this.apiUrl}/recycling-activities/${activityId}/approve`,
+      {},
+      { headers: this.getHeaders() }
+    );
+  }
+
+  rejectRecyclingActivity(activityId: number, adminNotes: string): Observable<RecyclingActivity> {
+    return this.http.post<RecyclingActivity>(
+      `${this.apiUrl}/recycling-activities/${activityId}/reject`,
       {},
       {
         headers: this.getHeaders(),
