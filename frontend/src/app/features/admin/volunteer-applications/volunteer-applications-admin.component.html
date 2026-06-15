@@ -3,21 +3,21 @@
   <!-- Header -->
   <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
     <div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">Postulaciones de voluntariado</h1>
-      <p class="text-lg text-gray-500 mt-2">Administra las solicitudes de los postulantes.</p>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ 'volunteer_app_admin.title' | translate }}</h1>
+      <p class="text-lg text-gray-500 mt-2">{{ 'volunteer_app_admin.subtitle' | translate }}</p>
     </div>
     <div class="flex items-center gap-3 bg-white p-2 rounded-2xl shadow-sm border border-gray-100">
       <div class="px-4 py-2 bg-green-50 text-green-700 rounded-xl font-bold text-sm flex items-center gap-2">
         <lucide-icon name="user-check" class="w-4 h-4"></lucide-icon>
-        {{ pendingCount }} Solicitudes
+        {{ pendingCount }} {{ 'shared.requests_count' | translate }}
       </div>
       <div class="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl font-bold text-sm flex items-center gap-2">
         <lucide-icon name="users" class="w-4 h-4"></lucide-icon>
-        {{ totalCount }} Total
+        {{ totalCount }} {{ 'shared.total_count' | translate }}
       </div>
       <div class="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-sm flex items-center gap-2">
         <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
-        {{ acceptedCount }} Aprobadas
+        {{ acceptedCount }} {{ 'shared.approved_count' | translate }}
       </div>
     </div>
   </div>
@@ -28,13 +28,13 @@
       [class]="activeTab === 'pending' ? 'bg-white text-green-700 shadow-md' : 'text-gray-500 hover:text-gray-700'"
       class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
       <lucide-icon name="clock" class="w-5 h-5"></lucide-icon>
-      Solicitudes Pendientes
+      {{ 'volunteer_app_admin.tabs.pending' | translate }}
     </button>
     <button type="button" (click)="setTab('all')"
       [class]="activeTab === 'all' ? 'bg-white text-blue-700 shadow-md' : 'text-gray-500 hover:text-gray-700'"
       class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
       <lucide-icon name="settings" class="w-5 h-5"></lucide-icon>
-      Todas las solicitudes
+      {{ 'volunteer_app_admin.tabs.all' | translate }}
     </button>
   </div>
 
@@ -44,7 +44,7 @@
       <div class="w-16 h-16 border-4 border-green-100 border-t-green-600 rounded-full animate-spin"></div>
       <lucide-icon name="loader-2" class="w-6 h-6 text-green-600 absolute inset-0 m-auto animate-pulse"></lucide-icon>
     </div>
-    <p class="text-gray-500 font-medium animate-pulse">Cargando postulaciones...</p>
+    <p class="text-gray-500 font-medium animate-pulse">{{ 'volunteer_app_admin.loading' | translate }}</p>
   </div>
 
   <!-- Error -->
@@ -60,10 +60,10 @@
         <table class="w-full text-left">
           <thead>
             <tr class="vol-thead-row">
-              <th class="vol-th">Solicitante</th>
-              <th class="vol-th">Email</th>
-              <th class="vol-th">Estado</th>
-              <th class="vol-th text-center">Acciones</th>
+              <th class="vol-th">{{ 'volunteer_app_admin.table.applicant' | translate }}</th>
+              <th class="vol-th">{{ 'volunteer_app_admin.table.email' | translate }}</th>
+              <th class="vol-th">{{ 'volunteer_app_admin.table.status' | translate }}</th>
+              <th class="vol-th text-center">{{ 'volunteer_app_admin.table.actions' | translate }}</th>
             </tr>
           </thead>
           <tbody>
@@ -97,17 +97,17 @@
                 <div class="flex items-center justify-center gap-2 flex-nowrap">
                   <button type="button" class="btn-view" (click)="viewDetails(application)">
                     <lucide-icon name="eye" class="w-3.5 h-3.5"></lucide-icon>
-                    Ver
+                    {{ 'shared.view' | translate }}
                   </button>
                   <button type="button" class="btn-approve" (click)="approve(application.id!)"
                     [disabled]="isSaving[application.id!] || application.status !== 'PENDING'">
                     <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
-                    Aprobar
+                    {{ 'shared.approve' | translate }}
                   </button>
                   <button type="button" class="btn-reject" (click)="reject(application.id!)"
                     [disabled]="isSaving[application.id!] || application.status !== 'PENDING'">
                     <lucide-icon name="x-circle" class="w-4 h-4"></lucide-icon>
-                    Rechazar
+                    {{ 'shared.reject' | translate }}
                   </button>
                 </div>
               </td>
@@ -120,8 +120,8 @@
                   <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
                     <lucide-icon name="user-check" class="w-10 h-10 text-gray-300"></lucide-icon>
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">Todo en orden</h3>
-                  <p class="text-gray-500">Cuando lleguen nuevas postulaciones aparecerán aquí.</p>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">{{ 'volunteer_app_admin.empty.title' | translate }}</h3>
+                  <p class="text-gray-500">{{ 'volunteer_app_admin.empty.description' | translate }}</p>
                 </div>
               </td>
             </tr>
@@ -154,32 +154,32 @@
 
       <div class="grid grid-cols-2 gap-4 text-sm mb-6">
         <div class="bg-gray-50 rounded-2xl px-4 py-3">
-          <p class="text-gray-400 font-medium mb-1">Email</p>
+          <p class="text-gray-400 font-medium mb-1">{{ 'volunteer_app_admin.table.email' | translate }}</p>
           <p class="font-semibold text-gray-800">{{ selectedApplication.usuarioEmail }}</p>
         </div>
         <div class="bg-gray-50 rounded-2xl px-4 py-3">
-          <p class="text-gray-400 font-medium mb-1">Teléfono</p>
+          <p class="text-gray-400 font-medium mb-1">{{ 'volunteer_app_admin.detail_modal.phone' | translate }}</p>
           <p class="font-semibold text-gray-800">{{ selectedApplication.phone || '—' }}</p>
         </div>
         <div class="bg-gray-50 rounded-2xl px-4 py-3">
-          <p class="text-gray-400 font-medium mb-1">Edad</p>
+          <p class="text-gray-400 font-medium mb-1">{{ 'volunteer_app_admin.detail_modal.age' | translate }}</p>
           <p class="font-semibold text-gray-800">{{ selectedApplication.age || '—' }}</p>
         </div>
         <div class="bg-gray-50 rounded-2xl px-4 py-3">
-          <p class="text-gray-400 font-medium mb-1">Horario</p>
+          <p class="text-gray-400 font-medium mb-1">{{ 'volunteer_app_admin.detail_modal.schedule' | translate }}</p>
           <p class="font-semibold text-gray-800">{{ selectedApplication.availabilityHours || '—' }}</p>
         </div>
         <div class="bg-gray-50 rounded-2xl px-4 py-3 col-span-2">
-          <p class="text-gray-400 font-medium mb-1">Motivación</p>
+          <p class="text-gray-400 font-medium mb-1">{{ 'volunteer_app_admin.detail_modal.motivation' | translate }}</p>
           <p class="font-semibold text-gray-800">{{ selectedApplication.motivation || '—' }}</p>
         </div>
         <div *ngIf="selectedApplication.experienceDetails" class="bg-gray-50 rounded-2xl px-4 py-3 col-span-2">
-          <p class="text-gray-400 font-medium mb-1">Experiencia previa</p>
+          <p class="text-gray-400 font-medium mb-1">{{ 'volunteer_app_admin.detail_modal.prev_experience' | translate }}</p>
           <p class="font-semibold text-gray-800">{{ selectedApplication.experienceDetails }}</p>
         </div>
         <div *ngIf="selectedApplication.adminNotes"
           class="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 col-span-2">
-          <p class="text-amber-600 font-medium mb-1">Notas del administrador</p>
+          <p class="text-amber-600 font-medium mb-1">{{ 'volunteer_app_admin.detail_modal.admin_notes' | translate }}</p>
           <p class="font-semibold text-amber-900">{{ selectedApplication.adminNotes }}</p>
         </div>
       </div>
@@ -187,11 +187,11 @@
       <!-- Rejection notes (only visible when PENDING) -->
       <div *ngIf="selectedApplication.status === 'PENDING'" class="mb-4">
         <label class="block space-y-2">
-          <span class="text-sm font-semibold text-gray-700">Nota de rechazo <span
-              class="text-gray-400 font-normal">(opcional)</span></span>
+          <span class="text-sm font-semibold text-gray-700">{{ 'volunteer_app_admin.detail_modal.rejection_note' | translate }} <span
+              class="text-gray-400 font-normal">{{ 'volunteer_app_admin.detail_modal.rejection_optional' | translate }}</span></span>
           <textarea [(ngModel)]="rejectionNotes[selectedApplication.id!]" rows="2"
             class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-200 focus:border-green-400 resize-none"
-            placeholder="Agrega una nota para el postulante..."></textarea>
+            [placeholder]="'volunteer_app_admin.detail_modal.rejection_placeholder' | translate"></textarea>
         </label>
       </div>
 
@@ -199,12 +199,12 @@
         <button type="button" class="btn-approve flex-1 justify-center"
           (click)="approve(selectedApplication.id!); closeDetails()" [disabled]="isSaving[selectedApplication.id!]">
           <lucide-icon name="check-circle-2" class="w-4 h-4"></lucide-icon>
-          Aprobar
+          {{ 'shared.approve' | translate }}
         </button>
         <button type="button" class="btn-reject flex-1 justify-center"
           (click)="reject(selectedApplication.id!); closeDetails()" [disabled]="isSaving[selectedApplication.id!]">
           <lucide-icon name="x-circle" class="w-4 h-4"></lucide-icon>
-          Rechazar
+          {{ 'shared.reject' | translate }}
         </button>
       </div>
     </div>
