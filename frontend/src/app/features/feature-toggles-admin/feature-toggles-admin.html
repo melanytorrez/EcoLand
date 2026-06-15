@@ -6,10 +6,10 @@
         style="background: linear-gradient(to bottom right, #9333ea, #7e22ce);">
         <lucide-icon name="toggle-left" class="w-6 h-6 text-white"></lucide-icon>
       </div>
-      <h1 class="text-3xl font-bold text-gray-900">Feature Toggles</h1>
+      <h1 class="text-3xl font-bold text-gray-900">{{ 'feature_toggles.title' | translate }}</h1>
     </div>
     <p class="text-gray-600">
-      Controla qué funcionalidades están disponibles para los usuarios de la plataforma
+      {{ 'feature_toggles.subtitle' | translate }}
     </p>
   </div>
 
@@ -28,19 +28,19 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
     <div class="p-6 rounded-2xl text-white shadow-lg"
       style="background: linear-gradient(to bottom right, #2E7D32, #4CAF50);">
-      <p class="text-sm opacity-90 mb-1">Total de Funcionalidades</p>
+      <p class="text-sm opacity-90 mb-1">{{ 'feature_toggles.stats.total' | translate }}</p>
       <p class="text-4xl font-bold">{{ features.length }}</p>
     </div>
     <div class="p-6 rounded-2xl text-white shadow-lg"
       style="background: linear-gradient(to bottom right, #16a34a, #15803d);">
-      <p class="text-sm opacity-90 mb-1">Activas</p>
+      <p class="text-sm opacity-90 mb-1">{{ 'feature_toggles.stats.active' | translate }}</p>
       <p class="text-4xl font-bold">
         {{ activeFeaturesCount }}
       </p>
     </div>
     <div class="p-6 rounded-2xl text-white shadow-lg"
       style="background: linear-gradient(to bottom right, #4b5563, #374151);">
-      <p class="text-sm opacity-90 mb-1">Desactivadas</p>
+      <p class="text-sm opacity-90 mb-1">{{ 'feature_toggles.stats.inactive' | translate }}</p>
       <p class="text-4xl font-bold">
         {{ inactiveFeaturesCount }}
       </p>
@@ -50,9 +50,9 @@
   <!-- Feature Toggles List -->
   <div class="bg-white rounded-2xl border-2 border-gray-200 shadow-lg overflow-hidden">
     <div class="p-6 border-b-2 border-gray-200" style="background: linear-gradient(to right, #E8F5E9, #ffffff);">
-      <h2 class="text-xl font-bold text-gray-800">Gestión de Funcionalidades</h2>
+      <h2 class="text-xl font-bold text-gray-800">{{ 'feature_toggles.management.title' | translate }}</h2>
       <p class="text-sm text-gray-600 mt-1">
-        Activa o desactiva las funcionalidades disponibles en la vista de usuario
+        {{ 'feature_toggles.management.subtitle' | translate }}
       </p>
     </div>
 
@@ -78,7 +78,7 @@
               <span class="px-3 py-1 rounded-xl text-xs font-semibold" [class.bg-green-100]="feature.enabled"
                 [class.text-green-700]="feature.enabled" [class.bg-gray-200]="!feature.enabled"
                 [class.text-gray-600]="!feature.enabled">
-                {{ feature.enabled ? 'Activa' : 'Desactivada' }}
+                {{ feature.enabled ? ('feature_toggles.status_active' | translate) : ('feature_toggles.status_inactive' | translate) }}
               </span>
             </div>
             <p class="text-sm" [class.text-gray-600]="feature.enabled" [class.text-gray-500]="!feature.enabled">
@@ -112,15 +112,14 @@
 
       <div class="flex flex-col">
         <h4 class="font-bold text-lg mb-1" style="color: #92400E !important;">
-          Advertencia
+          {{ 'feature_toggles.warning.title' | translate }}
         </h4>
         <p class="text-[15px] leading-relaxed" style="color: #B45309 !important;">
-          Los cambios en los feature toggles afectan inmediatamente a todos los usuarios de la plataforma.
-          Las funcionalidades desactivadas no aparecerán en el menú de navegación ni serán accesibles
-          hasta que las vuelvas a activar.
+          {{ 'feature_toggles.warning.message' | translate }}
         </p>
       </div>
     </div>
   </div>
   </ng-template>
+
 </div>
