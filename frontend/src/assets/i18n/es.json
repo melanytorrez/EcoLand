@@ -666,7 +666,17 @@
     "confirm": "Confirmar",
     "cancel": "Cancelar",
     "save": "Guardar",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "view": "Ver",
+    "close_view": "Cerrar Vista",
+    "loading_info": "Cargando información...",
+    "all": "Todas",
+    "pending": "Pendientes",
+    "requests_count": "Solicitudes",
+    "total_count": "Total",
+    "approved_count": "Aprobadas"
   },
   "admin_users": {
     "title": "Gestión de Usuarios",
@@ -680,7 +690,9 @@
       "email": "Email",
       "role": "Rol Actual",
       "status": "Estado",
-      "actions": "Acciones"
+      "actions": "Acciones",
+      "applicant": "Solicitante",
+      "user": "Usuario"
     },
     "actions": {
       "approve": "Aprobar",
@@ -691,7 +703,300 @@
       "no_requests": "No hay solicitudes pendientes en este momento.",
       "approve_success": "Usuario promovido a Líder exitosamente.",
       "reject_success": "Solicitud rechazada.",
-      "error": "Ocurrió un error al procesar la solicitud."
+      "error": "Ocurrió un error al procesar la solicitud.",
+      "all_clear": "Todo en orden"
+    },
+    "detail_modal": {
+      "promotion_request": "Solicitud de Ascenso a Líder",
+      "submission_date": "Fecha de Envío",
+      "not_available": "No disponible",
+      "influence_zone": "Zona de Influencia",
+      "not_specified": "No especificada",
+      "motivation_vision": "Motivación y Visión",
+      "no_answer": "Sin respuesta",
+      "plans_objectives": "Planes y Objetivos",
+      "experience": "Experiencia",
+      "commitment": "Compromiso",
+      "not_specified_m": "No especificado",
+      "organization": "Organización / Entidad"
     }
+  },
+  "volunteer_app": {
+    "title": "Postulación al voluntariado",
+    "subtitle": "Completa el formulario para enviar tu postulación. El equipo administrador revisará tu solicitud y te notificará el resultado.",
+    "required_note": "Los campos marcados con <1>*</1> son obligatorios.",
+    "fields": {
+      "full_name": "Nombre completo",
+      "full_name_placeholder": "Tu nombre y apellido",
+      "age": "Edad",
+      "phone": "Teléfono",
+      "phone_placeholder": "Ej. 71234567",
+      "availability": "Horario disponible",
+      "availability_placeholder": "Mañanas, tardes o jornada completa",
+      "weekends": "Disponible los fines de semana",
+      "env_experience": "Tengo experiencia ambiental previa",
+      "prev_experience": "Experiencia previa",
+      "prev_experience_placeholder": "Cuéntanos brevemente tu experiencia si aplica",
+      "motivation": "Motivación",
+      "motivation_placeholder": "¿Por qué quieres ser voluntario?"
+    },
+    "sidebar": {
+      "campaign_data": "Datos de la campaña",
+      "available_spots": "Cupos disponibles",
+      "location": "Ubicación",
+      "organizer": "Organizador",
+      "auth_user": "Usuario autenticado",
+      "not_identified": "No identificado",
+      "pending_note": "La postulación queda en estado pendiente hasta que el equipo admin la revise."
+    },
+    "buttons": {
+      "submitted": "Postulación enviada",
+      "submitting": "Enviando postulación...",
+      "submit": "Enviar postulación",
+      "back": "Volver"
+    },
+    "loading": "Cargando postulación..."
+  },
+  "volunteer_app_admin": {
+    "title": "Postulaciones de voluntariado",
+    "subtitle": "Administra las solicitudes de los postulantes.",
+    "tabs": {
+      "pending": "Solicitudes Pendientes",
+      "all": "Todas las solicitudes"
+    },
+    "table": {
+      "applicant": "Solicitante",
+      "email": "Email",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "empty": {
+      "title": "Todo en orden",
+      "description": "Cuando lleguen nuevas postulaciones aparecerán aquí."
+    },
+    "loading": "Cargando postulaciones...",
+    "detail_modal": {
+      "phone": "Teléfono",
+      "age": "Edad",
+      "schedule": "Horario",
+      "motivation": "Motivación",
+      "prev_experience": "Experiencia previa",
+      "admin_notes": "Notas del administrador",
+      "rejection_note": "Nota de rechazo",
+      "rejection_optional": "(opcional)",
+      "rejection_placeholder": "Agrega una nota para el postulante..."
+    }
+  },
+  "lider_dashboard": {
+    "header": {
+      "title": "Panel del Organizador",
+      "subtitle": "Crea, edita y gestiona tus campañas ecológicas."
+    },
+    "btn_new": "Proponer Nueva Campaña",
+    "stats": {
+      "my_campaigns": "Mis Campañas",
+      "approved_active": "Aprobadas/Activas",
+      "in_review": "En Revisión",
+      "rejected": "Rechazadas"
+    },
+    "tabs": {
+      "active": "Campañas Activas y Pendientes",
+      "past": "Campañas Pasadas"
+    },
+    "search_placeholder": "Buscar por título o ubicación...",
+    "card": {
+      "recycling": "Reciclaje",
+      "reforestation": "Reforestación",
+      "in_review": "En Revisión",
+      "rejected": "Rechazada",
+      "spots_covered": "Cupos cubiertos",
+      "rejection_reason": "Motivo del Rechazo:"
+    },
+    "empty": {
+      "title": "Aún no tienes campañas",
+      "description": "¿Listo para impactar? Haz clic en \"Proponer Nueva Campaña\" para enviar tu propuesta a moderación."
+    },
+    "modal": {
+      "title_edit": "Editar Propuesta de Campaña",
+      "title_new": "Proponer Nueva Campaña",
+      "fields": {
+        "title": "Título de la campaña *",
+        "title_placeholder": "Ej: Siembra de plantones en Colcapirhua",
+        "category": "Categoría *",
+        "category_reforestation": "🌳 Reforestación",
+        "category_recycling": "♻️ Reciclaje",
+        "date": "Fecha de la campaña *",
+        "spots": "Cupos disponibles *",
+        "spots_placeholder": "Ej: 50",
+        "organizer": "Organizador *",
+        "organizer_placeholder": "Ej: Asociación de Jóvenes Verdes",
+        "location": "Ubicación *",
+        "location_placeholder": "Ej: Plaza Principal, Cochabamba",
+        "description": "Descripción detallada *",
+        "description_placeholder": "Describe brevemente las actividades...",
+        "image_url": "URL de Imagen (Opcional)",
+        "image_placeholder": "https://ejemplo.com/imagen.jpg"
+      },
+      "btn_cancel": "Cancelar",
+      "btn_submit": "Enviar Propuesta"
+    }
+  },
+  "admin_green_points": {
+    "title": "Gestión de Puntos Verdes",
+    "subtitle": "Administra los centros de reciclaje",
+    "btn_new": "Nuevo Punto Verde",
+    "search_placeholder": "Buscar por nombre o zona...",
+    "table": {
+      "name": "Nombre",
+      "address": "Dirección",
+      "zone": "Zona",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "empty": "No se encontraron puntos verdes que coincidan con la búsqueda.",
+    "modal": {
+      "title_edit": "Editar Punto Verde",
+      "title_new": "Nuevo Punto Verde",
+      "fields": {
+        "name": "Nombre",
+        "name_placeholder": "Ej: Punto Verde Plaza Colón",
+        "zone": "Zona",
+        "zone_placeholder": "Ej: Norte, Centro, Sur",
+        "address": "Dirección",
+        "address_placeholder": "Ej: Av. Heroínas esq. Plaza Colón",
+        "status": "Estado",
+        "status_active": "Activo",
+        "status_inactive": "Inactivo",
+        "image_url": "URL Imagen (Opcional)"
+      },
+      "btn_cancel": "Cancelar",
+      "btn_save": "Guardar Cambios",
+      "btn_create": "Crear Punto"
+    }
+  },
+  "recycling_activities_admin": {
+    "title": "Solicitudes de reciclaje",
+    "subtitle": "Valida las actividades registradas desde los Puntos Verdes.",
+    "tabs": {
+      "pending": "Pendientes",
+      "all": "Todas"
+    },
+    "loading": "Cargando solicitudes...",
+    "card": {
+      "quantity": "Cantidad",
+      "not_indicated": "No indicada",
+      "date": "Fecha",
+      "green_point": "Punto Verde",
+      "user_comment": "Comentario del usuario",
+      "review_note": "Nota de revision",
+      "rejection_placeholder": "Nota para rechazar (opcional)"
+    },
+    "empty": {
+      "title": "Sin solicitudes por ahora",
+      "description": "Cuando un usuario registre reciclaje en un Punto Verde, aparecera aqui."
+    }
+  },
+  "admin_solicitudes": {
+    "title": "Solicitudes de Campaña",
+    "subtitle": "Revisa y modera las propuestas de campañas ecológicas de los Líderes.",
+    "tabs": {
+      "requests": "Solicitudes Pendientes",
+      "campaigns": "Vista General de Campañas"
+    },
+    "search_placeholder": "Buscar por título o líder...",
+    "loading": "Cargando campañas...",
+    "card": {
+      "recycling": "Reciclaje",
+      "reforestation": "Reforestación",
+      "pending": "Pendiente",
+      "rejected": "Rechazada",
+      "proposed_spots": "cupos propuestos",
+      "proposed_by": "Propuesta por:",
+      "description_label": "Descripción:",
+      "moderation_comment": "Comentario de Moderación:"
+    },
+    "empty": {
+      "no_requests_title": "No hay solicitudes pendientes",
+      "no_requests_desc": "Todas las propuestas de campañas han sido moderadas. ¡Excelente trabajo!",
+      "no_campaigns_title": "No hay campañas registradas",
+      "no_campaigns_desc": "No se encontraron campañas creadas en el sistema."
+    },
+    "modal": {
+      "title_approve": "Aprobar Campaña",
+      "title_reject": "Rechazar Campaña",
+      "campaign_label": "Campaña:",
+      "comment_optional": "Comentario (Opcional)",
+      "comment_required": "Motivo del Rechazo (Obligatorio) *",
+      "placeholder_approve": "Ej: ¡Felicidades! Campaña aceptada.",
+      "placeholder_reject": "Ej: Falta especificar la dirección exacta o no se permiten logos comerciales."
+    }
+  },
+  "feature_toggles": {
+    "title": "Feature Toggles",
+    "subtitle": "Controla qué funcionalidades están disponibles para los usuarios de la plataforma",
+    "stats": {
+      "total": "Total de Funcionalidades",
+      "active": "Activas",
+      "inactive": "Desactivadas"
+    },
+    "management": {
+      "title": "Gestión de Funcionalidades",
+      "subtitle": "Activa o desactiva las funcionalidades disponibles en la vista de usuario"
+    },
+    "status_active": "Activa",
+    "status_inactive": "Desactivada",
+    "warning": {
+      "title": "Advertencia",
+      "message": "Los cambios en los feature toggles afectan inmediatamente a todos los usuarios de la plataforma. Las funcionalidades desactivadas no aparecerán en el menú de navegación ni serán accesibles hasta que las vuelvas a activar."
+    }
+  },
+  "green_points_catalog": {
+    "hero": {
+      "badge": "♻️ Red de Reciclaje",
+      "title": "Puntos Verdes en Cochabamba",
+      "description": "Encuentra los puntos de reciclaje más cercanos y descubre qué materiales puedes llevar a cada uno."
+    },
+    "search_placeholder": "Buscar por nombre, dirección o zona...",
+    "filter_by_material": "Filtrar por material:",
+    "all": "Todos",
+    "loading": "Cargando puntos verdes...",
+    "retry": "Reintentar",
+    "materials_accepted": "Materiales Aceptados",
+    "btn_details": "Ver detalles",
+    "empty": {
+      "title": "No se encontraron puntos verdes",
+      "subtitle": "Intenta con otros filtros o búsqueda"
+    }
+  },
+  "green_points_detail": {
+    "loading": "Cargando punto verde...",
+    "not_found": "Punto Verde no encontrado",
+    "back_catalog": "Volver al catálogo",
+    "open": "Abierto",
+    "closed": "Cerrado",
+    "description_title": "Descripción",
+    "description_text": "Centro de reciclaje ubicado en {{zone}}, Cochabamba. Contamos con personal capacitado para orientarte sobre la correcta separación de residuos y aceptamos una amplia variedad de materiales reciclables.",
+    "materials_title": "Materiales Aceptados",
+    "no_materials": "No se especificaron materiales aceptados.",
+    "recycling_activity": {
+      "badge": "Actividad de reciclaje",
+      "title": "¿Reciclaste en este punto verde?",
+      "subtitle": "Registra tu visita. Un administrador revisara la solicitud antes de sumar progreso a tus insignias.",
+      "login_required": "Debes iniciar sesion para registrar una actividad de reciclaje.",
+      "material_label": "Material reciclado",
+      "material_placeholder": "Selecciona un material",
+      "quantity_label": "Cantidad",
+      "unit_label": "Unidad",
+      "comment_label": "Comentario",
+      "comment_optional": "(opcional)",
+      "comment_placeholder": "Ej. Entregue botellas plasticas limpias en el contenedor azul.",
+      "btn_submitting": "Enviando...",
+      "btn_submit": "Registrar reciclaje"
+    },
+    "schedule_title": "Horarios de Atención",
+    "no_schedule": "Horarios no disponibles",
+    "contact_title": "Contacto",
+    "location_title": "Ubicación",
+    "btn_directions": "Cómo llegar"
   }
 }
