@@ -8,11 +8,11 @@
     <div class="flex items-center gap-3 bg-white p-2 rounded-2xl shadow-sm border border-gray-100">
       <div class="px-4 py-2 bg-green-50 text-green-700 rounded-xl font-bold text-sm flex items-center gap-2">
         <lucide-icon name="user-check" class="w-4 h-4"></lucide-icon>
-        {{ pendingRequests.length }} Solicitudes
+        {{ pendingRequests.length }} {{ 'shared.requests_count' | translate }}
       </div>
       <div class="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl font-bold text-sm flex items-center gap-2">
         <lucide-icon name="user-plus" class="w-4 h-4"></lucide-icon>
-        {{ allUsers.length }} Usuarios
+        {{ allUsers.length }} {{ 'admin_users.table.user' | translate }}s
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
       <div class="w-16 h-16 border-4 border-green-100 border-t-green-600 rounded-full animate-spin"></div>
       <lucide-icon name="loader" class="w-6 h-6 text-green-600 absolute inset-0 m-auto animate-pulse"></lucide-icon>
     </div>
-    <p class="text-gray-500 font-medium animate-pulse">Cargando información...</p>
+    <p class="text-gray-500 font-medium animate-pulse">{{ 'shared.loading_info' | translate }}</p>
   </div>
 
   <!-- Content Section -->
@@ -52,10 +52,10 @@
           <table class="w-full text-left">
             <thead class="bg-gradient-to-r from-[#E8F5E9] to-[#C8E6C9]">
               <tr>
-                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Solicitante</th>
-                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Email</th>
-                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Estado</th>
-                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Acciones</th>
+                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.applicant' | translate }}</th>
+                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.email' | translate }}</th>
+                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.status' | translate }}</th>
+                <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.actions' | translate }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
@@ -82,17 +82,17 @@
                     <button (click)="viewDetails(req)"
                       class="btn-view flex items-center gap-2 px-4 py-2 rounded-full font-bold text-[10px] whitespace-nowrap">
                       <lucide-icon name="eye" class="w-3.5 h-3.5"></lucide-icon>
-                      Ver
+                      {{ 'shared.view' | translate }}
                     </button>
                     <button (click)="approveRequest(req.id)"
                       class="btn-approve flex items-center gap-2 px-4 py-2 text-white rounded-full font-bold text-[10px] shadow-md whitespace-nowrap">
                       <lucide-icon name="check-circle" class="w-3.5 h-3.5"></lucide-icon>
-                      Aprobar
+                      {{ 'shared.approve' | translate }}
                     </button>
                     <button (click)="rejectRequest(req.id)"
                       class="btn-reject flex items-center gap-2 px-4 py-2 text-white rounded-full font-bold text-[10px] shadow-md whitespace-nowrap">
                       <lucide-icon name="x-circle" class="w-3.5 h-3.5"></lucide-icon>
-                      Rechazar
+                      {{ 'shared.reject' | translate }}
                     </button>
                   </div>
                 </td>
@@ -104,7 +104,7 @@
                     <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
                       <lucide-icon name="user-check" class="w-10 h-10 text-gray-300"></lucide-icon>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Todo en orden</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ 'admin_users.messages.all_clear' | translate }}</h3>
                     <p class="text-gray-500">{{ 'admin_users.messages.no_requests' | translate }}</p>
                   </div>
                 </td>
@@ -122,10 +122,10 @@
         <table class="w-full text-left">
           <thead class="bg-gradient-to-r from-[#E8F5E9] to-[#C8E6C9]">
             <tr>
-              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Usuario</th>
-              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Email</th>
-              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Rol Actual</th>
-              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">Acciones</th>
+              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.user' | translate }}</th>
+              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.email' | translate }}</th>
+              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.role' | translate }}</th>
+              <th class="px-6 py-4 text-center font-semibold text-gray-900 uppercase tracking-wider">{{ 'admin_users.table.actions' | translate }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-50">
@@ -177,7 +177,7 @@
         </h2>
         <p class="text-white/60 flex items-center gap-2 mt-1">
           <lucide-icon name="file-text" class="w-4 h-4"></lucide-icon>
-          Solicitud de Ascenso a Líder
+          {{ 'admin_users.detail_modal.promotion_request' | translate }}
         </p>
       </div>
       <button (click)="closeDetails()" class="text-white/50 hover:text-white transition-all hover:rotate-90">
@@ -195,9 +195,8 @@
             <lucide-icon name="calendar" class="w-5 h-5"></lucide-icon>
           </div>
           <div>
-            <p class="text-xs font-bold text-blue-400 uppercase tracking-tighter">Fecha de Envío</p>
-            <p class="font-bold text-blue-900">{{ (selectedUser.fechaSolicitud | date:'dd/MM/yyyy HH:mm') || 'No
-              disponible' }}</p>
+            <p class="text-xs font-bold text-blue-400 uppercase tracking-tighter">{{ 'admin_users.detail_modal.submission_date' | translate }}</p>
+            <p class="font-bold text-blue-900">{{ (selectedUser.fechaSolicitud | date:'dd/MM/yyyy HH:mm') || ('admin_users.detail_modal.not_available' | translate) }}</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
@@ -205,8 +204,8 @@
             <lucide-icon name="map-pin" class="w-5 h-5"></lucide-icon>
           </div>
           <div>
-            <p class="text-xs font-bold text-indigo-400 uppercase tracking-tighter">Zona de Influencia</p>
-            <p class="font-bold text-indigo-900">{{ selectedUser.zone || 'No especificada' }}</p>
+            <p class="text-xs font-bold text-indigo-400 uppercase tracking-tighter">{{ 'admin_users.detail_modal.influence_zone' | translate }}</p>
+            <p class="font-bold text-indigo-900">{{ selectedUser.zone || ('admin_users.detail_modal.not_specified' | translate) }}</p>
           </div>
         </div>
       </div>
@@ -217,11 +216,11 @@
         <div class="group">
           <div class="flex items-center gap-3 mb-3">
             <lucide-icon name="activity" class="w-5 h-5 text-green-600"></lucide-icon>
-            <h3 class="text-lg font-black text-gray-800 uppercase tracking-tight">Motivación y Visión</h3>
+            <h3 class="text-lg font-black text-gray-800 uppercase tracking-tight">{{ 'admin_users.detail_modal.motivation_vision' | translate }}</h3>
           </div>
           <div
             class="p-8 bg-gray-50 rounded-[2rem] border border-gray-100 group-hover:border-green-200 transition-colors">
-            <p class="text-gray-700 leading-relaxed italic">"{{ selectedUser.motivation || 'Sin respuesta' }}"</p>
+            <p class="text-gray-700 leading-relaxed italic">"{{ selectedUser.motivation || ('admin_users.detail_modal.no_answer' | translate) }}"</p>
           </div>
         </div>
 
@@ -229,10 +228,10 @@
         <div>
           <div class="flex items-center gap-3 mb-3">
             <lucide-icon name="file-text" class="w-5 h-5 text-emerald-600"></lucide-icon>
-            <h3 class="text-lg font-black text-gray-800 uppercase tracking-tight">Planes y Objetivos</h3>
+            <h3 class="text-lg font-black text-gray-800 uppercase tracking-tight">{{ 'admin_users.detail_modal.plans_objectives' | translate }}</h3>
           </div>
           <div class="p-8 bg-gray-50 rounded-[2rem] border border-gray-100">
-            <p class="text-gray-700 leading-relaxed">{{ selectedUser.plans || 'Sin respuesta' }}</p>
+            <p class="text-gray-700 leading-relaxed">{{ selectedUser.plans || ('admin_users.detail_modal.no_answer' | translate) }}</p>
           </div>
         </div>
 
@@ -241,19 +240,19 @@
           <div>
             <div class="flex items-center gap-3 mb-3">
               <lucide-icon name="briefcase" class="w-5 h-5 text-blue-600"></lucide-icon>
-              <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest">Experiencia</h4>
+              <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest">{{ 'admin_users.detail_modal.experience' | translate }}</h4>
             </div>
             <div class="p-5 bg-gray-50 rounded-3xl border border-gray-100 text-sm text-gray-700">
-              {{ selectedUser.experience || 'No especificada' }}
+              {{ selectedUser.experience || ('admin_users.detail_modal.not_specified' | translate) }}
             </div>
           </div>
           <div>
             <div class="flex items-center gap-3 mb-3">
               <lucide-icon name="user-check" class="w-5 h-5 text-indigo-600"></lucide-icon>
-              <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest">Compromiso</h4>
+              <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest">{{ 'admin_users.detail_modal.commitment' | translate }}</h4>
             </div>
             <div class="p-5 bg-gray-50 rounded-3xl border border-gray-100 text-sm text-gray-700">
-              {{ selectedUser.commitment || 'No especificado' }}
+              {{ selectedUser.commitment || ('admin_users.detail_modal.not_specified_m' | translate) }}
             </div>
           </div>
         </div>
@@ -262,7 +261,7 @@
         <div *ngIf="selectedUser.organization">
           <div class="flex items-center gap-3 mb-3">
             <lucide-icon name="briefcase" class="w-5 h-5 text-gray-600"></lucide-icon>
-            <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest">Organización / Entidad</h4>
+            <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest">{{ 'admin_users.detail_modal.organization' | translate }}</h4>
           </div>
           <div class="px-5 py-3 bg-gray-100 rounded-xl text-gray-800 font-bold inline-block">
             {{ selectedUser.organization }}
@@ -276,8 +275,9 @@
       style="background-color: #f9fafb; border-bottom-left-radius: 2.5rem; border-bottom-right-radius: 2.5rem;">
       <button (click)="closeDetails()"
         class="w-full max-w-md py-4 bg-white text-gray-700 font-bold rounded-2xl border border-gray-200 hover:bg-gray-50 transition-all active:scale-95 shadow-sm">
-        Cerrar Vista
+        {{ 'shared.close_view' | translate }}
       </button>
     </div>
   </div>
+
 </div>
