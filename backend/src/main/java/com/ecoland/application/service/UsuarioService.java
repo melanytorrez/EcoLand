@@ -9,9 +9,12 @@ import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
 import com.ecoland.domain.port.out.RolRepositoryPort;
 import com.ecoland.domain.model.EstadoSolicitud;
 import com.ecoland.domain.model.Rol;
+import com.ecoland.domain.model.Notificacion;
+import com.ecoland.domain.port.out.NotificacionRepositoryPort;
 import com.ecoland.infrastructure.config.AppConstants;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
 
@@ -22,15 +25,18 @@ public class UsuarioService implements UsuarioUseCase {
     private final CampaignRepositoryPort campaignRepositoryPort;
     private final JpaUsuarioCampaignRepository usuarioCampaignRepository;
     private final RolRepositoryPort rolRepositoryPort;
+    private final NotificacionRepositoryPort notificacionRepositoryPort;
 
     public UsuarioService(UsuarioRepositoryPort usuarioRepositoryPort,
                           CampaignRepositoryPort campaignRepositoryPort,
                           JpaUsuarioCampaignRepository usuarioCampaignRepository,
-                          RolRepositoryPort rolRepositoryPort) {
+                          RolRepositoryPort rolRepositoryPort,
+                          NotificacionRepositoryPort notificacionRepositoryPort) {
         this.usuarioRepositoryPort = usuarioRepositoryPort;
         this.campaignRepositoryPort = campaignRepositoryPort;
         this.usuarioCampaignRepository = usuarioCampaignRepository;
         this.rolRepositoryPort = rolRepositoryPort;
+        this.notificacionRepositoryPort = notificacionRepositoryPort;
     }
 
     @Override
@@ -103,6 +109,14 @@ public class UsuarioService implements UsuarioUseCase {
             usuario.getRoles().add(roleLeader);
             
             usuarioRepositoryPort.save(usuario);
+
+            // Crear notificación
+            Notificacion notification = new Notificacion();
+            notification.setUsuarioEmail(usuario.getEmail());
+            notification.setMensaje("Tu solicitud para convertirte en líder ha sido aprobada.");
+            notification.setLeido(false);
+            notification.setFechaCreacion(LocalDateTime.now());
+            notificacionRepositoryPort.save(notification);
         }
     }
 
@@ -116,9 +130,16 @@ public class UsuarioService implements UsuarioUseCase {
             usuario.setEstadoSolicitud(EstadoSolicitud.REJECTED);
             // El rol del usuario NO se toca, se mantiene en el rol original (USUARIO)
             usuarioRepositoryPort.save(usuario);
+
+            // Crear notificación
+            Notificacion notification = new Notificacion();
+            notification.setUsuarioEmail(usuario.getEmail());
+            notification.setMensaje("Tu solicitud para convertirte en líder ha sido rechazada.");
+            notification.setLeido(false);
+            notification.setFechaCreacion(LocalDateTime.now());
+            notificacionRepositoryPort.save(notification);
         }
     }
-
 
     @Override
     public List<Usuario> getPendingLeaderRequests() {

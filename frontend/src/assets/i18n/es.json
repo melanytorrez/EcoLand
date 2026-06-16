@@ -693,5 +693,12 @@
       "reject_success": "Solicitud rechazada.",
       "error": "Ocurrió un error al procesar la solicitud."
     }
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "empty": "No tienes notificaciones en este momento.",
+    "mark_all_read": "Marcar como leídas",
+    "clear_all": "Limpiar todo",
+    "unread_count": "tienes {{count}} notificaciones sin leer"
   }
 }
