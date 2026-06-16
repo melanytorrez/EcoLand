@@ -78,7 +78,7 @@
 
               <!-- Notifications Dropdown -->
               <div *ngIf="showNotificationsDropdown"
-                class="absolute right-0 top-full mt-3 w-[360px] bg-white rounded-3xl shadow-2xl shadow-black/10 border border-gray-100 overflow-hidden z-50 transition-all duration-200">
+                class="absolute right-0 top-full mt-3 w-[360px] h-[480px] flex flex-col bg-white rounded-3xl shadow-2xl shadow-black/10 border border-gray-100 overflow-hidden z-50 transition-all duration-200">
                 <!-- Dropdown Header -->
                 <div class="px-5 pt-5 pb-4 bg-gradient-to-br from-[#2E7D32]/5 via-white to-[#4CAF50]/5 border-b border-gray-100">
                   <div class="flex items-center justify-between">
@@ -113,9 +113,9 @@
                 </div>
 
                 <!-- Dropdown Body -->
-                <div class="max-h-[420px] overflow-y-auto overscroll-contain">
+                <div class="flex-grow overflow-y-auto overscroll-contain flex flex-col">
                   <!-- Empty state -->
-                  <div *ngIf="notifications.length === 0" class="flex flex-col items-center justify-center py-14 px-6 text-center">
+                  <div *ngIf="notifications.length === 0" class="flex-grow flex flex-col items-center justify-center px-6 text-center">
                     <div class="w-14 h-14 rounded-2xl bg-[#E8F5E9] flex items-center justify-center mb-4">
                       <lucide-icon name="bell" size="24" class="text-[#4CAF50]"></lucide-icon>
                     </div>
