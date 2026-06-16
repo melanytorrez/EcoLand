@@ -666,6 +666,7 @@
     "confirm": "Takyachiy",
     "cancel": "Saqiy",
     "save": "Waqaychay",
+    "edit": "Allichay",
     "delete": "Qichuy",
     "approve": "Chaskiy",
     "reject": "Mana chaskiy",
@@ -692,7 +693,8 @@
       "status": "Imayna kasqan",
       "actions": "Ruraykuna",
       "applicant": "Mañakuq",
-      "user": "Apaykachaq"
+      "user": "Apaykachaq",
+      "users_total": "{{count}} Apaykachaqkuna"
     },
     "actions": {
       "approve": "Chaskiy",
@@ -724,7 +726,8 @@
   "volunteer_app": {
     "title": "Yanapaq postulación",
     "subtitle": "Kay formulariota hunt'achiy postulación apachiptiykipaq. Kamachiq ayllu mañakuyniykita qhawanqa, kayta willasunki.",
-    "required_note": "Kay <1>*</1> unanchawan pampakunaqa mañakusqa.",
+    "required_note_start": "Kay ",
+    "required_note_end": " unanchawan pampakunaqa mañakusqa.",
     "fields": {
       "full_name": "Hunt'a suti",
       "full_name_placeholder": "Sutiykita qillqay",

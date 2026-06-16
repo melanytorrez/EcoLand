@@ -24,7 +24,7 @@
             </div>
 
             <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
-              <p class="text-sm text-gray-500" [innerHTML]="'volunteer_app.required_note' | translate"></p>
+              <p class="text-sm text-gray-500">{{ 'volunteer_app.required_note_start' | translate }}<span class="text-red-600 font-semibold">*</span>{{ 'volunteer_app.required_note_end' | translate }}</p>
 
               <div class="grid md:grid-cols-2 gap-6">
                 <label class="space-y-2 block">

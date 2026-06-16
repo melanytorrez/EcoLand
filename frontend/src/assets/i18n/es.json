@@ -666,6 +666,7 @@
     "confirm": "Confirmar",
     "cancel": "Cancelar",
     "save": "Guardar",
+    "edit": "Editar",
     "delete": "Eliminar",
     "approve": "Aprobar",
     "reject": "Rechazar",
@@ -692,7 +693,8 @@
       "status": "Estado",
       "actions": "Acciones",
       "applicant": "Solicitante",
-      "user": "Usuario"
+      "user": "Usuario",
+      "users_total": "{{count}} Usuarios"
     },
     "actions": {
       "approve": "Aprobar",
@@ -724,7 +726,8 @@
   "volunteer_app": {
     "title": "Postulación al voluntariado",
     "subtitle": "Completa el formulario para enviar tu postulación. El equipo administrador revisará tu solicitud y te notificará el resultado.",
-    "required_note": "Los campos marcados con <1>*</1> son obligatorios.",
+    "required_note_start": "Los campos marcados con ",
+    "required_note_end": " son obligatorios.",
     "fields": {
       "full_name": "Nombre completo",
       "full_name_placeholder": "Tu nombre y apellido",
