@@ -165,14 +165,13 @@
                             <div class="flex items-center gap-1.5 text-gray-400" style="padding-right: 0px;">
                               <button *ngIf="!item.leido"
                                 (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
-                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#2E7D32] transition-colors"
-                                title="Marcar como leída">
-                                <lucide-icon name="check" size="18"></lucide-icon>
+                                class="p-1 rounded-lg btn-check transition-colors" title="Marcar como leída">
+                                <lucide-icon name="check" size="20"></lucide-icon>
                               </button>
                               <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#C62828] transition-colors"
-                                title="Eliminar" style="margin-left: 10px;">
-                                <lucide-icon name="trash-2" size="18"></lucide-icon>
+                                class="p-1 rounded-lg btn-delete transition-colors" title="Eliminar"
+                                style="margin-left: 10px;">
+                                <lucide-icon name="trash-2" size="20"></lucide-icon>
                               </button>
                             </div>
                           </div>
@@ -219,13 +218,12 @@
                             <div class="flex items-center gap-1.5 text-gray-400" style="padding-right: 0px;">
                               <button *ngIf="!item.leido"
                                 (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
-                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#2E7D32] transition-colors"
-                                title="Marcar como leída">
+                                class="p-1 rounded-lg btn-check transition-colors" title="Marcar como leída">
                                 <lucide-icon name="check" size="18"></lucide-icon>
                               </button>
                               <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#C62828] transition-colors"
-                                title="Eliminar" style="margin-left: 10px;">
+                                class="p-1 rounded-lg btn-delete transition-colors" title="Eliminar"
+                                style="margin-left: 10px;">
                                 <lucide-icon name="trash-2" size="18"></lucide-icon>
                               </button>
                             </div>
