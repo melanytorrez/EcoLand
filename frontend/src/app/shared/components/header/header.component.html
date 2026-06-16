@@ -170,7 +170,7 @@
                                 <lucide-icon name="check" size="18"></lucide-icon>
                               </button>
                               <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[!#C62828] transition-colors"
+                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#C62828] transition-colors"
                                 title="Eliminar" style="margin-left: 10px;">
                                 <lucide-icon name="trash-2" size="18"></lucide-icon>
                               </button>
@@ -216,17 +216,17 @@
                               }}</span>
 
                             <!-- Actions -->
-                            <div class="flex items-center gap-1.5 text-gray-400">
+                            <div class="flex items-center gap-1.5 text-gray-400" style="padding-right: 0px;">
                               <button *ngIf="!item.leido"
                                 (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
                                 class="p-1 rounded-lg hover:bg-black/5 hover:text-[#2E7D32] transition-colors"
                                 title="Marcar como leída">
-                                <lucide-icon name="check" size="14"></lucide-icon>
+                                <lucide-icon name="check" size="18"></lucide-icon>
                               </button>
                               <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                                class="p-1 rounded-lg hover:bg-black/5 hover:text-red-500 transition-colors"
-                                title="Eliminar">
-                                <lucide-icon name="trash-2" size="14"></lucide-icon>
+                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#C62828] transition-colors"
+                                title="Eliminar" style="margin-left: 10px;">
+                                <lucide-icon name="trash-2" size="18"></lucide-icon>
                               </button>
                             </div>
                           </div>
