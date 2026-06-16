@@ -63,20 +63,21 @@
             <!-- Notifications Bell -->
             <div class="relative">
               <button (click)="toggleNotifications()" [ngClass]="{
-                  'bg-[#E8F5E9] text-[#2E7D32]': showNotificationsDropdown,
-                  'hover:bg-gray-100 text-gray-500 hover:text-gray-700 bg-transparent': !showNotificationsDropdown
+                  'bg-[#E8F5E9] text-[#2E7D32]': showNotificationsDropdown || unreadCount > 0,
+                  'hover:bg-gray-100 text-gray-500 hover:text-gray-700 bg-transparent': !showNotificationsDropdown && unreadCount === 0
                 }" class="relative w-10 h-10 flex items-center justify-center rounded-2xl transition-all">
-                <lucide-icon name="bell" size="20" [class]="unreadCount > 0 ? 'text-[#2E7D32]' : ''"></lucide-icon>
+                <lucide-icon name="bell" size="20"></lucide-icon>
                 <!-- Badge for unread count -->
                 <span *ngIf="unreadCount > 0"
-                  class="absolute -top-1.5 -right-1.5 min-w-[22px] h-[22px] px-1 bg-[#4CAF50] text-white text-[11px] font-bold rounded-full flex items-center justify-center ring-2 ring-white shadow-[0_2px_8px_rgba(76,175,80,0.4)]">
+                  class="absolute -top-2 -right-2 min-w-[22px] h-[22px] px-1 bg-[#4CAF50] text-white text-[11px] font-bold rounded-full flex items-center justify-center ring-2 ring-white shadow-[0_2px_8px_rgba(76,175,80,0.4)]">
                   {{ unreadCount > 9 ? '9+' : unreadCount }}
                 </span>
               </button>
 
               <!-- Notifications Dropdown -->
               <div *ngIf="showNotificationsDropdown"
-                class="absolute right-0 top-full mt-3 w-[460px] h-[480px] flex flex-col bg-white rounded-3xl shadow-2xl shadow-black/10 border border-gray-100 overflow-hidden z-50 transition-all duration-200">
+                class="absolute right-0 top-full mt-3 w-[460px] h-[480px] flex flex-col bg-white rounded-3xl shadow-2xl shadow-black/10 border border-gray-100 overflow-hidden z-50 transition-all duration-200"
+                style="padding-top: 10px;">
                 <!-- Dropdown Header -->
                 <div
                   class="px-5 pt-5 pb-4 bg-gradient-to-br from-[#2E7D32]/5 via-white to-[#4CAF50]/5 border-b border-gray-100">
@@ -125,14 +126,14 @@
                   </div>
 
                   <!-- Notification list -->
-                  <div *ngIf="notifications.length > 0" class="p-3 space-y-2">
+                  <div *ngIf="notifications.length > 0" class="p-3 space-y-2" style="padding-top: 10px;">
                     <!-- Today notifications -->
                     <ng-container *ngIf="todayNotifications.length > 0">
                       <p class="px-2 py-1 text-[11px] font-semibold text-gray-400 uppercase tracking-wider text-left">
                         Hoy</p>
                       <div *ngFor="let item of todayNotifications" (click)="markNotificationAsRead(item.id)"
-                        [ngClass]="item.leido ? 'bg-white hover:bg-gray-50 border border-gray-100' : getNotificationConfig(item.mensaje).bg + ' hover:brightness-95'"
-                        class="relative flex gap-3 px-4 py-3.5 rounded-2xl transition-all cursor-pointer group text-left">
+                        [ngClass]="item.leido ? 'bg-white hover:bg-gray-50 border border-gray-100' : getNotificationConfig(item.mensaje).bg + ' hover:brightness-95 border border-transparent'"
+                        class="relative flex gap-3 px-4 py-3.5 rounded-3xl transition-all cursor-pointer group text-left">
 
                         <!-- Unread indicator dot -->
                         <span *ngIf="!item.leido" [ngClass]="getNotificationConfig(item.mensaje).dot"
@@ -146,32 +147,35 @@
                         </div>
 
                         <!-- Content -->
-                        <div class="flex-1 min-w-0 pr-6">
+                        <div class="flex-1 min-w-0">
                           <p [ngClass]="item.leido ? 'text-gray-600' : 'text-gray-900 font-bold'"
                             class="text-sm leading-snug">
                             {{ getNotificationConfig(item.mensaje).title }}
                           </p>
-                          <p class="text-xs text-gray-500 mt-0.5 leading-relaxed line-clamp-2">
+                          <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                             {{ item.mensaje }}
                           </p>
-                          <p class="text-[11px] text-gray-400 mt-1.5 font-medium">{{ formatRelative(item.fechaCreacion)
-                            }}</p>
-                        </div>
 
-                        <!-- Actions -->
-                        <div
-                          class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1 px-1 py-0.5 bg-white/95 backdrop-blur-sm rounded-xl shadow-md border border-gray-100 opacity-0 group-hover:opacity-100 transition-all duration-150">
-                          <button *ngIf="!item.leido"
-                            (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
-                            class="p-1 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-[#2E7D32] transition-colors"
-                            title="Marcar como leída">
-                            <lucide-icon name="check" size="13"></lucide-icon>
-                          </button>
-                          <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                            class="p-1 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-red-500 transition-colors"
-                            title="Eliminar">
-                            <lucide-icon name="trash-2" size="13"></lucide-icon>
-                          </button>
+                          <!-- Bottom row: Date and Actions -->
+                          <div class="flex items-center justify-between mt-2.5">
+                            <span class="text-[11px] text-gray-400 font-medium">{{ formatRelative(item.fechaCreacion)
+                              }}</span>
+
+                            <!-- Actions -->
+                            <div class="flex items-center gap-1.5 text-gray-400" style="padding-right: 0px;">
+                              <button *ngIf="!item.leido"
+                                (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
+                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#2E7D32] transition-colors"
+                                title="Marcar como leída">
+                                <lucide-icon name="check" size="18"></lucide-icon>
+                              </button>
+                              <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
+                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[!#C62828] transition-colors"
+                                title="Eliminar" style="margin-left: 10px;">
+                                <lucide-icon name="trash-2" size="18"></lucide-icon>
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </ng-container>
@@ -182,8 +186,8 @@
                         class="px-2 pt-2 pb-1 text-[11px] font-semibold text-gray-400 uppercase tracking-wider text-left">
                         Anteriores</p>
                       <div *ngFor="let item of olderNotifications" (click)="markNotificationAsRead(item.id)"
-                        [ngClass]="item.leido ? 'bg-white hover:bg-gray-50 border border-gray-100' : getNotificationConfig(item.mensaje).bg + ' hover:brightness-95'"
-                        class="relative flex gap-3 px-4 py-3.5 rounded-2xl transition-all cursor-pointer group text-left">
+                        [ngClass]="item.leido ? 'bg-white hover:bg-gray-50 border border-gray-100' : getNotificationConfig(item.mensaje).bg + ' hover:brightness-95 border border-transparent'"
+                        class="relative flex gap-3 px-4 py-3.5 rounded-3xl transition-all cursor-pointer group text-left">
 
                         <!-- Unread indicator dot -->
                         <span *ngIf="!item.leido" [ngClass]="getNotificationConfig(item.mensaje).dot"
@@ -197,32 +201,35 @@
                         </div>
 
                         <!-- Content -->
-                        <div class="flex-1 min-w-0 pr-6">
+                        <div class="flex-1 min-w-0">
                           <p [ngClass]="item.leido ? 'text-gray-600' : 'text-gray-900 font-bold'"
                             class="text-sm leading-snug">
                             {{ getNotificationConfig(item.mensaje).title }}
                           </p>
-                          <p class="text-xs text-gray-500 mt-0.5 leading-relaxed line-clamp-2">
+                          <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                             {{ item.mensaje }}
                           </p>
-                          <p class="text-[11px] text-gray-400 mt-1.5 font-medium">{{ formatRelative(item.fechaCreacion)
-                            }}</p>
-                        </div>
 
-                        <!-- Actions -->
-                        <div
-                          class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1 px-1 py-0.5 bg-white/95 backdrop-blur-sm rounded-xl shadow-md border border-gray-100 opacity-0 group-hover:opacity-100 transition-all duration-150">
-                          <button *ngIf="!item.leido"
-                            (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
-                            class="p-1 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-[#2E7D32] transition-colors"
-                            title="Marcar como leída">
-                            <lucide-icon name="check" size="13"></lucide-icon>
-                          </button>
-                          <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                            class="p-1 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-red-500 transition-colors"
-                            title="Eliminar">
-                            <lucide-icon name="trash-2" size="13"></lucide-icon>
-                          </button>
+                          <!-- Bottom row: Date and Actions -->
+                          <div class="flex items-center justify-between mt-2.5">
+                            <span class="text-[11px] text-gray-400 font-medium">{{ formatRelative(item.fechaCreacion)
+                              }}</span>
+
+                            <!-- Actions -->
+                            <div class="flex items-center gap-1.5 text-gray-400">
+                              <button *ngIf="!item.leido"
+                                (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
+                                class="p-1 rounded-lg hover:bg-black/5 hover:text-[#2E7D32] transition-colors"
+                                title="Marcar como leída">
+                                <lucide-icon name="check" size="14"></lucide-icon>
+                              </button>
+                              <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
+                                class="p-1 rounded-lg hover:bg-black/5 hover:text-red-500 transition-colors"
+                                title="Eliminar">
+                                <lucide-icon name="trash-2" size="14"></lucide-icon>
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </ng-container>
