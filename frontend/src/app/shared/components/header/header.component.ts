@@ -241,44 +241,61 @@ export class HeaderComponent implements OnInit {
     return date.toLocaleDateString('es-BO', { day: 'numeric', month: 'short' });
   }
 
-  getNotificationConfig(mensaje: string): { icon: string; gradient: string; bg: string; dot: string } {
+  getNotificationConfig(mensaje: string): { title: string; icon: string; gradient: string; bg: string; dot: string } {
     const msg = (mensaje || '').toLowerCase();
-    if (msg.includes('aprobada') || msg.includes('logro') || msg.includes('felicidades')) {
+    
+    // 1. Leader request (users) - check first to ensure leader request approval/rejection gets purple card instead of trophy/alert
+    if (msg.includes('líder') || msg.includes('lider') || msg.includes('solicitud')) {
+      const isAprobada = msg.includes('aprobada') || msg.includes('aceptada') || msg.includes('aprobó');
+      const isRechazada = msg.includes('rechazada') || msg.includes('denegada') || msg.includes('rechazó');
       return {
-        icon: 'trophy',
-        gradient: 'from-amber-400 to-orange-500',
-        bg: 'bg-amber-50',
-        dot: 'bg-amber-400'
-      };
-    }
-    if (msg.includes('rechazada') || msg.includes('alerta') || msg.includes('error')) {
-      return {
-        icon: 'alert-triangle',
-        gradient: 'from-orange-400 to-red-500',
-        bg: 'bg-orange-50',
-        dot: 'bg-orange-400'
-      };
-    }
-    if (msg.includes('líder') || msg.includes('lider') || msg.includes('usuarios') || msg.includes('miembro')) {
-      return {
+        title: isAprobada ? 'Solicitud aprobada' : (isRechazada ? 'Solicitud rechazada' : 'Solicitud de Líder'),
         icon: 'users',
         gradient: 'from-violet-500 to-purple-600',
-        bg: 'bg-violet-50',
+        bg: 'bg-violet-50/50',
         dot: 'bg-violet-500'
       };
     }
-    if (msg.includes('eco') || msg.includes('árbol') || msg.includes('arbol') || msg.includes('recicl') || msg.includes('campaña') || msg.includes('campana')) {
+    
+    // 2. Campaign (leaf)
+    if (msg.includes('campaña') || msg.includes('campana') || msg.includes('eco') || msg.includes('recicl') || msg.includes('árbol') || msg.includes('arbol')) {
       return {
+        title: 'Nueva campaña disponible',
         icon: 'leaf',
         gradient: 'from-[#2E7D32] to-[#4CAF50]',
-        bg: 'bg-[#E8F5E9]',
+        bg: 'bg-[#E8F5E9]/50',
         dot: 'bg-[#4CAF50]'
       };
     }
+    
+    // 3. Badge / Achievement (trophy)
+    if (msg.includes('insignia') || msg.includes('logro') || msg.includes('felicidades')) {
+      return {
+        title: 'Insignia desbloqueada',
+        icon: 'trophy',
+        gradient: 'from-amber-400 to-orange-500',
+        bg: 'bg-amber-50/50',
+        dot: 'bg-amber-400'
+      };
+    }
+    
+    // 4. Alert (alert-triangle)
+    if (msg.includes('alerta') || msg.includes('error')) {
+      return {
+        title: 'Alerta',
+        icon: 'alert-triangle',
+        gradient: 'from-orange-400 to-red-500',
+        bg: 'bg-orange-50/50',
+        dot: 'bg-orange-400'
+      };
+    }
+    
+    // 5. Default (info)
     return {
+      title: 'Notificación',
       icon: 'info',
       gradient: 'from-blue-400 to-blue-600',
-      bg: 'bg-blue-50',
+      bg: 'bg-blue-50/50',
       dot: 'bg-blue-400'
     };
   }
