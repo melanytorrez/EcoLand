@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Campaign } from '../../core/models/campaign.model';
 import { CampaignService } from '../../core/services/campaign.service';
 import { StatisticsService } from '../../core/services/statistics.service';
-import { FeatureFlagService } from '../../core/services/feature-flag.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +24,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private campaignService: CampaignService,
     private statisticsService: StatisticsService,
-    private featureFlagService: FeatureFlagService,
     private cdr: ChangeDetectorRef,
     private translate: TranslateService
   ) {
@@ -70,9 +68,5 @@ export class HomeComponent implements OnInit {
 
   getSpotCount(spots: number): string {
     return String(spots);
-  }
-
-  isFeatureEnabled(featureName: string): boolean {
-    return this.featureFlagService.isFeatureEnabled(featureName);
   }
 }
