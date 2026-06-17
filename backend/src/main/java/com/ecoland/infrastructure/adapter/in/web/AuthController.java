@@ -7,6 +7,8 @@ import com.ecoland.application.dto.GoogleLoginRequest;
 import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Authentication", description = "Endpoints para registro e inicio de sesión")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
@@ -28,6 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Iniciar sesión", description = "Autentica al usuario con email y contraseña y retorna un token JWT.")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         logger.info("Intento de login para el usuario: {}", request.getEmail());
         try {

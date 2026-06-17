@@ -2,6 +2,9 @@ package com.ecoland.infrastructure.adapter.in.web;
 
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.in.CampaignUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/campaigns")
+@Tag(name = "Campaigns", description = "Endpoints para la gestión de campañas ambientales")
 public class CampaignController {
 
     private final CampaignUseCase campaignUseCase;
@@ -21,6 +25,7 @@ public class CampaignController {
     }
 
     @GetMapping
+    @Operation(summary = "Obtener todas las campañas", description = "Retorna una lista de todas las campañas, opcionalmente filtradas por categoría.")
     public List<Campaign> getAll(@RequestParam(required = false) com.ecoland.domain.model.CampaignCategory category) {
         if (category != null) {
             return campaignUseCase.getCampaignsByCategory(category);
@@ -62,6 +67,7 @@ public class CampaignController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'LIDER')")
+    @Operation(summary = "Crear una nueva campaña", description = "Crea una campaña. Requiere rol ADMINISTRADOR o LIDER.", security = @SecurityRequirement(name = "Bearer Authentication"))
     public Campaign create(@RequestBody Campaign campaign) {
         return campaignUseCase.saveCampaign(campaign);
     }

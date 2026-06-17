@@ -6,6 +6,8 @@ import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.model.VolunteerStatus;
 import com.ecoland.domain.port.in.UsuarioUseCase;
 import com.ecoland.domain.port.in.VolunteerApplicationUseCase;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/admin")
+@Tag(name = "Administración", description = "Operaciones administrativas (Usuarios, Roles, Postulaciones)")
+@SecurityRequirement(name = "Bearer Authentication")
 public class AdminController {
 
     private final UsuarioUseCase usuarioUseCase;

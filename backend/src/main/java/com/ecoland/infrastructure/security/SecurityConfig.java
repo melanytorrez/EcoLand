@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/puntos-verdes/**").permitAll()
                         .requestMatchers("/api/v1/rutas/**").permitAll()
                         .requestMatchers("/api/v1/admin/**").hasAuthority("ROLE_ADMINISTRADOR")
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

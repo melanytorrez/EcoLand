@@ -3,6 +3,9 @@ package com.ecoland.infrastructure.adapter.in.web;
 import com.ecoland.application.dto.UsuarioResponse;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.UsuarioUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -14,6 +17,7 @@ import com.ecoland.domain.model.Campaign;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
+@Tag(name = "Usuarios", description = "Gestión de perfiles de usuario y participaciones")
 public class UsuarioController {
 
     private final UsuarioUseCase usuarioUseCase;
@@ -30,6 +34,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/me")
+    @Operation(summary = "Obtener perfil actual", description = "Retorna la información del usuario autenticado.", security = @SecurityRequirement(name = "Bearer Authentication"))
     public ResponseEntity<UsuarioResponse> getCurrentUser(Authentication authentication) {
         if (authentication == null || authentication.getName() == null) {
             return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).build();

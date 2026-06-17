@@ -4,12 +4,14 @@ import com.ecoland.domain.model.PuntoVerde;
 import com.ecoland.domain.port.in.PuntoVerdeUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/puntos-verdes")
+@Tag(name = "Puntos Verdes", description = "Gestión de puntos de reciclaje y centros de acopio")
 public class PuntoVerdeController {
 
     private final PuntoVerdeUseCase puntoVerdeUseCase;

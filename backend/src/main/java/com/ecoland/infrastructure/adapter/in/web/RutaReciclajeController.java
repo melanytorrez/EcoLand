@@ -2,6 +2,7 @@ package com.ecoland.infrastructure.adapter.in.web;
 
 import com.ecoland.domain.model.RutaReciclaje;
 import com.ecoland.domain.port.in.RutaReciclajeUseCase;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/rutas")
+@Tag(name = "Rutas de Reciclaje", description = "Gestión de rutas de recolección de residuos")
 public class RutaReciclajeController {
 
     private final RutaReciclajeUseCase useCase;
