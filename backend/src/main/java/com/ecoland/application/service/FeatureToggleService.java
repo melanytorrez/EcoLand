@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 @Service
 public class FeatureToggleService {
 
+    private static final String REMOVED_REFORESTATION_FEATURE = "reforestacion";
+
     private final FeatureToggleRepository repository;
 
     public FeatureToggleService(FeatureToggleRepository repository) {
@@ -20,6 +22,9 @@ public class FeatureToggleService {
         if (featureName == null || featureName.trim().isEmpty()) {
             return false;
         }
+        if (isRemovedFeature(featureName)) {
+            return true;
+        }
         return repository.findByFeatureName(featureName)
                 .map(FeatureToggleEntity::isEnabled)
                 .orElse(false); // Resiliencia: Si no existe, false por seguridad
@@ -27,6 +32,7 @@ public class FeatureToggleService {
 
     public Map<String, Boolean> getAllToggles() {
         return repository.findAll().stream()
+                .filter(toggle -> !isRemovedFeature(toggle.getFeatureName()))
                 .collect(Collectors.toMap(
                         FeatureToggleEntity::getFeatureName,
                         FeatureToggleEntity::isEnabled
@@ -34,9 +40,16 @@ public class FeatureToggleService {
     }
     
     public void updateToggle(String featureName, boolean isEnabled) {
+        if (isRemovedFeature(featureName)) {
+            return;
+        }
         FeatureToggleEntity entity = repository.findByFeatureName(featureName)
                 .orElseGet(() -> new FeatureToggleEntity(featureName, isEnabled));
         entity.setEnabled(isEnabled);
         repository.save(entity);
+    }
+
+    private boolean isRemovedFeature(String featureName) {
+        return REMOVED_REFORESTATION_FEATURE.equalsIgnoreCase(featureName);
     }
 }
