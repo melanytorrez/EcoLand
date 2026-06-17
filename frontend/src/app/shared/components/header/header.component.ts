@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   languages = SUPPORTED_LANGUAGES;
 
   allNavItems = [
-    { path: '/',              label: 'header.nav.home',          feature: 'inicio' },
+    { path: '/',              label: 'header.nav.home' },
     { path: '/reforestacion', label: 'header.nav.reforestation' },
     { path: '/reciclaje',     label: 'header.nav.recycling',     feature: 'reciclaje' },
     { path: '/estadisticas',  label: 'header.nav.stats',         feature: 'estadisticas' },

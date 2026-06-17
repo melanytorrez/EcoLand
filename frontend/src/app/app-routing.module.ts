@@ -10,9 +10,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
-    pathMatch: 'full',
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'inicio' }
+    pathMatch: 'full'
   },
   {
     path: '',
