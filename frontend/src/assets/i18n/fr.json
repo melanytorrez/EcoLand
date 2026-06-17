@@ -386,6 +386,8 @@
       "title": "Mes Badges",
       "earned": "{{count}} obtenus",
       "earned_on": "Obtenu le",
+      "progress_title": "Progression vers les prochains badges",
+      "progress_count": "{{current}} sur {{target}}",
       "empty_title": "Vous n'avez pas encore de badges",
       "empty_subtitle": "Participez à des activités pour gagner des badges !",
       "list": {
@@ -395,7 +397,7 @@
         },
         "ref_5": {
           "title": "Gardien de la Forêt",
-          "description": "Vous avez participé à plus de 5 activités de reboisement"
+          "description": "Vous avez participé à 5 activités de reboisement ou plus"
         },
         "rec_1": {
           "title": "Recycleur Novice",

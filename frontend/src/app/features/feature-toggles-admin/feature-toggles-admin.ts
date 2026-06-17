@@ -53,6 +53,7 @@ export class FeatureTogglesAdmin implements OnInit {
 
   features: FeatureConfig[] = [];
   isLoading: boolean = true;
+  private readonly removedFeatureKeys = new Set(['reforestacion']);
 
   constructor(
     private featureFlagService: FeatureFlagService,
@@ -80,13 +81,15 @@ export class FeatureTogglesAdmin implements OnInit {
     const flags = this.featureFlagService.getFlags();
     
     // Convert object to array using config mapping
-    this.features = Object.keys(this.featureConfigMap).map(key => {
-      return {
-        key,
-        enabled: flags[key] !== undefined ? flags[key] : true, // default true
-        ...this.featureConfigMap[key]
-      };
-    });
+    this.features = Object.keys(this.featureConfigMap)
+      .filter(key => !this.removedFeatureKeys.has(key))
+      .map(key => {
+        return {
+          key,
+          enabled: flags[key] !== undefined ? flags[key] : true, // default true
+          ...this.featureConfigMap[key]
+        };
+      });
     this.cdr.detectChanges();
   }
 

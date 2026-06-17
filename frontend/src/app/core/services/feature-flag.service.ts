@@ -39,7 +39,6 @@ export class FeatureFlagService {
         // Fallback resiliente
         this.features = {
           'inicio': true,
-          'reforestacion': true,
           'reciclaje': true,
           'estadisticas': true,
           'perfil': true

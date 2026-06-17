@@ -36,13 +36,16 @@ class CampaignServiceTest {
     @Mock
     private UsuarioRepositoryPort usuarioRepositoryPort;
 
+    @Mock
+    private BadgeService badgeService;
+
     private CampaignService campaignService;
     private Campaign campaign;
 
     @BeforeEach
     void setUp() {
         when(campaignRepositoryPort.findAll()).thenReturn(List.of(new Campaign()));
-        campaignService = new CampaignService(campaignRepositoryPort, usuarioCampaignRepository, usuarioRepositoryPort);
+        campaignService = new CampaignService(campaignRepositoryPort, usuarioCampaignRepository, usuarioRepositoryPort, badgeService);
         
         // Mock Security Context for Admin
         SecurityContext securityContext = mock(SecurityContext.class);
@@ -136,6 +139,7 @@ class CampaignServiceTest {
         assertEquals(11, result.getParticipants());
         verify(usuarioCampaignRepository, times(1)).save(any(UsuarioCampaignEntity.class));
         verify(campaignRepositoryPort, times(1)).save(any(Campaign.class));
+        verify(badgeService, times(1)).evaluateAndAssignBadges(email);
     }
 
     @Test

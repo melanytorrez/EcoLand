@@ -23,10 +23,10 @@ export class HeaderComponent implements OnInit {
 
   allNavItems = [
     { path: '/',              label: 'header.nav.home',          feature: 'inicio' },
-    { path: '/reforestacion', label: 'header.nav.reforestation', feature: 'reforestacion' },
+    { path: '/reforestacion', label: 'header.nav.reforestation' },
     { path: '/reciclaje',     label: 'header.nav.recycling',     feature: 'reciclaje' },
     { path: '/estadisticas',  label: 'header.nav.stats',         feature: 'estadisticas' },
-    { path: '/lider/campanas', label: 'header.nav.my_publications', feature: 'reforestacion', role: 'lider' },
+    { path: '/lider/campanas', label: 'header.nav.my_publications', role: 'lider' },
   ];
 
   constructor(

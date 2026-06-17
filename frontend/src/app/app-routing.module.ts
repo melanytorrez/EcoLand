@@ -20,21 +20,15 @@ const routes: Routes = [
   },
   {
     path: 'reforestacion',
-    loadChildren: () => import('./features/reforestacion/reforestacion.module').then(m => m.ReforestacionModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/reforestacion/reforestacion.module').then(m => m.ReforestacionModule)
   },
   {
     path: 'reforestacion/:campaignId/postular',
-    loadChildren: () => import('./features/volunteer-application/volunteer-application.module').then(m => m.VolunteerApplicationModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/volunteer-application/volunteer-application.module').then(m => m.VolunteerApplicationModule)
   },
   {
     path: 'reforestacion/:id',
-    loadChildren: () => import('./features/campaigns/pages/user/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/campaigns/pages/user/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule)
   },
   {
     path: 'campanas-reciclaje',
@@ -88,6 +82,12 @@ const routes: Routes = [
       {
         path: 'puntos-verdes',
         loadChildren: () => import('./features/admin/puntos-verdes/puntos-verdes.module').then(m => m.PuntosVerdesAdminModule)
+      },
+      {
+        path: 'recycling-activities',
+        loadChildren: () => import('./features/admin/recycling-activities/recycling-activities-admin.module').then(m => m.RecyclingActivitiesAdminModule),
+        canActivate: [RoleGuard],
+        data: { expectedRoles: ['admin'] }
       },
       {
         path: 'volunteer-applications',

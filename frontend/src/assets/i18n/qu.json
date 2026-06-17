@@ -437,6 +437,7 @@
       "reforestation": "Yurakunata musuqmanta tarpuy",
       "volunteer_applications": "Yanapakuy Mañakuykuna",
       "green_points": "Q'umir Puntoskuna",
+      "recycling_activities": "Musuqmanta apaykachay mañakuykuna",
       "recycling": "Musuqmanta apaykachay",
       "campaign_requests": "Campaña Solicitudkuna",
       "users": "Apaykachaqkuna",
@@ -549,6 +550,8 @@
       "title": "Ñuqap insigniakunay",
       "earned": "{{count}} tarisqa",
       "earned_on": "Tarisqa p'unchay",
+      "progress_title": "Qatiq insigniakunapaq puririy",
+      "progress_count": "{{current}} kay {{target}}manta",
       "empty_title": "Manaraq insigniakunata hap'irqankichu",
       "empty_subtitle": "¡Insigniakunata hap'inapaq ruraykunapi yanapakuy!",
       "list": {
@@ -558,7 +561,7 @@
         },
         "ref_5": {
           "title": "Sach'ap waqaychaqnin",
-          "description": "5manta aswan yurakunata tarpuy ruraykunapi yanapakurqanki"
+          "description": "5 icha aswan yurakunata tarpuy ruraykunapi yanapakurqanki"
         },
         "rec_1": {
           "title": "Musuqmanta apaykachay qallariq",

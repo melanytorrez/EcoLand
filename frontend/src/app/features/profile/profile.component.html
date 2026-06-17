@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-b from-white to-[#F1F8F4] flex flex-col" *ngIf="user">
+<div class="min-h-screen bg-gradient-to-b from-white to-[#F1F8F4] flex flex-col" *ngIf="user && !isLoading; else profileLoading">
   <!-- Success Modal -->
   <div *ngIf="showSuccessModal"
     class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md transition-all px-4">
@@ -53,7 +53,7 @@
               <div class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl shadow-sm border border-[#A5D6A7]">
                 <lucide-icon name="trending-up" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
                 <span class="font-semibold text-[#2E7D32]">
-                  {{ 'profile.user_info.total_participations' | translate:{count: participations.length} }}
+                  {{ 'profile.user_info.total_participations' | translate:{count: totalActivities} }}
                 </span>
               </div>
 
@@ -102,7 +102,7 @@
           <!-- Gráfico Circular -->
           <div class="p-8 bg-white rounded-2xl border-2 border-gray-200 shadow-lg">
             <h3 class="text-2xl font-bold text-gray-800 mb-6">{{ 'profile.charts.distribution_title' | translate }}</h3>
-            <div class="w-full h-[300px]" *ngIf="participations.length > 0; else emptyPie">
+            <div class="w-full h-[300px]" *ngIf="totalActivities > 0; else emptyPie">
               <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
               </canvas>
             </div>
@@ -142,8 +142,8 @@
                 <lucide-icon [name]="badge.iconName" class="w-8 h-8 text-white"></lucide-icon>
               </div>
               <div class="flex-1">
-                <h4 class="text-lg font-bold text-gray-800">{{ badge.title }}</h4>
-                <p class="text-gray-600 mt-2">{{ badge.description }}</p>
+                <h4 class="text-lg font-bold text-gray-800">{{ badge.titleKey | translate }}</h4>
+                <p class="text-gray-600 mt-2">{{ badge.descriptionKey | translate }}</p>
                 <div class="flex items-center gap-2 mt-3 text-sm text-gray-500">
                   <lucide-icon name="calendar" class="w-4 h-4"></lucide-icon>
                   <span>{{ 'profile.badges.earned_on' | translate }} {{ badge.earnedDate | date:'dd/MM/yyyy' }}</span>
@@ -161,11 +161,49 @@
               </p>
             </div>
           </ng-template>
+
+          <div *ngIf="badgeProgress.length > 0" class="mt-8 pt-8 border-t border-gray-100">
+            <h4 class="text-xl font-bold text-gray-800 mb-4">{{ 'profile.badges.progress_title' | translate }}</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div *ngFor="let progress of badgeProgress"
+                class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-sm"
+                    [ngClass]="progress.type === 'reciclaje' ? 'bg-gradient-to-br from-[#4CAF50] to-[#A5D6A7]' : 'bg-gradient-to-br from-[#2E7D32] to-[#4CAF50]'">
+                    <lucide-icon [name]="progress.iconName" class="w-6 h-6 text-white"></lucide-icon>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between gap-3">
+                      <h5 class="font-bold text-gray-800">{{ progress.titleKey | translate }}</h5>
+                      <span class="text-sm font-semibold text-[#2E7D32]">
+                        {{ 'profile.badges.progress_count' | translate:{current: progress.current, target: progress.target} }}
+                      </span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">{{ progress.descriptionKey | translate }}</p>
+                    <div class="h-2 bg-white rounded-full overflow-hidden mt-4">
+                      <div class="h-full bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] rounded-full transition-all"
+                        [style.width.%]="progress.percentage"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </main>
 </div>
+
+<ng-template #profileLoading>
+  <div class="min-h-screen bg-gradient-to-b from-white to-[#F1F8F4] flex items-center justify-center px-6">
+    <div class="bg-white rounded-3xl border border-gray-100 shadow-lg p-10 text-center max-w-md w-full">
+      <div class="w-16 h-16 border-4 border-green-100 border-t-[#2E7D32] rounded-full animate-spin mx-auto mb-5"></div>
+      <h2 class="text-xl font-bold text-gray-900 mb-2">Cargando perfil</h2>
+      <p class="text-gray-500">Estamos preparando tus participaciones, insignias y progreso.</p>
+    </div>
+  </div>
+</ng-template>
 
 <!-- Promotion Request Modal -->
 <div *ngIf="showPromotionModal"

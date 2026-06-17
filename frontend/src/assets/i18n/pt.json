@@ -386,6 +386,8 @@
       "title": "Minhas Insígnias",
       "earned": "{{count}} obtidas",
       "earned_on": "Obtido em",
+      "progress_title": "Progresso para as próximas insígnias",
+      "progress_count": "{{current}} de {{target}}",
       "empty_title": "Você ainda não tem insígnias",
       "empty_subtitle": "Participe de atividades para ganhar insígnias!",
       "list": {
@@ -395,7 +397,7 @@
         },
         "ref_5": {
           "title": "Guardião da Floresta",
-          "description": "Participou de mais de 5 atividades de reflorestamento"
+          "description": "Participou de 5 ou mais atividades de reflorestamento"
         },
         "rec_1": {
           "title": "Reciclador Novato",

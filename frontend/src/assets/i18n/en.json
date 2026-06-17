@@ -386,6 +386,7 @@
       "reforestation": "Reforestation",
       "volunteer_applications": "Volunteer Applications",
       "green_points": "Green Points",
+      "recycling_activities": "Recycling Requests",
       "recycling": "Recycling",
       "campaign_requests": "Campaign Requests",
       "users": "Users",
@@ -461,6 +462,8 @@
       "title": "My Badges",
       "earned": "{{count}} earned",
       "earned_on": "Earned on",
+      "progress_title": "Progress toward next badges",
+      "progress_count": "{{current}} of {{target}}",
       "empty_title": "You haven't earned any badges yet",
       "empty_subtitle": "Participate in activities to earn badges!",
       "list": {
@@ -470,7 +473,7 @@
         },
         "ref_5": {
           "title": "Forest Guardian",
-          "description": "Participated in more than 5 reforestation activities"
+          "description": "Participated in 5 or more reforestation activities"
         },
         "rec_1": {
           "title": "Novice Recycler",

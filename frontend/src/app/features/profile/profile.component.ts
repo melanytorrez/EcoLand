@@ -2,18 +2,34 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@an
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
+import { RecyclingService } from '../../core/services/recycling.service';
 import { Campaign } from '../../core/models/campaign.model';
 import { User } from '../../core/models/user.model';
+import { BadgeType, UserBadgeSummary } from '../../core/models/badge.model';
+import { RecyclingActivity } from '../../core/models/recycling.model';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
-import { finalize } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 
 interface Badge {
   id: string;
-  type: 'reforestacion' | 'reciclaje' | 'general';
-  title: string;
-  description: string;
+  code: string;
+  type: BadgeType;
+  titleKey: string;
+  descriptionKey: string;
   earnedDate: string;
+  iconName: string;
+}
+
+interface BadgeProgressView {
+  code: string;
+  type: BadgeType;
+  titleKey: string;
+  descriptionKey: string;
+  current: number;
+  target: number;
+  percentage: number;
   iconName: string;
 }
 
@@ -28,11 +44,14 @@ export class ProfileComponent implements OnInit {
   
   user: User | any = null;
   participations: Campaign[] = [];
+  recyclingActivities: RecyclingActivity[] = [];
   isLoading = true;
   
   reforestacionCount = 0;
   reciclajeCount = 0;
   badges: Badge[] = [];
+  badgeProgress: BadgeProgressView[] = [];
+  private badgeSummary: UserBadgeSummary | null = null;
   
   showPromotionModal = false;
   isSubmitting = false;
@@ -89,9 +108,14 @@ export class ProfileComponent implements OnInit {
     return new Date().getFullYear();
   }
 
+  get totalActivities(): number {
+    return this.participations.length + this.recyclingActivities.length;
+  }
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private recyclingService: RecyclingService,
     private router: Router,
     private cdr: ChangeDetectorRef,
     private translate: TranslateService
@@ -102,51 +126,75 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/auth/login']);
       return;
     }
-    this.user = this.authService.getUser();
-    
-    // Fetch full profile to get promotion status and actual role from DB
-    this.userService.getProfile().subscribe({
-      next: (profile: any) => {
-        console.log('User Profile loaded:', profile);
-        // Backend now returns role as flat string; handle both shapes for safety
-        const resolvedRole = profile.role ||
-          (profile.roles && profile.roles.length > 0 ? (profile.roles[0].nombre || profile.roles[0].name) : null) ||
-          this.user?.role;
-        // Map backend 'estadoSolicitud' to frontend 'promotionStatus'
-        this.user = {
-          ...this.user,
-          ...profile,
-          role: resolvedRole,
-          promotionStatus: profile.estadoSolicitud || profile.promotionStatus || this.user?.promotionStatus
-        };
-        // Update localStorage to persist status on reload
-        this.authService.updateUser(this.user);
-        this.cdr.detectChanges();
-      },
-      error: (err) => console.error('Error fetching full profile', err)
-    });
+    this.user = this.authService.getUser() || {};
 
     this.translate.onLangChange.subscribe(() => {
       this.updateChartLabels();
       this.cdr.detectChanges();
     });
 
-    this.userService.getMyParticipations()
+    this.loadProfileData();
+  }
+
+  private loadProfileData(): void {
+    this.isLoading = true;
+
+    forkJoin({
+      profile: this.userService.getProfile().pipe(catchError(err => {
+        console.error('Error fetching full profile', err);
+        return of(null);
+      })),
+      participations: this.userService.getMyParticipations().pipe(catchError(err => {
+        console.error('Error fetching participations', err);
+        return of([] as Campaign[]);
+      })),
+      recyclingActivities: this.recyclingService.getMyRecyclingActivities().pipe(catchError(err => {
+        console.error('Error fetching recycling activities', err);
+        return of([] as RecyclingActivity[]);
+      })),
+      badgeSummary: this.userService.getMyBadges().pipe(catchError(err => {
+        console.error('Error fetching badges', err);
+        return of(null);
+      }))
+    })
       .pipe(finalize(() => {
         this.isLoading = false;
         this.cdr.detectChanges();
       }))
       .subscribe({
-        next: (campaigns) => {
-          this.participations = campaigns;
+        next: ({ profile, participations, recyclingActivities, badgeSummary }) => {
+          if (profile) {
+            this.applyProfile(profile);
+          }
+
+          this.participations = participations;
+          this.recyclingActivities = recyclingActivities.filter(activity => activity.status === 'APPROVED');
+          this.badgeSummary = badgeSummary;
           this.calculateStats();
-          this.cdr.detectChanges();
-        },
-        error: (err) => {
-          console.error('Error fetching participations', err);
+
+          if (this.badgeSummary) {
+            this.applyBadgeSummary(this.badgeSummary);
+          } else {
+            this.generateBadges();
+          }
+
           this.cdr.detectChanges();
         }
       });
+  }
+
+  private applyProfile(profile: any): void {
+    const resolvedRole = profile.role ||
+      (profile.roles && profile.roles.length > 0 ? (profile.roles[0].nombre || profile.roles[0].name) : null) ||
+      this.user?.role;
+
+    this.user = {
+      ...this.user,
+      ...profile,
+      role: resolvedRole,
+      promotionStatus: profile.estadoSolicitud || profile.promotionStatus || this.user?.promotionStatus
+    };
+    this.authService.updateUser(this.user);
   }
 
   openPromotionModal(): void {
@@ -222,13 +270,79 @@ export class ProfileComponent implements OnInit {
         ]
       };
       
-      this.generateBadges(); // Refresh badge translations
     }
+  }
+
+  private loadBadgeSummary(): void {
+    this.userService.getMyBadges().subscribe({
+      next: (summary) => {
+        this.badgeSummary = summary;
+        this.applyBadgeSummary(summary);
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error fetching badges', err);
+        this.badgeSummary = null;
+        this.generateBadges();
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  private loadRecyclingActivities(): void {
+    this.recyclingService.getMyRecyclingActivities().subscribe({
+      next: (activities) => {
+        this.recyclingActivities = activities.filter(activity => activity.status === 'APPROVED');
+        this.calculateStats();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error fetching recycling activities', err);
+        this.recyclingActivities = [];
+        this.calculateStats();
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  private applyBadgeSummary(summary: UserBadgeSummary): void {
+    this.badges = (summary.earnedBadges || []).map(badge => ({
+      id: String(badge.id ?? badge.code),
+      code: badge.code,
+      type: this.normalizeBadgeType(badge.type),
+      titleKey: badge.titleKey,
+      descriptionKey: badge.descriptionKey,
+      earnedDate: badge.earnedAt,
+      iconName: badge.iconName
+    }));
+
+    this.badgeProgress = (summary.progress || [])
+      .filter(progress => !progress.earned)
+      .map(progress => ({
+        code: progress.code,
+        type: this.normalizeBadgeType(progress.type),
+        titleKey: progress.titleKey,
+        descriptionKey: progress.descriptionKey,
+        current: progress.current,
+        target: progress.target,
+        percentage: progress.percentage,
+        iconName: progress.iconName
+      }));
+  }
+
+  private normalizeBadgeType(type: string | undefined): BadgeType {
+    if (type === 'reciclaje') {
+      return 'reciclaje';
+    }
+    if (type === 'general') {
+      return 'general';
+    }
+    return 'reforestacion';
   }
 
   private calculateStats(): void {
     this.reforestacionCount = this.participations.filter(c => c.category === 'REFORESTATION').length;
-    this.reciclajeCount = this.participations.filter(c => c.category === 'RECYCLING').length;
+    this.reciclajeCount = this.participations.filter(c => c.category === 'RECYCLING').length + this.recyclingActivities.length;
 
     this.pieChartData.datasets[0].data = [this.reforestacionCount, this.reciclajeCount];
     
@@ -247,6 +361,16 @@ export class ProfileComponent implements OnInit {
               recData[monthIndex]++;
             }
           }
+        }
+      }
+    });
+
+    this.recyclingActivities.forEach(activity => {
+      if (activity.registeredAt) {
+        const date = new Date(activity.registeredAt);
+        const monthIndex = date.getMonth();
+        if (!Number.isNaN(monthIndex) && monthIndex >= 0 && monthIndex < 12) {
+          recData[monthIndex]++;
         }
       }
     });
@@ -275,47 +399,48 @@ export class ProfileComponent implements OnInit {
     
     if (this.reforestacionCount >= 1) {
       newBadges.push({
-        id: 'ref-1', type: 'reforestacion',
-        title: this.translate.instant('profile.badges.list.ref_1.title'),
-        description: this.translate.instant('profile.badges.list.ref_1.description'),
+        id: 'ref-1', code: 'ref_1', type: 'reforestacion',
+        titleKey: 'profile.badges.list.ref_1.title',
+        descriptionKey: 'profile.badges.list.ref_1.description',
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
       });
     }
     if (this.reforestacionCount >= 5) {
       newBadges.push({
-        id: 'ref-5', type: 'reforestacion',
-        title: this.translate.instant('profile.badges.list.ref_5.title'),
-        description: this.translate.instant('profile.badges.list.ref_5.description'),
+        id: 'ref-5', code: 'ref_5', type: 'reforestacion',
+        titleKey: 'profile.badges.list.ref_5.title',
+        descriptionKey: 'profile.badges.list.ref_5.description',
         earnedDate: new Date().toISOString(), iconName: 'tree-pine'
       });
     }
 
     if (this.reciclajeCount >= 1) {
       newBadges.push({
-        id: 'rec-1', type: 'reciclaje',
-        title: this.translate.instant('profile.badges.list.rec_1.title'),
-        description: this.translate.instant('profile.badges.list.rec_1.description'),
-        earnedDate: new Date().toISOString(), iconName: 'trash-2'
+        id: 'rec-1', code: 'rec_1', type: 'reciclaje',
+        titleKey: 'profile.badges.list.rec_1.title',
+        descriptionKey: 'profile.badges.list.rec_1.description',
+        earnedDate: new Date().toISOString(), iconName: 'recycle'
       });
     }
     if (this.reciclajeCount >= 5) {
       newBadges.push({
-        id: 'rec-5', type: 'reciclaje',
-        title: this.translate.instant('profile.badges.list.rec_5.title'),
-        description: this.translate.instant('profile.badges.list.rec_5.description'),
-        earnedDate: new Date().toISOString(), iconName: 'trash-2'
+        id: 'rec-5', code: 'rec_5', type: 'reciclaje',
+        titleKey: 'profile.badges.list.rec_5.title',
+        descriptionKey: 'profile.badges.list.rec_5.description',
+        earnedDate: new Date().toISOString(), iconName: 'recycle'
       });
     }
 
-    if (this.participations.length >= 10) {
+    if ((this.participations.length + this.recyclingActivities.length) >= 10) {
       newBadges.push({
-        id: 'gen-10', type: 'general',
-        title: this.translate.instant('profile.badges.list.gen_10.title'),
-        description: this.translate.instant('profile.badges.list.gen_10.description'),
+        id: 'gen-10', code: 'gen_10', type: 'general',
+        titleKey: 'profile.badges.list.gen_10.title',
+        descriptionKey: 'profile.badges.list.gen_10.description',
         earnedDate: new Date().toISOString(), iconName: 'award'
       });
     }
 
     this.badges = newBadges;
+    this.badgeProgress = [];
   }
 }
