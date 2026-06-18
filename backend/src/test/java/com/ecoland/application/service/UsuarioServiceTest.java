@@ -4,11 +4,13 @@ import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.model.EstadoSolicitud;
 import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
-import com.ecoland.domain.port.out.CampaignRepositoryPort;
-import com.ecoland.domain.port.out.RolRepositoryPort;
+import com.ecoland.domain.model.Notificacion;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
+import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
 import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
+import com.ecoland.domain.port.out.RolRepositoryPort;
+import com.ecoland.domain.port.out.NotificacionRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -37,6 +39,8 @@ class UsuarioServiceTest {
     @Mock
     private RolRepositoryPort rolRepositoryPort;
 
+    @Mock
+    private NotificacionRepositoryPort notificacionRepositoryPort;
     @InjectMocks
     private UsuarioService usuarioService;
 
@@ -50,6 +54,7 @@ class UsuarioServiceTest {
         usuarioPrueba.setId(1L);
         usuarioPrueba.setNombre("Juan Perez");
         usuarioPrueba.setEmail("juan@ecoland.com");
+        usuarioPrueba.setRoles(new HashSet<>());
     }
 
     @Test
@@ -164,6 +169,7 @@ class UsuarioServiceTest {
         verify(usuarioRepositoryPort).save(argThat(u ->
                 u.getEstadoSolicitud() == EstadoSolicitud.APPROVED &&
                 u.getRoles().contains(rolLider)));
+        verify(notificacionRepositoryPort, times(1)).save(any(Notificacion.class));
     }
 
     @Test
@@ -182,6 +188,7 @@ class UsuarioServiceTest {
         usuarioService.rejectLeaderRequest(1L);
 
         verify(usuarioRepositoryPort).save(argThat(u -> u.getEstadoSolicitud() == EstadoSolicitud.REJECTED));
+        verify(notificacionRepositoryPort, times(1)).save(any(Notificacion.class));
     }
 
     @Test

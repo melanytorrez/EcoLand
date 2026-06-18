@@ -579,5 +579,12 @@
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "You have no notifications at this time.",
+    "mark_all_read": "Mark as read",
+    "clear_all": "Clear all",
+    "unread_count": "you have {{count}} unread notifications"
   }
 }

@@ -723,6 +723,13 @@
       "organization": "Organización / Entidad"
     }
   },
+  "notifications": {
+    "title": "Notificaciones",
+    "empty": "No tienes notificaciones en este momento.",
+    "mark_all_read": "Marcar como leídas",
+    "clear_all": "Limpiar todo",
+    "unread_count": "tienes {{count}} notificaciones sin leer"
+  },
   "volunteer_app": {
     "title": "Postulación al voluntariado",
     "subtitle": "Completa el formulario para enviar tu postulación. El equipo administrador revisará tu solicitud y te notificará el resultado.",

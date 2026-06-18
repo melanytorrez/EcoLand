@@ -72,7 +72,7 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
             entity.getEmail(),
             entity.getPassword(),
             roles,
-            entity.getEstadoSolicitud()
+            entity.getEstadoSolicitud() == null ? EstadoSolicitud.NONE : entity.getEstadoSolicitud()
         );
         usuario.setMotivation(entity.getMotivation());
         usuario.setPlans(entity.getPlans());
