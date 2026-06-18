@@ -15,7 +15,7 @@ public class FeatureToggleDataInitializer {
     CommandLineRunner initFeatureToggles(FeatureToggleRepository repository) {
         return args -> {
             // Inicializar modulos por defecto en true si no existen en DB
-            String[] defaultFeatures = {"inicio", "reciclaje", "estadisticas", "perfil"};
+            String[] defaultFeatures = {"inicio"};
             
             for (String feature : defaultFeatures) {
                 Optional<FeatureToggleEntity> existing = repository.findByFeatureName(feature);
@@ -23,6 +23,10 @@ public class FeatureToggleDataInitializer {
                     repository.save(new FeatureToggleEntity(feature, true));
                 }
             }
+            
+            // Eliminar toggles removidos de la base de datos si existen
+            repository.findByFeatureName("perfil").ifPresent(repository::delete);
+            repository.findByFeatureName("reciclaje").ifPresent(repository::delete);
         };
     }
 }

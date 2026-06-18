@@ -5,12 +5,13 @@ import com.ecoland.infrastructure.repository.FeatureToggleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class FeatureToggleService {
 
-    private static final String REMOVED_REFORESTATION_FEATURE = "reforestacion";
+    private static final Set<String> REMOVED_FEATURES = Set.of("reforestacion", "reciclaje");
 
     private final FeatureToggleRepository repository;
 
@@ -38,7 +39,7 @@ public class FeatureToggleService {
                         FeatureToggleEntity::isEnabled
                 ));
     }
-    
+
     public void updateToggle(String featureName, boolean isEnabled) {
         if (isRemovedFeature(featureName)) {
             return;
@@ -50,6 +51,6 @@ public class FeatureToggleService {
     }
 
     private boolean isRemovedFeature(String featureName) {
-        return REMOVED_REFORESTATION_FEATURE.equalsIgnoreCase(featureName);
+        return REMOVED_FEATURES.stream().anyMatch(f -> f.equalsIgnoreCase(featureName));
     }
 }

@@ -1,0 +1,9 @@
+.btn-check:hover {
+  color: #2E7D32 !important;
+  background-color: rgba(0, 0, 0, 0.0) !important;
+}
+
+.btn-delete:hover {
+  color: #C62828 !important;
+  background-color: rgba(0, 0, 0, 0.0) !important;
+}

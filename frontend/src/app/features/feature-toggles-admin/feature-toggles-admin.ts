@@ -19,36 +19,12 @@ export interface FeatureConfig {
 export class FeatureTogglesAdmin implements OnInit {
   
   featureConfigMap: { [key: string]: Omit<FeatureConfig, 'enabled' | 'key'> } = {
-    'inicio': {
-      title: 'Inicio',
-      description: 'Página principal y dashboard de acceso rápido a la plataforma',
-      icon: 'layout-dashboard',
-      color: 'from-[#2E7D32] to-[#4CAF50]',
-    },
     'reforestacion': {
       title: 'Módulo de Reforestación',
       description: 'Permite a los usuarios ver y participar en campañas de reforestación',
       icon: 'tree-pine',
       color: 'from-[#2E7D32] to-[#4CAF50]',
     },
-    'reciclaje': {
-      title: 'Módulo de Reciclaje',
-      description: 'Muestra información sobre puntos de reciclaje y rutas de recolección',
-      icon: 'trash-2',
-      color: 'from-[#4CAF50] to-[#A5D6A7]',
-    },
-    'estadisticas': {
-      title: 'Módulo de Estadísticas',
-      description: 'Muestra estadísticas ambientales y métricas de impacto',
-      icon: 'bar-chart-3',
-      color: 'from-purple-600 to-purple-700',
-    },
-    'perfil': {
-      title: 'Perfil del Usuario',
-      description: 'Gestión de cuenta personal, configuración y resumen de actividad',
-      icon: 'user',
-      color: 'from-blue-600 to-blue-700',
-    }
   };
 
   features: FeatureConfig[] = [];

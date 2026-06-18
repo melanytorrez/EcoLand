@@ -10,9 +10,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
-    pathMatch: 'full',
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'inicio' }
+    pathMatch: 'full'
   },
   {
     path: '',
@@ -56,9 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'estadisticas',
-    loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'estadisticas' }
+    loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule)
   },
   {
     path: 'admin',
@@ -93,12 +89,7 @@ const routes: Routes = [
         path: 'volunteer-applications',
         loadChildren: () => import('./features/admin/volunteer-applications/volunteer-applications-admin.module').then(m => m.VolunteerApplicationsAdminModule)
       },
-      {
-        path: 'feature-toggles',
-        loadChildren: () => import('./features/feature-toggles-admin/feature-toggles-admin-module').then(m => m.FeatureTogglesAdminModule),
-        canActivate: [RoleGuard],
-        data: { expectedRoles: ['admin'] }
-      },
+
       {
         path: 'usuarios',
         loadChildren: () => import('./features/admin/user-management/user-management.module').then(m => m.UserManagementModule),
@@ -115,9 +106,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'perfil' }
+    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
   }
 ];
 

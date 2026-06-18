@@ -666,7 +666,18 @@
     "confirm": "Takyachiy",
     "cancel": "Saqiy",
     "save": "Waqaychay",
-    "delete": "Qichuy"
+    "edit": "Allichay",
+    "delete": "Qichuy",
+    "approve": "Chaskiy",
+    "reject": "Mana chaskiy",
+    "view": "Qhaway",
+    "close_view": "Qhawayta wisq'ay",
+    "loading_info": "Willay k'askachkan...",
+    "all": "Tukuy",
+    "pending": "Suyachkaq",
+    "requests_count": "Mañakuykuna",
+    "total_count": "Tukuy",
+    "approved_count": "Chaskisqa"
   },
   "admin_users": {
     "title": "Apaykachaqkunap kamachikuynin",
@@ -680,7 +691,10 @@
       "email": "Email",
       "role": "Kunan rol",
       "status": "Imayna kasqan",
-      "actions": "Ruraykuna"
+      "actions": "Ruraykuna",
+      "applicant": "Mañakuq",
+      "user": "Apaykachaq",
+      "users_total": "{{count}} Apaykachaqkuna"
     },
     "actions": {
       "approve": "Chaskiy",
@@ -691,7 +705,301 @@
       "no_requests": "Kunanqa mana suyachkaq mañakuykuna kanchu.",
       "approve_success": "Apaykachaq allinta pusaqman wicharisqa.",
       "reject_success": "Mañakuy mana chaskisqachu.",
-      "error": "Mañakuyta ruwaspa pantay karqa."
+      "error": "Mañakuyta ruwaspa pantay karqa.",
+      "all_clear": "Tukuy allin kachkan"
+    },
+    "detail_modal": {
+      "promotion_request": "Pusaqman wichariy mañakuy",
+      "submission_date": "Apachisqa p'unchay",
+      "not_available": "Mana tarikun",
+      "influence_zone": "Munayniyuq k'iti",
+      "not_specified": "Mana willasqa",
+      "motivation_vision": "Munaywan qhaway",
+      "no_answer": "Mana kutichinchu",
+      "plans_objectives": "Ruray yuyaykuna",
+      "experience": "Yachay",
+      "commitment": "Qusqa pacha",
+      "not_specified_m": "Mana willasqa",
+      "organization": "Chawpi / Wakichikuy"
     }
+  },
+  "volunteer_app": {
+    "title": "Yanapaq postulación",
+    "subtitle": "Kay formulariota hunt'achiy postulación apachiptiykipaq. Kamachiq ayllu mañakuyniykita qhawanqa, kayta willasunki.",
+    "required_note_start": "Kay ",
+    "required_note_end": " unanchawan pampakunaqa mañakusqa.",
+    "fields": {
+      "full_name": "Hunt'a suti",
+      "full_name_placeholder": "Sutiykita qillqay",
+      "age": "Watakuna",
+      "phone": "Waqyaq yupay",
+      "phone_placeholder": "Kayhina: 71234567",
+      "availability": "Kachkaq pacha",
+      "availability_placeholder": "Tutamanta, ch'isi icha hunt'a p'unchay",
+      "weekends": "Samana p'unchaykunapi kachkaq",
+      "env_experience": "Pachamama yachayniykuna tiyan",
+      "prev_experience": "Ñawpaq yachay",
+      "prev_experience_placeholder": "Yachayniykunamanta pisillata willawayku",
+      "motivation": "Munaynin",
+      "motivation_placeholder": "¿Imaraykutaq yanapaq kayta munanki?"
+    },
+    "sidebar": {
+      "campaign_data": "Kampañap willayninkunan",
+      "available_spots": "Kachkaq cupokuna",
+      "location": "Maypi kasqan",
+      "organizer": "Kamachiq runa",
+      "auth_user": "Riqsisqa apaykachaq",
+      "not_identified": "Mana riqsisqachu",
+      "pending_note": "Postulacionqa suyachkan kamachiq ayllu qhawakunankama."
+    },
+    "buttons": {
+      "submitted": "Postulación apachisqa",
+      "submitting": "Postulación apachichkan...",
+      "submit": "Postulación apachiy",
+      "back": "Kutiy"
+    },
+    "loading": "Postulación k'askachkan..."
+  },
+  "volunteer_app_admin": {
+    "title": "Yanapaqkunap postulaciónkuna",
+    "subtitle": "Postulaqkunap mañakuyninkunata kamachiy.",
+    "tabs": {
+      "pending": "Suyachkaq mañakuykuna",
+      "all": "Tukuy mañakuykuna"
+    },
+    "table": {
+      "applicant": "Mañakuq",
+      "email": "Email",
+      "status": "Imayna kasqan",
+      "actions": "Ruraykuna"
+    },
+    "empty": {
+      "title": "Tukuy allin kachkan",
+      "description": "Musuq postulacionkuna chayamuptinku kaypi rikurinqa."
+    },
+    "loading": "Postulacionkuna k'askachkan...",
+    "detail_modal": {
+      "phone": "Waqyaq yupay",
+      "age": "Watakuna",
+      "schedule": "Pacha",
+      "motivation": "Munaynin",
+      "prev_experience": "Ñawpaq yachay",
+      "admin_notes": "Kamachiqpa qillqasqan",
+      "rejection_note": "Mana chaskiy qillqa",
+      "rejection_optional": "(munaspa)",
+      "rejection_placeholder": "Postulaqpaq huk qillqata yapay..."
+    }
+  },
+  "lider_dashboard": {
+    "header": {
+      "title": "Kamachiq runap panelnin",
+      "subtitle": "Pachamama kampañakunata kamay, allichay, kamachiy."
+    },
+    "btn_new": "Musuq kampañata yuyay",
+    "stats": {
+      "my_campaigns": "Ñuqap kampañakunay",
+      "approved_active": "Chaskisqa/Ruwachkan",
+      "in_review": "Qhawachkan",
+      "rejected": "Mana chaskisqa"
+    },
+    "tabs": {
+      "active": "Ruwachkaq suyachkaq kampañakuna",
+      "past": "Ñawpaq kampañakuna"
+    },
+    "search_placeholder": "Sutiman icha maypi kasqanman hina mask'ay...",
+    "card": {
+      "recycling": "Musuqmanta apaykachay",
+      "reforestation": "Yurakunata musuqmanta tarpuy",
+      "in_review": "Qhawachkan",
+      "rejected": "Mana chaskisqa",
+      "spots_covered": "Hunt'asqa cupokuna",
+      "rejection_reason": "Mana chaskisqap sut'inchaynin:"
+    },
+    "empty": {
+      "title": "Manaraq kampañakunayki kanchu",
+      "description": "¿Tikrayta munanki? \"Musuq kampañata yuyay\" ñit'iy yuyaykiyta moderaciónman apachimuptiyki."
+    },
+    "modal": {
+      "title_edit": "Kampaña yuyayta allichay",
+      "title_new": "Musuq kampañata yuyay",
+      "fields": {
+        "title": "Kampañap sutin *",
+        "title_placeholder": "Kayhina: Colcapirhuapi yurakunata tarpuy",
+        "category": "Rikch'ay *",
+        "category_reforestation": "🌳 Yurakunata musuqmanta tarpuy",
+        "category_recycling": "♻️ Musuqmanta apaykachay",
+        "date": "Kampañap p'unchaynin *",
+        "spots": "Kachkaq cupokuna *",
+        "spots_placeholder": "Kayhina: 50",
+        "organizer": "Kamachiq runa *",
+        "organizer_placeholder": "Kayhina: Q'umir Waynakuna Ayllu",
+        "location": "Maypi kasqan *",
+        "location_placeholder": "Kayhina: Hatun Plaza, Cochabamba",
+        "description": "Sut'inchasqa willay *",
+        "description_placeholder": "Ruraymanta pisillata willaway...",
+        "image_url": "Wankip URLnin (Munaspa)",
+        "image_placeholder": "https://ejemplo.com/imagen.jpg"
+      },
+      "btn_cancel": "Saqiy",
+      "btn_submit": "Yuyayta apachiy"
+    }
+  },
+  "admin_green_points": {
+    "title": "Q'umir puntoskunap kamachikuynin",
+    "subtitle": "Musuqmanta apaykachay chawpikunata kamachiy",
+    "btn_new": "Musuq q'umir punto",
+    "search_placeholder": "Sutiman icha suyuman hina mask'ay...",
+    "table": {
+      "name": "Suti",
+      "address": "Ñan",
+      "zone": "Suyu",
+      "status": "Imayna kasqan",
+      "actions": "Ruraykuna"
+    },
+    "empty": "Mask'asqaykiman tupaq q'umir puntoskuna mana tarisqachu.",
+    "modal": {
+      "title_edit": "Q'umir puntota allichay",
+      "title_new": "Musuq q'umir punto",
+      "fields": {
+        "name": "Suti",
+        "name_placeholder": "Kayhina: Q'umir Punto Plaza Colón",
+        "zone": "Suyu",
+        "zone_placeholder": "Kayhina: Norte, Chawpi, Sur",
+        "address": "Ñan",
+        "address_placeholder": "Kayhina: Av. Heroínas esq. Plaza Colón",
+        "status": "Imayna kasqan",
+        "status_active": "Ruwachkan",
+        "status_inactive": "Samasqa",
+        "image_url": "Wankip URLnin (Munaspa)"
+      },
+      "btn_cancel": "Saqiy",
+      "btn_save": "Tikraykunata waqaychay",
+      "btn_create": "Punto kamay"
+    }
+  },
+  "recycling_activities_admin": {
+    "title": "Musuqmanta apaykachay mañakuykuna",
+    "subtitle": "Q'umir puntosmanta qillqasqa ruraykuna takyachiy.",
+    "tabs": {
+      "pending": "Suyachkaq",
+      "all": "Tukuy"
+    },
+    "loading": "Mañakuykuna k'askachkan...",
+    "card": {
+      "quantity": "Hayk'a",
+      "not_indicated": "Mana willasqachu",
+      "date": "P'unchay",
+      "green_point": "Q'umir punto",
+      "user_comment": "Apaykachaqpa qillqasqan",
+      "review_note": "Qhaway qillqa",
+      "rejection_placeholder": "Mana chaskiy qillqa (munaspa)"
+    },
+    "empty": {
+      "title": "Kunanqa mana mañakuykuna kanchu",
+      "description": "Huk apaykachaq Q'umir Puntopi musuqmanta apaykachaptinku, kaypi rikurinqa."
+    }
+  },
+  "admin_solicitudes": {
+    "title": "Kampaña mañakuykuna",
+    "subtitle": "Pusaqkunap pachamama kampaña yuyaykunata qhaway, kamachiy.",
+    "tabs": {
+      "requests": "Suyachkaq mañakuykuna",
+      "campaigns": "Tukuy kampañakuna qhaway"
+    },
+    "search_placeholder": "Sutiman icha pusaqman hina mask'ay...",
+    "loading": "Kampañakuna k'askachkan...",
+    "card": {
+      "recycling": "Musuqmanta apaykachay",
+      "reforestation": "Yurakunata musuqmanta tarpuy",
+      "pending": "Suyachkan",
+      "rejected": "Mana chaskisqa",
+      "proposed_spots": "yuyasqa cupokuna",
+      "proposed_by": "Yuyasqa kaymanta:",
+      "description_label": "Willay:",
+      "moderation_comment": "Kamachiy qillqa:"
+    },
+    "empty": {
+      "no_requests_title": "Mana suyachkaq mañakuykuna kanchu",
+      "no_requests_desc": "Tukuy kampaña yuyaykuna kamachisqa. ¡Allinta ruwasqa!",
+      "no_campaigns_title": "Mana kampañakuna qillqasqachu",
+      "no_campaigns_desc": "Mana kampañakuna tarisqachu."
+    },
+    "modal": {
+      "title_approve": "Kampañata chaskiy",
+      "title_reject": "Kampañata mana chaskiy",
+      "campaign_label": "Kampaña:",
+      "comment_optional": "Qillqa (munaspa)",
+      "comment_required": "Mana chaskisqap sut'inchaynin (mañakusqa) *",
+      "placeholder_approve": "Kayhina: ¡Allinpuni! Kampaña chaskisqa.",
+      "placeholder_reject": "Kayhina: Ñan maypi kasqan pisichkan icha mana comercial logokuna saqillasqachu."
+    }
+  },
+  "feature_toggles": {
+    "title": "Feature Toggles",
+    "subtitle": "Apaykachaqkunapaq kachkaq ruraymanta kamachiy",
+    "stats": {
+      "total": "Tukuy ruraykuna",
+      "active": "Ruwachkaq",
+      "inactive": "Samasqa"
+    },
+    "management": {
+      "title": "Ruraykunap kamachikuynin",
+      "subtitle": "Apaykachaqpa qhawaynimpi kachkaq ruraykuna kichanapaq wisq'anapaq"
+    },
+    "status_active": "Ruwachkan",
+    "status_inactive": "Samasqa",
+    "warning": {
+      "title": "Yuyachiy",
+      "message": "Feature togglespi tikraykuna tukuy plataforma apaykachaqkunaman chaychiyta atichkan. Samasqa ruraykuna mana puriynin menúpi rikurinqachu nitaq apaykachasqa kanqachu wakmanta kichanaykikama."
+    }
+  },
+  "green_points_catalog": {
+    "hero": {
+      "badge": "♻️ Musuqmanta apaykachay llika",
+      "title": "Cochabambapi Q'umir Puntoskuna",
+      "description": "Aswan qayllaykipi musuqmanta apaykachay chawpikunata tariy, sapa huknin chaskisqa materialkunata riqsiy."
+    },
+    "search_placeholder": "Sutiman, ñanman icha suyuman hina mask'ay...",
+    "filter_by_material": "Materialman hina ch'ullanchay:",
+    "all": "Tukuy",
+    "loading": "Q'umir puntoskuna k'askachkan...",
+    "retry": "Wakmanta kallpachakuy",
+    "materials_accepted": "Chaskisqa Materialkuna",
+    "btn_details": "Sut'inchayta qhaway",
+    "empty": {
+      "title": "Q'umir puntoskuna mana tarisqachu",
+      "subtitle": "Huk ch'ullanchaywan icha mask'aywan kallpachakuy"
+    }
+  },
+  "green_points_detail": {
+    "loading": "Q'umir punto k'askachkan...",
+    "not_found": "Q'umir Punto mana tarisqachu",
+    "back_catalog": "Catálogoman kutiy",
+    "open": "Kichasqa",
+    "closed": "Wisq'asqa",
+    "description_title": "Willay",
+    "description_text": "{{zone}} suyupi, Cochabambapi musuqmanta apaykachay chawpi. Yachaysapa llamk'aqkunayku q'upakunata allin rak'iymanta yanapasunki, hinallataq achka rikch'aq materialkunata chaskiyku.",
+    "materials_title": "Chaskisqa Materialkuna",
+    "no_materials": "Chaskisqa materialkuna mana willasqachu.",
+    "recycling_activity": {
+      "badge": "Musuqmanta apaykachay ruray",
+      "title": "¿Kay q'umir puntopi musuqmanta apaykacharqankichu?",
+      "subtitle": "Hamusqaykita qillqay. Huk kamachiq mañakuyta qhawanqa insigniakunaykiman yapanaykipaq.",
+      "login_required": "Musuqmanta apaykachay rurayta qillqanapaq ñawpaqta yaykunayki tiyan.",
+      "material_label": "Musuqmanta apaykachasqa material",
+      "material_placeholder": "Huk materialta akllay",
+      "quantity_label": "Hayk'a",
+      "unit_label": "Yupaynin",
+      "comment_label": "Qillqa",
+      "comment_optional": "(munaspa)",
+      "comment_placeholder": "Kayhina: Ch'uya plastiku botellakuna anqa awilupi churarqani.",
+      "btn_submitting": "Apachichkan...",
+      "btn_submit": "Musuqmanta apaykachayta qillqay"
+    },
+    "schedule_title": "Yanapay pachakuna",
+    "no_schedule": "Pachakuna mana willasqachu",
+    "contact_title": "Tupaq",
+    "location_title": "Maypi kasqan",
+    "btn_directions": "Imayna chayanapaq"
   }
 }

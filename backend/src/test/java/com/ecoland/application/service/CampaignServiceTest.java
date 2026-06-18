@@ -1,11 +1,11 @@
 package com.ecoland.application.service;
 
 import com.ecoland.domain.model.Campaign;
+import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.out.CampaignRepositoryPort;
 import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import com.ecoland.infrastructure.repository.JpaUsuarioCampaignRepository;
 import com.ecoland.infrastructure.entity.UsuarioCampaignEntity;
-import com.ecoland.domain.port.out.UsuarioRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -175,5 +175,93 @@ class CampaignServiceTest {
         doThrow(new RuntimeException("Delete Error")).when(campaignRepositoryPort).deleteById(1L);
 
         assertThrows(RuntimeException.class, () -> campaignService.deleteCampaign(1L));
+    }
+
+    // --- approveCampaign ---
+
+    @Test
+    void approveCampaign_SetsStatusActivaAndComment() {
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
+        when(campaignRepositoryPort.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+        Campaign result = campaignService.approveCampaign(1L, "Campaña aprobada");
+
+        assertEquals("ACTIVA", result.getStatus());
+        assertEquals("Campaña aprobada", result.getModerationComment());
+        verify(campaignRepositoryPort).save(any(Campaign.class));
+    }
+
+    @Test
+    void approveCampaign_ThrowsException_WhenNotFound() {
+        when(campaignRepositoryPort.findById(99L)).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> campaignService.approveCampaign(99L, "ok"));
+    }
+
+    // --- rejectCampaign ---
+
+    @Test
+    void rejectCampaign_SetsStatusRechazadaAndComment() {
+        when(campaignRepositoryPort.findById(1L)).thenReturn(Optional.of(campaign));
+        when(campaignRepositoryPort.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+        Campaign result = campaignService.rejectCampaign(1L, "No cumple requisitos");
+
+        assertEquals("RECHAZADA", result.getStatus());
+        assertEquals("No cumple requisitos", result.getModerationComment());
+    }
+
+    @Test
+    void rejectCampaign_ThrowsIllegalArgument_WhenCommentIsBlank() {
+        assertThrows(IllegalArgumentException.class, () -> campaignService.rejectCampaign(1L, ""));
+    }
+
+    @Test
+    void rejectCampaign_ThrowsException_WhenNotFound() {
+        when(campaignRepositoryPort.findById(99L)).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> campaignService.rejectCampaign(99L, "motivo"));
+    }
+
+    // --- getMyCampaigns ---
+
+    @Test
+    void getMyCampaigns_ReturnsCampaignsForCurrentUser() {
+        // SecurityContext ya está mockeado como ADMIN en setUp
+        // Necesitamos que el principal tenga un email y que usuarioRepositoryPort lo resuelva
+        Authentication auth = mock(Authentication.class);
+        SecurityContext ctx = mock(SecurityContext.class);
+        when(ctx.getAuthentication()).thenReturn(auth);
+        lenient().when(auth.getPrincipal()).thenReturn("lider@ecoland.com");
+        lenient().doReturn(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMINISTRADOR")))
+                .when(auth).getAuthorities();
+        SecurityContextHolder.setContext(ctx);
+
+        Usuario usuario = new Usuario();
+        usuario.setId(5L);
+        when(usuarioRepositoryPort.findByEmail("lider@ecoland.com")).thenReturn(Optional.of(usuario));
+        when(campaignRepositoryPort.findByCreatorId(5L)).thenReturn(List.of(campaign));
+
+        List<Campaign> result = campaignService.getMyCampaigns();
+
+        assertEquals(1, result.size());
+        verify(campaignRepositoryPort).findByCreatorId(5L);
+    }
+
+    // --- getPendingCampaigns ---
+
+    @Test
+    void getPendingCampaigns_ReturnsOnlyPendientes() {
+        Campaign pendiente = new Campaign();
+        pendiente.setId(2L);
+        pendiente.setStatus("PENDIENTE");
+
+        when(campaignRepositoryPort.findByStatus("PENDIENTE")).thenReturn(List.of(pendiente));
+
+        List<Campaign> result = campaignService.getPendingCampaigns();
+
+        assertEquals(1, result.size());
+        assertEquals("PENDIENTE", result.get(0).getStatus());
+        verify(campaignRepositoryPort).findByStatus("PENDIENTE");
     }
 }
