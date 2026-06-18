@@ -73,16 +73,4 @@ describe('FooterComponent', () => {
     });
   });
 
-  describe('isFeatureEnabled', () => {
-    it('should delegate to featureFlagService.isFeatureEnabled', () => {
-      featureFlagServiceSpy.isFeatureEnabled.and.returnValue(false);
-      expect(component.isFeatureEnabled('reciclaje')).toBeFalse();
-      expect(featureFlagServiceSpy.isFeatureEnabled).toHaveBeenCalledWith('reciclaje');
-    });
-
-    it('should return true when feature is enabled', () => {
-      featureFlagServiceSpy.isFeatureEnabled.and.returnValue(true);
-      expect(component.isFeatureEnabled('estadisticas')).toBeTrue();
-    });
-  });
 });

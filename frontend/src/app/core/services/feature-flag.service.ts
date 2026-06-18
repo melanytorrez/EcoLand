@@ -37,9 +37,7 @@ export class FeatureFlagService {
       catchError(error => {
         console.error('Error cargando Feature Toggles. Usando defaults seguros.', error);
         // Fallback resiliente
-        this.features = {
-          'reciclaje': true
-        };
+        this.features = {};
         this.featuresSubject.next(this.features);
         return of(this.features);
       })
