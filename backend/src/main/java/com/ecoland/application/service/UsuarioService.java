@@ -80,7 +80,7 @@ public class UsuarioService implements UsuarioUseCase {
         Usuario usuario = usuarioRepositoryPort.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException(AppConstants.MSG_USER_NOT_FOUND));
         
-        if (usuario.getEstadoSolicitud() == EstadoSolicitud.NONE || usuario.getEstadoSolicitud() == EstadoSolicitud.REJECTED) {
+        if (usuario.getEstadoSolicitud() == null || usuario.getEstadoSolicitud() == EstadoSolicitud.NONE || usuario.getEstadoSolicitud() == EstadoSolicitud.REJECTED) {
             usuario.setEstadoSolicitud(EstadoSolicitud.PENDING);
             usuario.setMotivation(promotionData.getMotivation());
             usuario.setPlans(promotionData.getPlans());
