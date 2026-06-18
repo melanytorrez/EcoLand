@@ -9,7 +9,7 @@ import {
   Truck, Navigation, Lock, Plus, Edit, Trash2, Image, LayoutDashboard, 
   Route, BarChart3, ChevronDown, Check, ToggleRight, TreePine, 
   Megaphone, Map, ToggleLeft, Droplets, ArrowLeft, AlertCircle, ClipboardList,
-  Eye, EyeOff
+  Eye, EyeOff, Bell
 } from 'lucide-angular';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -35,7 +35,7 @@ import { IfFeatureDirective } from './directives/if-feature.directive';
       Filter, Clock, CheckCircle, Target, Award, Truck, Navigation, Lock, 
       Plus, Edit, Trash2, Image, LayoutDashboard, Route, BarChart3, 
       ChevronDown, Check, ToggleRight, ToggleLeft, TreePine, Megaphone, 
-      Map, Droplets, ArrowLeft, AlertCircle, ClipboardList, Eye, EyeOff
+      Map, Droplets, ArrowLeft, AlertCircle, ClipboardList, Eye, EyeOff, Bell
     })
   ],
   exports: [
