@@ -89,12 +89,7 @@ const routes: Routes = [
         path: 'volunteer-applications',
         loadChildren: () => import('./features/admin/volunteer-applications/volunteer-applications-admin.module').then(m => m.VolunteerApplicationsAdminModule)
       },
-      {
-        path: 'feature-toggles',
-        loadChildren: () => import('./features/feature-toggles-admin/feature-toggles-admin-module').then(m => m.FeatureTogglesAdminModule),
-        canActivate: [RoleGuard],
-        data: { expectedRoles: ['admin'] }
-      },
+
       {
         path: 'usuarios',
         loadChildren: () => import('./features/admin/user-management/user-management.module').then(m => m.UserManagementModule),
@@ -111,9 +106,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'perfil' }
+    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
   }
 ];
 

@@ -30,13 +30,6 @@ export class FeatureTogglesAdmin implements OnInit {
       description: 'Muestra información sobre puntos de reciclaje y rutas de recolección',
       icon: 'trash-2',
       color: 'from-[#4CAF50] to-[#A5D6A7]',
-    },
-
-    'perfil': {
-      title: 'Perfil del Usuario',
-      description: 'Gestión de cuenta personal, configuración y resumen de actividad',
-      icon: 'user',
-      color: 'from-blue-600 to-blue-700',
     }
   };
 
