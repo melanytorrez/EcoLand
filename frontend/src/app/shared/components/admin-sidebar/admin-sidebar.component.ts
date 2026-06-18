@@ -14,7 +14,6 @@ export class AdminSidebarComponent {
     { path: '/admin/puntos-verdes', label: 'admin_sidebar.nav.green_points', icon: 'map-pin' },
     { path: '/admin/recycling-activities', label: 'admin_sidebar.nav.recycling_activities', icon: 'recycle' },
     { path: '/admin/usuarios', label: 'admin_sidebar.nav.users', icon: 'users' },
-    { path: '/admin/feature-toggles', label: 'Feature Toggles', icon: 'toggle-right' },
   ];
 
   constructor(public router: Router) { }
