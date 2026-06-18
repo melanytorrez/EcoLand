@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+
+@Pipe({ name: 'translate', standalone: false })
+class FakeTranslatePipe implements PipeTransform {
+  transform(value: any): any { return value; }
+}
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -36,7 +41,7 @@ describe('VolunteerApplicationComponent', () => {
     volunteerServiceSpy.getMyApplication.and.returnValue(throwError(() => ({ status: 404 })));
 
     await TestBed.configureTestingModule({
-      declarations: [VolunteerApplicationComponent],
+      declarations: [VolunteerApplicationComponent, FakeTranslatePipe],
       imports: [ReactiveFormsModule, RouterTestingModule],
       providers: [
         { provide: CampaignService, useValue: campaignServiceSpy },

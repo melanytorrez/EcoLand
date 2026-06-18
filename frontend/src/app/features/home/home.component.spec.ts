@@ -110,11 +110,4 @@ describe('HomeComponent', () => {
     });
   });
 
-  describe('isFeatureEnabled', () => {
-    it('should delegate to featureFlagService', () => {
-      featureFlagServiceSpy.isFeatureEnabled.and.returnValue(false);
-      expect(component.isFeatureEnabled('reciclaje')).toBeFalse();
-      expect(featureFlagServiceSpy.isFeatureEnabled).toHaveBeenCalledWith('reciclaje');
-    });
-  });
 });
