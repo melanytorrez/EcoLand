@@ -1,7 +1,16 @@
 package com.ecoland.infrastructure.adapter.in.web;
 
+import com.ecoland.application.dto.ErrorResponseDto;
 import com.ecoland.domain.model.Campaign;
 import com.ecoland.domain.port.in.CampaignUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/campaigns")
+@Tag(name = "Campaigns", description = "Endpoints para la gestión de campañas ambientales")
 public class CampaignController {
 
     private final CampaignUseCase campaignUseCase;
@@ -21,11 +31,16 @@ public class CampaignController {
     }
 
     @GetMapping
-    public List<Campaign> getAll(@RequestParam(required = false) com.ecoland.domain.model.CampaignCategory category) {
+    @Operation(summary = "Obtener todas las campañas", description = "Retorna una lista de todas las campañas de reforestación registradas.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Lista de campañas obtenida exitosamente", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Campaign.class)))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
+    public ResponseEntity<List<Campaign>> getAll(@RequestParam(required = false) com.ecoland.domain.model.CampaignCategory category) {
         if (category != null) {
-            return campaignUseCase.getCampaignsByCategory(category);
+            return ResponseEntity.ok(campaignUseCase.getCampaignsByCategory(category));
         }
-        return campaignUseCase.getAllCampaigns();
+        return ResponseEntity.ok(campaignUseCase.getAllCampaigns());
     }
 
     @GetMapping("/me")
@@ -62,6 +77,14 @@ public class CampaignController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'LIDER')")
+    @SecurityRequirement(name = "Bearer Authentication")
+    @Operation(summary = "Crear nueva campaña", description = "Registra una nueva campaña de reforestación. Requiere rol de Administrador o Líder.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Campaña creada exitosamente", content = @Content(schema = @Schema(implementation = Campaign.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de campaña inválidos", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
     public Campaign create(@RequestBody Campaign campaign) {
         return campaignUseCase.saveCampaign(campaign);
     }

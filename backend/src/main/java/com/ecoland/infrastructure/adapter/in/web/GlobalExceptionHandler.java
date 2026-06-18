@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Map;
 
+import com.ecoland.application.dto.ErrorResponseDto;
 import com.ecoland.domain.exception.EmailAlreadyExistsException;
 import org.springframework.security.access.AccessDeniedException;
 
@@ -31,30 +32,22 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<Map<String, String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("message", ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    public ResponseEntity<ErrorResponseDto> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+        return new ResponseEntity<>(new ErrorResponseDto(ex.getMessage()), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<Map<String, String>> handleIllegalStateException(IllegalStateException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("message", ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    public ResponseEntity<ErrorResponseDto> handleIllegalStateException(IllegalStateException ex) {
+        return new ResponseEntity<>(new ErrorResponseDto(ex.getMessage()), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<Map<String, String>> handleNoSuchElementException(NoSuchElementException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("message", ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorResponseDto> handleNoSuchElementException(NoSuchElementException ex) {
+        return new ResponseEntity<>(new ErrorResponseDto(ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Map<String, String>> handleAccessDeniedException(AccessDeniedException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("message", ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    public ResponseEntity<ErrorResponseDto> handleAccessDeniedException(AccessDeniedException ex) {
+        return new ResponseEntity<>(new ErrorResponseDto(ex.getMessage()), HttpStatus.FORBIDDEN);
     }
 }
