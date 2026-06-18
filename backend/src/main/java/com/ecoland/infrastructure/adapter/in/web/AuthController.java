@@ -4,10 +4,15 @@ import com.ecoland.application.dto.AuthResponse;
 import com.ecoland.application.dto.LoginRequest;
 import com.ecoland.application.dto.RegisterRequest;
 import com.ecoland.application.dto.GoogleLoginRequest;
+import com.ecoland.application.dto.ErrorResponseDto;
 import com.ecoland.domain.model.Rol;
 import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.port.in.AuthUseCase;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +37,11 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "Iniciar sesión", description = "Autentica al usuario con email y contraseña y retorna un token JWT.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Autenticación exitosa", content = @Content(schema = @Schema(implementation = AuthResponse.class))),
+        @ApiResponse(responseCode = "401", description = "Credenciales inválidas", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         logger.info("Intento de login para el usuario: {}", request.getEmail());
         try {
@@ -45,6 +55,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Registrar nuevo usuario", description = "Crea una nueva cuenta de usuario en la plataforma.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente", content = @Content(schema = @Schema(implementation = AuthResponse.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de registro inválidos", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+        @ApiResponse(responseCode = "409", description = "El email ya se encuentra en uso", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         Usuario usuario = new Usuario();
         usuario.setNombre(request.getNombre());

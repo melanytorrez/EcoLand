@@ -1,5 +1,6 @@
 package com.ecoland.infrastructure.adapter.in.web;
 
+import com.ecoland.application.dto.ErrorResponseDto;
 import com.ecoland.application.dto.RecyclingActivityResponse;
 import com.ecoland.application.dto.VolunteerApplicationResponse;
 import com.ecoland.application.dto.UsuarioResponse;
@@ -9,6 +10,12 @@ import com.ecoland.domain.model.Usuario;
 import com.ecoland.domain.model.VolunteerStatus;
 import com.ecoland.domain.port.in.UsuarioUseCase;
 import com.ecoland.domain.port.in.VolunteerApplicationUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +44,12 @@ public class AdminController {
     }
 
     @GetMapping("/leader-requests")
+    @Operation(summary = "Ver solicitudes de líder", description = "Lista todos los usuarios que han solicitado ser líderes de comunidad.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Usuario.class)))),
+        @ApiResponse(responseCode = "403", description = "Acceso denegado", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
     public ResponseEntity<List<Usuario>> getPendingLeaderRequests() {
         return ResponseEntity.ok(usuarioUseCase.getPendingLeaderRequests());
     }
@@ -62,6 +75,11 @@ public class AdminController {
     }
 
     @GetMapping("/users")
+    @Operation(summary = "Listar todos los usuarios", description = "Retorna la lista completa de usuarios registrados.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Usuarios listados", content = @Content(array = @ArraySchema(schema = @Schema(implementation = UsuarioResponse.class)))),
+        @ApiResponse(responseCode = "403", description = "Acceso denegado", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
     public ResponseEntity<List<UsuarioResponse>> getAllUsers() {
         List<UsuarioResponse> users = usuarioUseCase.getAllUsuarios().stream()
                 .map(UsuarioResponse::fromUsuario)
