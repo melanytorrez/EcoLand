@@ -4,7 +4,7 @@
   <div *ngIf="isLoading" class="flex items-center justify-center min-h-[60vh]">
     <div class="text-center">
       <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-[#2E7D32] mx-auto mb-4"></div>
-      <p class="text-gray-500 font-medium">Cargando punto verde...</p>
+      <p class="text-gray-500 font-medium">{{ 'green_points_detail.loading' | translate }}</p>
     </div>
   </div>
 
@@ -12,14 +12,14 @@
   <div *ngIf="error && !isLoading" class="flex items-center justify-center min-h-[60vh]">
     <div class="text-center">
       <lucide-icon name="map-pin" class="w-16 h-16 mx-auto text-gray-300 mb-4"></lucide-icon>
-      <h2 class="text-2xl font-bold text-gray-800 mb-2">Punto Verde no encontrado</h2>
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ 'green_points_detail.not_found' | translate }}</h2>
       <p class="text-gray-600 mb-6">{{ error }}</p>
       <button
         (click)="volverAlCatalogo()"
         class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl hover:shadow-lg transition-all font-semibold"
       >
         <lucide-icon name="arrow-left" class="w-4 h-4"></lucide-icon>
-        Volver al catálogo
+        {{ 'green_points_detail.back_catalog' | translate }}
       </button>
     </div>
   </div>
@@ -34,7 +34,7 @@
         class="flex items-center gap-2 text-gray-600 hover:text-[#2E7D32] transition-colors"
       >
         <lucide-icon name="arrow-left" class="w-5 h-5"></lucide-icon>
-        <span class="font-medium">Volver al catálogo</span>
+        <span class="font-medium">{{ 'green_points_detail.back_catalog' | translate }}</span>
       </button>
     </div>
 
@@ -53,7 +53,7 @@
               [class]="'px-4 py-2 rounded-full text-sm font-semibold ' + 
                 (point.activo ? 'bg-green-500 text-white' : 'bg-red-500 text-white')"
             >
-              {{ point.activo ? 'Abierto' : 'Cerrado' }}
+              {{ point.activo ? ('green_points_detail.open' | translate) : ('green_points_detail.closed' | translate) }}
             </span>
           </div>
           <h1 class="text-4xl font-bold text-white mb-2">{{ point.nombre }}</h1>
@@ -72,17 +72,15 @@
         <div class="lg:col-span-2 space-y-8">
           <!-- Description -->
           <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Descripción</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ 'green_points_detail.description_title' | translate }}</h2>
             <p class="text-gray-600 leading-relaxed">
-              Centro de reciclaje ubicado en {{ point.zona }}, Cochabamba. 
-              Contamos con personal capacitado para orientarte sobre la correcta separación de residuos 
-              y aceptamos una amplia variedad de materiales reciclables.
+              {{ 'green_points_detail.description_text' | translate: { zone: point.zona } }}
             </p>
           </div>
 
           <!-- Accepted Materials -->
           <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Materiales Aceptados</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ 'green_points_detail.materials_title' | translate }}</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4" *ngIf="point.tiposMaterial?.length; else noMaterials">
               <div
                 *ngFor="let material of point.tiposMaterial"
@@ -93,7 +91,7 @@
               </div>
             </div>
             <ng-template #noMaterials>
-              <p class="text-gray-400 italic">No se especificaron materiales aceptados.</p>
+              <p class="text-gray-400 italic">{{ 'green_points_detail.no_materials' | translate }}</p>
             </ng-template>
           </div>
 
@@ -101,10 +99,10 @@
           <div class="bg-white rounded-2xl border-2 border-green-100 p-8 shadow-lg">
             <div class="flex items-start justify-between gap-4 mb-6">
               <div>
-                <p class="text-sm font-bold text-[#2E7D32] uppercase tracking-wide mb-2">Actividad de reciclaje</p>
-                <h2 class="text-2xl font-bold text-gray-800">¿Reciclaste en este punto verde?</h2>
+                <p class="text-sm font-bold text-[#2E7D32] uppercase tracking-wide mb-2">{{ 'green_points_detail.recycling_activity.badge' | translate }}</p>
+                <h2 class="text-2xl font-bold text-gray-800">{{ 'green_points_detail.recycling_activity.title' | translate }}</h2>
                 <p class="text-gray-500 mt-2">
-                  Registra tu visita. Un administrador revisara la solicitud antes de sumar progreso a tus insignias.
+                  {{ 'green_points_detail.recycling_activity.subtitle' | translate }}
                 </p>
               </div>
               <div class="w-14 h-14 rounded-2xl bg-[#E8F5E9] flex items-center justify-center shrink-0">
@@ -113,26 +111,26 @@
             </div>
 
             <div *ngIf="!authService.isAuthenticated()" class="mb-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              Debes iniciar sesion para registrar una actividad de reciclaje.
+              {{ 'green_points_detail.recycling_activity.login_required' | translate }}
             </div>
 
             <form (ngSubmit)="registrarReciclaje()" class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label class="block space-y-2">
-                <span class="text-sm font-semibold text-gray-700">Material reciclado</span>
+                <span class="text-sm font-semibold text-gray-700">{{ 'green_points_detail.recycling_activity.material_label' | translate }}</span>
                 <select
                   name="material"
                   [(ngModel)]="recyclingForm.material"
                   required
                   class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-200 focus:border-green-400"
                 >
-                  <option value="" disabled>Selecciona un material</option>
+                  <option value="" disabled>{{ 'green_points_detail.recycling_activity.material_placeholder' | translate }}</option>
                   <option *ngFor="let material of (point.tiposMaterial || [])" [value]="material">{{ material }}</option>
                 </select>
               </label>
 
               <div class="grid grid-cols-2 gap-3">
                 <label class="block space-y-2">
-                  <span class="text-sm font-semibold text-gray-700">Cantidad</span>
+                  <span class="text-sm font-semibold text-gray-700">{{ 'green_points_detail.recycling_activity.quantity_label' | translate }}</span>
                   <input
                     name="cantidad"
                     [(ngModel)]="recyclingForm.cantidad"
@@ -144,7 +142,7 @@
                 </label>
 
                 <label class="block space-y-2">
-                  <span class="text-sm font-semibold text-gray-700">Unidad</span>
+                  <span class="text-sm font-semibold text-gray-700">{{ 'green_points_detail.recycling_activity.unit_label' | translate }}</span>
                   <select
                     name="unidad"
                     [(ngModel)]="recyclingForm.unidad"
@@ -156,13 +154,13 @@
               </div>
 
               <label class="block space-y-2 md:col-span-2">
-                <span class="text-sm font-semibold text-gray-700">Comentario <span class="text-gray-400 font-normal">(opcional)</span></span>
+                <span class="text-sm font-semibold text-gray-700">{{ 'green_points_detail.recycling_activity.comment_label' | translate }} <span class="text-gray-400 font-normal">{{ 'green_points_detail.recycling_activity.comment_optional' | translate }}</span></span>
                 <textarea
                   name="comentario"
                   [(ngModel)]="recyclingForm.comentario"
                   rows="3"
                   maxlength="800"
-                  placeholder="Ej. Entregue botellas plasticas limpias en el contenedor azul."
+                  [placeholder]="'green_points_detail.recycling_activity.comment_placeholder' | translate"
                   class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-200 focus:border-green-400 resize-none"
                 ></textarea>
               </label>
@@ -181,7 +179,7 @@
                   class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl hover:shadow-lg transition-all font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <lucide-icon name="check-circle" class="w-4 h-4"></lucide-icon>
-                  {{ isSubmittingActivity ? 'Enviando...' : 'Registrar reciclaje' }}
+                  {{ isSubmittingActivity ? ('green_points_detail.recycling_activity.btn_submitting' | translate) : ('green_points_detail.recycling_activity.btn_submit' | translate) }}
                 </button>
               </div>
             </form>
@@ -195,7 +193,7 @@
             <div>
               <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                 <lucide-icon name="clock" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
-                Horarios de Atención
+                {{ 'green_points_detail.schedule_title' | translate }}
               </h3>
               <div *ngIf="point.horarios?.length; else noSchedule" class="space-y-2">
                 <div *ngFor="let horario of point.horarios" class="flex justify-between text-sm">
@@ -204,7 +202,7 @@
                 </div>
               </div>
               <ng-template #noSchedule>
-                <p class="text-sm text-gray-400 italic">Horarios no disponibles</p>
+                <p class="text-sm text-gray-400 italic">{{ 'green_points_detail.no_schedule' | translate }}</p>
               </ng-template>
             </div>
 
@@ -213,7 +211,7 @@
 
             <!-- Contact -->
             <div>
-              <h3 class="text-lg font-bold text-gray-800 mb-4">Contacto</h3>
+              <h3 class="text-lg font-bold text-gray-800 mb-4">{{ 'green_points_detail.contact_title' | translate }}</h3>
               <div class="space-y-3">
                 <div class="flex items-center gap-3 text-sm text-gray-600">
                   <lucide-icon name="phone" class="w-4 h-4 text-[#2E7D32]"></lucide-icon>
@@ -233,7 +231,7 @@
             <div>
               <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                 <lucide-icon name="map-pin" class="w-5 h-5 text-[#2E7D32]"></lucide-icon>
-                Ubicación
+                {{ 'green_points_detail.location_title' | translate }}
               </h3>
               <div *ngIf="point.latitud && point.longitud" class="space-y-2 text-sm text-gray-600 mb-4">
                 <p>Latitud: {{ point.latitud }}</p>
@@ -249,7 +247,7 @@
                 class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#2E7D32] to-[#4CAF50] text-white rounded-2xl hover:shadow-lg transition-all font-semibold"
               >
                 <lucide-icon name="navigation" class="w-4 h-4"></lucide-icon>
-                Cómo llegar
+                {{ 'green_points_detail.btn_directions' | translate }}
               </button>
             </div>
           </div>

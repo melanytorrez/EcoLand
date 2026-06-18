@@ -2,17 +2,17 @@
   <!-- Header Section -->
   <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
     <div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">Solicitudes de Campaña</h1>
-      <p class="text-lg text-gray-500 mt-2">Revisa y modera las propuestas de campañas ecológicas de los Líderes.</p>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ 'admin_solicitudes.title' | translate }}</h1>
+      <p class="text-lg text-gray-500 mt-2">{{ 'admin_solicitudes.subtitle' | translate }}</p>
     </div>
     <div class="flex items-center gap-3 bg-white p-2 rounded-2xl shadow-sm border border-gray-100">
       <div class="px-4 py-2 bg-green-50 text-green-700 rounded-xl font-bold text-sm flex items-center gap-2">
         <lucide-icon name="clock" class="w-4 h-4"></lucide-icon>
-        {{ campaigns.length }} Pendientes
+        {{ campaigns.length }} {{ 'shared.pending' | translate }}
       </div>
       <div class="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl font-bold text-sm flex items-center gap-2">
         <lucide-icon name="list" class="w-4 h-4"></lucide-icon>
-        {{ allCampaigns.length }} Totales
+        {{ allCampaigns.length }} {{ 'shared.all' | translate }}
       </div>
     </div>
   </div>
@@ -23,20 +23,20 @@
       [class]="activeTab === 'requests' ? 'bg-white text-green-700 shadow-md translate-y-0' : 'text-gray-500 hover:text-gray-700'"
       class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
       <lucide-icon name="clock" class="w-5 h-5"></lucide-icon>
-      Solicitudes Pendientes
+      {{ 'admin_solicitudes.tabs.requests' | translate }}
     </button>
     <button (click)="activeTab = 'campaigns'"
       [class]="activeTab === 'campaigns' ? 'bg-white text-blue-700 shadow-md translate-y-0' : 'text-gray-500 hover:text-gray-700'"
       class="px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 active:scale-95">
       <lucide-icon name="settings" class="w-5 h-5"></lucide-icon>
-      Vista General de Campañas
+      {{ 'admin_solicitudes.tabs.campaigns' | translate }}
     </button>
   </div>
 
   <!-- Search Bar -->
   <div class="relative w-full md:max-w-md mb-8">
     <lucide-icon name="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></lucide-icon>
-    <input type="text" placeholder="Buscar por título o líder..." [(ngModel)]="searchTerm"
+    <input type="text" [placeholder]="'admin_solicitudes.search_placeholder' | translate" [(ngModel)]="searchTerm"
       class="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:border-emerald-500 focus:shadow-md transition-all text-sm"
       style="height: 42px; height: 42px;padding-left: 55px;" />
   </div>
@@ -44,7 +44,7 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex flex-col items-center justify-center py-20">
     <div class="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-    <p class="text-slate-500 mt-4 font-semibold">Cargando campañas...</p>
+    <p class="text-slate-500 mt-4 font-semibold">{{ 'admin_solicitudes.loading' | translate }}</p>
   </div>
 
   <!-- Content Section -->
@@ -67,7 +67,7 @@
             style="background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.9); border: 1px solid #e8f5e9;">
             <lucide-icon [name]="campaign.category === 'RECYCLING' ? 'recycle' : 'tree-deciduous'"
               class="w-3.5 h-3.5 text-[#2E7D32]"></lucide-icon>
-            {{ campaign.category === 'RECYCLING' ? 'Reciclaje' : 'Reforestación' }}
+            {{ campaign.category === 'RECYCLING' ? ('admin_solicitudes.card.recycling' | translate) : ('admin_solicitudes.card.reforestation' | translate) }}
           </span>
           <!-- Status Badge -->
           <span [class]="'absolute top-4 right-4 px-3 py-1 text-xs font-bold rounded-full shadow-sm border ' + 
@@ -76,7 +76,7 @@
              campaign.status === 'RECHAZADA' ? 'text-rose-800 border-rose-200' : 'text-gray-800 border-gray-200')"
             [style.background-color]="campaign.status === 'PENDIENTE' ? '#FEF3C7' : (campaign.status === 'ACTIVA' || campaign.status === 'Activa' ? '#D1FAE5' : (campaign.status === 'RECHAZADA' ? '#FFE4E6' : '#F3F4F6'))"
             style="box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.9);">
-            {{ campaign.status === 'PENDIENTE' ? 'Pendiente' : campaign.status === 'RECHAZADA' ? 'Rechazada' :
+            {{ campaign.status === 'PENDIENTE' ? ('admin_solicitudes.card.pending' | translate) : campaign.status === 'RECHAZADA' ? ('admin_solicitudes.card.rejected' | translate) :
             campaign.status }}
           </span>
         </div>
@@ -96,7 +96,7 @@
             </div>
             <div class="flex items-center gap-2">
               <lucide-icon name="users" class="w-4 h-4 text-emerald-600 flex-shrink-0"></lucide-icon>
-              <span>{{ campaign.spots }} cupos propuestos</span>
+              <span>{{ campaign.spots }} {{ 'admin_solicitudes.card.proposed_spots' | translate }}</span>
             </div>
 
             <!-- Proposer details -->
@@ -106,20 +106,20 @@
                 {{ campaign.organizer ? campaign.organizer.substring(0,2).toUpperCase() : 'OR' }}
               </div>
               <div class="overflow-hidden">
-                <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Propuesta por:</p>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">{{ 'admin_solicitudes.card.proposed_by' | translate }}</p>
                 <p class="text-sm font-semibold text-slate-700 truncate">{{ campaign.organizer }}</p>
               </div>
             </div>
 
             <!-- Description summary -->
             <div class="mt-3">
-              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Descripción:</p>
+              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">{{ 'admin_solicitudes.card.description_label' | translate }}</p>
               <p class="text-xs text-slate-500 mt-1 line-clamp-3 italic">"{{ campaign.description }}"</p>
             </div>
 
             <!-- Moderation comment if rejected/accepted with comment -->
             <div *ngIf="campaign.moderationComment" class="mt-3 p-3 bg-gray-100/70 border border-gray-200 rounded-2xl">
-              <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Comentario de Moderación:</p>
+              <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{{ 'admin_solicitudes.card.moderation_comment' | translate }}</p>
               <p class="text-xs text-slate-600 mt-1 italic">"{{ campaign.moderationComment }}"</p>
             </div>
           </div>
@@ -129,12 +129,12 @@
             <button (click)="openActionModal(campaign, 'reject')"
               class="btn-reject-custom w-full py-2.5 px-4 font-bold rounded-2xl text-sm flex items-center justify-center gap-1.5">
               <lucide-icon name="x" class="w-4 h-4"></lucide-icon>
-              Rechazar
+              {{ 'shared.reject' | translate }}
             </button>
             <button (click)="openActionModal(campaign, 'approve')"
               class="btn-approve-custom w-full py-2.5 px-4 font-bold rounded-2xl text-sm flex items-center justify-center gap-1.5">
               <lucide-icon name="check" class="w-4 h-4"></lucide-icon>
-              Aprobar
+              {{ 'shared.approve' | translate }}
             </button>
           </div>
         </div>
@@ -150,11 +150,10 @@
           <lucide-icon name="check-circle" class="w-10 h-10 text-emerald-600"></lucide-icon>
         </div>
         <h3 class="text-2xl font-bold text-slate-800">
-          {{ activeTab === 'requests' ? 'No hay solicitudes pendientes' : 'No hay campañas registradas' }}
+          {{ activeTab === 'requests' ? ('admin_solicitudes.empty.no_requests_title' | translate) : ('admin_solicitudes.empty.no_campaigns_title' | translate) }}
         </h3>
         <p class="text-slate-500 mt-2">
-          {{ activeTab === 'requests' ? 'Todas las propuestas de campañas han sido moderadas. ¡Excelente trabajo!' : 'No
-          se encontraron campañas creadas en el sistema.' }}
+          {{ activeTab === 'requests' ? ('admin_solicitudes.empty.no_requests_desc' | translate) : ('admin_solicitudes.empty.no_campaigns_desc' | translate) }}
         </p>
       </div>
     </ng-template>
@@ -171,20 +170,20 @@
       </div>
 
       <h2 class="text-2xl font-bold text-slate-800">
-        {{ modalType === 'approve' ? 'Aprobar Campaña' : 'Rechazar Campaña' }}
+        {{ modalType === 'approve' ? ('admin_solicitudes.modal.title_approve' | translate) : ('admin_solicitudes.modal.title_reject' | translate) }}
       </h2>
       <p class="text-slate-500 text-sm mt-2">
-        Campaña: <span class="font-semibold text-slate-700">{{ selectedCampaign?.title }}</span>
+        {{ 'admin_solicitudes.modal.campaign_label' | translate }} <span class="font-semibold text-slate-700">{{ selectedCampaign?.title }}</span>
       </p>
     </div>
 
     <form (ngSubmit)="handleActionSubmit()" class="space-y-4 mt-6">
       <div>
         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-          {{ modalType === 'approve' ? 'Comentario (Opcional)' : 'Motivo del Rechazo (Obligatorio) *' }}
+          {{ modalType === 'approve' ? ('admin_solicitudes.modal.comment_optional' | translate) : ('admin_solicitudes.modal.comment_required' | translate) }}
         </label>
         <textarea name="comment" [(ngModel)]="comment"
-          [placeholder]="modalType === 'approve' ? 'Ej: ¡Felicidades! Campaña aceptada.' : 'Ej: Falta especificar la dirección exacta o no se permiten logos comerciales.'"
+          [placeholder]="modalType === 'approve' ? ('admin_solicitudes.modal.placeholder_approve' | translate) : ('admin_solicitudes.modal.placeholder_reject' | translate)"
           rows="4"
           class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all text-sm resize-none"></textarea>
         <p *ngIf="modalError" class="text-rose-500 text-xs mt-1">{{ modalError }}</p>
@@ -194,11 +193,11 @@
       <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100">
         <button type="button" (click)="closeModal()"
           class="w-full py-3 border border-slate-200 text-slate-600 rounded-2xl font-bold hover:bg-slate-50 transition-all text-sm">
-          Cancelar
+          {{ 'shared.cancel' | translate }}
         </button>
         <button type="submit"
           [class]="'w-full py-3 text-white rounded-2xl font-bold shadow-md transition-all text-sm ' + (modalType === 'approve' ? 'bg-emerald-600 shadow-emerald-600/10 hover:bg-emerald-700' : 'bg-rose-600 shadow-rose-600/10 hover:bg-rose-700')">
-          Confirmar
+          {{ 'shared.confirm' | translate }}
         </button>
       </div>
     </form>
