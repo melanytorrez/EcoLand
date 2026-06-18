@@ -80,7 +80,8 @@
 
               <!-- Notifications Dropdown -->
               <div *ngIf="showNotificationsDropdown"
-                class="absolute right-0 top-full mt-3 w-[460px] h-[480px] flex flex-col bg-white rounded-3xl shadow-2xl shadow-black/10 border border-gray-100 overflow-hidden z-50 transition-all duration-200">
+                class="absolute right-0 top-full mt-3 w-[460px] h-[480px] flex flex-col bg-white rounded-3xl shadow-2xl shadow-black/10 border border-gray-100 overflow-hidden z-50 transition-all duration-200"
+                style="width: 360px; height: 280px; padding-top: 15px;">
                 <!-- Dropdown Header -->
                 <div
                   class="px-5 pt-5 pb-4 bg-gradient-to-br from-[#2E7D32]/5 via-white to-[#4CAF50]/5 border-b border-gray-100">
@@ -110,7 +111,7 @@
                       </button>
                       <button (click)="showNotificationsDropdown = false"
                         class="ml-1 p-1.5 rounded-xl hover:bg-gray-100 text-gray-400 transition-colors">
-                        <lucide-icon name="x" size="14"></lucide-icon>
+                        <lucide-icon name="x" size="20"></lucide-icon>
                       </button>
                     </div>
                   </div>
@@ -120,7 +121,8 @@
                 <div class="flex-grow overflow-y-auto overscroll-contain flex flex-col">
                   <!-- Empty state -->
                   <div *ngIf="notifications.length === 0"
-                    class="flex-grow flex flex-col items-center justify-center px-6 text-center">
+                    class="flex-grow flex flex-col items-center justify-center px-6 text-center"
+                    style="padding-top: 50px;">
                     <div class="w-14 h-14 rounded-2xl bg-[#E8F5E9] flex items-center justify-center mb-4">
                       <lucide-icon name="bell" size="24" class="text-[#2E7D32]"></lucide-icon>
                     </div>
@@ -161,19 +163,19 @@
 
                           <!-- Bottom row: Date and Actions -->
                           <div class="flex items-center justify-between mt-2.5">
-                            <span class="text-[11px] text-gray-400 font-medium">{{ formatRelative(item.fechaCreacion) }}</span>
+                            <span class="text-[11px] text-gray-400 font-medium">{{ formatRelative(item.fechaCreacion)
+                              }}</span>
 
                             <!-- Actions -->
                             <div class="flex items-center gap-1.5 text-gray-400" style="padding-right: 0px;">
                               <button *ngIf="!item.leido"
                                 (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
-                                class="p-1 rounded-lg btn-check transition-colors"
-                                title="Marcar como leída">
+                                class="p-1 rounded-lg btn-check transition-colors" title="Marcar como leída">
                                 <lucide-icon name="check" size="18"></lucide-icon>
                               </button>
                               <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                                class="p-1 rounded-lg btn-delete transition-colors"
-                                title="Eliminar" style="margin-left: 10px;">
+                                class="p-1 rounded-lg btn-delete transition-colors" title="Eliminar"
+                                style="margin-left: 10px;">
                                 <lucide-icon name="trash-2" size="18"></lucide-icon>
                               </button>
                             </div>
@@ -214,19 +216,19 @@
 
                           <!-- Bottom row: Date and Actions -->
                           <div class="flex items-center justify-between mt-2.5">
-                            <span class="text-[11px] text-gray-400 font-medium">{{ formatRelative(item.fechaCreacion) }}</span>
+                            <span class="text-[11px] text-gray-400 font-medium">{{ formatRelative(item.fechaCreacion)
+                              }}</span>
 
                             <!-- Actions -->
                             <div class="flex items-center gap-1.5 text-gray-400" style="padding-right: 0px;">
                               <button *ngIf="!item.leido"
                                 (click)="$event.stopPropagation(); markNotificationAsRead(item.id)"
-                                class="p-1 rounded-lg btn-check transition-colors"
-                                title="Marcar como leída">
+                                class="p-1 rounded-lg btn-check transition-colors" title="Marcar como leída">
                                 <lucide-icon name="check" size="18"></lucide-icon>
                               </button>
                               <button (click)="$event.stopPropagation(); deleteNotification(item.id)"
-                                class="p-1 rounded-lg btn-delete transition-colors"
-                                title="Eliminar" style="margin-left: 10px;">
+                                class="p-1 rounded-lg btn-delete transition-colors" title="Eliminar"
+                                style="margin-left: 10px;">
                                 <lucide-icon name="trash-2" size="18"></lucide-icon>
                               </button>
                             </div>
