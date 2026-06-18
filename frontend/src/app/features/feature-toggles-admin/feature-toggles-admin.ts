@@ -19,12 +19,6 @@ export interface FeatureConfig {
 export class FeatureTogglesAdmin implements OnInit {
   
   featureConfigMap: { [key: string]: Omit<FeatureConfig, 'enabled' | 'key'> } = {
-    'inicio': {
-      title: 'Inicio',
-      description: 'Página principal y dashboard de acceso rápido a la plataforma',
-      icon: 'layout-dashboard',
-      color: 'from-[#2E7D32] to-[#4CAF50]',
-    },
     'reforestacion': {
       title: 'Módulo de Reforestación',
       description: 'Permite a los usuarios ver y participar en campañas de reforestación',
