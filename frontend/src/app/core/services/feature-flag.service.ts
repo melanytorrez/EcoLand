@@ -16,7 +16,7 @@ export class FeatureFlagService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) { }
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = this.authService.getToken();
@@ -38,10 +38,7 @@ export class FeatureFlagService {
         console.error('Error cargando Feature Toggles. Usando defaults seguros.', error);
         // Fallback resiliente
         this.features = {
-          'inicio': true,
-          'reforestacion': true,
           'reciclaje': true,
-          'estadisticas': true,
           'perfil': true
         };
         this.featuresSubject.next(this.features);

@@ -19,12 +19,6 @@ export interface FeatureConfig {
 export class FeatureTogglesAdmin implements OnInit {
   
   featureConfigMap: { [key: string]: Omit<FeatureConfig, 'enabled' | 'key'> } = {
-    'inicio': {
-      title: 'Inicio',
-      description: 'Página principal y dashboard de acceso rápido a la plataforma',
-      icon: 'layout-dashboard',
-      color: 'from-[#2E7D32] to-[#4CAF50]',
-    },
     'reforestacion': {
       title: 'Módulo de Reforestación',
       description: 'Permite a los usuarios ver y participar en campañas de reforestación',
@@ -37,12 +31,7 @@ export class FeatureTogglesAdmin implements OnInit {
       icon: 'trash-2',
       color: 'from-[#4CAF50] to-[#A5D6A7]',
     },
-    'estadisticas': {
-      title: 'Módulo de Estadísticas',
-      description: 'Muestra estadísticas ambientales y métricas de impacto',
-      icon: 'bar-chart-3',
-      color: 'from-purple-600 to-purple-700',
-    },
+
     'perfil': {
       title: 'Perfil del Usuario',
       description: 'Gestión de cuenta personal, configuración y resumen de actividad',
@@ -53,6 +42,7 @@ export class FeatureTogglesAdmin implements OnInit {
 
   features: FeatureConfig[] = [];
   isLoading: boolean = true;
+  private readonly removedFeatureKeys = new Set(['reforestacion']);
 
   constructor(
     private featureFlagService: FeatureFlagService,
@@ -80,13 +70,15 @@ export class FeatureTogglesAdmin implements OnInit {
     const flags = this.featureFlagService.getFlags();
     
     // Convert object to array using config mapping
-    this.features = Object.keys(this.featureConfigMap).map(key => {
-      return {
-        key,
-        enabled: flags[key] !== undefined ? flags[key] : true, // default true
-        ...this.featureConfigMap[key]
-      };
-    });
+    this.features = Object.keys(this.featureConfigMap)
+      .filter(key => !this.removedFeatureKeys.has(key))
+      .map(key => {
+        return {
+          key,
+          enabled: flags[key] !== undefined ? flags[key] : true, // default true
+          ...this.featureConfigMap[key]
+        };
+      });
     this.cdr.detectChanges();
   }
 

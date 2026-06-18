@@ -26,11 +26,11 @@ export class HeaderComponent implements OnInit {
   languages = SUPPORTED_LANGUAGES;
 
   allNavItems = [
-    { path: '/',              label: 'header.nav.home',          feature: 'inicio' },
-    { path: '/reforestacion', label: 'header.nav.reforestation', feature: 'reforestacion' },
+    { path: '/',              label: 'header.nav.home' },
+    { path: '/reforestacion', label: 'header.nav.reforestation' },
     { path: '/reciclaje',     label: 'header.nav.recycling',     feature: 'reciclaje' },
-    { path: '/estadisticas',  label: 'header.nav.stats',         feature: 'estadisticas' },
-    { path: '/lider/campanas', label: 'header.nav.my_publications', feature: 'reforestacion', role: 'lider' },
+    { path: '/estadisticas',  label: 'header.nav.stats' },
+    { path: '/lider/campanas', label: 'header.nav.my_publications', role: 'lider' },
   ];
 
   constructor(

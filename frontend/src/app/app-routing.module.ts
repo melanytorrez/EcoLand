@@ -10,9 +10,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
-    pathMatch: 'full',
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'inicio' }
+    pathMatch: 'full'
   },
   {
     path: '',
@@ -20,21 +18,15 @@ const routes: Routes = [
   },
   {
     path: 'reforestacion',
-    loadChildren: () => import('./features/reforestacion/reforestacion.module').then(m => m.ReforestacionModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/reforestacion/reforestacion.module').then(m => m.ReforestacionModule)
   },
   {
     path: 'reforestacion/:campaignId/postular',
-    loadChildren: () => import('./features/volunteer-application/volunteer-application.module').then(m => m.VolunteerApplicationModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/volunteer-application/volunteer-application.module').then(m => m.VolunteerApplicationModule)
   },
   {
     path: 'reforestacion/:id',
-    loadChildren: () => import('./features/campaigns/pages/user/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'reforestacion' }
+    loadChildren: () => import('./features/campaigns/pages/user/campaign-detail/campaign-detail.module').then(m => m.CampaignDetailModule)
   },
   {
     path: 'campanas-reciclaje',
@@ -62,9 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'estadisticas',
-    loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule),
-    canActivate: [FeatureFlagGuard],
-    data: { feature: 'estadisticas' }
+    loadChildren: () => import('./features/statistics/statistics.module').then(m => m.StatisticsModule)
   },
   {
     path: 'admin',

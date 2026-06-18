@@ -6,7 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
 import java.util.Optional;
 
 @Configuration
@@ -16,7 +15,7 @@ public class FeatureToggleDataInitializer {
     CommandLineRunner initFeatureToggles(FeatureToggleRepository repository) {
         return args -> {
             // Inicializar modulos por defecto en true si no existen en DB
-            String[] defaultFeatures = {"inicio", "reforestacion", "reciclaje", "estadisticas", "perfil"};
+            String[] defaultFeatures = {"inicio", "reciclaje", "perfil"};
             
             for (String feature : defaultFeatures) {
                 Optional<FeatureToggleEntity> existing = repository.findByFeatureName(feature);
