@@ -25,12 +25,6 @@ export class FeatureTogglesAdmin implements OnInit {
       icon: 'tree-pine',
       color: 'from-[#2E7D32] to-[#4CAF50]',
     },
-    'reciclaje': {
-      title: 'Módulo de Reciclaje',
-      description: 'Muestra información sobre puntos de reciclaje y rutas de recolección',
-      icon: 'trash-2',
-      color: 'from-[#4CAF50] to-[#A5D6A7]',
-    }
   };
 
   features: FeatureConfig[] = [];
