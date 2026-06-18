@@ -40,7 +40,6 @@ export class FeatureFlagService {
         this.features = {
           'inicio': true,
           'reciclaje': true,
-          'estadisticas': true,
           'perfil': true
         };
         this.featuresSubject.next(this.features);

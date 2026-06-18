@@ -37,12 +37,7 @@ export class FeatureTogglesAdmin implements OnInit {
       icon: 'trash-2',
       color: 'from-[#4CAF50] to-[#A5D6A7]',
     },
-    'estadisticas': {
-      title: 'Módulo de Estadísticas',
-      description: 'Muestra estadísticas ambientales y métricas de impacto',
-      icon: 'bar-chart-3',
-      color: 'from-purple-600 to-purple-700',
-    },
+
     'perfil': {
       title: 'Perfil del Usuario',
       description: 'Gestión de cuenta personal, configuración y resumen de actividad',
